@@ -2,6 +2,8 @@ import { useState } from "react"
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated'
 import * as courses from '../../../../data/courses.json';
+import registerUser from "../../helper/auth/registerUser";
+
 
 const SignUp = () => {
     const animatedComponents = makeAnimated();
@@ -16,7 +18,7 @@ const SignUp = () => {
         majorOptions.push(courseDict)
     }
 
-    let campusOptions = [
+    const campusOptions = [
         { value: 'sgs', label: "Saigon South Campus" },
         { value: 'hn', label: "Hanoi Campus" },
     ]
@@ -32,27 +34,28 @@ const SignUp = () => {
 
     const [message, setMessage] = useState(null)
 
-    const registerUser = async (username, email, password, campus, major, e) => {
-        e.preventDefault()
-        const res = await fetch('/api/auth/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username, email, password, campus, major }),
-        })
-
-        let data = await res.json()
-        if (data.message) {
-            setMessage(data.name)
-        }
-        if (data.message == "success") {
-            let options = { redirect: false, email, password }
-            console.log(options)
-            // const res = await signIn("credentials", options)
-            // return Router.push("/")
-        }
-    }
+    // const registerUser = async (username, email, password, campus, major, e) => {
+    //     e.preventDefault()
+    //     const res = await fetch('/api/auth/register', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify({ username, email, password, campus, major }),
+    //     })
+    //
+    //     let data = await res.json()
+    //     console.log(data)
+    //     if (data.message) {
+    //         setMessage(data.name)
+    //     }
+    //     if (data.message === "success") {
+    //         let options = { redirect: false, email, password }
+    //         console.log(options)
+    //         // const res = await signIn("credentials", options)
+    //         // return Router.push("/")
+    //     }
+    // }
 
     return (
         <div>
@@ -110,7 +113,7 @@ const SignUp = () => {
                         options={majorOptions}
                     />
                 </div>
-                <button onClick={(e) => registerUser(username, email, password, campus, major, e)}>
+                <button onClick={(e) => registerUser({username, email, password, campus, major}, e, setMessage)}>
                     Register
                 </button>
             </form>
