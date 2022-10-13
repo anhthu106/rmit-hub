@@ -11,17 +11,17 @@ export default function Home() {
   return (
     <div>
       <main>
-        {/*{session ? (*/}
-        {/*  <button onClick={() => signOut()}>Log out</button>*/}
-        {/*) : (*/}
-        {/*  <button*/}
-        {/*    onClick={() => {*/}
-        {/*      router.push("/api/auth/signin");*/}
-        {/*    }}*/}
-        {/*  >*/}
-        {/*    Sign in*/}
-        {/*  </button>*/}
-        {/*)}*/}
+        {session ? (
+          <button onClick={() => signOut()}>Log out</button>
+        ) : (
+          <button
+            onClick={() => {
+              router.push("/api/auth/signin");
+            }}
+          >
+            Sign in
+          </button>
+        )}
           <SignUp />
       </main>
     </div>

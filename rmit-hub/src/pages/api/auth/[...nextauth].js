@@ -1,5 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialProvider from "next-auth/providers/credentials";
+import EmailProvider from "next-auth/providers/email";
+import bcrypt from "bcrypt";
 
 export default NextAuth({
     providers: [
@@ -53,8 +55,9 @@ const signinUser = async ({ password, user }) => {
         throw new Error("Please enter password!")
     }
     const isMatch = await bcrypt.compare(password, user.password)
+
     if (!isMatch) {
         throw new Error("Password Incorrect!");
     }
     return user;
-} 
+}

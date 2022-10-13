@@ -11,9 +11,12 @@
   "dependencies": {
     "bcrypt": "^5.1.0",
     "config": "3.3.1",
+    "http-status-codes": "^2.2.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.6.5",
     "next": "12.3.1",
     "next-auth": "^4.12.3",
+    "nodemailer": "^6.8.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-select": "^5.4.0"
