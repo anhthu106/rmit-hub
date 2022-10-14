@@ -1,7 +1,8 @@
 import NextAuth from "next-auth";
 import CredentialProvider from "next-auth/providers/credentials";
-import EmailProvider from "next-auth/providers/email";
 import bcrypt from "bcrypt";
+import Users from "../../../models/user.models";
+import connectDB from "../../../lib/connectDB";
 
 export default NextAuth({
     providers: [
@@ -17,29 +18,38 @@ export default NextAuth({
             },
 
             authorize: async (credentials, req) => {
+                await connectDB()
                 const email = credentials.email;
                 const password = credentials.password;
-                const user = await Users.findOne({ email })
+                const check = await Users.findOne({ email: email })
+                if (!check) throw new Error("You haven't registered yet!")
+                if (check) {
+                    if (!check.password) {
+                        throw new Error("Please enter password!")
+                    }
+                    const isMatch = await bcrypt.compare(password, check.password)
 
-                if (!user) throw new Error("You haven't registered yet!")
-
-                if (user) return signinUser({ password, user })
+                    if (!isMatch) {
+                        throw new Error("Password Incorrect!");
+                    }
+                    return check;
+                }
+                return null
             },
         }),
     ],
 
     callbacks: {
-        jwt: ({ token, user }) => {
+        async jwt ({ token, user }) {
             if (user) token.id = user.id;
-
             return token;
         },
 
-        session: ({ session, token }) => {
+        async session ({ session, token }) {
             if (token) session.id = token.id;
 
             return session;
-        },
+        }
     },
     secret: "test",
 
@@ -49,15 +59,6 @@ export default NextAuth({
     }
 
 });
-
-const signinUser = async ({ password, user }) => {
-    if (!user.password) {
-        throw new Error("Please enter password!")
-    }
-    const isMatch = await bcrypt.compare(password, user.password)
-
-    if (!isMatch) {
-        throw new Error("Password Incorrect!");
-    }
-    return user;
-}
+// const signinUser = async ({ password, user }) => {
+//
+// }
