@@ -56,7 +56,6 @@ const SignUp = () => {
     //         // return Router.push("/")
     //     }
     // }
-
     return (
         <div>
             <form>
@@ -96,7 +95,7 @@ const SignUp = () => {
                 <div>
                     <label htmlFor="campus">Campus</label>
                     <Select
-                        onChange={(campus) => setCampus(campus)}
+                        onChange={(campus) => setCampus(campus.value)}
                         closeMenuOnSelect={false}
                         components={animatedComponents}
                         defaultValue={[campusOptions[0]]}
@@ -106,7 +105,7 @@ const SignUp = () => {
                 <div>
                     <label htmlFor="major">Major</label>
                     <Select
-                        onChange={(major) => setMajor(major)}
+                        onChange={(major) => setMajor(major.label)}
                         closeMenuOnSelect={false}
                         components={animatedComponents}
                         defaultValue={[majorOptions[0]]}
@@ -117,7 +116,9 @@ const SignUp = () => {
                     Register
                 </button>
             </form>
+            <div>{message}</div>
         </div>
+
     )
 }
 
