@@ -1,7 +1,7 @@
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/dist/client/router";
-import SignUp from "../components/auth/SignUp";
-import LoginBtn from "../components/auth/login-btn";
+import LoginBtn from "../components/auth/loginBtn";
+import Link from "next/link";
 
 export default function Home() {
   const { data: session } = useSession();
@@ -25,6 +25,7 @@ export default function Home() {
         {/*)}*/}
         {/*  <SignUp />*/}
           <LoginBtn />
+
       </main>
     </div>
   );

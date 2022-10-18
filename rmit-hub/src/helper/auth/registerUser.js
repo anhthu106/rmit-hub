@@ -12,6 +12,7 @@ async function registerUser (body, e, setMessage){
         let options = { redirect: false,body}
         console.log(options)
     }
+
 }
 
 export default registerUser

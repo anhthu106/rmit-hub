@@ -7,20 +7,18 @@ import {sendConfirmationEmail} from "../../../helper/mailler";
 export default async function handler(req, res) {
     await connectMongo();
     const body = req.body
-    try {
-        const user = await Users.findOne({email: body.email})
-        if (!user) {
-            //Create token to verify email
-            const token = jwt.sign({...body}, process.env.JWT_SECRET, {
-                expiresIn: process.env.JWT_VERIFY_LIFETIME
-            })
-            //Send Email
-            await sendConfirmationEmail({toUser: body, token})
-            res.status(StatusCodes.CREATED).json({message: "Verify email is sent which have 5 minutes expires"})
-        }
-    } catch (error) {
-        console.log(error.message)
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({message: error.message})
+
+    const user = await Users.findOne({email: body.email})
+    if (!user) {
+        //Create token to verify email
+        const token = jwt.sign({...body}, process.env.JWT_SECRET, {
+            expiresIn: process.env.JWT_VERIFY_LIFETIME
+        })
+        //Send Email
+        await sendConfirmationEmail({toUser: body, token})
+        res.status(StatusCodes.CREATED).json({message: "Verify email is sent which have 5 minutes expires"})
+    } else {
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({message: "This email was used"})
     }
 
 

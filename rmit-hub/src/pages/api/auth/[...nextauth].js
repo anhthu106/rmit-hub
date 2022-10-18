@@ -21,18 +21,18 @@ export default NextAuth({
                 await connectDB()
                 const email = credentials.email;
                 const password = credentials.password;
-                const check = await Users.findOne({ email: email })
-                if (!check) throw new Error("You haven't registered yet!")
-                if (check) {
-                    if (!check.password) {
+                const user = await Users.findOne({ email: email })
+                if (!user) throw new Error("You haven't registered yet!")
+                if (user) {
+                    if (!user.password) {
                         throw new Error("Please enter password!")
                     }
-                    const isMatch = await bcrypt.compare(password, check.password)
+                    const isMatch = await bcrypt.compare(password, user.password)
 
                     if (!isMatch) {
                         throw new Error("Password Incorrect!");
                     }
-                    return check;
+                    return user;
                 }
                 return null
             },
