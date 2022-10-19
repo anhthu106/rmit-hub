@@ -8,24 +8,10 @@ export default function Home() {
   const router = useRouter();
 
   console.log("session", session);
-
   return (
     <div>
       <main>
-        {/*{session ? (*/}
-        {/*  <button onClick={() => signOut()}>Log out</button>*/}
-        {/*) : (*/}
-        {/*  <button*/}
-        {/*    onClick={() => {*/}
-        {/*      router.push("/api/auth/signin");*/}
-        {/*    }}*/}
-        {/*  >*/}
-        {/*    Sign in*/}
-        {/*  </button>*/}
-        {/*)}*/}
-        {/*  <SignUp />*/}
           <LoginBtn />
-
       </main>
     </div>
   );

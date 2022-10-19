@@ -1,4 +1,4 @@
-export default function Profile({username, email, campus, major}) {
+export default function Information({username, email, campus, major}) {
     return (
         <div>
             <div>{username}</div>
