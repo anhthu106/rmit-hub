@@ -8,8 +8,6 @@ export default function LoginBtn() {
             <>
                 Signed in as {session.user.email} <br />
                 <button onClick={() => signOut()}>Sign out</button>
-                <Link href={`/profile/${session.id}`}>Profile</Link>
-
             </>
         )
     }

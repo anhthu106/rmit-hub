@@ -1,4 +1,7 @@
 async function post(url, body){
+    /**
+     * POST METHOD
+     */
     return await fetch(url, {
         method: 'POST',
         headers: {
@@ -8,16 +11,14 @@ async function post(url, body){
     })
 }
 
-async function get(url, body){
+async function get(url){
+    /**
+     * GET METHOD
+     */
     return await fetch(url,  {
         method: "GET",
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body)
     })
 }
-
 
 export const fetchData = {
     post,
