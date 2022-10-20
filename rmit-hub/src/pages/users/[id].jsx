@@ -1,5 +1,6 @@
 import Information from "../../components/users/Information";
 import {take} from "../../helper/users/users";
+import {getSession, SessionContext, useSession} from "next-auth/react";
 
 
 export async function getStaticPaths() {

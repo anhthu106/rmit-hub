@@ -3,9 +3,6 @@ import Users from "../../../models/user.models";
 import {StatusCodes} from "http-status-codes";
 
 export default async function handler(req, res) {
-    /**
-     *
-     */
     try {
         await connectDB()
         switch (req.method) {

@@ -20,7 +20,21 @@ async function get(url){
     })
 }
 
+async function patch(url, body){
+    /**
+     * PATCH METHOD
+     */
+    return await fetch(url, {
+        method: "PATCH",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body)
+    })
+}
+
 export const fetchData = {
     post,
-    get
+    get,
+    patch
 }
