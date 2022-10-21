@@ -1,6 +1,8 @@
 import Information from "../../components/users/Information";
 import {take} from "../../helper/users/users";
-import {getSession, SessionContext, useSession} from "next-auth/react";
+import {useSession} from "next-auth/react";
+import EditProfileForm from "../../components/users/EditProfileForm";
+import {useEffect, useState} from "react";
 
 
 export async function getStaticPaths() {
@@ -31,15 +33,43 @@ export const getStaticProps = async ({params}) => {
 }
 
 export default function Detail({Info}) {
-    return (
-        <div>
-            <Information
-                id={Info._id}
-                username={Info.username}
-                email={Info.email}
-                campus={Info.campus}
-                major={Info.major}
-            />
-        </div>
-    )
+    const {data: session} = useSession()
+    if (session) {
+        if (session.user._id === Info._id) {
+            return (
+                //My account
+                <div>
+                    <Information
+                        username={Info.username}
+                        email={Info.email}
+                        campus={Info.campus}
+                        major={Info.major}
+                    />
+                    <EditProfileForm
+                        id={Info._id}
+                        PreCampus={Info.campus}
+                        PreMajor={Info.major}
+                        PreUsername={Info.username}
+                    />
+                </div>
+            )
+        }
+        return (
+            //Normal account
+            <div>
+                <Information
+                    username={Info.username}
+                    email={Info.email}
+                    campus={Info.campus}
+                    major={Info.major}
+                />
+            </div>
+        )
+    } else {
+        return (
+            <div>Loading</div>
+        )
+    }
+
+
 }

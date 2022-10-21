@@ -27,20 +27,19 @@ export default async function handler(req, res) {
                 } = req
 
                 if (username === "" || campus === "" || major === "") {
-                    new Error("Please fill out the box")
+                    new Error.json({message: "Please fill out the box"})
                 }
                 const user = await Users.findByIdAndUpdate(
                     {_id: id}, req.body, {new: true, runValidators: true}
                 )
-                if(!user){
-                    new Error("Not found the user")
+                if (!user) {
+                    new Error.json({message: "User not found"})
                 }
-                return res.status(StatusCodes.OK).json({user})
+                return res.status(StatusCodes.OK).json({message: "Your account updated"})
             }
         }
     } catch
         (Error) {
-        console.log(Error)
         throw new Error("Something Wrong")
     }
 

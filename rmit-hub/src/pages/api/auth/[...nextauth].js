@@ -14,20 +14,21 @@ export default NextAuth({
                     type: "text",
                     placeholder: "johndoe@test.com",
                 },
-                password: { label: "Password", type: "password" },
+                password: {label: "Password", type: "password"},
             },
 
             authorize: async (credentials, req) => {
                 await connectDB()
                 const email = credentials.email;
                 const password = credentials.password;
-                const user = await Users.findOne({ email: email })
-                if (!user) throw new Error("You haven't registered yet!")
-                if (user) {
-                    if (!user.password) {
+                const check = await Users.findOne({email: email})
+                if (!check) throw new Error("You haven't registered yet!")
+                if (check) {
+                    const user = await Users.findOne({email: email}, "_id username email campus major")
+                    if (!check.password) {
                         throw new Error("Please enter password!")
                     }
-                    const isMatch = await bcrypt.compare(password, user.password)
+                    const isMatch = await bcrypt.compare(password, check.password)
 
                     if (!isMatch) {
                         throw new Error("Password Incorrect!");
@@ -40,13 +41,15 @@ export default NextAuth({
     ],
 
     callbacks: {
-        async jwt ({ token, user }) {
-            if (user) token.id = user.id;
+        async jwt({token, user}) {
+            if (user) {
+                token.user = user;
+            }
             return token;
         },
 
-        async session ({ session, token }) {
-            if (token) session.id = token.id;
+        async session({session, token}) {
+            session.user = token.user;
 
             return session;
         }
@@ -54,7 +57,7 @@ export default NextAuth({
     secret: "test",
 
     jwt: {
-        secret: "test",
+        secret: process.env.JWT_SECRET,
         encryption: true,
     }
 

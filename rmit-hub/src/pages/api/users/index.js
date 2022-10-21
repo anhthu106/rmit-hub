@@ -7,7 +7,7 @@ export default async function handler(req, res) {
         await connectDB()
         switch (req.method) {
             case "GET": {
-                const user = await Users.find({}, "username email campus major")
+                const user = await Users.find({}, "_id username email campus major")
                 res.status(StatusCodes.OK).json(user)
             }
         }
