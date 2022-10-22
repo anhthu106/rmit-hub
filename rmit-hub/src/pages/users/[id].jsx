@@ -1,35 +1,15 @@
 import Information from "../../components/users/Information";
-import {take} from "../../helper/users/users";
 import {useSession} from "next-auth/react";
 import EditProfileForm from "../../components/users/EditProfileForm";
-import {useEffect, useState} from "react";
+import connectDB from "../../lib/connectDB";
+import Users from "../../models/user.models";
 
-
-export async function getStaticPaths() {
-    /**
-     * Create dynamic paths
-     * @type {any}
-     */
-    const data = await take.AllUser()
-    const paths = data.map((data) => ({
-        params: {id: data._id}
-    }))
-
-    return {
-        paths, fallback: false
-    }
-}
-
-
-export const getStaticProps = async ({params}) => {
-    /**
-     * Fetch data to the page
-     * @type {any}
-     */
-    const data = await take.UserByID(params.id)
-    return {
-        props: {Info: data}
-    }
+//Fetch data
+export async function getServerSideProps({ params }) {
+    await connectDB()
+    const Info = await Users.findById(params.id, "_id username email campus major").lean()
+    Info._id = Info._id.toString()
+    return { props: { Info } }
 }
 
 export default function Detail({Info}) {

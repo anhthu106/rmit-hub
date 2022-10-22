@@ -1,13 +1,22 @@
 import Information from "../../components/users/Information";
-import {take} from "../../helper/users/users";
 import Link from "next/link";
+import connectDB from "../../lib/connectDB";
 
-export const getStaticProps = async () => {
-    const data = await take.AllUser()
-    return {
-        props: {Info: data}
-    }
+
+//Fetch data form server
+export async function getServerSideProps() {
+    await connectDB()
+    /* find all the data in our database */
+    const data = await Users.find({}, "_id username email campus major")
+    const users = data.map((doc) => {
+        const user = doc.toObject()
+        user._id = user._id.toString()
+        return user
+    })
+
+    return { props: { Info: users } }
 }
+
 
 export default function Profile({Info}) {
     /**
