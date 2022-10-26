@@ -1,8 +1,8 @@
 import Information from "../../components/users/Information";
 import {useSession} from "next-auth/react";
 import EditProfileForm from "../../components/users/EditProfileForm";
-import connectDB from "../../lib/connectDB";
-import Users from "../../models/user.models";
+import connectDB from "../../backend/lib/connectDB";
+import Users from "../../backend/models/user.models";
 
 //Fetch data
 export async function getServerSideProps({ params }) {

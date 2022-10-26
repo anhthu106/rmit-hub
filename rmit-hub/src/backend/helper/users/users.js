@@ -1,4 +1,4 @@
-import {fetchData} from "../fetch-data";
+import { fetchData } from "../fetchData/fetchData";
 
 async function AllUser() {
     /**
@@ -18,17 +18,17 @@ async function UserByID(id) {
     return await res.json()
 }
 
-async function UpdateUserInformation(body,id, e, setMessage){
-        e.preventDefault()
-        const res = await fetchData.patch(`/api/users/${id}`, body)
-        let data = await res.json()
-        if(data.message){
-            console.log(data.message)
-            await setMessage(data.message)
-        }
+async function UpdateUserInformation(body, id, e, setMessage) {
+    e.preventDefault()
+    const res = await fetchData.patch(`/api/users/${id}`, body)
+    let data = await res.json()
+    if (data.message) {
+        console.log(data.message)
+        await setMessage(data.message)
+    }
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export const take = {
-   AllUser, UserByID, UpdateUserInformation
+    AllUser, UserByID, UpdateUserInformation
 }

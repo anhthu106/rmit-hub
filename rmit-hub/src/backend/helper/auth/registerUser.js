@@ -1,15 +1,15 @@
-import {fetchData} from "../fetch-data";
+import { fetchData } from "../fetchData/fetchData";
 
-async function registerUser (body, e, setMessage){
+async function registerUser(body, e, setMessage) {
     e.preventDefault()
     const res = await fetchData.post("/api/auth/register", body)
     let data = await res.json()
-    if(data.message){
+    if (data.message) {
         console.log(data.message)
         await setMessage(data.message)
     }
-    if(data.message === "success"){
-        let options = { redirect: false,body}
+    if (data.message === "success") {
+        let options = { redirect: false, body }
         console.log(options)
     }
 

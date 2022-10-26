@@ -1,7 +1,7 @@
 import Information from "../../components/users/Information";
 import Link from "next/link";
-import connectDB from "../../lib/connectDB";
-import Users from "../../models/user.models";
+import connectDB from "../../backend/lib/connectDB";
+import Users from "../../backend/models/user.models";
 
 
 //Fetch data form server

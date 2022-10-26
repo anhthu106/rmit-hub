@@ -2,7 +2,7 @@ import {useState} from "react"
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated'
 import * as courses from '../../../../data/courses.json';
-import registerUser from "../../helper/auth/registerUser";
+import registerUser from "../../backend/helper/auth/registerUser";
 
 
 const SignUp = () => {

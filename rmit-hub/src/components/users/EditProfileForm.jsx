@@ -2,7 +2,7 @@ import makeAnimated from "react-select/animated";
 import * as courses from "../../../../data/courses.json";
 import {useState} from "react";
 import Select from "react-select";
-import {take} from "../../helper/users/users";
+import {take} from "../../backend/helper/users/users";
 
 export default function EditProfileForm({PreUsername, PreCampus, PreMajor, id}) {
     const animated = makeAnimated();
