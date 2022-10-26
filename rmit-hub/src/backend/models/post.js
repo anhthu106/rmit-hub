@@ -2,7 +2,13 @@ import { Schema, model, models } from 'mongoose';
 
 const postSchema = new Schema({
     userID: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+    },
+    courseID: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Course",
         required: true,
     },
     date: {

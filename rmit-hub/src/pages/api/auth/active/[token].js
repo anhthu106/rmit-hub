@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import Users from "../../../../backend/models/user.models";
+import Users from "../../../../backend/models/user";
 import { StatusCodes } from "http-status-codes";
 
 export default async function handle(req, res) {

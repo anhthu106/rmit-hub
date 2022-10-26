@@ -1,5 +1,5 @@
 import connectDB from "../../../backend/lib/connectDB";
-import Users from "../../../backend/models/user.models";
+import Users from "../../../backend/models/user";
 import {StatusCodes} from "http-status-codes";
 
 export default async function handler(req, res) {

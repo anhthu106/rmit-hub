@@ -1,5 +1,5 @@
 import connectMongo from '../../../backend/lib/connectDB'
-import Users from '../../../backend/models/user.models'
+import Users from '../../../backend/models/user'
 import { StatusCodes } from "http-status-codes"
 import jwt from "jsonwebtoken"
 import { sendConfirmationEmail } from "../../../backend/helper/auth/mailler";

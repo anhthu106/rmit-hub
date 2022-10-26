@@ -29,6 +29,6 @@ async function UpdateUserInformation(body, id, e, setMessage) {
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export const take = {
+export const user = {
     AllUser, UserByID, UpdateUserInformation
 }
