@@ -33,6 +33,7 @@ const SignUp = () => {
     const [major, setMajor] = useState(defaultMajor)
 
     const [message, setMessage] = useState(null)
+
     return (
         <div>
             <form>

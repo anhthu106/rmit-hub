@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, {Schema} from "mongoose";
 import bcrypt from "bcrypt";
 
 const userSchema = new mongoose.Schema({
@@ -19,13 +19,32 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please provide campus']
     },
-    major: {
-        type: String,
-        required: [true, 'Please provide major']
-    }
+    major_id: {
+        type: Schema.Types.ObjectId,
+        ref: "Major"
+    },
+    course_id: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Course"
+        }
+    ],
+    team_id: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Team"
+        }
+    ],
+    task_id: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Tasks",
+            default: null
+        }
+    ]
 })
 
-userSchema.pre("save", async function(){
+userSchema.pre("save", async function () {
     const salt = await bcrypt.genSalt(10)
     this.password = await bcrypt.hash(this.password, salt)
 })

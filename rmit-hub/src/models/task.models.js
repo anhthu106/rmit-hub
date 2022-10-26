@@ -1,14 +1,16 @@
-import { Schema, model, models } from 'mongoose';
+import {Schema, model, models} from 'mongoose';
 
 const taskSchema = new Schema({
     description: {
         type: String,
         required: true
     },
-    userID: {
-        type: String,
-        required: true,
-    },
+    user_id: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+        }
+    ],
     createdDate: {
         type: String,
         required: true,
