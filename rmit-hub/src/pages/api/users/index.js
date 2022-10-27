@@ -1,10 +1,10 @@
-import connectDB from "../../../backend/lib/connectDB";
+import connectMongo from "../../../backend/lib/connectDB";
 import Users from "../../../backend/models/user";
-import {StatusCodes} from "http-status-codes";
+import { StatusCodes } from "http-status-codes";
 
 export default async function handler(req, res) {
     try {
-        await connectDB()
+        await connectMongo()
         switch (req.method) {
             case "GET": {
                 const user = await Users.find({}, "_id username email campus major")
@@ -12,7 +12,7 @@ export default async function handler(req, res) {
             }
         }
     } catch
-        (Error) {
+    (Error) {
         console.log(Error)
         throw new Error("Something Wrong")
     }

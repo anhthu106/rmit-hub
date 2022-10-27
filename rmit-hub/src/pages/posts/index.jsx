@@ -1,35 +1,31 @@
-import Information from "../../components/users/Information";
-import Link from "next/link";
 import connectDB from "../../backend/lib/connectDB";
-import Users from "../../backend/models/user";
-
+import Posts from "../../backend/models/posts";
 
 //Fetch data form server
 export async function getServerSideProps() {
     await connectDB()
     /* find all the data in our database */
-    const data = await Users.find({}, "_id username email campus major")
-    const users = data.map((doc) => {
-        const user = doc.toObject()
-        user._id = user._id.toString()
-        return user
+    const data = await Posts.find({}, "_id username email campus major")
+    const posts = data.map((doc) => {
+        const post = doc.toObject()
+        post._id = post._id.toString()
+        return post
     })
 
-    return { props: { Info: users } }
+    return { props: { Post: posts } }
 }
 
 
-export default function Profile({ Info }) {
+export default function AllPost({ Post }) {
     /**
      * Display all User
      */
     return (
         <div>
             <h1>All User</h1>
-            {Info.map(info => (
+            {Post.map(post => (
                 // eslint-disable-next-line react/jsx-key
-                <div key={info._id}>
-                    <Link href={`/users/${info._id}`}>{info._id}</Link>
+                <div key={post._id}>
                     <Information
                         username={info.username}
                         email={info.email}

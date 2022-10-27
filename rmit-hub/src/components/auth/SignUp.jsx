@@ -1,36 +1,20 @@
-import {useState} from "react"
+import { useState } from "react"
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated'
-import * as courses from '../../../../data/courses.json';
 import registerUser from "../../backend/helper/auth/registerUser";
-
+import { util } from "../../utils/utils";
 
 const SignUp = () => {
     const animatedComponents = makeAnimated();
 
-    const course = Object.keys(courses)
-    const majorOptions = []
-
-    for (let i = 0; i < course.length - 1; i++) {
-        let courseDict = {}
-        courseDict['value'] = course[i]
-        courseDict['label'] = course[i]
-        majorOptions.push(courseDict)
-    }
-
-    const campusOptions = [
-        {value: 'sgs', label: "Saigon South Campus"},
-        {value: 'hn', label: "Hanoi Campus"},
-    ]
-
-    let defaultCampus = campusOptions[0]['label']
-    let defaultMajor = majorOptions[0]['label']
+    const campusOptions = util.campus()
+    const majorOptions = util.major()
 
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [campus, setCampus] = useState(defaultCampus)
-    const [major, setMajor] = useState(defaultMajor)
+    const [campus, setCampus] = useState(campusOptions[0].label)
+    const [major, setMajor] = useState(majorOptions[0].label)
 
     const [message, setMessage] = useState(null)
     return (
@@ -89,7 +73,7 @@ const SignUp = () => {
                         options={majorOptions}
                     />
                 </div>
-                <button onClick={(e) => registerUser({username, email, password, campus, major}, e, setMessage)}>
+                <button onClick={(e) => registerUser({ username, email, password, campus, major }, e, setMessage)}>
                     Register
                 </button>
             </form>

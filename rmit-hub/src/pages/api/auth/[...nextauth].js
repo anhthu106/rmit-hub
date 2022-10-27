@@ -62,6 +62,3 @@ export default NextAuth({
     }
 
 });
-// const signinUser = async ({ password, user }) => {
-//
-// }

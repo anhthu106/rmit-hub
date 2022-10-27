@@ -1,26 +1,14 @@
 import makeAnimated from "react-select/animated";
-import * as courses from "../../../../data/courses.json";
-import {useState} from "react";
+import { useState } from "react";
 import Select from "react-select";
-import {user} from "../../backend/helper/users/users";
+import { user } from "../../backend/helper/users/users";
+import { util } from "../../utils/utils";
 
-export default function EditProfileForm({PreUsername, PreCampus, PreMajor, id}) {
+export default function EditProfileForm({ PreUsername, PreCampus, PreMajor, id }) {
+
     const animated = makeAnimated();
-
-    const UpdateCourse = Object.keys(courses)
-    const majorOptions = []
-
-    for (let i = 0; i < UpdateCourse.length - 1; i++) {
-        let UpdateCourseDict = {}
-        UpdateCourseDict['value'] = UpdateCourse[i]
-        UpdateCourseDict['label'] = UpdateCourse[i]
-        majorOptions.push(UpdateCourseDict)
-    }
-
-    const campusOptions = [
-        {value: 'sgs', label: "Saigon South Campus"},
-        {value: 'hn', label: "Hanoi Campus"},
-    ]
+    const majorOptions = util.major()
+    const campusOptions = util.campus()
 
     const [username, setUsername] = useState(PreUsername)
     const [campus, setCampus] = useState(PreCampus)
@@ -62,7 +50,7 @@ export default function EditProfileForm({PreUsername, PreCampus, PreMajor, id}) 
                         options={majorOptions}
                     />
                 </div>
-                <button onClick={(e) => user.UpdateUserInformation({username, campus, major},id, e, setMessage)}>
+                <button onClick={(e) => user.UpdateUserInformation({ username, campus, major }, id, e, setMessage)}>
                     Update
                 </button>
             </form>
