@@ -1,15 +1,11 @@
 import jwt from "jsonwebtoken";
-import Users from "../../../../models/user.models";
-import {StatusCodes} from "http-status-codes";
-import NextAuth from "next-auth";
-import {signIn} from "next-auth/react";
-import {fetchData} from "../../../../helper/fetch-data";
-
+import Users from "../../../../backend/models/user";
+import { StatusCodes } from "http-status-codes";
 
 export default async function handle(req, res) {
     try {
         //Check header
-        const {token} = req.query
+        const { token } = req.query
         const payload = jwt.verify(token, process.env.JWT_SECRET)
         //    Attach the user to the job routes
         //    req.user = {userId: payload.userID, name: payload.name}

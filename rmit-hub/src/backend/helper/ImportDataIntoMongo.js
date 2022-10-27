@@ -1,5 +1,5 @@
-import * as courses from "../../../data/courses.json";
-import Major from "../models/major.models";
+import * as courses from "../../../../data/courses.json";
+import Major from "../models/major";
 import Course from "../models/course.models";
 
 const majors = Object.keys(courses)

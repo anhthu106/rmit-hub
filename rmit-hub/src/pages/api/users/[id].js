@@ -1,6 +1,6 @@
-import connectDB from "../../../lib/connectDB";
-import Users from "../../../models/user.models";
-import {StatusCodes} from "http-status-codes";
+import connectDB from "../../../backend/lib/connectDB";
+import Users from "../../../backend/models/user";
+import { StatusCodes } from "http-status-codes";
 
 export default async function handler(req, res) {
     /**
@@ -13,7 +13,7 @@ export default async function handler(req, res) {
                 /**
                  * Get information
                  */
-                const {id} = req.query
+                const { id } = req.query
                 const user = await Users.findById(id, "_id username email campus major")
                 return res.status(StatusCodes.OK).json(user)
             }
@@ -22,24 +22,24 @@ export default async function handler(req, res) {
                  * Update Information
                  */
                 const {
-                    body: {username, campus, major},
-                    query: {id}
+                    body: { username, campus, major },
+                    query: { id }
                 } = req
 
                 if (username === "" || campus === "" || major === "") {
-                    new Error.json({message: "Please fill out the box"})
+                    new Error.json({ message: "Please fill out the box" })
                 }
                 const user = await Users.findByIdAndUpdate(
-                    {_id: id}, req.body, {new: true, runValidators: true}
+                    { _id: id }, req.body, { new: true, runValidators: true }
                 )
                 if (!user) {
-                    new Error.json({message: "User not found"})
+                    new Error.json({ message: "User not found" })
                 }
-                return res.status(StatusCodes.OK).json({message: "Your account updated"})
+                return res.status(StatusCodes.OK).json({ message: "Your account updated" })
             }
         }
     } catch
-        (Error) {
+    (Error) {
         throw new Error("Something Wrong")
     }
 

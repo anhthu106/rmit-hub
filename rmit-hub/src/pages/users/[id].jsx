@@ -1,8 +1,8 @@
 import Information from "../../components/users/Information";
-import {useSession} from "next-auth/react";
+import { useSession } from "next-auth/react";
 import EditProfileForm from "../../components/users/EditProfileForm";
-import connectDB from "../../lib/connectDB";
-import Users from "../../models/user.models";
+import connectDB from "../../backend/lib/connectDB";
+import Users from "../../backend/models/user";
 
 //Fetch data
 export async function getServerSideProps({ params }) {
@@ -12,8 +12,8 @@ export async function getServerSideProps({ params }) {
     return { props: { Info } }
 }
 
-export default function Detail({Info}) {
-    const {data: session} = useSession()
+export default function Detail({ Info }) {
+    const { data: session } = useSession()
     if (session) {
         if (session.user._id === Info._id) {
             return (

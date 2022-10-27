@@ -3,7 +3,7 @@ import connectDB from "../../../lib/connectDB";
 import Teams from "../../../models/team.models";
 import * as courses from '../../../../../data/courses.json';
 import Course from "../../../models/course.models";
-import Major from "../../../models/major.models";
+import Major from "../../../backend/models/major";
 
 
 export default async function handler(req, res) {

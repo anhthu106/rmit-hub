@@ -1,8 +1,8 @@
-import SignUp from "../components/auth/SignUp"
+import SignUp from "../../components/auth/SignUp"
 const signup = () => {
     return (
         <div>
-            <SignUp />
+           <SignUp />
         </div>
     )
 }

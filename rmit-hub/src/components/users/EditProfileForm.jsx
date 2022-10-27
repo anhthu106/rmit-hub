@@ -2,7 +2,7 @@ import makeAnimated from "react-select/animated";
 import * as courses from "../../../../data/courses.json";
 import {useState} from "react";
 import Select from "react-select";
-import {take} from "../../helper/users/users";
+import {user} from "../../backend/helper/users/users";
 
 export default function EditProfileForm({PreUsername, PreCampus, PreMajor, id}) {
     const animated = makeAnimated();
@@ -62,7 +62,7 @@ export default function EditProfileForm({PreUsername, PreCampus, PreMajor, id}) 
                         options={majorOptions}
                     />
                 </div>
-                <button onClick={(e) => take.UpdateUserInformation({username, campus, major},id, e, setMessage)}>
+                <button onClick={(e) => user.UpdateUserInformation({username, campus, major},id, e, setMessage)}>
                     Update
                 </button>
             </form>
