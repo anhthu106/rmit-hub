@@ -5,16 +5,15 @@ import * as courses from '../../../../data/courses.json';
 import registerUser from "../../backend/helper/auth/registerUser";
 
 
-const SignUp = () => {
+
+const SignUp = ({majorProps}) => {
     const animatedComponents = makeAnimated();
-
-    const course = Object.keys(courses)
+    
     const majorOptions = []
-
-    for (let i = 0; i < course.length - 1; i++) {
+    for (let i = 0; i < majorProps.length - 1; i++) {
         let courseDict = {}
-        courseDict['value'] = course[i]
-        courseDict['label'] = course[i]
+        courseDict['value'] = majorProps[i].name
+        courseDict['label'] = majorProps[i].name
         majorOptions.push(courseDict)
     }
 
