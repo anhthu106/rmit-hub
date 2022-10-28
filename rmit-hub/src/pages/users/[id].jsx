@@ -7,7 +7,7 @@ import Users from "../../backend/models/user";
 //Fetch data
 export async function getServerSideProps({ params }) {
     await connectDB()
-    const Info = await Users.findById(params.id, "_id username email campus major").lean()
+    const Info = await Users.findById(params.id, "_id username email campus major_id").lean()
     Info._id = Info._id.toString()
     return { props: { Info } }
 }

@@ -14,7 +14,7 @@ export default async function handler(req, res) {
                  * Get information
                  */
                 const { id } = req.query
-                const user = await Users.findById(id, "_id username email campus major")
+                const user = await Users.findById(id, "_id username email campus major_id")
                 return res.status(StatusCodes.OK).json(user)
             }
             case "PATCH": {

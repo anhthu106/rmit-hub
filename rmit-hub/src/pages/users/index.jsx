@@ -5,40 +5,30 @@ import Users from "../../backend/models/user";
 import Major from "../../backend/models/major";
 
 
-//Fetch data form server
+// Fetch data form server
 export async function getServerSideProps() {
     await connectDB()
     /* find all the data in our database */
     const data = await Users.find({}, "_id username email campus major_id")
 
-    const users = data.map( (doc) => {
-        const name =  Major.findById(doc.major_id.toString(), "name")
-            .lean()
-            .then((data) => {
-                return data.name
-            })
-        let major =  () => {
-            name.then((a) => {
-                return a
-            })
-        }
-
-        const user = {
+    const users = await Promise.all(data.map(async (doc) => {// Promise all use for take an iterable of promises
+        // Take the name of major base in ID
+        const majorData = await Major.findById(doc.major_id.toString(), "name")
+        
+        return {
             _id: doc._id.toString(),
             username: doc.username,
             email: doc.email,
             campus: doc.campus,
-            major: "asd"
+            major: majorData.name
         }
-        return user
-    })
-    console.log(users)
+    }))
+    return {props: {Info: users}}
 
-    return { props: { Info: users } }
 }
 
 
-export default function Profile({ Info }) {
+export default function Profile({Info}) {
     /**
      * Display all User
      */
