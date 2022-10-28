@@ -1,19 +1,40 @@
 import Information from "../../components/users/Information";
-import { useSession } from "next-auth/react";
+import {useSession} from "next-auth/react";
 import EditProfileForm from "../../components/users/EditProfileForm";
 import connectDB from "../../backend/lib/connectDB";
 import Users from "../../backend/models/user";
+import Major from "../../backend/models/major";
 
 //Fetch data
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps({params}) {
     await connectDB()
-    const Info = await Users.findById(params.id, "_id username email campus major_id").lean()
-    Info._id = Info._id.toString()
-    return { props: { Info } }
+    const majorData = await Major.find({}, "name")
+    const majors = majorData.map((doc) => {
+        const major = doc.toObject()
+        major._id = major._id.toString()
+        return major
+    })
+
+    const userData = await Users.findById(params.id, "_id username email campus major_id")
+    const userMajor = await Major.findById(userData.major_id.toString(), "name")
+
+    const Info = {
+        _id: userData._id.toString(),
+        email: userData.email,
+        campus: userData.campus,
+        major: userMajor.name
+    }
+
+    return {
+        props: {
+            Info,
+            majorProps: majors
+        }
+    }
 }
 
-export default function Detail({ Info }) {
-    const { data: session } = useSession()
+export default function Detail({Info, majorProps}) {
+    const {data: session} = useSession()
     if (session) {
         if (session.user._id === Info._id) {
             return (
@@ -30,6 +51,7 @@ export default function Detail({ Info }) {
                         PreCampus={Info.campus}
                         PreMajor={Info.major}
                         PreUsername={Info.username}
+                        majorProps={majorProps}
                     />
                 </div>
             )
@@ -47,7 +69,7 @@ export default function Detail({ Info }) {
         )
     } else {
         return (
-            <div>Loading</div>
+            <div>Please Sign in</div>
         )
     }
 

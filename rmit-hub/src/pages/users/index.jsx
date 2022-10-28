@@ -4,7 +4,6 @@ import connectDB from "../../backend/lib/connectDB";
 import Users from "../../backend/models/user";
 import Major from "../../backend/models/major";
 
-
 // Fetch data form server
 export async function getServerSideProps() {
     await connectDB()
@@ -14,7 +13,7 @@ export async function getServerSideProps() {
     const users = await Promise.all(data.map(async (doc) => {// Promise all use for take an iterable of promises
         // Take the name of major base in ID
         const majorData = await Major.findById(doc.major_id.toString(), "name")
-        
+
         return {
             _id: doc._id.toString(),
             username: doc.username,

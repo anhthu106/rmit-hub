@@ -4,10 +4,9 @@ import Select from "react-select";
 import { user } from "../../backend/helper/users/users";
 import { util } from "../../utils/utils";
 
-export default function EditProfileForm({ PreUsername, PreCampus, PreMajor, id }) {
-
+export default function EditProfileForm({ PreUsername, PreCampus, PreMajor, id, majorProps}) {
     const animated = makeAnimated();
-    const majorOptions = util.major()
+    const majorOptions = util.major(majorProps)
     const campusOptions = util.campus()
 
     const [username, setUsername] = useState(PreUsername)

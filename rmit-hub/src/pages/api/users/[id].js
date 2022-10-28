@@ -1,6 +1,7 @@
 import connectMongo from "../../../backend/lib/connectDB";
 import Users from "../../../backend/models/user";
-import { StatusCodes } from "http-status-codes";
+import {StatusCodes} from "http-status-codes";
+import Major from "../../../backend/models/major";
 
 export default async function handler(req, res) {
     /**
@@ -9,37 +10,38 @@ export default async function handler(req, res) {
     try {
         await connectMongo()
         switch (req.method) {
-            case "GET": {
-                /**
-                 * Get information
-                 */
-                const { id } = req.query
-                const user = await Users.findById(id, "_id username email campus major_id")
-                return res.status(StatusCodes.OK).json(user)
-            }
             case "PATCH": {
                 /**
                  * Update Information
                  */
                 const {
-                    body: { username, campus, major },
-                    query: { id }
+                    body: {username, campus,  major},
+                    query: {id}
                 } = req
 
                 if (username === "" || campus === "" || major === "") {
-                    new Error.json({ message: "Please fill out the box" })
+                    new Error.json({message: "Please fill out the box"})
+                }
+                const majorName = await Major.findOne({name: req.body.major}, "_id").lean()
+                const majorID = majorName._id.toString()
+
+                const newUser = {
+                    username: req.body.username,
+                    campus: req.body.campus,
+                    major_id: majorID
                 }
                 const user = await Users.findByIdAndUpdate(
-                    { _id: id }, req.body, { new: true, runValidators: true }
+                    {_id: id}, newUser, {new: true, runValidators: true}
                 )
+                console.log(user)
                 if (!user) {
-                    new Error.json({ message: "User not found" })
+                    new Error.json({message: "User not found"})
                 }
-                return res.status(StatusCodes.OK).json({ message: "Your account updated" })
+                return res.status(StatusCodes.OK).json({message: "Your account updated"})
             }
         }
     } catch
-    (Error) {
+        (Error) {
         throw new Error("Something Wrong")
     }
 
