@@ -17,18 +17,18 @@ export async function getServerSideProps() {
             .then((data) => {
                 return data.name
             })
-        const major =  () => {
+        let major =  () => {
             name.then((a) => {
-
+                return a
             })
         }
-        major()
+
         const user = {
             _id: doc._id.toString(),
             username: doc.username,
             email: doc.email,
             campus: doc.campus,
-            major: "asdas"
+            major: "asd"
         }
         return user
     })

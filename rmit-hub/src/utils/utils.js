@@ -1,20 +1,18 @@
 import * as courses from "../../../data/courses.json";
 
 const campus = () => {
-    const campusOptions = [
-        { value: 'sgs', label: "Saigon South Campus" },
-        { value: 'hn', label: "Hanoi Campus" },
+    return [
+        {value: 'sgs', label: "Saigon South Campus"},
+        {value: 'hn', label: "Hanoi Campus"},
     ]
-    return campusOptions
 }
-const major = () => {
-    const courseList = Object.keys(courses)
+const major = (majorProps) => {
     const majorOptions = []
 
-    for (let i = 0; i < courseList.length - 1; i++) {
+    for (let i = 0; i < majorProps.length - 1; i++) {
         let updateMajorDict = {}
-        updateMajorDict['value'] = courseList[i]
-        updateMajorDict['label'] = courseList[i]
+        updateMajorDict['value'] = majorProps[i].name
+        updateMajorDict['label'] = majorProps[i].name
         majorOptions.push(updateMajorDict)
     }
     return majorOptions
