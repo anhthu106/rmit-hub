@@ -1,9 +1,26 @@
 import { useSession, signIn, signOut } from "next-auth/react"
 import Link from "next/link";
+import connectMongo from "../backend/lib/connectDB";
 import CreatePost from "../components/posts/CreatePost"
-export default function Home() {
+import Course from "../backend/models/course"
+
+export async function getServerSideProps() {
+  await connectMongo()
+  const data = await Course.find({}, "name")
+
+  const courses = data.map((doc) => {
+    const course = doc.toObject();
+    course._id = course._id.toString()
+    return course
+  })
+
+  return { props: { courseProps: courses } }
+}
+
+
+export default function Home({ courseProps }) {
   const { data: session } = useSession()
-  console.log(session)
+
   if (session) {
     return (
       <>
@@ -11,7 +28,7 @@ export default function Home() {
           Signed in as {session.user.email} <br />
           <button onClick={() => signOut()}>Sign out</button>
         </div>
-        {/*<CreatePost />*/}
+        <CreatePost courseProps={courseProps} />
       </>
     )
   }

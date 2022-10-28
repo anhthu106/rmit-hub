@@ -11,10 +11,6 @@ const postSchema = new Schema({
         ref: "Course",
         required: true,
     },
-    date: {
-        type: String,
-        required: true
-    },
     content: {
         type: String,
         required: true,
@@ -23,7 +19,7 @@ const postSchema = new Schema({
         type: String,
         required: true,
     }
-});
+}, { timestamps: true });
 
 const Post = models.Post || model('Post', postSchema);
 
