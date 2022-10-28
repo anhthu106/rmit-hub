@@ -24,7 +24,7 @@ export default NextAuth({
                 const check = await Users.findOne({email: email})
                 if (!check) throw new Error("You haven't registered yet!")
                 if (check) {
-                    const user = await Users.findOne({email: email}, "_id username email campus major")
+                    const user = await Users.findOne({email: email}, "_id username email campus major_id team_id post_id task_id")
                     if (!check.password) {
                         throw new Error("Please enter password!")
                     }

@@ -2,18 +2,37 @@ import Information from "../../components/users/Information";
 import Link from "next/link";
 import connectDB from "../../backend/lib/connectDB";
 import Users from "../../backend/models/user";
+import Major from "../../backend/models/major";
 
 
 //Fetch data form server
 export async function getServerSideProps() {
     await connectDB()
     /* find all the data in our database */
-    const data = await Users.find({}, "_id username email campus major")
-    const users = data.map((doc) => {
-        const user = doc.toObject()
-        user._id = user._id.toString()
+    const data = await Users.find({}, "_id username email campus major_id")
+
+    const users = data.map( (doc) => {
+        const name =  Major.findById(doc.major_id.toString(), "name")
+            .lean()
+            .then((data) => {
+                return data.name
+            })
+        const major =  () => {
+            name.then((a) => {
+
+            })
+        }
+        major()
+        const user = {
+            _id: doc._id.toString(),
+            username: doc.username,
+            email: doc.email,
+            campus: doc.campus,
+            major: "asdas"
+        }
         return user
     })
+    console.log(users)
 
     return { props: { Info: users } }
 }

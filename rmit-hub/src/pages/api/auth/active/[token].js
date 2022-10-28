@@ -1,6 +1,8 @@
 import jwt from "jsonwebtoken";
 import Users from "../../../../backend/models/user";
 import { StatusCodes } from "http-status-codes";
+import Major from "../../../../backend/models/major";
+import major from "../../../../backend/models/major";
 
 export default async function handle(req, res) {
     try {
@@ -10,12 +12,15 @@ export default async function handle(req, res) {
         //    Attach the user to the job routes
         //    req.user = {userId: payload.userID, name: payload.name}
         //     req.user = req.body
+        const data = await Major.findOne({name: payload.major}, "_id").lean()
+        const majorId = data._id.toString()
+
         req.user = {
             username: payload.username,
             email: payload.email,
             password: payload.password,
             campus: payload.campus,
-            major: payload.major
+            major_id: majorId
         }
         await Users.create(req.user)
         res.status(StatusCodes.CREATED).redirect("/api/auth/signin/")

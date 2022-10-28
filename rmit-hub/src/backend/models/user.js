@@ -32,14 +32,20 @@ const userSchema = new mongoose.Schema({
     team_id: [
         {
             type: Schema.Types.ObjectId,
-            ref: "Team"
+            ref: "Team",
+            default: null
+        }
+    ],
+    post_id: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Post"
         }
     ],
     task_id: [
         {
             type: Schema.Types.ObjectId,
             ref: "Tasks",
-            default: null
         }
     ]
 })

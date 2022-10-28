@@ -4,11 +4,9 @@ import makeAnimated from 'react-select/animated'
 import * as courses from '../../../../data/courses.json';
 import registerUser from "../../backend/helper/auth/registerUser";
 
-
-
 const SignUp = ({majorProps}) => {
     const animatedComponents = makeAnimated();
-    
+
     const majorOptions = []
     for (let i = 0; i < majorProps.length - 1; i++) {
         let courseDict = {}
