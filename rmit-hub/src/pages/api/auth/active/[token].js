@@ -13,7 +13,7 @@ export default async function handle(req, res) {
         //    req.user = {userId: payload.userID, name: payload.name}
         //     req.user = req.body
         const data = await Major.findOne({name: payload.major}, "_id").lean()
-        const majorId = data.toString()
+        const majorId = data._id.toString()
 
         req.user = {
             username: payload.username,
