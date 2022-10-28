@@ -38,7 +38,7 @@ export async function getServerSideProps() {
 }
 
 
-export default function Profile({Info}) {
+export default function Profile({ Info }) {
     /**
      * Display all User
      */
@@ -56,8 +56,6 @@ export default function Profile({Info}) {
                         major={info.major}
                     />
                 </div>
-
-
             ))}
         </div>
 

@@ -1,68 +1,50 @@
-// import makeAnimated from "react-select/animated";
-// import * as courses from "../../../../data/courses.json";
-// import { useState } from "react";
-// import Select from "react-select";
-// import { take } from "../../backend/helper/users/users";
+import makeAnimated from "react-select/animated";
+import { useState, useEffect } from "react";
+import Select from "react-select";
+import addPost from "../../backend/helper/posts/posts";
+import { util } from "../../utils/utils";
 
-// export default function CreatePost({ PreUsername, PreMajor, id }) {
-//     const animated = makeAnimated();
+export default function CreatePost() {
+    const animated = makeAnimated();
+    const courseOptions = util.course()
 
-//     const UpdateCourse = Object.keys(courses)
-//     const majorOptions = []
+    const [content, setContent] = useState()
+    const [course, setCourse] = useState()
+    const [message, setMessage] = useState(null)
 
-//     for (let i = 0; i < UpdateCourse.length - 1; i++) {
-//         let UpdateCourseDict = {}
-//         UpdateCourseDict['value'] = UpdateCourse[i]
-//         UpdateCourseDict['label'] = UpdateCourse[i]
-//         majorOptions.push(UpdateCourseDict)
-//     }
+    let dateFormat = new Date().toLocaleString('default', { month: 'long', day: '2-digit', year: 'numeric' })
 
-//     const [username, setUsername] = useState(PreUsername)
-//     const [campus, setCampus] = useState(PreCampus)
-//     const [major, setMajor] = useState(PreMajor)
+    return (
+        <div>
+            <form>
+                <div>
+                    <label htmlFor="course">Course</label>
+                    <Select
+                        onChange={(course) => setCourse(course.label)}
+                        closeMenuOnSelect={false}
+                        components={animated}
+                        placeholder={course}
+                        options={courseOptions}
+                    />
+                </div>
 
-//     const [message, setMessage] = useState(null)
-//     return (
-//         <div>
-//             <form>
-//                 <div>
-//                     <label htmlFor="username">Username</label>
-//                     <input
-//                         type="text"
-//                         id="username"
-//                         name="username"
-//                         required
-//                         value={username}
-//                         placeholder={PreUsername}
-//                         onChange={e => setUsername(e.target.value)}
-//                     />
-//                 </div>
-//                 <div>
-//                     <label htmlFor="campus">Campus</label>
-//                     <Select
-//                         onChange={(campus) => setCampus(campus.label)}
-//                         closeMenuOnSelect={false}
-//                         components={animated}
-//                         placeholder={PreCampus}
-//                         options={campusOptions}
-//                     />
-//                 </div>
-//                 <div>
-//                     <label htmlFor="major">Major</label>
-//                     <Select
-//                         onChange={(major) => setMajor(major.label)}
-//                         closeMenuOnSelect={false}
-//                         components={animated}
-//                         placeholder={PreMajor}
-//                         options={majorOptions}
-//                     />
-//                 </div>
-//                 <button onClick={(e) => take.UpdateUserInformation({ username, campus, major }, id, e, setMessage)}>
-//                     Update
-//                 </button>
-//             </form>
-//             <div>{message}</div>
-//         </div>
+                <div>
+                    <label htmlFor="content">Content</label>
+                    <textarea
+                        type="text"
+                        id="content"
+                        name="content"
+                        required
+                        value={content}
+                        onChange={e => setContent(e.target.value)}
+                    />
+                </div>
+                <button onClick={(e) => addPost({ content, course, dateFormat }, e, setMessage)}>
+                    Create Post
+                </button>
+            </form>
+            <div>{message}</div>
+        </div>
 
-//     )
-// }
+    )
+}

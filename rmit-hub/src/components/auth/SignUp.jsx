@@ -1,10 +1,11 @@
-import {useState} from "react"
+import { useState } from "react"
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated'
-import * as courses from '../../../../data/courses.json';
 import registerUser from "../../backend/helper/auth/registerUser";
+import { util } from "../../utils/utils";
 
 const SignUp = ({majorProps}) => {
+const SignUp = () => {
     const animatedComponents = makeAnimated();
 
     const majorOptions = []
@@ -23,11 +24,14 @@ const SignUp = ({majorProps}) => {
     let defaultCampus = campusOptions[0]['label']
     let defaultMajor = majorOptions[0]['label']
 
+    const campusOptions = util.campus()
+    const majorOptions = util.major()
+
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [campus, setCampus] = useState(defaultCampus)
-    const [major, setMajor] = useState(defaultMajor)
+    const [campus, setCampus] = useState(campusOptions[0].label)
+    const [major, setMajor] = useState(majorOptions[0].label)
 
     const [message, setMessage] = useState(null)
 
@@ -87,7 +91,7 @@ const SignUp = ({majorProps}) => {
                         options={majorOptions}
                     />
                 </div>
-                <button onClick={(e) => registerUser({username, email, password, campus, major}, e, setMessage)}>
+                <button onClick={(e) => registerUser({ username, email, password, campus, major }, e, setMessage)}>
                     Register
                 </button>
             </form>
