@@ -4,15 +4,13 @@ import Select from "react-select";
 import addPost from "../../backend/helper/posts/posts";
 import { util } from "../../utils/utils";
 
-export default function CreatePost() {
+export default function CreatePost({ courseProps }) {
     const animated = makeAnimated();
-    const courseOptions = util.course()
+    const courseOptions = util.course(courseProps)
 
     const [content, setContent] = useState()
     const [course, setCourse] = useState()
     const [message, setMessage] = useState(null)
-
-    let dateFormat = new Date().toLocaleString('default', { month: 'long', day: '2-digit', year: 'numeric' })
 
     return (
         <div>
@@ -39,7 +37,7 @@ export default function CreatePost() {
                         onChange={e => setContent(e.target.value)}
                     />
                 </div>
-                <button onClick={(e) => addPost({ content, course, dateFormat }, e, setMessage)}>
+                <button onClick={(e) => addPost({ content, course }, e, setMessage)}>
                     Create Post
                 </button>
             </form>
