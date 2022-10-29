@@ -35,8 +35,10 @@ export async function getServerSideProps({params}) {
 }
 
 export default function Detail({Info, majorProps}) {
-    const {data: session} = useSession()
-    if (session) {
+    const {data: session, status} = useSession()
+    if (status === "Loading") {
+        return (<div>Loading</div>)
+    } else if (status === "authenticated") {
         if (session.user._id === Info._id) {
             return (
                 //My account
@@ -68,11 +70,5 @@ export default function Detail({Info, majorProps}) {
                 />
             </div>
         )
-    } else {
-        return (
-            <div>Please Sign in</div>
-        )
     }
-
-
 }

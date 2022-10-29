@@ -2,20 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="49bb965a-6f71-43af-8e5b-af0d7cc6025d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/rmit-hub/src/pages/team/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rmit-hub/src/backend/helper/auth/mailler.js" beforeDir="false" afterPath="$PROJECT_DIR$/rmit-hub/src/backend/helper/auth/mailler.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rmit-hub/src/backend/helper/auth/registerUser.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rmit-hub/src/backend/helper/posts/posts.js" beforeDir="false" afterPath="$PROJECT_DIR$/rmit-hub/src/backend/helper/Items/Items.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rmit-hub/src/backend/helper/users/users.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rmit-hub/src/backend/models/team.js" beforeDir="false" afterPath="$PROJECT_DIR$/rmit-hub/src/backend/models/team.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rmit-hub/src/components/auth/SignUp.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/rmit-hub/src/components/auth/SignUp.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rmit-hub/src/components/posts/CreatePost.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/rmit-hub/src/components/posts/CreatePost.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rmit-hub/src/components/team/createTeam.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/rmit-hub/src/components/team/CreateTeam.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rmit-hub/src/components/users/EditProfileForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/rmit-hub/src/components/users/EditProfileForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rmit-hub/src/frontend/components/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/rmit-hub/src/components/team/createTeam.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rmit-hub/src/pages/api/auth/active/[token].js" beforeDir="false" afterPath="$PROJECT_DIR$/rmit-hub/src/pages/api/auth/active/[token].js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rmit-hub/src/pages/api/team/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/rmit-hub/src/pages/api/team/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rmit-hub/src/pages/api/users/[id].js" beforeDir="false" afterPath="$PROJECT_DIR$/rmit-hub/src/pages/api/users/[id].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rmit-hub/src/pages/posts/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/rmit-hub/src/pages/posts/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rmit-hub/src/pages/team/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/rmit-hub/src/pages/team/index.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rmit-hub/src/pages/users/[id].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/rmit-hub/src/pages/users/[id].jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -61,7 +54,7 @@
       <option name="presentableId" value="Default" />
       <updated>1667031061691</updated>
       <workItem from="1667031063637" duration="340000" />
-      <workItem from="1667031418152" duration="7654000" />
+      <workItem from="1667031418152" duration="11518000" />
     </task>
     <servers />
   </component>

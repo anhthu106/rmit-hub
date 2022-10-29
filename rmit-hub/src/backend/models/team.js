@@ -13,7 +13,8 @@ const teamSchema = new Schema({
         default: 0
     }],
     courseID: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: "Course",
         required: [true, "courseID is required"]
     },
     Member: {

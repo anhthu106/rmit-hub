@@ -1,17 +1,16 @@
 import makeAnimated from "react-select/animated";
-import { useState } from "react";
+import {useState} from "react";
 import Select from "react-select";
-import { user } from "../../backend/helper/users/users";
-import { util } from "../../utils/utils";
+import {util} from "../../utils/utils";
 import {addItems} from "../../backend/helper/Items/Items";
 
-export default function CreateTeam({courseProps  }) {
+export default function CreateTeam({courseProps, OwnerUser}) {
 
     const animated = makeAnimated();
     const courseOptions = util.course(courseProps)
 
 
-    const [teamName, setTeamName] = useState()
+    const [name, setName] = useState()
     const [course, setCourse] = useState()
     const [description, setDescription] = useState()
 
@@ -20,14 +19,14 @@ export default function CreateTeam({courseProps  }) {
         <div>
             <form>
                 <div>
-                    <label htmlFor="teamName">Team name</label>
+                    <label htmlFor="name">Team name</label>
                     <input
                         type="text"
-                        id="teamName"
-                        name="teamName"
+                        id="name"
+                        name="name"
                         required
-                        value={teamName}
-                        onChange={e => setTeamName(e.target.value)}
+                        value={name}
+                        onChange={e => setName(e.target.value)}
                     />
                 </div>
                 <div>
@@ -51,7 +50,7 @@ export default function CreateTeam({courseProps  }) {
                         onChange={e => setDescription(e.target.value)}
                     />
                 </div>
-                <button onClick={(e) => addItems({ teamName, course, description }, id, e, setMessage)}>
+                <button onClick={(e) => addItems({name, course, description, userID: OwnerUser}, e, setMessage, "api/team")}>
                     Create Team
                 </button>
             </form>

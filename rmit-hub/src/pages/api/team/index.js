@@ -2,6 +2,7 @@ import connectDB from "../../../backend/lib/connectDB";
 import Teams from "../../../backend/models/team";
 import {StatusCodes} from "http-status-codes";
 import User from "../../../backend/models/user";
+import Course from "../../../backend/models/course";
 
 
 export default async function handler(req, res) {
@@ -9,7 +10,17 @@ export default async function handler(req, res) {
         await connectDB()
         switch (req.method) {
             case "POST": {
-                const team = await Teams.create(req.body)
+                const data = await Course.findOne({name: req.body.course}, "_id").lean()
+                const courseId = data._id.toString()
+                console.log(courseId)
+
+                const teamValue  = {
+                    name : req.body.name,
+                    userID: req.body.userID,
+                    courseID: courseId,
+                    Description: req.body.Description
+                }
+                const team = await Teams.create(teamValue)
                 const userID = team.userID
                 for (let i = 0; i < userID.length; i++) {
                     const id = userID[i].toString()
