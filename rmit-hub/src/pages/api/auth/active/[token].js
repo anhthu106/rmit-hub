@@ -2,7 +2,6 @@ import jwt from "jsonwebtoken";
 import Users from "../../../../backend/models/user";
 import { StatusCodes } from "http-status-codes";
 import Major from "../../../../backend/models/major";
-import major from "../../../../backend/models/major";
 
 export default async function handle(req, res) {
     try {

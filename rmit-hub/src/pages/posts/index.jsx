@@ -1,5 +1,6 @@
 import connectDB from "../../backend/lib/connectDB";
 import Posts from "../../backend/models/posts";
+import Information from "../../components/users/Information";
 
 //Fetch data form server
 export async function getServerSideProps() {

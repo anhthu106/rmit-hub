@@ -1,8 +1,8 @@
 import {useState} from "react"
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated'
-import registerUser from "../../backend/helper/auth/registerUser";
 import {util} from "../../utils/utils";
+import items, {addItems} from "../../backend/helper/Items/Items";
 
 const SignUp = ({majorProps}) => {
     const animatedComponents = makeAnimated();
@@ -74,7 +74,8 @@ const SignUp = ({majorProps}) => {
                         options={majorOptions}
                     />
                 </div>
-                <button onClick={(e) => registerUser({username, email, password, campus, major}, e, setMessage)}>
+                <button onClick={(e) =>
+                    addItems({username, email, password, campus, major}, e, setMessage, "/api/auth/register")}>
                     Register
                 </button>
             </form>

@@ -1,5 +1,4 @@
 import {model, models, Schema} from 'mongoose';
-import Users from "./user.models";
 
 
 const teamSchema = new Schema({
@@ -7,17 +6,11 @@ const teamSchema = new Schema({
         type: String,
         required: [true, "Name is required"]
     },
-    // teamStatus: {
-    //     type: String,
-    //     required: [true, "teamStatus is required"]
-    //
-    // },
     userID: [{
         type: Schema.Types.ObjectId,
         ref: "Users",
         validate: {validator: membersLimit, message: "Out of range"},
         default: 0
-
     }],
     courseID: {
         type: String,
@@ -26,6 +19,9 @@ const teamSchema = new Schema({
     Member: {
         type: Number,
         default: 0,
+    },
+    Description: {
+        type: String,
     }
 });
 
