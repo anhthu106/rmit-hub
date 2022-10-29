@@ -1,4 +1,4 @@
-import Information from "../../components/users/Information";
+import UserInformation from "../../components/users/UserInformation";
 import {useSession} from "next-auth/react";
 import EditProfileForm from "../../components/users/EditProfileForm";
 import connectDB from "../../backend/lib/connectDB";
@@ -43,7 +43,7 @@ export default function Detail({Info, majorProps}) {
             return (
                 //My account
                 <div>
-                    <Information
+                    <UserInformation
                         username={Info.username}
                         email={Info.email}
                         campus={Info.campus}
@@ -62,7 +62,7 @@ export default function Detail({Info, majorProps}) {
         return (
             //Normal account
             <div>
-                <Information
+                <UserInformation
                     username={Info.username}
                     email={Info.email}
                     campus={Info.campus}

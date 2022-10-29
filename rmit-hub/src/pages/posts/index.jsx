@@ -1,6 +1,7 @@
 import connectDB from "../../backend/lib/connectDB";
 import Posts from "../../backend/models/posts";
-import Information from "../../components/users/Information";
+import Information from "../../components/users/UserInformation";
+import UserInformation from "../../components/users/UserInformation";
 
 //Fetch data form server
 export async function getServerSideProps() {
@@ -27,7 +28,7 @@ export default function AllPost({ Post }) {
             {Post.map(post => (
                 // eslint-disable-next-line react/jsx-key
                 <div key={post._id}>
-                    <Information
+                    <UserInformation
                         username={info.username}
                         email={info.email}
                         campus={info.campus}

@@ -12,15 +12,15 @@ export default async function handler(req, res) {
             case "POST": {
                 const data = await Course.findOne({name: req.body.course}, "_id").lean()
                 const courseId = data._id.toString()
-                console.log(courseId)
 
-                const teamValue  = {
-                    name : req.body.name,
+                const teamValue = {
+                    name: req.body.name,
                     userID: req.body.userID,
                     courseID: courseId,
-                    Description: req.body.Description
+                    Description: req.body.description
                 }
                 const team = await Teams.create(teamValue)
+
                 const userID = team.userID
                 for (let i = 0; i < userID.length; i++) {
                     const id = userID[i].toString()
@@ -31,11 +31,9 @@ export default async function handler(req, res) {
                         }
                     })
                 }
-
                 res.status(StatusCodes.CREATED).json({message: "Team created"});
             }
         }
-
     } catch (error) {
         console.log(error)
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({message: error})

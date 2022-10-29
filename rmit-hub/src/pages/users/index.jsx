@@ -1,8 +1,8 @@
-import Information from "../../components/users/Information";
 import Link from "next/link";
 import connectDB from "../../backend/lib/connectDB";
 import Users from "../../backend/models/user";
 import Major from "../../backend/models/major";
+import UserInformation from "../../components/users/UserInformation";
 
 
 // Fetch data form server
@@ -36,10 +36,9 @@ export default function Profile({Info}) {
         <div>
             <h1>All User</h1>
             {Info.map(info => (
-                // eslint-disable-next-line react/jsx-key
                 <div key={info._id}>
                     <Link href={`/users/${info._id}`}>{info._id}</Link>
-                    <Information
+                    <UserInformation
                         username={info.username}
                         email={info.email}
                         campus={info.campus}
