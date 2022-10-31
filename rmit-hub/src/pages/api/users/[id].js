@@ -15,7 +15,7 @@ export default async function handler(req, res) {
                  * Update Information
                  */
                 const {
-                    body: {username, campus,  major},
+                    body: {username, campus, major},
                     query: {id}
                 } = req
 
@@ -31,18 +31,16 @@ export default async function handler(req, res) {
                     major_id: majorID
                 }
                 const user = await Users.findByIdAndUpdate(
-                    {_id: id}, newUser, {new: true, runValidators: true}
+                    id, newUser, {new: true, runValidators: true}
                 )
-                console.log(user)
                 if (!user) {
                     new Error.json({message: "User not found"})
                 }
                 return res.status(StatusCodes.OK).json({message: "Your account updated"})
             }
         }
-    } catch
-        (Error) {
-        throw new Error("Something Wrong")
+    } catch (Error) {
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({Error})
     }
 
 }

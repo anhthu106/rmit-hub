@@ -5,6 +5,7 @@ import {useSession} from "next-auth/react";
 import TeamInformation from "../../components/team/TeamInformation";
 import Teams from "../../backend/models/team";
 import Users from "../../backend/models/user";
+import Link from "next/link";
 
 export async function getServerSideProps() {
     await connectMongo()
@@ -55,6 +56,7 @@ const Team = ({courseProps, teamProps}) => {
                 />
                 {teamProps.map((team) => (
                     <div key={team._id}>
+                        <Link href={`/team/${team._id}`}>{team._id}</Link>
                         <TeamInformation
                             User={team.userID}
                             CourseId={team.courseID}

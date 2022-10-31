@@ -15,6 +15,7 @@ export async function addItems(body, e, setMessage, url) {
 }
 
 export async function updateItems(body, e, setMessage, url) {
+    e.preventDefault()
     const res = await fetchData.patch(url, body)
     await returnMessage(res, setMessage)
 }
