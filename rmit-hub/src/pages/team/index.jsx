@@ -6,30 +6,31 @@ import TeamInformation from "../../components/team/TeamInformation";
 import Teams from "../../backend/models/team";
 import Users from "../../backend/models/user";
 import Link from "next/link";
+import importRawData from "../../backend/helper/Data/data";
 
 export async function getServerSideProps() {
     await connectMongo()
-    const data = await Course.find({}, "name")
+
+    const courseData = await Course.find({}, "name")
     const teamData = await Teams.find({})
 
     const teams = await Promise.all(teamData.map(async (doc) => {
         const team = doc.toObject()
         team._id = team._id.toString()
+
         team.userID = await Promise.all(team.userID.map(async (id) => {
             id = id.toString()
             const user = await Users.findById(id, "username").lean()
             return user["username"]
         }))
+
         const course = await Course.findById(team.courseID.toString(), "name").lean()
         team.courseID = course["name"]
+
         return team
     }))
 
-    const courses = data.map((doc) => {
-        const course = doc.toObject();
-        course._id = course._id.toString()
-        return course
-    })
+    const courses = importRawData(courseData)
 
     return {
         props: {

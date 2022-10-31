@@ -36,31 +36,9 @@ export async function getServerSideProps({params}) {
 
 export default function Detail({Info, majorProps}) {
     const {data: session, status} = useSession()
-    if (status === "Loading") {
-        return (<div>Loading</div>)
-    } else if (status === "authenticated") {
-        if (session.user._id === Info._id) {
-            return (
-                //My account
-                <div>
-                    <UserInformation
-                        username={Info.username}
-                        email={Info.email}
-                        campus={Info.campus}
-                        major={Info.major}
-                    />
-                    <EditProfileForm
-                        id={Info._id}
-                        PreCampus={Info.campus}
-                        PreMajor={Info.major}
-                        PreUsername={Info.username}
-                        majorProps={majorProps}
-                    />
-                </div>
-            )
-        }
+    if (session.user._id === Info._id) {
         return (
-            //Normal account
+            //My account
             <div>
                 <UserInformation
                     username={Info.username}
@@ -68,7 +46,27 @@ export default function Detail({Info, majorProps}) {
                     campus={Info.campus}
                     major={Info.major}
                 />
+                <EditProfileForm
+                    id={Info._id}
+                    PreCampus={Info.campus}
+                    PreMajor={Info.major}
+                    PreUsername={Info.username}
+                    majorProps={majorProps}
+                />
             </div>
         )
     }
+    return (
+        //Normal account
+        <div>
+            <UserInformation
+                username={Info.username}
+                email={Info.email}
+                campus={Info.campus}
+                major={Info.major}
+            />
+        </div>
+    )
 }
+
+Detail.auth = true

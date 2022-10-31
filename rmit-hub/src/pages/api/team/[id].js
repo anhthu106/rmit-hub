@@ -40,7 +40,6 @@ export default async function handler(req, res) {
                 }catch (e){
                     console.log(e)
                 }
-
             }
         }
     } catch (Error) {

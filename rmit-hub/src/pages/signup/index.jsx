@@ -1,16 +1,13 @@
 import SignUp from "../../components/auth/SignUp"
 import connectDB from "../../backend/lib/connectDB";
 import Major from "../../backend/models/major";
+import importRawData from "../../backend/helper/Data/data";
 
 export async function getServerSideProps() {
     await connectDB()
     /* find all the data in our database */
-    const data = await Major.find({}, "name")
-    const majors = data.map((doc) => {
-        const major = doc.toObject()
-        major._id = major._id.toString()
-        return major
-    })
+    const majorData = await Major.find({}, "name")
+    const majors = importRawData(majorData)
 
     return {props: {majorProps: majors}}
 }

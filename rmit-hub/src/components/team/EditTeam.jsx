@@ -50,7 +50,9 @@ export default function EditTeam({preName, preCourse, preDescription, courseProp
                         onChange={e => setDescription(e.target.value)}
                     />
                 </div>
-                <button onClick={(e) => updateItems({newName, newCourse, newDescription}, e, setMessage, `/api/team/${id}`)}>
+                <button onClick={(e) => updateItems({
+                    newName, newCourse, newDescription
+                }, e, setMessage, `/api/team/${id}`)}>
                     Update Team
                 </button>
             </form>

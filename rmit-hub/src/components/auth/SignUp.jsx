@@ -2,7 +2,7 @@ import {useState} from "react"
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated'
 import {util} from "../../utils/utils";
-import items, {addItems} from "../../backend/helper/Items/Items";
+import {addItems} from "../../backend/helper/Items/Items";
 
 const SignUp = ({majorProps}) => {
     const animatedComponents = makeAnimated();
