@@ -1,5 +1,6 @@
 import connectMongo from "../../../backend/lib/connectDB";
 import Posts from "../../../backend/models/post";
+import Course from "../../../backend/models/course";
 import { StatusCodes } from "http-status-codes";
 
 export default async function handler(req, res) {
@@ -8,34 +9,25 @@ export default async function handler(req, res) {
         switch (req.method) {
             // create post
             case "POST": {
-                await Posts.create(req.body)
-                res.status(StatusCodes.OK).json(req.body)
-            }
+                const data = await Course.findOne({ name: req.body.course }, "_id").lean()
+                const courseId = data._id.toString()
 
-            // get all post
-            case "GET": {
-                try {
-                    const post = await Posts.find({})
-                    return res.status(StatusCodes.OK).json(post)
-                } catch (e) {
-                    console.log(e)
+                const postValue = {
+                    userID: req.body.id,
+                    courseID: courseId,
+                    content: req.body.content,
+                    currentDate: req.body.currentDate
                 }
-            }
+                console.log(postValue)
 
-            // delete post
-            case "DELETE": {
-                try {
-                    const id = req.params.id;
-                    const post = await Posts.findByIdAndDelete({ _id: id });
-                    res.send("Post deleted successfully");
-                } catch (err) {
-                    console.log(err);
-                }
+                await Posts.create(postValue)
+
+                res.status(StatusCodes.CREATED).json({ message: "Post created" });
             }
         }
     } catch
     (error) {
-        return error
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: error })
     }
 
 }

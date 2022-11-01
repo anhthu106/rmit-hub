@@ -15,11 +15,11 @@ const postSchema = new Schema({
         type: String,
         required: true,
     },
-    pictureURL: {
+    currentDate: {
         type: String,
         required: true,
     }
-}, { timestamps: true });
+});
 
 const Post = models.Post || model('Post', postSchema);
 

@@ -1,10 +1,10 @@
 import makeAnimated from "react-select/animated";
-import {useState} from "react";
+import { useState } from "react";
 import Select from "react-select";
-import {util} from "../../utils/utils";
-import {addItems} from "../../backend/helper/Items/Items";
+import { util } from "../../utils/utils";
+import { addItems } from "../../backend/helper/Items/Items";
 
-export default function CreatePost({courseProps}) {
+export default function CreatePost({ courseProps, id }) {
     const animated = makeAnimated();
     const courseOptions = util.course(courseProps)
 
@@ -12,6 +12,8 @@ export default function CreatePost({courseProps}) {
     const [course, setCourse] = useState()
     const [message, setMessage] = useState(null)
 
+    const d = new Date()
+    const currentDate = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate()
     return (
         <div>
             <form>
@@ -37,7 +39,7 @@ export default function CreatePost({courseProps}) {
                         onChange={e => setContent(e.target.value)}
                     />
                 </div>
-                <button onClick={(e) => addItems({content, course}, e, setMessage, "/api/auth/posts")}>
+                <button onClick={(e) => addItems({ currentDate, content, course, id }, e, setMessage, "/api/posts")}>
                     Create Post
                 </button>
             </form>
