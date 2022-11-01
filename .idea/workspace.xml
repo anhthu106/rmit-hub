@@ -2,17 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="49bb965a-6f71-43af-8e5b-af0d7cc6025d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/rmit-hub/src/backend/helper/Data/data.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rmit-hub/src/backend/helper/Items/Items.js" beforeDir="false" afterPath="$PROJECT_DIR$/rmit-hub/src/backend/helper/Items/Items.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rmit-hub/src/backend/helper/fetchData/fetchData.js" beforeDir="false" afterPath="$PROJECT_DIR$/rmit-hub/src/backend/helper/fetchData/fetchData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rmit-hub/src/backend/models/team.js" beforeDir="false" afterPath="$PROJECT_DIR$/rmit-hub/src/backend/models/team.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rmit-hub/src/components/auth/SignUp.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/rmit-hub/src/components/auth/SignUp.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rmit-hub/src/components/team/EditTeam.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/rmit-hub/src/components/team/EditTeam.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rmit-hub/src/pages/_app.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/rmit-hub/src/pages/_app.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rmit-hub/src/pages/api/team/[id].js" beforeDir="false" afterPath="$PROJECT_DIR$/rmit-hub/src/pages/api/team/[id].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rmit-hub/src/pages/signup/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/rmit-hub/src/pages/signup/index.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rmit-hub/src/pages/team/[id].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/rmit-hub/src/pages/team/[id].jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rmit-hub/src/pages/team/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/rmit-hub/src/pages/team/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rmit-hub/src/pages/users/[id].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/rmit-hub/src/pages/users/[id].jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

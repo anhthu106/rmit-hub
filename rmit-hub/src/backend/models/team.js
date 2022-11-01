@@ -28,7 +28,7 @@ const teamSchema = new Schema({
 
 teamSchema.pre("save", function (next) {
     const member = this.userID.length
-    this.set("Member", member)
+    this.set("Member", member) || this.update("Member", member);
     next()
 })
 

@@ -11,15 +11,6 @@ async function post(url, body){
     })
 }
 
-async function get(url){
-    /**
-     * GET METHOD
-     */
-    return await fetch(url,  {
-        method: "GET",
-    })
-}
-
 async function patch(url, body){
     /**
      * PATCH METHOD
@@ -33,8 +24,19 @@ async function patch(url, body){
     })
 }
 
+async function Delete(url, body) {
+    return await fetch(url, {
+        method: "DELETE",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body)
+    })
+}
+
+
 export const fetchData = {
     post,
-    get,
-    patch
+    patch,
+    Delete,
 }

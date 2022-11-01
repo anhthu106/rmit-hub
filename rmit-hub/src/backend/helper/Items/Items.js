@@ -19,3 +19,9 @@ export async function updateItems(body, e, setMessage, url) {
     const res = await fetchData.patch(url, body)
     await returnMessage(res, setMessage)
 }
+
+export async function deleteItems(body, e, setMessage, url) {
+    e.preventDefault()
+    const res = await fetchData.Delete(url, body)
+    await returnMessage(res, setMessage)
+}

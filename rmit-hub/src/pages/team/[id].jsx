@@ -7,6 +7,9 @@ import TeamInformation from "../../components/team/TeamInformation";
 import Users from "../../backend/models/user";
 import EditTeam from "../../components/team/EditTeam";
 import importRawData from "../../backend/helper/Data/data";
+import {deleteItems, updateItems} from "../../backend/helper/Items/Items";
+import {useState} from "react";
+import Button from "../../components/button/Button";
 
 export async function getServerSideProps({params}) {
     await connectDB()
@@ -47,7 +50,9 @@ export async function getServerSideProps({params}) {
 
 export default function TeamDetail({TeamInfo, courseProps}) {
     const {data: session} = useSession()
-    if (session.user._id === TeamInfo.userId[0]) {
+    const id = session.user._id
+    const [message, setMessage] = useState(null)
+    if (id === TeamInfo.userId[0]) {
         return (
             <div>
                 <TeamInformation
@@ -68,13 +73,26 @@ export default function TeamDetail({TeamInfo, courseProps}) {
         )
     } else {
         return (
-            <TeamInformation
-                Description={TeamInfo.description}
-                Name={TeamInfo.name}
-                Member={TeamInfo.members}
-                CourseId={TeamInfo.courseName}
-                User={TeamInfo.user}
-            />
+
+            <div>
+                <TeamInformation
+                    Description={TeamInfo.description}
+                    Name={TeamInfo.name}
+                    Member={TeamInfo.members}
+                    CourseId={TeamInfo.courseName}
+                    User={TeamInfo.user}
+                />
+
+                <Button
+                    fn={(e) => updateItems({userId: id}, e, setMessage, `/api/team/${TeamInfo._id}`)}
+                    options={"Joins"}
+                />
+                <Button
+                    fn={(e) => deleteItems({userId: id}, e, setMessage, `/api/team/${TeamInfo._id}`)}
+                    options={"Delete"}
+                />
+                <div>{message}</div>
+            </div>
         )
     }
 }
