@@ -20,6 +20,7 @@ const SignUp = ({majorProps}) => {
     const [message, setMessage] = useState(null)
 
     return (
+        
         <div>
             <form>
                 <div>
