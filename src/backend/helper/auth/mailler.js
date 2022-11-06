@@ -22,8 +22,7 @@ function sendEmail(message) {
 exports.sendConfirmationEmail = function ({toUser, token}) {
     const message = {
         from: process.env.GOOGLE_USER,
-        // to: `${toUser.email}`,
-        to: `phamvodong0811@gmail.com`,
+        to: `${toUser.email}`,
 
         subject: "Your App - Activate Account",
         html: `
