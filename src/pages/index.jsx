@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import { useSession, signIn, signOut } from "next-auth/react";
-import Link from "next/link";
 import connectMongo from "../backend/lib/connectDB";
 import CreatePost from "../components/posts/CreatePost";
 import Course from "../backend/models/course";
