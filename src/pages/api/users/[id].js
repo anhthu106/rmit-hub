@@ -1,4 +1,4 @@
-import connectMongo from "../../../backend/lib/connectDB";
+import connectDB from "../../../backend/lib/connectDB";
 import Users from "../../../backend/models/user";
 import {StatusCodes} from "http-status-codes";
 import Major from "../../../backend/models/major";
@@ -8,7 +8,7 @@ export default async function handler(req, res) {
      * Backend specific user information
      */
     try {
-        await connectMongo()
+        await connectDB()
         switch (req.method) {
             case "PATCH": {
                 /**

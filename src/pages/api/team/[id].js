@@ -1,4 +1,4 @@
-import connectMongo from "../../../backend/lib/connectDB";
+import connectDB from "../../../backend/lib/connectDB";
 import {StatusCodes} from "http-status-codes";
 import Teams from "../../../backend/models/team";
 import Course from "../../../backend/models/course";
@@ -8,7 +8,7 @@ export default async function handler(req, res) {
      * Backend specific team information
      */
     try {
-        await connectMongo()
+        await connectDB()
         switch (req.method) {
             case "PATCH": {
                 try {

@@ -1,11 +1,11 @@
-import {useState} from "react"
+import { useState } from "react"
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated'
-import {util} from "../../utils/utils";
-import {addItems} from "../../backend/helper/Items/Items";
+import { util } from "../../utils/utils";
+import { addItems } from "../../backend/helper/Items/Items";
 import Button from "../button/Button";
 
-const SignUp = ({majorProps}) => {
+const SignUp = ({ majorProps }) => {
     const animatedComponents = makeAnimated();
 
     const campusOptions = util.campus()
@@ -78,7 +78,7 @@ const SignUp = ({majorProps}) => {
                 </div>
                 <Button
                     fn={(e) =>
-                        addItems({username, email, password, campus, major}, e, setMessage, "/api/auth/register")}
+                        addItems({ username, email, password, campus, major }, e, setMessage, "/api/auth/register")}
                     options={"Register"}
                 />
                 <div>{message}</div>

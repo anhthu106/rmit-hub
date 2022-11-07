@@ -1,7 +1,7 @@
 import SignUp from "../../components/auth/SignUp"
 import connectDB from "../../backend/lib/connectDB";
 import Major from "../../backend/models/major";
-import importRawData from "../../backend/helper/Data/data";
+import importRawData from "../../backend/helper/data/data";
 
 export async function getServerSideProps() {
     await connectDB()
@@ -9,12 +9,12 @@ export async function getServerSideProps() {
     const majorData = await Major.find({}, "name")
     const majors = importRawData(majorData)
 
-    return {props: {majorProps: majors}}
+    return { props: { majorProps: majors } }
 }
-const signup = ({majorProps}) => {
+const signup = ({ majorProps }) => {
     return (
         <div>
-           <SignUp majorProps={majorProps}/>
+            <SignUp majorProps={majorProps} />
         </div>
     )
 }

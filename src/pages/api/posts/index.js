@@ -1,11 +1,11 @@
-import connectMongo from "../../../backend/lib/connectDB";
+import connectDB from "../../../backend/lib/connectDB";
 import Posts from "../../../backend/models/post";
 import Course from "../../../backend/models/course";
 import { StatusCodes } from "http-status-codes";
 
 export default async function handler(req, res) {
     try {
-        await connectMongo()
+        await connectDB()
         switch (req.method) {
             // create post
             case "POST": {

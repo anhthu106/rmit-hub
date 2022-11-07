@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import connectMongo from "../backend/lib/connectDB";
 import CreatePost from "../components/posts/CreatePost";
 import Course from "../backend/models/course";
@@ -40,6 +40,8 @@ export async function getServerSideProps() {
     })
   );
 
+  console.log("posts", posts)
+  console.log("courses", courses)
   return {
     props: {
       courseProps: courses,
