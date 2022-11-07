@@ -8,8 +8,10 @@ import DisplayPost from "../../components/posts/DisplayPost"
 export async function getServerSideProps({ params }) {
     await connectDB()
 
-    const postData = await Post.find({})
     let obj = {}
+
+    const postData = await Post.find({ courseID: params.id }, 'courseID userID content currentDate')
+    console.log(postData)
 
     const posts = await Promise.all(postData.map(async (doc) => {
         const post = doc.toObject()
@@ -23,14 +25,12 @@ export async function getServerSideProps({ params }) {
 
             const user = await User.findById(post.userID.toString(), "username").lean()
             post.userID = user["username"]
-            console.log("adfsa", post)
-            if (Object.keys(post).length !== 0) {
-                obj = { ...post }
-            }
+            obj = { ...post }
         }
         return obj
+
     }))
-    console.log(posts)
+
     return {
         props: {
             postProps: posts,
@@ -40,7 +40,7 @@ export async function getServerSideProps({ params }) {
 
 export default function Detail({ postProps }) {
     const { data: session } = useSession()
-    if (session && postProps != {}) {
+    if (session) {
         return (
             <>
                 {
