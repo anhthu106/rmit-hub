@@ -34,3 +34,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+src/pages/hello.jsx
+package-lock.json
+package.json
+yarn.lock
+package-lock.json
+package.json
+yarn.lock
+yarn.lock
