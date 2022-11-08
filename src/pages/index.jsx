@@ -43,8 +43,6 @@ export async function getServerSideProps() {
     })
   );
 
-  console.log("posts", posts)
-  console.log("courses", courses)
   return {
     props: {
       courseProps: courses,
@@ -83,22 +81,6 @@ export default function Home({ courseProps, postProps }) {
     <>
       {/* Header */}
       <Header></Header>
-
-      {/* Hero Section */}
-      {/* <section className="header flex justify-center">
-        Not signed in <br />
-        <button
-          onClick={() => signIn()}
-          className="font-medium text-indigo-600 hover:text-indigo-500"
-        >
-          Sign in
-        </button>
-        <Link href={"/signup"} className="border-2 border-indigo-500">
-          <div className="font-medium text-indigo-600 hover:text-indigo-500 ">
-            Sign Up
-          </div>
-        </Link>
-      </section> */}
 
       <HeroSection></HeroSection>
 
