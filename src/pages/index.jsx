@@ -53,7 +53,6 @@ export async function getServerSideProps() {
 
 export default function Home({ courseProps, postProps }) {
   const { data: session } = useSession();
-
   if (session) {
     return (
       <>
@@ -71,6 +70,8 @@ export default function Home({ courseProps, postProps }) {
               content={post.content}
               course={post.courseID}
               id={post._id}
+              sessionName={session.user.username}
+              username={post.userID}
             />
           </div>
         ))}
