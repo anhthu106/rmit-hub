@@ -20,7 +20,7 @@ const SignUp = ({ majorProps }) => {
     const [message, setMessage] = useState(null)
 
     return (
-        
+
         <div>
             <form>
                 <div>
@@ -50,7 +50,7 @@ const SignUp = ({ majorProps }) => {
                 <div>
                     <label htmlFor="password">Password</label>
                     <input
-                    
+
                         type="password"
                         id="password"
                         name="password"
@@ -63,7 +63,7 @@ const SignUp = ({ majorProps }) => {
                 <div>
                     <label htmlFor="campus">Campus</label>
                     <Select
-                        onChange={(campus) => setCampus(campus.value)}
+                        onChange={(campus) => setCampus(campus.label)}
                         closeMenuOnSelect={false}
                         components={animatedComponents}
                         defaultValue={[campusOptions[0]]}
