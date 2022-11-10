@@ -10,6 +10,7 @@ import Header from "../components/header/Header";
 import HeroSection from "../components/landing/heroSection";
 import FeatureSections from "../components/landing/featureSections";
 import TeamSection from "../components/landing/TeamSection";
+import Footer from "../components/footer/Footer";
 
 export async function getServerSideProps() {
   await connectMongo();
@@ -91,6 +92,9 @@ export default function Home({ courseProps, postProps }) {
       {/* Team Section */}
       <TeamSection></TeamSection>
 
+      {/* Footer */}
+      <Footer></Footer>
+      
     </>
   );
 }
