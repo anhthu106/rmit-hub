@@ -1,6 +1,7 @@
 import { useState } from "react";
 import submitHandler from "../../backend/helper/auth/login";
 import Link from "next/link";
+import Footer from "../footer/Footer";
 const Login = () => {
   const [userInfo, setUserInfo] = useState({ email: "", password: "" });
 
@@ -90,7 +91,7 @@ const Login = () => {
               </button>
               <p className="text-sm font-light text-gray-500 ">
                 Don’t have an account yet?
-                <Link href="../signup/index.jsx">
+                <Link href="../signup">
                   <a className="font-medium text-primary-600 hover:underline">
                     {" "}
                     Sign up
@@ -101,6 +102,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+      <Footer></Footer>
     </section>
   );
 };
