@@ -1,5 +1,6 @@
 import connectDB from "../../../backend/lib/connectDB";
 import Posts from "../../../backend/models/post";
+import User from "../../../backend/models/user";
 import { StatusCodes } from "http-status-codes";
 
 export default async function handler(req, res) {
@@ -9,7 +10,18 @@ export default async function handler(req, res) {
             case "DELETE": {
                 try {
                     const { id } = req.query;
+                    const userName = req.body.author
                     await Posts.findByIdAndDelete(id);
+                    const postID = await User.find({ username: userName }, "post_id");
+                    const postArr = postID[0]["post_id"]
+
+                    for (let i = 0; i < postArr.length; i++) {
+                        if (postArr[i].toString() === id) {
+                            postArr.splice(i, 1);
+                        }
+                    }
+
+                    await User.findOneAndUpdate({ username: userName }, { post_id: postArr });
                     res.status(StatusCodes.OK).json({ message: "Deleted" });
                 } catch (e) {
                     console.log(e);
