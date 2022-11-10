@@ -1,8 +1,8 @@
 export default function Footer() {
   return (
     <>
-      <footer className="p-4 bg-white rounded-lg shadow md:px-6 md:py-8">
-        <hr className="my-6 border-gray-200 sm:mx-auto  lg:my-8" />
+      <footer className="p-4 bg-white rounded-lg shadow md:px-6 md:pb-8">
+        <hr className="mb-6 border-gray-200 sm:mx-auto  lg:mb-8" />
         <div className="sm:flex sm:items-center sm:justify-between">
           <a href="" className="flex items-center mb-4 sm:mb-0">
             <img src="" className="mr-3 h-8" alt="App Logo" />
