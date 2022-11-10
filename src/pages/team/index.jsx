@@ -1,7 +1,7 @@
 import CreateTeam from "../../components/team/CreateTeam";
 import connectMongo from "../../backend/lib/connectDB";
 import Course from "../../backend/models/course";
-import {useSession} from "next-auth/react";
+import { useSession } from "next-auth/react";
 import TeamInformation from "../../components/team/TeamInformation";
 import Teams from "../../backend/models/team";
 import Users from "../../backend/models/user";
@@ -40,8 +40,8 @@ export async function getServerSideProps() {
     }
 }
 
-const Team = ({courseProps, teamProps}) => {
-    const {data: session, status} = useSession()
+const Team = ({ courseProps, teamProps }) => {
+    const { data: session, status } = useSession()
     if (status === "Loading") {
         return (
             <div>Loading</div>

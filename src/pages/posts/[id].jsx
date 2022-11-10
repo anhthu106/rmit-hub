@@ -52,6 +52,8 @@ export default function Detail({ postProps }) {
                                 content={post.content}
                                 course={post.courseID}
                                 id={post._id}
+                                sessionName={session.user.username}
+                                username={post.userID}
                             />
                         </div>
                     ))

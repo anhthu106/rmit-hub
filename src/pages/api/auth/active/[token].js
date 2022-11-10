@@ -11,7 +11,7 @@ export default async function handle(req, res) {
         //    Attach the user to the job routes
         //    req.user = {userId: payload.userID, name: payload.name}
         //     req.user = req.body
-        const data = await Major.findOne({name: payload.major}, "_id").lean()
+        const data = await Major.findOne({ name: payload.major }, "_id").lean()
         const majorId = data._id.toString()
 
         req.user = {
@@ -22,7 +22,7 @@ export default async function handle(req, res) {
             major_id: majorId
         }
         await Users.create(req.user)
-        res.status(StatusCodes.CREATED).redirect("/api/auth/signin/")
+        res.status(StatusCodes.CREATED).redirect("/signin")
     } catch (error) {
         console.log(error)
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(error)

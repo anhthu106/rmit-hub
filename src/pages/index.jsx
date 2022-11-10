@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import connectMongo from "../backend/lib/connectDB";
 import CreatePost from "../components/posts/CreatePost";
 import Course from "../backend/models/course";
@@ -53,7 +53,6 @@ export async function getServerSideProps() {
 
 export default function Home({ courseProps, postProps }) {
   const { data: session } = useSession();
-
   if (session) {
     return (
       <>
@@ -71,6 +70,8 @@ export default function Home({ courseProps, postProps }) {
               content={post.content}
               course={post.courseID}
               id={post._id}
+              sessionName={session.user.username}
+              username={post.userID}
             />
           </div>
         ))}
@@ -81,22 +82,6 @@ export default function Home({ courseProps, postProps }) {
     <>
       {/* Header */}
       <Header></Header>
-
-      {/* Hero Section */}
-      {/* <section className="header flex justify-center">
-        Not signed in <br />
-        <button
-          onClick={() => signIn()}
-          className="font-medium text-indigo-600 hover:text-indigo-500"
-        >
-          Sign in
-        </button>
-        <Link href={"/signup"} className="border-2 border-indigo-500">
-          <div className="font-medium text-indigo-600 hover:text-indigo-500 ">
-            Sign Up
-          </div>
-        </Link>
-      </section> */}
 
       <HeroSection></HeroSection>
 

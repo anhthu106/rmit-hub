@@ -1,11 +1,12 @@
-import connectMongo from "../../../backend/lib/connectDB";
+import connectDB from "../../../backend/lib/connectDB";
 import Posts from "../../../backend/models/post";
 import Course from "../../../backend/models/course";
+import User from "../../../backend/models/user";
 import { StatusCodes } from "http-status-codes";
 
 export default async function handler(req, res) {
     try {
-        await connectMongo()
+        await connectDB()
         switch (req.method) {
             // create post
             case "POST": {
@@ -18,9 +19,14 @@ export default async function handler(req, res) {
                     content: req.body.content,
                     currentDate: req.body.currentDate
                 }
-                console.log(postValue)
 
-                await Posts.create(postValue)
+                const post = await Posts.create(postValue)
+                const id = post.userID
+                await User.findByIdAndUpdate(id, {
+                    $push: {
+                        post_id: post._id.toString(),
+                    }
+                })
 
                 res.status(StatusCodes.CREATED).json({ message: "Post created" });
             }

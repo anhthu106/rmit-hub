@@ -1,10 +1,10 @@
-import connectMongo from "../../../backend/lib/connectDB";
+import connectDB from "../../../backend/lib/connectDB";
 import Posts from "../../../backend/models/post";
 import { StatusCodes } from "http-status-codes";
 
 export default async function handler(req, res) {
     try {
-        await connectMongo()
+        await connectDB()
         switch (req.method) {
             case "DELETE": {
                 try {
