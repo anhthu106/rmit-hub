@@ -31,6 +31,7 @@ const SignUp = ({ majorProps }) => {
                         name="username"
                         required
                         value={username}
+                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                         onChange={e => setUsername(e.target.value)}
                     />
                 </div>
@@ -40,6 +41,7 @@ const SignUp = ({ majorProps }) => {
                         type="email"
                         id="email"
                         name="email"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                         placeholder="s1234567@rmit.edu.com" required
                         value={email}
                         onChange={e => setEmail(e.target.value)}
@@ -48,9 +50,11 @@ const SignUp = ({ majorProps }) => {
                 <div>
                     <label htmlFor="password">Password</label>
                     <input
+                    
                         type="password"
                         id="password"
                         name="password"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                         required
                         value={password}
                         onChange={e => setPassword(e.target.value)}
