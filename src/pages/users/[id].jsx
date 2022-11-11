@@ -33,7 +33,7 @@ export async function getServerSideProps({ params }) {
                 const postInfo = {
                     _id: postData._id.toString(),
                     userID: userData.username,
-                    currentData: postData.currentDate,
+                    currentDate: postData.currentDate,
                     content: postData.content,
                     courseID: course["name"]
                 }
