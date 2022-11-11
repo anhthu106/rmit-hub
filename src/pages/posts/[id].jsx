@@ -4,33 +4,34 @@ import User from "../../backend/models/user";
 import Post from "../../backend/models/post"
 import Course from "../../backend/models/course"
 import DisplayPost from "../../components/posts/DisplayPost"
+import { Types } from "mongoose"
 
 export async function getServerSideProps({ params }) {
     await connectDB()
 
-    let obj = {}
+    let posts = []
+    if (Types.ObjectId.isValid(params.id)) {
 
-    const postData = await Post.find({ courseID: params.id }, 'courseID userID content currentDate')
-    console.log(postData)
+        const postData = await Post.find({ courseID: params.id }, 'courseID userID content currentDate')
+        let obj
+        posts = await Promise.all(postData.map(async (doc) => {
+            const post = doc.toObject()
 
-    const posts = await Promise.all(postData.map(async (doc) => {
-        const post = doc.toObject()
+            if (post.courseID.toString() === params.id) {
+                post._id = post._id.toString()
+                post.userID = post.userID.toString()
 
-        if (post.courseID.toString() === params.id) {
-            post._id = post._id.toString()
-            post.userID = post.userID.toString()
+                const course = await Course.findById(post.courseID.toString(), "name").lean()
+                post.courseID = course["name"]
 
-            const course = await Course.findById(post.courseID.toString(), "name").lean()
-            post.courseID = course["name"]
+                const user = await User.findById(post.userID.toString(), "username").lean()
+                post.userID = user["username"]
+                obj = { ...post }
+            }
+            return obj
 
-            const user = await User.findById(post.userID.toString(), "username").lean()
-            post.userID = user["username"]
-            obj = { ...post }
-        }
-        return obj
-
-    }))
-
+        }))
+    }
     return {
         props: {
             postProps: posts,
@@ -52,17 +53,14 @@ export default function Detail({ postProps }) {
                                 content={post.content}
                                 course={post.courseID}
                                 id={post._id}
+                                sessionName={session.user.username}
+                                username={post.userID}
                             />
                         </div>
                     ))
                 }
             </>
         )
-    } else {
-        return
-        <>
-            dfsf
-        </>
     }
 }
 
