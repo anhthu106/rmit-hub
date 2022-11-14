@@ -3,6 +3,9 @@ import connectDB from "../../backend/lib/connectDB";
 import Users from "../../backend/models/user";
 import Major from "../../backend/models/major";
 import UserInformation from "../../components/users/UserInformation";
+import {useState} from "react";
+import Search from "../../components/Search/search";
+import {searchItems, searchUsername} from "../../backend/helper/items/items";
 
 
 // Fetch data form server
@@ -14,7 +17,7 @@ export async function getServerSideProps() {
     const users = await Promise.all(data.map(async (doc) => {// Promise all use for take an iterable of promises
         // Take the name of major base in ID
         const majorData = await Major.findById(doc.major_id.toString(), "name")
-        
+
         return {
             _id: doc._id.toString(),
             username: doc.username,
@@ -32,10 +35,19 @@ export default function Profile({Info}) {
     /**
      * Display all User
      */
+    const [query, setQuery] = useState('');
+
+    const filtered = searchUsername(query, Info)
+//Handling the input on our search bar
+    const handleChange = (e) => {
+        setQuery(e.target.value)
+    }
+
     return (
         <div>
+            <Search onchange={handleChange}/>
             <h1>All User</h1>
-            {Info.map(info => (
+            {filtered.map(info => (
                 <div key={info._id}>
                     <Link href={`/users/${info._id}`}>{info._id}</Link>
                     <UserInformation

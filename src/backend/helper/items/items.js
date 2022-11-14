@@ -25,3 +25,23 @@ export async function deleteItems(body, e, setMessage, url) {
     const res = await fetchData.Delete(url, body)
     await returnMessage(res, setMessage)
 }
+
+export function searchUsername(query, data){
+    //Our search filter function
+    const searchFilter = (array) => {
+        return array.filter(
+            (el) => el.username.toLowerCase().includes(query.toLowerCase())
+        )
+    }
+    return searchFilter(data)
+}
+
+export function searchName(query, data) {
+    //Our search filter function
+    const searchFilter = (array) => {
+        return array.filter(
+            (el) => el.name.toLowerCase().includes(query.toLowerCase())
+        )
+    }
+    return searchFilter(data)
+}
