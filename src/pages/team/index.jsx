@@ -21,6 +21,7 @@ export async function getServerSideProps() {
         team.userID = await Promise.all(team.userID.map(async (id) => {
             id = id.toString()
             const user = await Users.findById(id, "username").lean()
+            console.log(user)
             return user["username"]
         }))
 

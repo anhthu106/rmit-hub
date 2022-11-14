@@ -9,4 +9,10 @@ export default async function submitHandler(e, email, password) {
         redirect: true,
         callbackUrl: '/'
     })
+        .then((res) => {
+            console.log(res)
+        })
+        .catch((err) => {
+            console.error(err)
+        })
 }
