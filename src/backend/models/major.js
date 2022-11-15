@@ -1,16 +1,15 @@
-import mongoose, {model, models, Schema} from "mongoose";
+import { model, models, Schema, Types } from "mongoose";
 
-const majorSchema = new mongoose.Schema({
+const majorSchema = new Schema({
     name: {
         type: String
     },
     course_id: [
         {
-            type: Schema.Types.ObjectId,
+            type: Types.ObjectId,
             ref: "Course"
         }
     ]
-
 })
 
 const Major = models.Major || model('Major', majorSchema);

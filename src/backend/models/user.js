@@ -1,7 +1,7 @@
-import mongoose, { Schema } from "mongoose";
+import  { Schema, Types, model, models } from "mongoose";
 import bcrypt from "bcrypt";
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
     username: {
         type: String,
         required: [true, 'Please provide name'],
@@ -21,31 +21,31 @@ const userSchema = new mongoose.Schema({
         required: [true, 'Please provide campus']
     },
     major_id: {
-        type: Schema.Types.ObjectId,
+        type: Types.ObjectId,
         ref: "Major"
     },
     course_id: [
         {
-            type: Schema.Types.ObjectId,
+            type: Types.ObjectId,
             ref: "Course"
         }
     ],
     team_id: [
         {
-            type: Schema.Types.ObjectId,
+            type: Types.ObjectId,
             ref: "Team",
             default: null
         }
     ],
     post_id: [
         {
-            type: Schema.Types.ObjectId,
+            type: Types.ObjectId,
             ref: "Post"
         }
     ],
     task_id: [
         {
-            type: Schema.Types.ObjectId,
+            type: Types.ObjectId,
             ref: "Tasks",
         }
     ]
@@ -56,6 +56,6 @@ userSchema.pre("save", async function () {
     this.password = await bcrypt.hash(this.password, salt)
 })
 
-const Users = mongoose.models.User || mongoose.model('User', userSchema);
+const Users = models.User || model('User', userSchema);
 
 export default Users;

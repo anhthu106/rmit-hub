@@ -1,17 +1,17 @@
 //Fetch data
 import Course from "../../backend/models/course";
-import {useSession} from "next-auth/react";
+import { useSession } from "next-auth/react";
 import connectDB from "../../backend/lib/connectDB";
 import Teams from "../../backend/models/team";
 import TeamInformation from "../../components/team/TeamInformation";
 import Users from "../../backend/models/user";
 import EditTeam from "../../components/team/EditTeam";
 import importRawData from "../../backend/helper/Data/data";
-import {deleteItems, updateItems} from "../../backend/helper/Items/Items";
-import {useState} from "react";
+import { deleteItems, updateItems } from "../../backend/helper/Items/Items";
+import { useState } from "react";
 import Button from "../../components/button/Button";
-
-export async function getServerSideProps({params}) {
+import CreateList from "../../components/workspace/CreateList"
+export async function getServerSideProps({ params }) {
     await connectDB()
 
     const courseData = await Course.find({}, "name")
@@ -48,8 +48,8 @@ export async function getServerSideProps({params}) {
     }
 }
 
-export default function TeamDetail({TeamInfo, courseProps}) {
-    const {data: session} = useSession()
+export default function TeamDetail({ test, TeamInfo, courseProps }) {
+    const { data: session } = useSession()
     const id = session.user._id
     const [message, setMessage] = useState(null)
     if (id === TeamInfo.userId[0]) {
@@ -69,6 +69,7 @@ export default function TeamDetail({TeamInfo, courseProps}) {
                     id={TeamInfo._id}
                     preDescription={TeamInfo.description}
                 />
+                <CreateList teamID={TeamInfo._id} />
             </div>
         )
     } else {
@@ -82,14 +83,14 @@ export default function TeamDetail({TeamInfo, courseProps}) {
                     CourseId={TeamInfo.courseName}
                     User={TeamInfo.user}
                 />
-
+                <CreateList teamID={TeamInfo._id} />
                 <Button
-                    fn={(e) => updateItems({userId: id}, e, setMessage, `/api/team/${TeamInfo._id}`)}
-                    options={"Joins"}
+                    fn={(e) => updateItems({ userId: id }, e, setMessage, `/api/team/${TeamInfo._id}`)}
+                    options={"Join Team"}
                 />
                 <Button
-                    fn={(e) => deleteItems({userId: id}, e, setMessage, `/api/team/${TeamInfo._id}`)}
-                    options={"Delete"}
+                    fn={(e) => deleteItems({ userId: id }, e, setMessage, `/api/team/${TeamInfo._id}`)}
+                    options={"Out Team"}
                 />
                 <div>{message}</div>
             </div>
