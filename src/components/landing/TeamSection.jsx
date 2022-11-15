@@ -14,30 +14,30 @@ export default function TeamSection() {
         </div>
         <div className="grid gap-8 lg:gap-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           <Member
-            name="Member1"
+            name="Pham Vo Dong"
             avaUrl="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png"
-            role="CEO/Co-founder"
+            role="Project manager/Lead backend developer"
             linkFB="#"
             linkGitHub="#"
           />
           <Member
-            name="Member2"
+            name="Pham Anh Thu"
             avaUrl="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png"
-            role="CEO/Co-founder"
+            role="Vice project manager/Backend developer/Lead researcher"
             linkFB="#"
             linkGitHub="#"
           />
           <Member
-            name="Member3"
+            name="Tran Ngoc Khang"
             avaUrl="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png"
-            role="SEO & Marketing"
+            role="Frontend leader"
             linkFB="#"
             linkGitHub="#"
           />
           <Member
-            name="Member4"
+            name="Duong Hoang Anh Khoa"
             avaUrl="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png"
-            role="Sales"
+            role="Frontend developer"
             linkFB="#"
             linkGitHub="#"
           />

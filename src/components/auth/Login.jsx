@@ -2,6 +2,7 @@ import { useState } from "react";
 import submitHandler from "../../backend/helper/auth/login";
 import Link from "next/link";
 import Footer from "../footer/Footer";
+
 const Login = () => {
   const [userInfo, setUserInfo] = useState({ email: "", password: "" });
 
