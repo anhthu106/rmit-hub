@@ -3,9 +3,9 @@ import connectDB from "../../backend/lib/connectDB";
 import Users from "../../backend/models/user";
 import Major from "../../backend/models/major";
 import UserInformation from "../../components/users/UserInformation";
-import {useState} from "react";
+import { useState } from "react";
 import Search from "../../components/Search/search";
-import {searchItems, searchUsername} from "../../backend/helper/items/items";
+import { searchUsername } from "../../backend/helper/items/items";
 
 
 // Fetch data form server
@@ -26,26 +26,26 @@ export async function getServerSideProps() {
             major: majorData.name
         }
     }))
-    return {props: {Info: users}}
+    return { props: { Info: users } }
 
 }
 
 
-export default function Profile({Info}) {
+export default function Profile({ Info }) {
     /**
      * Display all User
      */
     const [query, setQuery] = useState('');
 
     const filtered = searchUsername(query, Info)
-//Handling the input on our search bar
+    //Handling the input on our search bar
     const handleChange = (e) => {
         setQuery(e.target.value)
     }
 
     return (
         <div>
-            <Search onchange={handleChange}/>
+            <Search onchange={handleChange} />
             <h1>All User</h1>
             {filtered.map(info => (
                 <div key={info._id}>

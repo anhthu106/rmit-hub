@@ -1,4 +1,4 @@
-import {Schema, model, models} from 'mongoose';
+import {Schema, model, models, Types} from 'mongoose';
 
 const taskSchema = new Schema({
     description: {
@@ -7,7 +7,7 @@ const taskSchema = new Schema({
     },
     user_id: [
         {
-            type: Schema.Types.ObjectId,
+            type: Types.ObjectId,
             ref: "User",
         }
     ],
