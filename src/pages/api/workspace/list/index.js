@@ -1,6 +1,7 @@
 import connectDB from "../../../../backend/lib/connectDB";
 import Lists from "../../../../backend/models/list";
 import { StatusCodes } from "http-status-codes";
+import Teams from "../../../../backend/models/team";
 
 export default async function handler(req, res) {
     try {
@@ -14,6 +15,8 @@ export default async function handler(req, res) {
                 }
                 const list = await Lists.create(listValue)
 
+                await Teams.findByIdAndUpdate(listValue.team_id.toString(),
+                    { $push: { listID: list._id } })
                 res.status(StatusCodes.CREATED).json({ message: "List created" });
             }
         }
