@@ -6,7 +6,7 @@ import TeamInformation from "../../components/team/TeamInformation";
 import Users from "../../backend/models/user";
 import EditTeam from "../../components/team/EditTeam";
 import importRawData from "../../backend/helper/data/data";
-import { deleteItems, updateItems } from "../../backend/helper/Items/Items";
+import { deleteItems, updateItems } from "../../backend/helper/items/items";
 import { useState } from "react";
 import Button from "../../components/button/Button";
 import CreateList from "../../components/workspace/CreateList"
