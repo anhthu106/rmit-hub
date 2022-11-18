@@ -53,7 +53,7 @@ function Member(props) {
       <img
         className="mx-auto mb-4 w-36 h-36 rounded-full"
         src={props.avaUrl}
-        alt=""
+        alt="memberImg"
       />
       <h3 className="mb-1 text-2xl font-bold tracking-tight text-gray-900 ">
         <p href="#">{props.name}</p>

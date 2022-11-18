@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { addItems } from "../../backend/helper/Items/Items";
+import { addItems } from "../../backend/helper/items/items";
 
 export default function CreateList({ teamID }) {
 
