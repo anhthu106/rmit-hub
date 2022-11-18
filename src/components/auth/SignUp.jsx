@@ -2,7 +2,7 @@ import { useState } from "react";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import { util } from "../../utils/utils";
-import { addItems } from "../../backend/helper/Items/Items";
+import { addItems } from "../../backend/helper/items/items";
 import Button from "../button/Button";
 import Footer from "../footer/Footer";
 import Link from "next/link";

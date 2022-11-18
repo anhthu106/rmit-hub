@@ -1,10 +1,10 @@
 import makeAnimated from "react-select/animated";
-import {useState} from "react";
+import { useState } from "react";
 import Select from "react-select";
-import {util} from "../../utils/utils";
-import {addItems} from "../../backend/helper/Items/Items";
+import { util } from "../../utils/utils";
+import { addItems } from "../../backend/helper/items/items";
 
-export default function CreateTeam({courseProps, OwnerUser}) {
+export default function CreateTeam({ courseProps, OwnerUser }) {
 
     const animated = makeAnimated();
     const courseOptions = util.course(courseProps)
@@ -50,7 +50,7 @@ export default function CreateTeam({courseProps, OwnerUser}) {
                         onChange={e => setDescription(e.target.value)}
                     />
                 </div>
-                <button onClick={(e) => addItems({name, course, description, userID: OwnerUser}, e, setMessage, "api/team")}>
+                <button onClick={(e) => addItems({ name, course, description, userID: OwnerUser }, e, setMessage, "api/team")}>
                     Create Team
                 </button>
             </form>

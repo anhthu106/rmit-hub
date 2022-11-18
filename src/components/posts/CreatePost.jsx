@@ -2,7 +2,7 @@ import makeAnimated from "react-select/animated";
 import { useState } from "react";
 import Select from "react-select";
 import { util } from "../../utils/utils";
-import { addItems } from "../../backend/helper/Items/Items";
+import { addItems } from "../../backend/helper/items/items";
 
 export default function CreatePost({ courseProps, id }) {
     const animated = makeAnimated();
