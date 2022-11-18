@@ -1,6 +1,6 @@
 import connectDB from "../../../backend/lib/connectDB";
 import Teams from "../../../backend/models/team";
-import {StatusCodes} from "http-status-codes";
+import { StatusCodes } from "http-status-codes";
 import User from "../../../backend/models/user";
 import Course from "../../../backend/models/course";
 
@@ -10,7 +10,7 @@ export default async function handler(req, res) {
         await connectDB()
         switch (req.method) {
             case "POST": {
-                const data = await Course.findOne({name: req.body.course}, "_id").lean()
+                const data = await Course.findOne({ name: req.body.course }, "_id").lean()
                 const courseId = data._id.toString()
 
                 const teamValue = {
@@ -31,12 +31,12 @@ export default async function handler(req, res) {
                         }
                     })
                 }
-                res.status(StatusCodes.CREATED).json({message: "Team created"});
+                res.status(StatusCodes.CREATED).json({ message: "Team created" });
             }
         }
     } catch (error) {
         console.log(error)
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({message: error})
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: error })
     }
 
 }

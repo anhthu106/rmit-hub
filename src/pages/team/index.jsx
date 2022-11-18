@@ -24,6 +24,11 @@ export async function getServerSideProps() {
             return user["username"]
         }))
 
+        team.listID = await Promise.all(team.listID.map(async (id) => {
+            id = id.toString()
+            return id
+        }))
+
         const course = await Course.findById(team.courseID.toString(), "name").lean()
         team.courseID = course["name"]
 
@@ -48,7 +53,6 @@ const Team = ({ courseProps, teamProps }) => {
         )
     } else if (status === "authenticated") {
         const id = session.user._id.toString()
-        console.log(id)
         return (
             <div>
                 <CreateTeam

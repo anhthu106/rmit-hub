@@ -1,4 +1,4 @@
-import { Schema, model, models } from 'mongoose';
+import { Schema, model, models, Types } from 'mongoose';
 
 const postSchema = new Schema({
     userID: {
@@ -7,7 +7,7 @@ const postSchema = new Schema({
         required: true,
     },
     courseID: {
-        type: Schema.Types.ObjectId,
+        type: Types.ObjectId,
         ref: "Course",
         required: true,
     },

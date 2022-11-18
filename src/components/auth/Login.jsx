@@ -2,8 +2,10 @@ import { useState } from "react";
 import submitHandler from "../../backend/helper/auth/login";
 import Link from "next/link";
 import Footer from "../footer/Footer";
+import {useRouter} from "next/router";
 const Login = () => {
   const [userInfo, setUserInfo] = useState({ email: "", password: "" });
+  const {error} = useRouter().query;
 
   return (
     <>
@@ -108,6 +110,9 @@ const Login = () => {
                   </Link>
                 </p>
               </form>
+              <div>
+                {error}
+              </div>
             </div>
           </div>
         </div>
@@ -116,5 +121,4 @@ const Login = () => {
     </>
   );
 };
-
 export default Login;
