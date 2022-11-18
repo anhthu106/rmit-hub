@@ -64,6 +64,7 @@ function Member(props) {
           <a
             href={props.linkFB}
             target="_blank"
+            rel="noreferrer"
             className="text-[#39569c] hover:text-gray-900 "
           >
             <svg
@@ -84,6 +85,7 @@ function Member(props) {
           <a
             href={props.linkGitHub}
             target="_blank"
+            rel="noreferrer"
             className="text-gray-900 hover:text-gray-900"
           >
             <svg
