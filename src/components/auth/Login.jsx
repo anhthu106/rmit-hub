@@ -2,18 +2,21 @@ import { useState } from "react";
 import submitHandler from "../../backend/helper/auth/login";
 import Link from "next/link";
 import Footer from "../footer/Footer";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 const Login = () => {
   const [userInfo, setUserInfo] = useState({ email: "", password: "" });
-  const {error} = useRouter().query;
+  const { error } = useRouter().query;
 
   return (
     <>
-      <section className="bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-rose-400 via-fuchsia-500 to-white grid sm:grid-cols-2">
-        <span className=" w-full">
+      <section className="bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-rose-400 via-fuchsia-500 to-white grid">
+        <span className="">
+          <img
+            className="scale-[0.7] z-0 absolute -left-4 -top-[500px]"
+            src="data:image/svg+xml;base64,PCEtLT94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/LS0+CiAgICAgICAgICAgICAgPHN2ZyBpZD0ic3ctanMtYmxvYi1zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSI+CiAgICAgICAgICAgICAgICAgICAgPGRlZnM+IAogICAgICAgICAgICAgICAgICAgICAgICA8bGluZWFyR3JhZGllbnQgaWQ9InN3LWdyYWRpZW50IiB4MT0iMCIgeDI9IjEiIHkxPSIxIiB5Mj0iMCI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8c3RvcCBpZD0ic3RvcDEiIHN0b3AtY29sb3I9InJnYmEoMjE1LjIyNywgMjE1LjIyNywgMjE1LjIyNywgMC44NSkiIG9mZnNldD0iMCUiPjwvc3RvcD4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxzdG9wIGlkPSJzdG9wMiIgc3RvcC1jb2xvcj0icmdiYSgyNTUsIDI1NSwgMjU1LCAwLjc0KSIgb2Zmc2V0PSIxMDAlIj48L3N0b3A+CiAgICAgICAgICAgICAgICAgICAgICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICAgICAgICAgICAgICAgICAgPC9kZWZzPgogICAgICAgICAgICAgICAgPHBhdGggZmlsbD0idXJsKCNzdy1ncmFkaWVudCkiIGQ9Ik0xNywtMjcuNkMyMi4zLC0yNi4zLDI3LC0yMi40LDMxLjMsLTE3LjNDMzUuNiwtMTIuMiwzOS40LC02LjEsMzkuOSwwLjJDNDAuMyw2LjYsMzcuMywxMy4yLDM0LjEsMjAuMUMzMC44LDI3LDI3LjQsMzQuMiwyMS42LDM1LjJDMTUuOSwzNi4xLDgsMzAuOSwxLjQsMjguNUMtNS4xLDI2LC0xMC4yLDI2LjIsLTE2LDI1LjNDLTIxLjcsMjQuMywtMjguMiwyMi4yLC0zMC43LDE3LjdDLTMzLjEsMTMuMywtMzEuNiw2LjcsLTMxLjksLTAuMkMtMzIuMiwtNywtMzQuMywtMTQsLTMyLjUsLTE5LjVDLTMwLjYsLTI1LjEsLTI0LjksLTI5LjIsLTE4LjksLTMwQy0xMi44LC0zMC44LC02LjQsLTI4LjMsLTAuMywtMjcuOEM1LjgsLTI3LjMsMTEuNywtMjguOCwxNywtMjcuNloiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDUwIDUwKSIgc3Ryb2tlLXdpZHRoPSIwIiBzdHlsZT0idHJhbnNpdGlvbjogYWxsIDAuM3MgZWFzZSAwczsiIHN0cm9rZT0idXJsKCNzdy1ncmFkaWVudCkiPjwvcGF0aD4KICAgICAgICAgICAgICA8L3N2Zz4="
+          />
         </span>
-
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto w-full md:h-screen lg:py-0 backdrop-blur-3xl bg-white/80 rounded-l-[200px] shadow z-10">
+        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto w-full md:h-screen lg:py-0 z-10">
           <div className="w-full md:mt-0 sm:max-w-md xl:p-">
             <div className=" space-y-4 md:space-y-6   align-middle md:align-top">
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-6xl text-center">
@@ -69,7 +72,6 @@ const Login = () => {
                   />
                 </div>
 
-                
                 <div className="flex items-center justify-between">
                   <div className="flex items-start">
                     <div className="flex items-center h-5">
@@ -110,9 +112,7 @@ const Login = () => {
                   </Link>
                 </p>
               </form>
-              <div>
-                {error}
-              </div>
+              <div>{error}</div>
             </div>
           </div>
         </div>
