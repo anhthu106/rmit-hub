@@ -88,6 +88,7 @@ export default function TeamDetail({ listProps, TeamInfo, courseProps }) {
                     <div key={list._id}>
                         <DisplayList
                             title={list.title}
+                            listID={list._id}
                         />
                     </div>
                 ))}
@@ -105,6 +106,13 @@ export default function TeamDetail({ listProps, TeamInfo, courseProps }) {
                     User={TeamInfo.user}
                 />
                 <CreateList teamID={TeamInfo._id} />
+                {listProps.map((list) => (
+                    <div key={list._id}>
+                        <DisplayList
+                            title={list.title}
+                        />
+                    </div>
+                ))}
                 <Button
                     fn={(e) => updateItems({ userId: id }, e, setMessage, `/api/team/${TeamInfo._id}`)}
                     options={"Join Team"}
