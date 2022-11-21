@@ -1,10 +1,10 @@
 import makeAnimated from "react-select/animated";
-import {useState} from "react";
+import { useState } from "react";
 import Select from "react-select";
-import {util} from "../../utils/utils";
-import {updateItems} from "../../backend/helper/Items/Items";
+import { util } from "../../utils/utils";
+import { updateItems } from "../../backend/helper/items/items";
 
-export default function EditTeam({preName, preCourse, preDescription, courseProps, id}) {
+export default function EditTeam({ preName, preCourse, preDescription, courseProps, id }) {
 
     const animated = makeAnimated();
     const courseOptions = util.course(courseProps)

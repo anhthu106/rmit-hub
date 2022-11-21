@@ -1,4 +1,3 @@
-//Fetch data
 import Course from "../../backend/models/course";
 import { useSession } from "next-auth/react";
 import connectDB from "../../backend/lib/connectDB";
@@ -6,8 +5,8 @@ import Teams from "../../backend/models/team";
 import TeamInformation from "../../components/team/TeamInformation";
 import Users from "../../backend/models/user";
 import EditTeam from "../../components/team/EditTeam";
-import importRawData from "../../backend/helper/Data/data";
-import { deleteItems, updateItems } from "../../backend/helper/Items/Items";
+import importRawData from "../../backend/helper/data/data";
+import { deleteItems, updateItems } from "../../backend/helper/items/items";
 import { useState } from "react";
 import Button from "../../components/button/Button";
 import CreateList from "../../components/workspace/CreateList"

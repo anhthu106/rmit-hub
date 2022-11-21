@@ -1,10 +1,10 @@
 import makeAnimated from "react-select/animated";
-import {useState} from "react";
+import { useState } from "react";
 import Select from "react-select";
-import {util} from "../../utils/utils";
-import {updateItems} from "../../backend/helper/Items/Items";
+import { util } from "../../utils/utils";
+import { updateItems } from "../../backend/helper/items/items";
 
-export default function EditProfileForm({PreUsername, PreCampus, PreMajor, id, majorProps}) {
+export default function EditProfileForm({ PreUsername, PreCampus, PreMajor, id, majorProps }) {
     const animated = makeAnimated();
     const majorOptions = util.major(majorProps)
     const campusOptions = util.campus()
@@ -49,7 +49,7 @@ export default function EditProfileForm({PreUsername, PreCampus, PreMajor, id, m
                         options={majorOptions}
                     />
                 </div>
-                <button onClick={(e) => updateItems({username, campus, major}, e, setMessage, `/api/users/${id}`)}>
+                <button onClick={(e) => updateItems({ username, campus, major }, e, setMessage, `/api/users/${id}`)}>
                     Update
                 </button>
             </form>

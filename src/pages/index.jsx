@@ -7,8 +7,8 @@ import Post from "../backend/models/post";
 import User from "../backend/models/user";
 import DisplayPost from "../components/posts/DisplayPost";
 import Header from "../components/header/Header";
-import HeroSection from "../components/landing/heroSection";
-import FeatureSections from "../components/landing/featureSections";
+import HeroSection from "../components/landing/HeroSection";
+import FeatureSections from "../components/landing/FeatureSections";
 import TeamSection from "../components/landing/TeamSection";
 import Footer from "../components/footer/Footer";
 
@@ -94,7 +94,7 @@ export default function Home({ courseProps, postProps }) {
 
       {/* Footer */}
       <Footer></Footer>
-      
+
     </>
   );
 }

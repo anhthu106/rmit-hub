@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { deleteItems } from "../../backend/helper/Items/Items";
+import { deleteItems } from "../../backend/helper/items/items";
 
 export default function DisplayPost({ author, date, content, course, id, sessionName, username }) {
     const [message, setMessage] = useState(null)

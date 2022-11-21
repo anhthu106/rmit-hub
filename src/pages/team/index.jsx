@@ -6,7 +6,7 @@ import TeamInformation from "../../components/team/TeamInformation";
 import Teams from "../../backend/models/team";
 import Users from "../../backend/models/user";
 import Link from "next/link";
-import importRawData from "../../backend/helper/Data/data";
+import importRawData from "../../backend/helper/data/data";
 
 export async function getServerSideProps() {
     await connectMongo()

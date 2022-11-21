@@ -14,31 +14,31 @@ export default function TeamSection() {
         </div>
         <div className="grid gap-8 lg:gap-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           <Member
-            name="Pham Vo Dong"
-            avaUrl="https://scontent.fsgn3-1.fna.fbcdn.net/v/t39.30808-6/315195742_876240313753295_3094634890061788285_n.jpg?stp=cp6_dst-jpg&_nc_cat=104&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=YGu0ZrnSIfEAX_XrzxZ&_nc_ht=scontent.fsgn3-1.fna&oh=00_AfB3Pe2xSibckXTqMIbcQKDJhxq3OnS3XrYcWt302vDBWg&oe=6379030F"
-            role="Project manager - Backend leader"
-            linkFB="https://www.facebook.com/phamvodong0811"
-            linkGitHub="https://github.com/phamvodong"
+            name="Member1"
+            avaUrl="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png"
+            role="CEO/Co-founder"
+            linkFB="#"
+            linkGitHub="#"
           />
           <Member
-            name="Pham Anh Thu"
-            avaUrl="https://scontent.fsgn4-1.fna.fbcdn.net/v/t39.30808-1/307846001_3518594765041229_2449483969026276034_n.jpg?stp=cp6_dst-jpg_p200x200&_nc_cat=101&ccb=1-7&_nc_sid=7206a8&_nc_ohc=EI7iu9AhSqwAX-MlWQT&_nc_ht=scontent.fsgn4-1.fna&oh=00_AfDAZiD_RFPA4gU5bf3SQAhq2_S1go5Z68cXt6NngzPqDw&oe=63777723"
-            role="Backend developer - Researcher"
-            linkFB="https://www.facebook.com/ahthupham02"
-            linkGitHub="https://github.com/anhthu106"
+            name="Member2"
+            avaUrl="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png"
+            role="CEO/Co-founder"
+            linkFB="#"
+            linkGitHub="#"
           />
           <Member
-            name="Tran Ngoc Khang"
-            avaUrl="https://scontent.fsgn13-2.fna.fbcdn.net/v/t39.30808-6/313411605_1836417260043598_509651273992803094_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=qoWAJZKAG-0AX9ZFK-H&_nc_ht=scontent.fsgn13-2.fna&oh=00_AfAs3WFVpDpBlWRJOrbNFXuwNTYTM27sZNOHx_mC6Qz6iw&oe=6377A7BE"
-            role="Frontend leader"
-            linkFB="https://www.facebook.com/Oct.13rd.k.u.z.e/"
-            linkGitHub="https://github.com/KN2222"
+            name="Member3"
+            avaUrl="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png"
+            role="SEO & Marketing"
+            linkFB="#"
+            linkGitHub="#"
           />
           <Member
-            name="Duong Hoang Anh Khoa"
-            avaUrl="https://scontent.fsgn8-3.fna.fbcdn.net/v/t1.6435-1/152128000_1091601261267753_3625386987866619618_n.jpg?stp=dst-jpg_p200x200&_nc_cat=100&ccb=1-7&_nc_sid=7206a8&_nc_ohc=WJbW8ySv34kAX8NwDi8&_nc_ht=scontent.fsgn8-3.fna&oh=00_AfAVmZbxU0VZFMTHKVX7v2iNij1zvEL0d7NXFaEbbeI9nA&oe=639AAB1C"
-            role="Frontend developer"
-            linkFB="https://www.facebook.com/profile.php?id=100012536686801"
+            name="Member4"
+            avaUrl="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png"
+            role="Sales"
+            linkFB="#"
             linkGitHub="#"
           />
         </div>
@@ -49,11 +49,11 @@ export default function TeamSection() {
 
 function Member(props) {
   return (
-    <div className="text-center text-gray-500 w-72">
+    <div className="text-center text-gray-500 ">
       <img
         className="mx-auto mb-4 w-36 h-36 rounded-full"
         src={props.avaUrl}
-        alt=""
+        alt="memberImg"
       />
       <h3 className="mb-1 text-2xl font-bold tracking-tight text-gray-900 ">
         <p href="#">{props.name}</p>
@@ -64,6 +64,7 @@ function Member(props) {
           <a
             href={props.linkFB}
             target="_blank"
+            rel="noreferrer"
             className="text-[#39569c] hover:text-gray-900 "
           >
             <svg
@@ -84,6 +85,7 @@ function Member(props) {
           <a
             href={props.linkGitHub}
             target="_blank"
+            rel="noreferrer"
             className="text-gray-900 hover:text-gray-900"
           >
             <svg
