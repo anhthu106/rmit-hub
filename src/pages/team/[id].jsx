@@ -10,12 +10,26 @@ import { deleteItems, updateItems } from "../../backend/helper/items/items";
 import { useState } from "react";
 import Button from "../../components/button/Button";
 import CreateList from "../../components/workspace/CreateList"
+import DisplayList from "../../components/workspace/DisplayList"
+import List from "../../backend/models/list";
+
 export async function getServerSideProps({ params }) {
     await connectDB()
 
     const courseData = await Course.find({}, "name")
     const teamData = await Teams.findById(params.id)
     const teamCourse = await Course.findById(teamData.courseID.toString(), "name")
+    const listData = await List.find({})
+
+    const lists = await Promise.all(
+        listData.map(async (doc) => {
+            const list = doc.toObject();
+            list._id = list._id.toString();
+            list.team_id = list.team_id.toString()
+            return list;
+        })
+    );
+    console.log(lists)
 
     const courses = importRawData(courseData)
 
@@ -42,12 +56,13 @@ export async function getServerSideProps({ params }) {
     return {
         props: {
             TeamInfo,
-            courseProps: courses
+            courseProps: courses,
+            listProps: lists
         }
     }
 }
 
-export default function TeamDetail({ test, TeamInfo, courseProps }) {
+export default function TeamDetail({ listProps, TeamInfo, courseProps }) {
     const { data: session } = useSession()
     const id = session.user._id
     const [message, setMessage] = useState(null)
@@ -69,6 +84,13 @@ export default function TeamDetail({ test, TeamInfo, courseProps }) {
                     preDescription={TeamInfo.description}
                 />
                 <CreateList teamID={TeamInfo._id} />
+                {listProps.map((list) => (
+                    <div key={list._id}>
+                        <DisplayList
+                            title={list.title}
+                        />
+                    </div>
+                ))}
             </div>
         )
     } else {
