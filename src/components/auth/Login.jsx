@@ -71,7 +71,12 @@ const Login = () => {
                     }
                   />
                 </div>
-
+                {/* {error && (
+                  <p className="mt-2 text-sm text-red-600">
+                    We do not recognize the email or password. Please try again.
+                  </p>
+                )} */}
+                <span className="mt-2 text-sm text-red-600">{error}</span>
                 <div className="flex items-center justify-between">
                   <div className="flex items-start">
                     <div className="flex items-center h-5">
@@ -112,7 +117,6 @@ const Login = () => {
                   </Link>
                 </p>
               </form>
-              <div>{error}</div>
             </div>
           </div>
         </div>
