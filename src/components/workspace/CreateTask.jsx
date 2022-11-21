@@ -49,7 +49,7 @@ export default function CreateTask({ listID }) {
                         onChange={e => setAssignedPerson(e.target.value)}
                     />
                 </div>
-                <button onClick={(e) => addItems({ createdDate, description, listID, deadline, assignedPerson }, e, setMessage, "/api/workspace/list")}>
+                <button onClick={(e) => addItems({ createdDate, description, listID, deadline, assignedPerson }, e, setMessage, "/api/workspace/task")}>
                     Add Task
                 </button>
                 <div>-----------------------</div>

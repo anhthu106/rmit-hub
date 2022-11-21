@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { deleteItems } from "../../backend/helper/items/items";
 import CreateTask from "./CreateTask"
+import DisplayTask from "./DisplayTask";
 
 export default function DisplayList({ title, listID }) {
     const [message, setMessage] = useState(null)

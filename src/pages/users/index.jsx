@@ -7,14 +7,13 @@ import { useState } from "react";
 import Search from "../../components/Search/search";
 import { searchUsername } from "../../backend/helper/items/items";
 
-
 // Fetch data form server
 export async function getServerSideProps() {
     await connectDB()
     /* find all the data in our database */
     const data = await Users.find({}, "_id username email campus major_id")
 
-    const users = await Promise.all(data.map(async (doc) => {// Promise all use for take an iterable of promises
+    const users = await Promise.all(data.map(async (doc) => {
         // Take the name of major base in ID
         const majorData = await Major.findById(doc.major_id.toString(), "name")
 
