@@ -20,8 +20,6 @@ const SignUp = ({ majorProps }) => {
   const [major, setMajor] = useState(majorOptions[0].label);
   const [message, setMessage] = useState(null);
 
-  // const regex = "[Ss]{1}[0-9._%+-]+@rmit+.edu+.vn";
-
   const [emailError, setEmailError] = useState(false);
 
   const [passwordCheck, setPasswordCheck] = useState("");
@@ -37,11 +35,9 @@ const SignUp = ({ majorProps }) => {
   const emailIsOK = false;
   const passwordIsOK = false;
 
-  //Fixed using úe
   useEffect(() => {
     checkEmail();
     checkPassword();
-    // comparePasswords();
     checkForm();
   });
 
@@ -62,11 +58,6 @@ const SignUp = ({ majorProps }) => {
       }
     }
   }
-
-  // console.log("S3917201@rmit.edu.vn".length); //20
-  // console.log("s3917201@rmit.edu.vn".endsWith("@rmit.edu.vn"));
-  // console.log("s3917201@rmit.edu.vn".startsWith("s", 0));
-  //console.log(/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])[a-zA-Z0-9]{8,}$/.test("Qerty1") + " testing");
 
   function checkPassword() {
     if (password === "") {
