@@ -17,6 +17,36 @@ const SignUp = ({ majorProps }) => {
   const [major, setMajor] = useState(majorOptions[0].label);
   const [message, setMessage] = useState(null);
 
+  // const regex = "[Ss]{1}[0-9._%+-]+@rmit+.edu+.vn";
+
+  const [error, setError] = useState("");
+
+  const [passwordPass, setPasswordPass] = useState("");
+  const [passwordFail, setPasswordFail] = useState("");
+
+  const [retypePassword, setRetypePassword] = useState("")
+
+  const comparePasswords = (e) => {
+    setRetypePassword(e.target.value);
+    if (retypePassword != password){
+      setPasswordFail("Your passwords do not match");
+      setPasswordPass("");
+    }else if (retypePassword === password){
+      setPasswordFail("");
+      setPasswordPass("✓");
+    }
+  }
+
+
+  const checkEmail = (e) => {
+    setEmail(e.target.value);
+    console.log(email);
+    if (email != "") {
+      setError("Email value is " + email);
+    }else if (email === "") {
+      setError("");
+    }
+  };
 
   return (
     <>
@@ -40,7 +70,7 @@ const SignUp = ({ majorProps }) => {
                 <div>
                   <label
                     htmlFor="username"
-                    class="block mb-2 text-sm font-medium text-gray-900 "
+                    className="block mb-2 text-sm font-medium text-gray-900 "
                   >
                     Username
                   </label>
@@ -49,6 +79,7 @@ const SignUp = ({ majorProps }) => {
                     id="username"
                     name="username"
                     required
+                    placeholder="New username"
                     value={username}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                     onChange={(e) => setUsername(e.target.value)}
@@ -57,7 +88,7 @@ const SignUp = ({ majorProps }) => {
                 <div>
                   <label
                     htmlFor="email"
-                    class="block mb-2 text-sm font-medium text-gray-900 "
+                    className="block mb-2 text-sm font-medium text-gray-900 "
                   >
                     Email
                   </label>
@@ -69,13 +100,14 @@ const SignUp = ({ majorProps }) => {
                     placeholder="s1234567@rmit.edu.com"
                     required
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) =>  {checkEmail(e); }}
                   />
+                  <p className="mt-2 text-xs text-red-600">{error}</p>
                 </div>
                 <div>
                   <label
                     htmlFor="password"
-                    class="block mb-2 text-sm font-medium text-gray-900 "
+                    className="block mb-2 text-sm font-medium text-gray-900 "
                   >
                     Password
                   </label>
@@ -85,14 +117,36 @@ const SignUp = ({ majorProps }) => {
                     name="password"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                     required
+                    placeholder="New password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
+
+                <div>
+                  <label
+                    htmlFor="retypePassword"
+                    className="block mb-2 text-sm font-medium text-gray-900 "
+                  >
+                    Retype Your Password
+                  </label>
+                  <input
+                    name="retypePassword"
+                    type="password"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                    required
+                    placeholder="Confirm your password"
+                    value={retypePassword}
+                    onChange={(e) => {setRetypePassword(e.target.value); comparePasswords(e)}}
+                  />
+                  <p className="mt-2 text-xs text-red-600">{passwordFail}</p>
+                  <p className="mt-2 text-xs text-green-600">{passwordPass}</p>
+                </div>
+
                 <div>
                   <label
                     htmlFor="campus"
-                    class="block mb-2 text-sm font-medium text-gray-900 "
+                    className="block mb-2 text-sm font-medium text-gray-900 "
                   >
                     Campus
                   </label>
@@ -122,6 +176,7 @@ const SignUp = ({ majorProps }) => {
                   />
                 </div>
                 <Button
+                  className = "cursor-not-allowed"
                   fn={(e) =>
                     addItems(
                       { username, email, password, campus, major },
