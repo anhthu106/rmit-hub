@@ -56,6 +56,7 @@ userSchema.pre("save", async function () {
     this.password = await bcrypt.hash(this.password, salt)
 })
 
+
 const Users = models.User || model('User', userSchema);
 
 export default Users;
