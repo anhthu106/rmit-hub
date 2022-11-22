@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-html{
+html {
   overflow-x: hidden;
 }
 
@@ -85,9 +85,9 @@ html{
   }
 }
 .rotating {
-    /* overflow: visible; */
-    margin: auto;
-    color: #784ba8;
+  /* overflow: visible; */
+  margin: auto;
+  color: #784ba8;
   -webkit-animation: rotating 160s linear infinite;
   -moz-animation: rotating 160s linear infinite;
   -ms-animation: rotating 160s linear infinite;
