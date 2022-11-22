@@ -13,7 +13,7 @@ const taskSchema = new Schema({
     ],
     list_id: {
         type: Types.ObjectId,
-        ref: "Team",
+        ref: "List",
     },
     createdDate: {
         type: String,
