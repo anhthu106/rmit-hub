@@ -1,11 +1,16 @@
+// BACKEND
+import { useState } from "react";
 import Link from "next/link";
 import connectDB from "../../backend/lib/connectDB";
+import { searchUsername } from "../../backend/helper/items/items";
+
+// model
 import Users from "../../backend/models/user";
 import Major from "../../backend/models/major";
+
+// COMPONENT
 import UserInformation from "../../components/users/UserInformation";
-import { useState } from "react";
 import Search from "../../components/Search/search";
-import { searchUsername } from "../../backend/helper/items/items";
 
 // Fetch data form server
 export async function getServerSideProps() {

@@ -1,14 +1,19 @@
+// BACKEND
 import { useSession } from "next-auth/react";
-import UserInformation from "../../components/users/UserInformation";
-import EditProfileForm from "../../components/users/EditProfileForm";
 import connectDB from "../../backend/lib/connectDB";
 import importRawData from "../../backend/helper/data/data"
+import mongoose from "mongoose";
+
+// model 
 import Users from "../../backend/models/user";
 import Major from "../../backend/models/major";
-import mongoose from "mongoose";
 import Post from "../../backend/models/post";
-import DisplayPost from "../../components/posts/DisplayPost";
 import Course from "../../backend/models/course"
+
+// COMPONENT
+import UserInformation from "../../components/users/UserInformation";
+import EditProfileForm from "../../components/users/EditProfileForm";
+import DisplayPost from "../../components/posts/DisplayPost";
 
 export async function getServerSideProps({ params }) {
     await connectDB()

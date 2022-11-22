@@ -1,10 +1,16 @@
+// BACKEND
 import { useSession } from "next-auth/react";
 import connectDB from "../../backend/lib/connectDB";
+import { Types } from "mongoose"
+
+// model 
 import User from "../../backend/models/user";
 import Post from "../../backend/models/post"
 import Course from "../../backend/models/course"
+
+// COMPONENT
 import DisplayPost from "../../components/posts/DisplayPost"
-import { Types } from "mongoose"
+
 
 export async function getServerSideProps({ params }) {
     await connectDB()

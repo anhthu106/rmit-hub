@@ -1,12 +1,19 @@
-import CreateTeam from "../../components/team/CreateTeam";
+// BACKEND
 import connectMongo from "../../backend/lib/connectDB";
-import Course from "../../backend/models/course";
 import { useSession } from "next-auth/react";
-import TeamInformation from "../../components/team/TeamInformation";
-import Teams from "../../backend/models/team";
-import Users from "../../backend/models/user";
 import Link from "next/link";
 import importRawData from "../../backend/helper/data/data";
+
+// model
+import Teams from "../../backend/models/team";
+import Users from "../../backend/models/user";
+import Course from "../../backend/models/course";
+
+// COMPONENT
+import CreateTeam from "../../components/team/CreateTeam";
+import TeamInformation from "../../components/team/TeamInformation";
+
+
 
 export async function getServerSideProps() {
     await connectMongo()
