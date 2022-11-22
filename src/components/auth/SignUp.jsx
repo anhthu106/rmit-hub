@@ -118,7 +118,7 @@ const SignUp = ({ majorProps }) => {
             height="1200"
             className="rotating max-h-[80rem] max-w-[62rem]  z-0 absolute -top-[145px] -left-[0] -right-[0]"
           >
-            <path fill="#EFF5F5" fill-opacity="75%" className="scale-[2]">
+            <path fill="#EFF5F5" fillOpacity="75%" className="scale-[2]">
               <animate
                 attributeName="d"
                 dur="10s"
