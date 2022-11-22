@@ -94,7 +94,6 @@ export default function Home({ courseProps, postProps }) {
 
       {/* Footer */}
       <Footer></Footer>
-
     </>
   );
 }

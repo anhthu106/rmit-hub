@@ -6,8 +6,8 @@ import { addItems } from "../../backend/helper/items/items";
 import Button from "../button/Button";
 import Footer from "../footer/Footer";
 import { validPassword } from "../regularexpression/Regex";
-import {signIn} from "next-auth/react";
-
+import { signIn } from "next-auth/react";
+import { blobInfo2 } from "../blob/Blob";
 const SignUp = ({ majorProps }) => {
   const animatedComponents = makeAnimated();
   const campusOptions = util.campus();
@@ -105,13 +105,30 @@ const SignUp = ({ majorProps }) => {
   return (
     <>
       <section className="bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-rose-400 via-fuchsia-500 to-white grid">
-        <span className="">
-          <img
+        <span className="w-screen">
+          {/* <img
             className="scale-[0.8] z-0 absolute -left-[-50px] -top-[500px]"
             src="data:image/svg+xml;base64,PCEtLT94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/LS0+CiAgICAgICAgICAgICAgPHN2ZyBpZD0ic3ctanMtYmxvYi1zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSI+CiAgICAgICAgICAgICAgICAgICAgPGRlZnM+IAogICAgICAgICAgICAgICAgICAgICAgICA8bGluZWFyR3JhZGllbnQgaWQ9InN3LWdyYWRpZW50IiB4MT0iMCIgeDI9IjEiIHkxPSIxIiB5Mj0iMCI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8c3RvcCBpZD0ic3RvcDEiIHN0b3AtY29sb3I9InJnYmEoMjE1LjIyNywgMjE1LjIyNywgMjE1LjIyNywgMC44NSkiIG9mZnNldD0iMCUiPjwvc3RvcD4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxzdG9wIGlkPSJzdG9wMiIgc3RvcC1jb2xvcj0icmdiYSgyNTUsIDI1NSwgMjU1LCAwLjc0KSIgb2Zmc2V0PSIxMDAlIj48L3N0b3A+CiAgICAgICAgICAgICAgICAgICAgICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICAgICAgICAgICAgICAgICAgPC9kZWZzPgogICAgICAgICAgICAgICAgPHBhdGggZmlsbD0idXJsKCNzdy1ncmFkaWVudCkiIGQ9Ik0yNS4xLC0yMC42QzMwLjksLTEyLjgsMzIuOSwtMi40LDMwLjcsNi45QzI4LjQsMTYuMiwyMi4xLDI0LjQsMTIuNywzMC40QzMuNCwzNi41LC05LDQwLjMsLTE3LjgsMzYuM0MtMjYuNiwzMi4zLC0zMS44LDIwLjQsLTM0LjcsNy45Qy0zNy42LC00LjYsLTM4LC0xNy42LC0zMS44LC0yNS41Qy0yNS42LC0zMy40LC0xMi44LC0zNi4zLC0xLjYsLTM1QzkuNywtMzMuNywxOS4zLC0yOC40LDI1LjEsLTIwLjZaIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1MCA1MCkiIHN0cm9rZS13aWR0aD0iMCIgc3R5bGU9InRyYW5zaXRpb246IGFsbCAwLjNzIGVhc2UgMHM7IiBzdHJva2U9InVybCgjc3ctZ3JhZGllbnQpIj48L3BhdGg+CiAgICAgICAgICAgICAgPC9zdmc+"
-          />
+          /> */}
+          
+          {/* <div className="z-0 blob absolute -left-[0] -right-[0]"></div> */}
+
+          <svg
+            viewBox="0 0 1000 1000" width="1200" 
+            height="1200"
+            className="rotating max-h-[80rem] max-w-[62rem]  z-0 absolute -top-[145px] -left-[0] -right-[0]"
+          >
+            <path fill="#EFF5F5" fill-opacity="75%" className="scale-[2]">
+              <animate
+                attributeName="d"
+                dur="10s"
+                repeatCount="indefinite"
+                values={blobInfo2}
+              />
+            </path>
+          </svg>
         </span>
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto w-full md:h-screen lg:py-0 z-10 ">
+        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto w-auto md:h-screen lg:py-0 z-10 ">
           <div className="w-full md:mt-0 sm:max-w-md xl:p- absolute top-[50px]]">
             <div className=" space-y-4 md:space-y-6   align-middle md:align-top">
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-6xl text-center">
@@ -138,6 +155,7 @@ const SignUp = ({ majorProps }) => {
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                     onChange={(e) => setUsername(e.target.value)}
                   />
+                  <span className="mt-2 text-sm text-red-600">{message}</span>
                 </div>
                 <div>
                   <label
@@ -272,8 +290,6 @@ const SignUp = ({ majorProps }) => {
                     options={"Register"}
                   />
                 )}
-
-                <div>{message}</div>
                 <p className="text-sm font-light text-gray-500 ">
                   Already have an account yet? &nbsp;
                   <a href="#" className="text-sm font-light text-gray-500 ">
