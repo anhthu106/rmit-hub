@@ -17,11 +17,12 @@ const Login = () => {
           /> */}
           {/* <div className="max-h-[50rem] max-w-[50rem] z-0 blob absolute top-[50px] -left-[0] -right-[0]"></div> */}
           <svg
-            viewBox="0 0 1000 1000" width="1200" 
+            viewBox="0 0 1000 1000"
+            width="1200"
             height="1200"
             className="rotating max-h-[64rem] max-w-screen  z-0 absolute -top-[50px] -left-[0] -right-[0]"
           >
-            <path fill="#EFF5F5" fill-opacity="75%" className="scale-[2]">
+            <path fill="#EFF5F5" fillOpacity="75%" className="scale-[2]">
               <animate
                 attributeName="d"
                 dur="30s"
