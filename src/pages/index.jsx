@@ -1,10 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
+// BACKEND
 import { useSession, signOut } from "next-auth/react";
 import connectMongo from "../backend/lib/connectDB";
-import CreatePost from "../components/posts/CreatePost";
+
+// model
 import Course from "../backend/models/course";
 import Post from "../backend/models/post";
 import User from "../backend/models/user";
+
+// COMPONENT
+import CreatePost from "../components/posts/CreatePost";
 import DisplayPost from "../components/posts/DisplayPost";
 import Header from "../components/header/Header";
 import HeroSection from "../components/landing/HeroSection";
@@ -94,7 +99,6 @@ export default function Home({ courseProps, postProps }) {
 
       {/* Footer */}
       <Footer></Footer>
-
     </>
   );
 }

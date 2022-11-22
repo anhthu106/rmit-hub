@@ -1,13 +1,16 @@
 import { useState } from "react";
-import { addItems } from "../../backend/helper/Items/Items";
+import { addItems } from "../../backend/helper/items/items";
 
-export default function CreateList({ teamID }) {
+export default function CreateTask({ listID }) {
 
     const [description, setDescription] = useState()
+    const [deadline, setDeadline] = useState()
+    const [assignedPerson, setAssignedPerson] = useState()
+
     const [message, setMessage] = useState(null)
 
     const d = new Date()
-    const currentDate = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate()
+    const createdDate = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate()
     return (
         <div>
             <form>
@@ -23,9 +26,33 @@ export default function CreateList({ teamID }) {
                         onChange={e => setDescription(e.target.value)}
                     />
                 </div>
-                <button onClick={(e) => addItems({ currentDate, description, teamID }, e, setMessage, "/api/workspace/list")}>
-                    Add List
+                <div>
+                    <label htmlFor="deadline">Deadline</label>
+                    <input
+                        placeholder="Enter deadline..."
+                        type="text"
+                        id="deadline"
+                        name="deadline"
+                        required
+                        value={deadline}
+                        onChange={e => setDeadline(e.target.value)}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="assignedPerson">Person In Charge</label>
+                    <input
+                        placeholder="Enter person in charge..."
+                        type="text"
+                        id="assignedPerson"
+                        name="assignedPerson"
+                        value={assignedPerson}
+                        onChange={e => setAssignedPerson(e.target.value)}
+                    />
+                </div>
+                <button onClick={(e) => addItems({ createdDate, description, listID, deadline, assignedPerson }, e, setMessage, "/api/workspace/task")}>
+                    Add Task
                 </button>
+                <div>-----------------------</div>
             </form>
             <div>{message}</div>
         </div>

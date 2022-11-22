@@ -4,42 +4,33 @@ export default function TeamSection() {
       <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-6">
         <div className="mx-auto mb-8 max-w-screen-sm lg:mb-16">
           <h2 className="mt-2 text-3xl font-bold leading-8 tracking-tight text-gray-900 sm:text-4xl">
-            Our team
+            About us
           </h2>
           <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores
-            impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis
-            ratione.
+            Let's meet the team
           </p>
         </div>
-        <div className="grid gap-8 lg:gap-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="grid gap-8 lg:gap-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
           <Member
-            name="Member1"
-            avaUrl="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png"
-            role="CEO/Co-founder"
-            linkFB="#"
-            linkGitHub="#"
+            name="Pham Vo Dong"
+            avaUrl="https://scontent.fsgn3-1.fna.fbcdn.net/v/t39.30808-1/315195742_876240313753295_3094634890061788285_n.jpg?stp=cp6_dst-jpg_p200x200&_nc_cat=104&ccb=1-7&_nc_sid=7206a8&_nc_ohc=tDH6K3TLNzgAX9gr3lL&_nc_ht=scontent.fsgn3-1.fna&oh=00_AfDTLGwcf0a6dXMHYRgcfX8FKDrT4ep6rKQjVVDbY6S0zA&oe=638103C9"
+            role="Project manager - Backend leader"
+            linkFB="https://www.facebook.com/phamvodong0811"
+            linkGitHub="https://github.com/phamvodong"
           />
           <Member
-            name="Member2"
-            avaUrl="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png"
-            role="CEO/Co-founder"
-            linkFB="#"
-            linkGitHub="#"
+            name="Pham Anh Thu"
+            avaUrl="https://scontent.fsgn4-1.fna.fbcdn.net/v/t39.30808-1/307846001_3518594765041229_2449483969026276034_n.jpg?stp=cp6_dst-jpg_p200x200&_nc_cat=101&ccb=1-7&_nc_sid=7206a8&_nc_ohc=2iv1N-2FwM4AX-I3tww&_nc_ht=scontent.fsgn4-1.fna&oh=00_AfBjOGJ3Ed6rCqhmIlaw9o6m-5vN3AxEjhuLMHyQc9rOYg&oe=63815A63"
+            role="Backend developer - Researcher"
+            linkFB="https://www.facebook.com/ahthupham02"
+            linkGitHub="https://github.com/anhthu106"
           />
           <Member
-            name="Member3"
-            avaUrl="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png"
-            role="SEO & Marketing"
-            linkFB="#"
-            linkGitHub="#"
-          />
-          <Member
-            name="Member4"
-            avaUrl="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png"
-            role="Sales"
-            linkFB="#"
-            linkGitHub="#"
+            name="Tran Ngoc Khang"
+            avaUrl="https://scontent.fsgn4-1.fna.fbcdn.net/v/t39.30808-6/315399283_1847464522272205_478193018127653045_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=kXZrm2kuIAwAX8vTdo9&_nc_ht=scontent.fsgn4-1.fna&oh=00_AfBq0Vv5TioPi_RrdFGvhzb3S4xDAsbCOeQscScA4vgDIw&oe=637FE292"
+            role="Frontend leader"
+            linkFB="https://www.facebook.com/Oct.13rd.k.u.z.e"
+            linkGitHub="https://github.com/KN2222"
           />
         </div>
       </div>

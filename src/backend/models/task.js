@@ -11,9 +11,9 @@ const taskSchema = new Schema({
             ref: "User",
         }
     ],
-    team_id: {
+    list_id: {
         type: Types.ObjectId,
-        ref: "Team",
+        ref: "List",
     },
     createdDate: {
         type: String,

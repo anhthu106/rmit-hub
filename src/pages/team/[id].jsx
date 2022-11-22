@@ -1,22 +1,63 @@
-import Course from "../../backend/models/course";
+// BACKEND 
+import { useState } from "react";
 import { useSession } from "next-auth/react";
 import connectDB from "../../backend/lib/connectDB";
-import Teams from "../../backend/models/team";
-import TeamInformation from "../../components/team/TeamInformation";
-import Users from "../../backend/models/user";
-import EditTeam from "../../components/team/EditTeam";
 import importRawData from "../../backend/helper/data/data";
 import { deleteItems, updateItems } from "../../backend/helper/items/items";
-import { useState } from "react";
+
+// model
+import Course from "../../backend/models/course";
+import Users from "../../backend/models/user";
+import Teams from "../../backend/models/team";
+import List from "../../backend/models/list";
+// import Task from "../../backend/models/task";
+
+// COMPONENT
+import TeamInformation from "../../components/team/TeamInformation";
+import EditTeam from "../../components/team/EditTeam";
 import Button from "../../components/button/Button";
 import CreateList from "../../components/workspace/CreateList"
+import DisplayList from "../../components/workspace/DisplayList"
+
 export async function getServerSideProps({ params }) {
     await connectDB()
 
     const courseData = await Course.find({}, "name")
     const teamData = await Teams.findById(params.id)
     const teamCourse = await Course.findById(teamData.courseID.toString(), "name")
+    const listData = await List.find({ team_id: params.id })
+    // const taskData = await Task.find({})
 
+    // const lists = await Promise.all(
+    //     listData.map(async (doc) => {
+    //         const list = doc.toObject();
+    //         list._id = list._id.toString();
+    //         list.team_id = list.team_id.toString()
+    //         Promise.all(
+    //             list.task_id.map((doc) => {
+    //                 doc = doc.toString()
+    //                 return doc
+    //             })
+    //         )
+
+    //         return list;
+    //     })
+    // );
+    console.log(lists)
+    // const tasks = await Promise.all(
+    //     taskData.map(async (doc) => {
+    //         const task = doc.toObject();
+    //         task._id = task._id.toString();
+    //         task.list_id = task.list_id.toString()
+    //         await Promise.all(task.user_id.map(async (data) => {
+    //             data = data.toString()
+    //             const user = await Users.findById(data, "username").lean()
+    //             return user["username"]
+    //         }))
+    //         return task;
+    //     })
+    // );
+    // console.log(tasks)
     const courses = importRawData(courseData)
 
     const userId = teamData.userID.map((data) => {
@@ -42,12 +83,14 @@ export async function getServerSideProps({ params }) {
     return {
         props: {
             TeamInfo,
-            courseProps: courses
+            courseProps: courses,
+            listProps: lists,
+            // taskProps: tasks,
         }
     }
 }
 
-export default function TeamDetail({ test, TeamInfo, courseProps }) {
+export default function TeamDetail({ listProps, TeamInfo, courseProps }) {
     const { data: session } = useSession()
     const id = session.user._id
     const [message, setMessage] = useState(null)
@@ -69,6 +112,25 @@ export default function TeamDetail({ test, TeamInfo, courseProps }) {
                     preDescription={TeamInfo.description}
                 />
                 <CreateList teamID={TeamInfo._id} />
+                {listProps.map((list) => (
+                    <div key={list._id}>
+                        <DisplayList
+                            title={list.title}
+                            listID={list._id}
+                        />
+                    </div>
+                ))}
+                {/* {taskProps.map((task) => {
+                    <div key={task._id}>
+                        <DisplayTask
+                            description={task.description}
+                            username={task.username}
+                            createdDate={task.createdDate}
+                            deadline={task.deadline}
+                        />
+                    </div>
+                })
+                } */}
             </div>
         )
     } else {
@@ -83,6 +145,14 @@ export default function TeamDetail({ test, TeamInfo, courseProps }) {
                     User={TeamInfo.user}
                 />
                 <CreateList teamID={TeamInfo._id} />
+                {listProps.map((list) => (
+                    <div key={list._id}>
+                        <DisplayList
+                            title={list.title}
+                            listID={list._id}
+                        />
+                    </div>
+                ))}
                 <Button
                     fn={(e) => updateItems({ userId: id }, e, setMessage, `/api/team/${TeamInfo._id}`)}
                     options={"Join Team"}
