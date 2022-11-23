@@ -1,15 +1,30 @@
 import { useState } from "react";
 import { deleteItems } from "../../backend/helper/items/items";
 import CreateTask from "./CreateTask"
-import DisplayTask from "./DisplayTask";
+// import DisplayTask from "./DisplayTask";
 
-export default function DisplayList({ title, listID }) {
+export default function DisplayList({ title, listID, usernameProps }) {
     const [message, setMessage] = useState(null)
     return (
         <div>
             <div>----------------------</div>
             <div>{title}</div>
-            <CreateTask listID={listID} />
+            <CreateTask
+                listID={listID}
+                usernameProps={usernameProps}
+
+            />
+            {/* 
+            {taskProps.map((task) => {
+                <DisplayTask
+                    description={taskProps.description}
+                    username={taskProps.username}
+                    createdDate={taskProps.createdDate}
+                    deadline={taskProps.deadline}
+                />
+            })}
+            */}
+
             <button onClick={(e) => deleteItems({ title }, e, setMessage, `/api/workspace/list${id}`)}>
                 Delete List
             </button>

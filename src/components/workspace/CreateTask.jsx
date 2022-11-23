@@ -1,7 +1,14 @@
+import makeAnimated from "react-select/animated";
 import { useState } from "react";
+import Select from "react-select";
+import { util } from "../../utils/utils";
 import { addItems } from "../../backend/helper/items/items";
 
-export default function CreateTask({ listID }) {
+
+export default function CreateTask({ listID, usernameProps }) {
+    const animated = makeAnimated();
+    const personOption = util.username(usernameProps)
+    console.log('usernameProps', usernameProps)
 
     const [description, setDescription] = useState()
     const [deadline, setDeadline] = useState()
@@ -40,14 +47,14 @@ export default function CreateTask({ listID }) {
                 </div>
                 <div>
                     <label htmlFor="assignedPerson">Person In Charge</label>
-                    <input
-                        placeholder="Enter person in charge..."
-                        type="text"
-                        id="assignedPerson"
-                        name="assignedPerson"
-                        value={assignedPerson}
-                        onChange={e => setAssignedPerson(e.target.value)}
+                    <Select
+                        onChange={(assignedPerson) => setAssignedPerson(assignedPerson.label)}
+                        components={animated}
+                        options={personOption}
+                        placeholder={assignedPerson}
+
                     />
+
                 </div>
                 <button onClick={(e) => addItems({ createdDate, description, listID, deadline, assignedPerson }, e, setMessage, "/api/workspace/task")}>
                     Add Task

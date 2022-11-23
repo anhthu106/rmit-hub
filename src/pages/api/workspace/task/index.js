@@ -12,7 +12,7 @@ export default async function handler(req, res) {
                 const taskValue = {
                     description: req.body.description,
                     list_id: req.body.listID,
-                    user_id: req.body.assignedPerson,
+                    username: req.body.assignedPerson,
                     createdDate: req.body.createdDate,
                     deadline: req.body.deadline,
                 }

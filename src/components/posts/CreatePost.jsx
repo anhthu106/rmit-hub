@@ -6,7 +6,7 @@ import { addItems } from "../../backend/helper/items/items";
 
 export default function CreatePost({ courseProps, id }) {
     const animated = makeAnimated();
-    const courseOptions = util.course(courseProps)
+    const courseOptions = util.item(courseProps, "name")
 
     const [content, setContent] = useState()
     const [course, setCourse] = useState()

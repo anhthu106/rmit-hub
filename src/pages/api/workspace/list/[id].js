@@ -4,9 +4,6 @@ import { StatusCodes } from "http-status-codes";
 import Major from "../../../backend/models/major";
 
 export default async function handler(req, res) {
-    /**
-     * Backend specific user information
-     */
     try {
         await connectDB()
         switch (req.method) {

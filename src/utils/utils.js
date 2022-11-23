@@ -4,28 +4,26 @@ const campus = () => {
         { value: 'hn', label: "Hanoi Campus" },
     ]
 }
-const major = (majorProps) => {
-    const majorOptions = []
 
-    for (let i = 0; i < majorProps.length - 1; i++) {
-        let updateMajorDict = {}
-        updateMajorDict['value'] = majorProps[i].name
-        updateMajorDict['label'] = majorProps[i].name
-        majorOptions.push(updateMajorDict)
+const item = (itemProps, item) => {
+    const itemOptions = []
+    for (let i = 0; i < itemProps.length - 1; i++) {
+        let updateitemDict = {}
+        updateitemDict['value'] = itemProps[i][item]
+        updateitemDict['label'] = itemProps[i][item]
+        itemOptions.push(updateitemDict)
     }
-    return majorOptions
+    return itemOptions
 }
 
-const course = (courseProps) => {
-    let courseOptions = []
-
-    for (let i = 0; i < courseProps.length - 1; i++) {
-        let updateCourseDict = {}
-        updateCourseDict['value'] = courseProps[i].name
-        updateCourseDict['label'] = courseProps[i].name
-        courseOptions.push(updateCourseDict)
+const username = (usernameProps) => {
+    const props = []
+    for (let i of usernameProps) {
+        let usernameDict = {}
+        usernameDict['value'] = i
+        usernameDict['label'] = i
+        props.push(usernameDict)
     }
-    return courseOptions
+    return props
 }
-
-export const util = { campus, major, course }
+export const util = { campus, item, username }

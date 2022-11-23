@@ -26,24 +26,24 @@ export async function getServerSideProps({ params }) {
     const teamData = await Teams.findById(params.id)
     const teamCourse = await Course.findById(teamData.courseID.toString(), "name")
     const listData = await List.find({ team_id: params.id })
-    // const taskData = await Task.find({})
+    // const taskData = await Task.find({}, "desccription user_id list_id createdDate deadline")
+    // console.log('taskData', taskData)
 
-    // const lists = await Promise.all(
-    //     listData.map(async (doc) => {
-    //         const list = doc.toObject();
-    //         list._id = list._id.toString();
-    //         list.team_id = list.team_id.toString()
-    //         Promise.all(
-    //             list.task_id.map((doc) => {
-    //                 doc = doc.toString()
-    //                 return doc
-    //             })
-    //         )
+    // console.log(listData)
+    const lists = await Promise.all(
+        listData.map(async (doc) => {
+            const list = doc.toObject();
+            list._id = list._id.toString();
+            list.team_id = list.team_id.toString()
 
-    //         return list;
-    //     })
-    // );
-    console.log(lists)
+            for (let i = 0; i < list.task_id.length; i++) {
+                list.task_id[i] = list.task_id[i].toString()
+            }
+
+            return list;
+        })
+    );
+
     // const tasks = await Promise.all(
     //     taskData.map(async (doc) => {
     //         const task = doc.toObject();
@@ -54,10 +54,12 @@ export async function getServerSideProps({ params }) {
     //             const user = await Users.findById(data, "username").lean()
     //             return user["username"]
     //         }))
+
+
     //         return task;
     //     })
     // );
-    // console.log(tasks)
+
     const courses = importRawData(courseData)
 
     const userId = teamData.userID.map((data) => {
@@ -86,11 +88,12 @@ export async function getServerSideProps({ params }) {
             courseProps: courses,
             listProps: lists,
             // taskProps: tasks,
+            userName: userName
         }
     }
 }
 
-export default function TeamDetail({ listProps, TeamInfo, courseProps }) {
+export default function TeamDetail({ listProps, TeamInfo, courseProps, userName }) {
     const { data: session } = useSession()
     const id = session.user._id
     const [message, setMessage] = useState(null)
@@ -117,20 +120,10 @@ export default function TeamDetail({ listProps, TeamInfo, courseProps }) {
                         <DisplayList
                             title={list.title}
                             listID={list._id}
+                            usernameProps={userName}
                         />
                     </div>
                 ))}
-                {/* {taskProps.map((task) => {
-                    <div key={task._id}>
-                        <DisplayTask
-                            description={task.description}
-                            username={task.username}
-                            createdDate={task.createdDate}
-                            deadline={task.deadline}
-                        />
-                    </div>
-                })
-                } */}
             </div>
         )
     } else {
@@ -150,6 +143,7 @@ export default function TeamDetail({ listProps, TeamInfo, courseProps }) {
                         <DisplayList
                             title={list.title}
                             listID={list._id}
+                            usernameProps={userName}
                         />
                     </div>
                 ))}
