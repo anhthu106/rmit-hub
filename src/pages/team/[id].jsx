@@ -10,7 +10,7 @@ import Course from "../../backend/models/course";
 import Users from "../../backend/models/user";
 import Teams from "../../backend/models/team";
 import List from "../../backend/models/list";
-// import Task from "../../backend/models/task";
+import Task from "../../backend/models/task";
 
 // COMPONENT
 import TeamInformation from "../../components/team/TeamInformation";
@@ -32,6 +32,7 @@ export async function getServerSideProps({ params }) {
     // console.log(listData)
     const lists = await Promise.all(
         listData.map(async (doc) => {
+            let object = {}
             const list = doc.toObject();
             list._id = list._id.toString();
             list.team_id = list.team_id.toString()
@@ -39,26 +40,27 @@ export async function getServerSideProps({ params }) {
             for (let i = 0; i < list.task_id.length; i++) {
                 list.task_id[i] = list.task_id[i].toString()
             }
-
-            return list;
+            let taskObj = {}
+            let arr = []
+            for (let i = 0; i < list.task_id.length; i++) {
+                const taskProps = await Task.findById(list.task_id)
+                let o = {
+                    _id: taskProps._id.toString(),
+                    description: taskProps.description,
+                    username: taskProps.username,
+                    list_id: taskProps.list_id.toString(),
+                    createdDate: taskProps.createdDate,
+                    deadline: taskProps.deadline,
+                }
+                arr.push(o)
+            }
+            taskObj['taskProps'] = arr
+            object = { ...list, ...taskObj }
+            return object;
         })
     );
 
-    // const tasks = await Promise.all(
-    //     taskData.map(async (doc) => {
-    //         const task = doc.toObject();
-    //         task._id = task._id.toString();
-    //         task.list_id = task.list_id.toString()
-    //         await Promise.all(task.user_id.map(async (data) => {
-    //             data = data.toString()
-    //             const user = await Users.findById(data, "username").lean()
-    //             return user["username"]
-    //         }))
-
-
-    //         return task;
-    //     })
-    // );
+    console.log(lists)
 
     const courses = importRawData(courseData)
 
@@ -87,7 +89,6 @@ export async function getServerSideProps({ params }) {
             TeamInfo,
             courseProps: courses,
             listProps: lists,
-            // taskProps: tasks,
             userName: userName
         }
     }
@@ -118,9 +119,9 @@ export default function TeamDetail({ listProps, TeamInfo, courseProps, userName 
                 {listProps.map((list) => (
                     <div key={list._id}>
                         <DisplayList
-                            title={list.title}
                             listID={list._id}
                             usernameProps={userName}
+                            taskProps={list}
                         />
                     </div>
                 ))}
