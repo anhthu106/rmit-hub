@@ -1,39 +1,38 @@
-import connectDB from "../../../backend/lib/connectDB";
-import Users from "../../../backend/models/user";
+import connectDB from "../../../../backend/lib/connectDB";
 import { StatusCodes } from "http-status-codes";
-import Major from "../../../backend/models/major";
+import List from "../../../../backend/models/list";
+import Teams from "../../../../backend/models/team";
+import Task from "../../../../backend/models/task";
 
 export default async function handler(req, res) {
     try {
         await connectDB()
         switch (req.method) {
-            case "PATCH": {
-                /**
-                 * Update Information
-                 */
-                const {
-                    body: { username, campus, major },
-                    query: { id }
-                } = req
+            case "DELETE": {
+                try {
+                    const { id } = req.query;
+                    const teamID = req.body.teamID
+                    await List.findByIdAndDelete(id);
+                    const teamObj = await Teams.findById(teamID, "listID")
 
-                if (username === "" || campus === "" || major === "") {
-                    new Error.json({ message: "Please fill out the box" })
-                }
-                const majorName = await Major.findOne({ name: req.body.major }, "_id").lean()
-                const majorID = majorName._id.toString()
 
-                const newUser = {
-                    username: req.body.username,
-                    campus: req.body.campus,
-                    major_id: majorID
+                    let listArr = teamObj['listID']
+                    for (let i of listArr) {
+                        if (i.toString() == id.toString()) {
+                            listArr.splice(i, 1)
+                        }
+                    }
+
+                    let taskArr = req.body.taskID
+                    for (let i of taskArr) {
+                        await Task.findByIdAndDelete(i)
+                    }
+
+                    await Teams.findOneAndUpdate({ _id: teamID }, { listID: listArr })
+                    res.status(StatusCodes.OK).json({ message: "Deleted" });
+                } catch (e) {
+                    console.log(e);
                 }
-                const user = await Users.findByIdAndUpdate(
-                    id, newUser, { new: true, runValidators: true }
-                )
-                if (!user) {
-                    new Error.json({ message: "User not found" })
-                }
-                return res.status(StatusCodes.OK).json({ message: "Your account updated" })
             }
         }
     } catch (Error) {
