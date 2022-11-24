@@ -2,11 +2,11 @@
 // BACKEND
 import { useSession, signOut } from "next-auth/react";
 import connectMongo from "../backend/lib/connectDB";
-
 // model
 import Course from "../backend/models/course";
 import Post from "../backend/models/post";
 import User from "../backend/models/user";
+import { Dropdown } from "flowbite-react";
 
 // COMPONENT
 import CreatePost from "../components/posts/CreatePost";
@@ -20,7 +20,6 @@ import Footer from "../components/footer/Footer";
 export async function getServerSideProps() {
   await connectMongo();
   const data = await Course.find({}, "name");
-
   const courses = data.map((doc) => {
     const course = doc.toObject();
     course._id = course._id.toString();
@@ -62,10 +61,10 @@ export default function Home({ courseProps, postProps }) {
   if (session) {
     return (
       <>
-        <div className="header">
-          Signed in as {session.user.email} <br />
-          <button onClick={() => signOut()}>Sign out</button>
-        </div>
+        <Header></Header>
+
+
+        {/* new */}
         <CreatePost courseProps={courseProps} id={session.user._id} />
 
         {postProps.map((post) => (

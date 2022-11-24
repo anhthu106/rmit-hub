@@ -299,7 +299,7 @@ const SignUp = ({ majorProps }) => {
                       </label>
                       <Select
                         onChange={(campus) => setCampus(campus.value)}
-                        closeMenuOnSelect={false}
+                        closeMenuOnSelect={true}
                         components={animatedComponents}
                         defaultValue={[campusOptions[0]]}
                         options={campusOptions}
@@ -315,7 +315,7 @@ const SignUp = ({ majorProps }) => {
                       </label>
                       <Select
                         onChange={(major) => setMajor(major.label)}
-                        closeMenuOnSelect={false}
+                        closeMenuOnSelect={true}
                         components={animatedComponents}
                         defaultValue={[majorOptions[0]]}
                         options={majorOptions}
