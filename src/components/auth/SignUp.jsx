@@ -12,7 +12,7 @@ const SignUp = ({ majorProps }) => {
   const animatedComponents = makeAnimated();
   const campusOptions = util.campus();
   const majorOptions = util.item(majorProps, "name");
-  console.log(majorProps);
+  // console.log(majorProps);
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -303,7 +303,7 @@ const SignUp = ({ majorProps }) => {
                         components={animatedComponents}
                         defaultValue={[campusOptions[0]]}
                         options={campusOptions}
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-64 p-2.5 "
                       />
                     </div>
                     <div class="mb-3 font-light text-gray-500 dark:text-gray-400">
@@ -319,7 +319,7 @@ const SignUp = ({ majorProps }) => {
                         components={animatedComponents}
                         defaultValue={[majorOptions[0]]}
                         options={majorOptions}
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-64 p-2.5 "
                       />
                     </div>
                   </div>
