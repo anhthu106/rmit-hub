@@ -1,10 +1,7 @@
 import { useState } from "react";
 import submitHandler from "../../backend/helper/auth/login";
 import Link from "next/link";
-import Footer from "../footer/Footer";
 import { useRouter } from "next/router";
-// import { blobInfo1 } from "../blob/Blob";
-// import Blob from "../blob/Blob";
 const Login = () => {
   const [userInfo, setUserInfo] = useState({ email: "", password: "" });
   const { error } = useRouter().query;
@@ -99,7 +96,7 @@ const Login = () => {
                       </div>
                     </div>
                     <a
-                      href="#"
+                      href="../recover"
                       className="text-sm font-medium text-primary-600 hover:underline "
                     >
                       Forgot password?

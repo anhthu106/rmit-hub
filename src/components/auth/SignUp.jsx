@@ -4,10 +4,10 @@ import makeAnimated from "react-select/animated";
 import { util } from "../../utils/utils";
 import { addItems } from "../../backend/helper/items/items";
 import Button from "../button/Button";
-import Footer from "../footer/Footer";
+// import Footer from "../footer/Footer";
 import { validPassword } from "../regularexpression/Regex";
 import { signIn } from "next-auth/react";
-import { blobInfo2 } from "../blob/Blob";
+// import { blobInfo2 } from "../blob/Blob";
 const SignUp = ({ majorProps }) => {
   const animatedComponents = makeAnimated();
   const campusOptions = util.campus();
@@ -235,11 +235,11 @@ const SignUp = ({ majorProps }) => {
                     )}
                   </div>
 
-                  <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                    <div class="mb-3 font-light text-gray-500 dark:text-gray-400">
+                  <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 ">
+                    <div class="font-light text-gray-500 dark:text-gray-400 w-64">
                       <label
                         htmlFor="password"
-                        className="block mb-2 text-sm font-medium text-gray-900 "
+                        className="block mb-2 text-sm font-medium text-gray-900"
                       >
                         Password
                       </label>
@@ -260,7 +260,7 @@ const SignUp = ({ majorProps }) => {
                         </p>
                       )}
                     </div>
-                    <div class="mb-3 font-light text-gray-500 dark:text-gray-400">
+                    <div class="font-light text-gray-500 dark:text-gray-400 w-64">
                       <label
                         htmlFor="retypePassword"
                         className="block mb-2 text-sm font-medium text-gray-900 "
@@ -290,7 +290,7 @@ const SignUp = ({ majorProps }) => {
                   </div>
 
                   <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                    <div class="mb-3 font-light text-gray-500 dark:text-gray-400">
+                    <div class=" font-light text-gray-500 dark:text-gray-400">
                       <label
                         htmlFor="campus"
                         className="block mb-2 text-sm font-medium text-gray-900 "
@@ -306,7 +306,7 @@ const SignUp = ({ majorProps }) => {
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-64 p-2.5 "
                       />
                     </div>
-                    <div class="mb-3 font-light text-gray-500 dark:text-gray-400">
+                    <div class=" font-light text-gray-500 dark:text-gray-400">
                       <label
                         htmlFor="major"
                         className="block mb-2 text-sm font-medium text-gray-900"
@@ -348,7 +348,7 @@ const SignUp = ({ majorProps }) => {
                   )}
                   <p className="text-sm font-light text-gray-500 ">
                     Already have an account yet? &nbsp;
-                    <a href="#" className="text-sm font-light text-gray-500 ">
+                    <a className="text-sm font-light text-gray-500 ">
                       <button
                         onClick={() => signIn()}
                         className="font-medium text-primary-600 hover:underline"
