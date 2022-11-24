@@ -33,15 +33,17 @@ export async function getServerSideProps({ params }) {
     const lists = await Promise.all(
         listData.map(async (doc) => {
             let object = {}
+            let taskObj = {}
+            let arr = []
             const list = doc.toObject();
+
             list._id = list._id.toString();
             list.team_id = list.team_id.toString()
 
             for (let i = 0; i < list.task_id.length; i++) {
                 list.task_id[i] = list.task_id[i].toString()
             }
-            let taskObj = {}
-            let arr = []
+
             for (let i = 0; i < list.task_id.length; i++) {
                 const taskProps = await Task.findById(list.task_id)
                 let o = {
@@ -60,7 +62,7 @@ export async function getServerSideProps({ params }) {
         })
     );
 
-    console.log(lists)
+    // console.log(lists)
 
     const courses = importRawData(courseData)
 
