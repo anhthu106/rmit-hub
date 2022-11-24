@@ -5,10 +5,9 @@ const taskSchema = new Schema({
         type: String,
         required: true
     },
-    user_id: [
+    username: [
         {
-            type: Types.ObjectId,
-            ref: "User",
+            type: String,
         }
     ],
     list_id: {

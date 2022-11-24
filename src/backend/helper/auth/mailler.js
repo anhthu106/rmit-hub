@@ -36,3 +36,18 @@ exports.sendConfirmationEmail = function ({toUser, token}) {
 
     return sendEmail(message)
 }
+
+exports.recoverPasswordEmail = function ({email, token}){
+    const message = {
+        from: process.env.GOOGLE_USER,
+        to: `${email}`,
+
+        subject: "Reset password",
+        html: `
+           <p>To reset your account please follow this link: <a target="_" href="${process.env.DOMAIN}/recover/${token}"</a>${process.env.DOMAIN}/recover/${token}</p>
+           <p>Cheers</p>
+           <p>Your Application Team</p>
+        `
+    }
+    return sendEmail(message)
+}

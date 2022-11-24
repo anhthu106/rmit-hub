@@ -1,7 +1,12 @@
-import SignUp from "../../components/auth/SignUp"
+// BACKEND 
 import connectDB from "../../backend/lib/connectDB";
-import Major from "../../backend/models/major";
 import importRawData from "../../backend/helper/data/data";
+
+// model
+import Major from "../../backend/models/major";
+
+// COMPONENT
+import SignUp from "../../components/auth/SignUp"
 
 export async function getServerSideProps() {
     await connectDB()

@@ -7,7 +7,7 @@ import { addItems } from "../../backend/helper/items/items";
 export default function CreateTeam({ courseProps, OwnerUser }) {
 
     const animated = makeAnimated();
-    const courseOptions = util.course(courseProps)
+    const courseOptions = util.item(courseProps, "name")
 
 
     const [name, setName] = useState()
