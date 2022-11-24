@@ -11,7 +11,8 @@ import { blobInfo2 } from "../blob/Blob";
 const SignUp = ({ majorProps }) => {
   const animatedComponents = makeAnimated();
   const campusOptions = util.campus();
-  const majorOptions = util.major(majorProps);
+  const majorOptions = util.item(majorProps, "name");
+  console.log(majorProps);
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
