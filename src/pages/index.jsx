@@ -60,27 +60,30 @@ export default function Home({ courseProps, postProps }) {
   const { data: session } = useSession();
   if (session) {
     return (
-      <>
+      <div className="bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500">
         <Header></Header>
 
-
         {/* new */}
-        <CreatePost courseProps={courseProps} id={session.user._id} />
+        <div className="m-auto md:w-6/12">
+          <div>
+            <CreatePost courseProps={courseProps} id={session.user._id} />
 
-        {postProps.map((post) => (
-          <div key={post._id}>
-            <DisplayPost
-              author={post.userID}
-              date={post.currentDate}
-              content={post.content}
-              course={post.courseID}
-              id={post._id}
-              sessionName={session.user.username}
-              username={post.userID}
-            />
+            {postProps.map((post) => (
+              <div key={post._id}>
+                <DisplayPost
+                  author={post.userID}
+                  date={post.currentDate}
+                  content={post.content}
+                  course={post.courseID}
+                  id={post._id}
+                  sessionName={session.user.username}
+                  username={post.userID}
+                />
+              </div>
+            ))}
           </div>
-        ))}
-      </>
+        </div>
+      </div>
     );
   }
   return (

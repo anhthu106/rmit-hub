@@ -15,7 +15,7 @@ export default function DisplayPost({
     return (
       <>
         <div className="">
-          <div className="md:w-6/12 py-8 space-y-4 md:space-y-6 ">
+          <div className="py-8 space-y-4 md:space-y-6 ">
             <div className="relative p-4 bg-white rounded-lg shadow sm:p-5 border border-gray-200">
               <div className="flex justify-between mb-4 rounded-t sm:mb-5">
                 <div className="text-gray-900">
@@ -51,7 +51,7 @@ export default function DisplayPost({
   return (
     <>
       <div className="">
-        <div className="md:w-6/12 py-8 space-y-4 md:space-y-6 ">
+        <div className="py-8 space-y-4 md:space-y-6 ">
           <div className="relative p-4 bg-white rounded-lg shadow sm:p-5 border border-gray-200">
             <div className="flex justify-between mb-4 rounded-t sm:mb-5">
               <div className="text-gray-900">

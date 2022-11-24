@@ -19,8 +19,8 @@ export default function CreatePost({ courseProps, id }) {
   return (
     <div>
       {/* new */}
-      <form className="w-5/12 px-6 pb-6 space-y-4 md:space-y-6 sm:px-8 sm:pb-8 pt-8">
-        <div className="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50">
+      <form className="w-full pb-6 space-y-4 md:space-y-6 sm:pb-8 pt-8">
+        <div className="mb-4 border border-gray-200 rounded-lg bg-gray-50">
           <div className="px-4 py-2 bg-white rounded-t-lg">
             <div className="pb-4 md:pb-6">
               <label
