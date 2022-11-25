@@ -1,9 +1,9 @@
-// BACKEND 
-import { useState } from "react";
-import { useSession } from "next-auth/react";
+// BACKEND
+import {useState} from "react";
+import {useSession} from "next-auth/react";
 import connectDB from "../../backend/lib/connectDB";
 import importRawData from "../../backend/helper/data/data";
-import { deleteItems, updateItems } from "../../backend/helper/items/items";
+import {deleteItems, updateItems} from "../../backend/helper/items/items";
 
 // model
 import Course from "../../backend/models/course";
@@ -29,40 +29,24 @@ export async function getServerSideProps({ params }) {
     // const taskData = await Task.find({}, "desccription user_id list_id createdDate deadline")
     // console.log('taskData', taskData)
 
-    // console.log(listData)
     const lists = await Promise.all(
-        listData.map(async (doc) => {
-            let object = {}
-            let taskObj = {}
-            let arr = []
-            const list = doc.toObject();
+        listData.map(async  (doc) => {
+            const list = doc.toObject()
 
-            list._id = list._id.toString();
-            list.team_id = list.team_id.toString()
+            list._id = list._id.toString()
+            list.team_id =  list.team_id.toString()
 
-            for (let i = 0; i < list.task_id.length; i++) {
-                list.task_id[i] = list.task_id[i].toString()
-            }
-
-            for (let i = 0; i < list.task_id.length; i++) {
-                const taskProps = await Task.findById(list.task_id)
-                let o = {
-                    _id: taskProps._id.toString(),
-                    description: taskProps.description,
-                    username: taskProps.username,
-                    list_id: taskProps.list_id.toString(),
-                    createdDate: taskProps.createdDate,
-                    deadline: taskProps.deadline,
-                }
-                arr.push(o)
-            }
-            taskObj['taskProps'] = arr
-            object = { ...list, ...taskObj }
-            return object;
+            list.task_id = await Promise.all(list.task_id.map(async (id) => {
+                id = id.toString()
+                const task = await Task.findById(id).lean()
+                task._id = task._id.toString()
+                task.list_id = task.list_id.toString()
+                return task
+            }))
+            return list
         })
-    );
+    )
 
-    // console.log(lists)
 
     const courses = importRawData(courseData)
 
@@ -144,7 +128,7 @@ export default function TeamDetail({ listProps, TeamInfo, courseProps, userName 
                 {listProps.map((list) => (
                     <div key={list._id}>
                         <DisplayList
-                            title={list.title}
+                            taskProps={list}
                             listID={list._id}
                             usernameProps={userName}
                         />

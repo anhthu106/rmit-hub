@@ -1,9 +1,9 @@
-import { useState } from "react";
-import { deleteItems } from "../../backend/helper/items/items";
+import {useState} from "react";
+import {deleteItems} from "../../backend/helper/items/items";
 import CreateTask from "./CreateTask"
 import DisplayTask from "./DisplayTask";
 
-export default function DisplayList({ listID, usernameProps, taskProps }) {
+export default function DisplayList({listID, usernameProps, taskProps}) {
     const [message, setMessage] = useState(null)
     let title = taskProps.title
     let teamId = taskProps.team_id
@@ -19,23 +19,27 @@ export default function DisplayList({ listID, usernameProps, taskProps }) {
             />
 
             <div>this is the list</div>
-            {taskProps['taskProps'].map((task) => {
-                <div key={task._id}>
-                    <div>hellooooooooo</div>
-                    <div>{task.description}</div>
-                    {/* <DisplayTask
-                        description={task.description}
-                        username={task.username}
-                        createdDate={task.createdDate}
-                        deadline={task.deadline}
-                    /> */}
-                </div>
-
-            })}
+            <div>
+                {taskProps.task_id.map((doc) => (
+                        <div key={doc._id}>
+                            <DisplayTask
+                                username={doc.username}
+                                description={doc.description}
+                                createdDate={doc.createdDate}
+                                deadline={doc.deadline}
+                            />
+                        </div>
+                    )
+                )}
+            </div>
 
             <div>this is the end of the list</div>
 
-            <button onClick={(e) => deleteItems({ title: title, teamID: teamId, taskID: taskId }, e, setMessage, `/api/workspace/list/${listID}`)}>
+            <button onClick={(e) => deleteItems({
+                title: title,
+                teamID: teamId,
+                taskID: taskId
+            }, e, setMessage, `/api/workspace/list/${listID}`)}>
                 Delete List
             </button>
         </div>
