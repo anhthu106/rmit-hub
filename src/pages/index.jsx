@@ -60,7 +60,9 @@ export default function Home({ courseProps, postProps }) {
   const { data: session } = useSession();
   if (session) {
     return (
-      <div className="bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500">
+      <div
+        className="bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500"
+      >
         <Header></Header>
 
         {/* new */}

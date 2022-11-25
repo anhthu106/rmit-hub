@@ -4,9 +4,10 @@
 
 html {
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
-@-webkit-keyframes rotating /* Safari and Chrome */ {
+/* @-webkit-keyframes rotating{
   from {
     -webkit-transform: rotate(0deg);
     -o-transform: rotate(0deg);
@@ -35,7 +36,6 @@ html {
   }
 }
 .rotating {
-  /* overflow: visible; */
   margin: auto;
   color: #784ba8;
   -webkit-animation: rotating 160s linear infinite;
@@ -55,4 +55,4 @@ html {
   padding: 1.5rem;
   z-index: 10;
   color: whitesmoke;
-}
+} */
