@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { deleteItems } from "../../backend/helper/items/items";
+import { Dropdown } from "flowbite-react";
 
 export default function DisplayPost({
   author,
@@ -14,61 +15,103 @@ export default function DisplayPost({
   if (sessionName === username) {
     return (
       <>
-        <div className="">
-          <div className="py-8 space-y-4 md:space-y-6 ">
-            <div className="relative p-4 bg-white rounded-lg shadow sm:p-5 border border-gray-200">
-              <div className="flex justify-between mb-4 rounded-t sm:mb-5">
-                <div className="text-gray-900">
-                  <h3 className="text-lg md:text-xl font-semibold ">
-                    {author}
-                  </h3>
-                  <em className="text-xs md:text-sm font-em">{date}</em>
-                </div>
-                <div></div>
-              </div>
-              <ReturnPost
-                author={author}
-                course={course}
-                content={content}
-                date={date}
-              />
+        <div className="flex items-center justify-center">
+          <div className="rounded-xl border p-5 shadow-md w-full bg-white">
+            <div className="flex w-full items-center justify-between border-b pb-3">
+              <div className="flex items-center space-x-3">
+                <div className="h-8 w-8 rounded-full bg-slate-400 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500"></div>
+                <div className="text-lg font-bold text-slate-700">{author}</div>
+                <Dropdown label="...">
 
-              <DeleteButton
-                author={author}
-                course={course}
-                content={content}
-                date={date}
-                setMessage={setMessage}
-                id={id}
-              />
+                    <Dropdown.Item>
+                      <div>sth</div>
+                    </Dropdown.Item>
+                  </Dropdown>
+              </div>
+              <div className="flex items-center space-x-8">
+                {/* <button className="rounded-2xl border bg-neutral-100 px-3 py-1 text-xs font-semibold">
+                Category
+              </button> */}
+                <div className="text-xs text-neutral-500">{date}</div>
+              </div>
+            </div>
+            <ReturnPost course={course} content={content}/>
+            <div>
+              <div className="flex items-center justify-between text-slate-500">
+                <div className="flex space-x-4 md:space-x-8">
+                  <div className="flex cursor-pointer items-center transition hover:text-slate-600">
+                    <span>
+                      LOL something goes here
+                      <DeleteButton
+                        author={author}
+                        course={course}
+                        content={content}
+                        date={date}
+                        setMessage={setMessage}
+                        id={id}
+                      />
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <span></span>
         </div>
       </>
     );
   }
   return (
     <>
-      <div className="">
-        <div className="py-8 space-y-4 md:space-y-6 ">
-          <div className="relative p-4 bg-white rounded-lg shadow sm:p-5 border border-gray-200">
-            <div className="flex justify-between mb-4 rounded-t sm:mb-5">
-              <div className="text-gray-900">
-                <h3 className="text-lg md:text-xl font-semibold ">{author}</h3>
-                <em className="text-xs md:text-sm font-em">{date}</em>
-              </div>
-              <div></div>
+      <div className="flex items-center justify-center">
+        <div className="rounded-xl border p-5 shadow-md w-full bg-white">
+          <div className="flex w-full items-center justify-between border-b pb-3">
+            <div className="flex items-center space-x-3">
+              <div className="h-8 w-8 rounded-full bg-slate-400 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500"></div>
+              <div className="text-lg font-bold text-slate-700">{author}</div>
             </div>
-            <ReturnPost
-              author={author}
-              course={course}
-              content={content}
-              date={date}
-            />
+            <div className="flex items-center space-x-8">
+              {/* <button className="rounded-2xl border bg-neutral-100 px-3 py-1 text-xs font-semibold">
+                Category
+              </button> */}
+              <div className="text-xs text-neutral-500">{date}</div>
+            </div>
+          </div>
+          <ReturnPost course={course} content={content} />
+          <div>
+            <div className="flex items-center justify-between text-slate-500">
+              <div className="flex space-x-4 md:space-x-8">
+                <div className="flex cursor-pointer items-center transition hover:text-slate-600">
+                  <span>
+                    LOL something goes here
+                    <span
+                      className="inline-flex items-center rounded-full p-2 bg-indigo-500 text-white group transition-all duration-500 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none"
+                      role="alert"
+                      tabindex="0"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        className="w-6 h-6"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+
+                      <span className="whitespace-nowrap inline-block group-hover:max-w-screen-2xl group-focus:max-w-screen-2xl max-w-0 scale-80 group-hover:scale-100 overflow-hidden transition-all duration-500 group-hover:px-2 group-focus:px-2">
+                        your content here
+                      </span>
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <span></span>
       </div>
     </>
   );
@@ -113,15 +156,15 @@ function DeleteButton({ author, date, content, course, setMessage, id }) {
 
 function ReturnPost(props) {
   return (
-    <dl>
-      <dt className="mb-2 font-semibold leading-none text-gray-900 ">Course</dt>
-      <dd className="mb-4 font-light text-gray-500 sm:mb-5 ">{props.course}</dd>
-      <dt className="mb-2 font-semibold leading-none text-gray-900 ">
-        Content
-      </dt>
-      <dd className="mb-4 font-light text-gray-500 sm:mb-5 ">
-        {props.content}
-      </dd>
-    </dl>
+    <>
+      <div className="mt-4 mb-6">
+        <div className="mb-3 text-xl font-bold">Course</div>
+        <div className="text-sm text-neutral-600">{props.course}</div>
+      </div>
+      <hr />
+      <div className="mt-4 mb-6">
+        <div className="text-sm text-neutral-600">{props.content}</div>
+      </div>
+    </>
   );
 }

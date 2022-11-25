@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Button from "../button/Button";
 import { addItems } from "../../backend/helper/items/items";
-
+import  Header from "../header/Header";
 const Recover = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState(null);
@@ -30,7 +30,7 @@ const Recover = () => {
   return (
     <>
       <section className="bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500 grid h-screen">
-        <span></span>
+        <Header></Header>
         <div className="opacity-[1] flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-min lg:py-0 z-10 rounded-[50px] drop-shadow-2xl md:mt-0 sm:max-w-screen xl:p-0 ">
           <div className="w-full md:mt-0 sm:max-w-md xl:p-0">
             <div className="align-middle md:align-top w-full">

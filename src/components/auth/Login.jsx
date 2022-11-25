@@ -2,18 +2,15 @@ import { useState } from "react";
 import submitHandler from "../../backend/helper/auth/login";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Header from "../header/Header";
 const Login = () => {
   const [userInfo, setUserInfo] = useState({ email: "", password: "" });
   const { error } = useRouter().query;
   return (
     <>
+      
       <section className="bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500 grid h-screen">
-        <span>
-          {/* <img
-            className="scale-[0.7] z-0 absolute -left-4"
-            src="data:image/svg+xml;base64,PCEtLT94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/LS0+CiAgICAgICAgICAgICAgPHN2ZyBpZD0ic3ctanMtYmxvYi1zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSI+CiAgICAgICAgICAgICAgICAgICAgPGRlZnM+IAogICAgICAgICAgICAgICAgICAgICAgICA8bGluZWFyR3JhZGllbnQgaWQ9InN3LWdyYWRpZW50IiB4MT0iMCIgeDI9IjEiIHkxPSIxIiB5Mj0iMCI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8c3RvcCBpZD0ic3RvcDEiIHN0b3AtY29sb3I9InJnYmEoMjE1LjIyNywgMjE1LjIyNywgMjE1LjIyNywgMC44NSkiIG9mZnNldD0iMCUiPjwvc3RvcD4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxzdG9wIGlkPSJzdG9wMiIgc3RvcC1jb2xvcj0icmdiYSgyNTUsIDI1NSwgMjU1LCAwLjc0KSIgb2Zmc2V0PSIxMDAlIj48L3N0b3A+CiAgICAgICAgICAgICAgICAgICAgICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICAgICAgICAgICAgICAgICAgPC9kZWZzPgogICAgICAgICAgICAgICAgPHBhdGggZmlsbD0idXJsKCNzdy1ncmFkaWVudCkiIGQ9Ik0xNywtMjcuNkMyMi4zLC0yNi4zLDI3LC0yMi40LDMxLjMsLTE3LjNDMzUuNiwtMTIuMiwzOS40LC02LjEsMzkuOSwwLjJDNDAuMyw2LjYsMzcuMywxMy4yLDM0LjEsMjAuMUMzMC44LDI3LDI3LjQsMzQuMiwyMS42LDM1LjJDMTUuOSwzNi4xLDgsMzAuOSwxLjQsMjguNUMtNS4xLDI2LC0xMC4yLDI2LjIsLTE2LDI1LjNDLTIxLjcsMjQuMywtMjguMiwyMi4yLC0zMC43LDE3LjdDLTMzLjEsMTMuMywtMzEuNiw2LjcsLTMxLjksLTAuMkMtMzIuMiwtNywtMzQuMywtMTQsLTMyLjUsLTE5LjVDLTMwLjYsLTI1LjEsLTI0LjksLTI5LjIsLTE4LjksLTMwQy0xMi44LC0zMC44LC02LjQsLTI4LjMsLTAuMywtMjcuOEM1LjgsLTI3LjMsMTEuNywtMjguOCwxNywtMjcuNloiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDUwIDUwKSIgc3Ryb2tlLXdpZHRoPSIwIiBzdHlsZT0idHJhbnNpdGlvbjogYWxsIDAuM3MgZWFzZSAwczsiIHN0cm9rZT0idXJsKCNzdy1ncmFkaWVudCkiPjwvcGF0aD4KICAgICAgICAgICAgICA8L3N2Zz4="
-          /> */}
-        </span>
+      <Header></Header>
         <div className="opacity-[1] flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-min lg:py-0 z-10 rounded-[50px] drop-shadow-2xl md:mt-0 sm:max-w-screen xl:p-0 ">
           <div className="w-full md:mt-0 sm:max-w-md xl:p-0">
             <div className="align-middle md:align-top w-full">
@@ -112,7 +109,6 @@ const Login = () => {
                     Don’t have an account yet?
                     <Link href="../signup">
                       <a className="font-medium text-primary-600 hover:underline">
-                        {" "}
                         Sign up
                       </a>
                     </Link>

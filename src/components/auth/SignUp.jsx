@@ -7,13 +7,13 @@ import Button from "../button/Button";
 // import Footer from "../footer/Footer";
 import { validPassword } from "../regularexpression/Regex";
 import { signIn } from "next-auth/react";
-// import { blobInfo2 } from "../blob/Blob";
+import Header from "../header/Header";
 const SignUp = ({ majorProps }) => {
   const animatedComponents = makeAnimated();
   const campusOptions = util.campus();
   const majorOptions = util.item(majorProps, "name");
   // console.log(majorProps);
-
+  const animated = makeAnimated();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -39,6 +39,7 @@ const SignUp = ({ majorProps }) => {
   const [emailIsUsed, setEmailIsUsed] = useState(false);
   const [usernameIsUsed, setUsernameIsUsed] = useState(false);
   const [accountIsCreated, setAccountIsCreated] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   function accountCreateCheck() {
     if (message != null) {
@@ -140,28 +141,7 @@ const SignUp = ({ majorProps }) => {
           md:bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500
           grid h-screen sm:max-w-full"
       >
-        <span className="">
-          {/* <img
-            className="scale-[0.8] z-0 absolute -left-[-50px] -top-[500px]"
-            src="data:image/svg+xml;base64,PCEtLT94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/LS0+CiAgICAgICAgICAgICAgPHN2ZyBpZD0ic3ctanMtYmxvYi1zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSI+CiAgICAgICAgICAgICAgICAgICAgPGRlZnM+IAogICAgICAgICAgICAgICAgICAgICAgICA8bGluZWFyR3JhZGllbnQgaWQ9InN3LWdyYWRpZW50IiB4MT0iMCIgeDI9IjEiIHkxPSIxIiB5Mj0iMCI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8c3RvcCBpZD0ic3RvcDEiIHN0b3AtY29sb3I9InJnYmEoMjE1LjIyNywgMjE1LjIyNywgMjE1LjIyNywgMC44NSkiIG9mZnNldD0iMCUiPjwvc3RvcD4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxzdG9wIGlkPSJzdG9wMiIgc3RvcC1jb2xvcj0icmdiYSgyNTUsIDI1NSwgMjU1LCAwLjc0KSIgb2Zmc2V0PSIxMDAlIj48L3N0b3A+CiAgICAgICAgICAgICAgICAgICAgICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICAgICAgICAgICAgICAgICAgPC9kZWZzPgogICAgICAgICAgICAgICAgPHBhdGggZmlsbD0idXJsKCNzdy1ncmFkaWVudCkiIGQ9Ik0yNS4xLC0yMC42QzMwLjksLTEyLjgsMzIuOSwtMi40LDMwLjcsNi45QzI4LjQsMTYuMiwyMi4xLDI0LjQsMTIuNywzMC40QzMuNCwzNi41LC05LDQwLjMsLTE3LjgsMzYuM0MtMjYuNiwzMi4zLC0zMS44LDIwLjQsLTM0LjcsNy45Qy0zNy42LC00LjYsLTM4LC0xNy42LC0zMS44LC0yNS41Qy0yNS42LC0zMy40LC0xMi44LC0zNi4zLC0xLjYsLTM1QzkuNywtMzMuNywxOS4zLC0yOC40LDI1LjEsLTIwLjZaIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1MCA1MCkiIHN0cm9rZS13aWR0aD0iMCIgc3R5bGU9InRyYW5zaXRpb246IGFsbCAwLjNzIGVhc2UgMHM7IiBzdHJva2U9InVybCgjc3ctZ3JhZGllbnQpIj48L3BhdGg+CiAgICAgICAgICAgICAgPC9zdmc+"
-          /> */}
-          {/* <svg
-            viewBox="0 0 1000 1000"
-            width="1200"
-            height="1200"
-            className="rotating max-h-[80rem] max-w-[62rem]  z-0 absolute -top-[145px] -left-[0] -right-[0]"
-          >
-            <path fill="#EFF5F5" fillOpacity="75%" className="scale-[2]">
-              <animate
-                attributeName="d"
-                dur="10s"
-                repeatCount="indefinite"
-                values={blobInfo2}
-              />
-            </path>
-          </svg> */}
-          {/* <div class="blob"></div> */}
-        </span>
+        <Header></Header>
         <div className="opacity-[1] flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-min lg:py-0 z-10 rounded-[50px] drop-shadow-2xl md:mt-0 sm:max-w-screen xl:p-0">
           <div className="w-max md:mt-0 sm:max-w-full xl:p-0">
             <div className="align-middle md:align-top">
@@ -235,8 +215,8 @@ const SignUp = ({ majorProps }) => {
                     )}
                   </div>
 
-                  <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 ">
-                    <div class="font-light text-gray-500 dark:text-gray-400 w-64">
+                  <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 ">
+                    <div className="font-light text-gray-500 dark:text-gray-400 w-64">
                       <label
                         htmlFor="password"
                         className="block mb-2 text-sm font-medium text-gray-900"
@@ -260,7 +240,7 @@ const SignUp = ({ majorProps }) => {
                         </p>
                       )}
                     </div>
-                    <div class="font-light text-gray-500 dark:text-gray-400 w-64">
+                    <div className="font-light text-gray-500 dark:text-gray-400 w-64">
                       <label
                         htmlFor="retypePassword"
                         className="block mb-2 text-sm font-medium text-gray-900 "
@@ -289,8 +269,8 @@ const SignUp = ({ majorProps }) => {
                     </div>
                   </div>
 
-                  <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                    <div class=" font-light text-gray-500 dark:text-gray-400">
+                  <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                    <div className=" font-light text-gray-500 dark:text-gray-400">
                       <label
                         htmlFor="campus"
                         className="block mb-2 text-sm font-medium text-gray-900 "
@@ -306,7 +286,7 @@ const SignUp = ({ majorProps }) => {
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-64 p-2.5 "
                       />
                     </div>
-                    <div class=" font-light text-gray-500 dark:text-gray-400">
+                    <div className=" font-light text-gray-500 dark:text-gray-400">
                       <label
                         htmlFor="major"
                         className="block mb-2 text-sm font-medium text-gray-900"
@@ -327,7 +307,7 @@ const SignUp = ({ majorProps }) => {
                   {formUncompelete && (
                     <button
                       type="button"
-                      class="w-full text-white bg-blue-400 dark:bg-blue-500 cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                      className="w-full text-white bg-blue-400 dark:bg-blue-500 cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                       disabled
                     >
                       Register
@@ -335,14 +315,15 @@ const SignUp = ({ majorProps }) => {
                   )}
                   {formCompelete && (
                     <Button
-                      fn={(e) =>
+                      fn={(e) => {
                         addItems(
                           { username, email, password, campus, major },
                           e,
                           setMessage,
                           "/api/auth/register"
-                        )
-                      }
+                        );
+                        setShowModal(true);
+                      }}
                       options={"Register"}
                     />
                   )}
@@ -362,6 +343,45 @@ const SignUp = ({ majorProps }) => {
             </div>
           </div>
         </div>
+
+        {/* Modal */}
+        <span>
+          {showModal ? (
+            <>
+              <div className="fixed inset-0 z-10 overflow-y-auto">
+                <div
+                  className="fixed inset-0 w-full h-full bg-black opacity-40"
+                  // onClick={() => setShowModal(false)}
+                ></div>
+                <div className="flex items-center min-h-screen px-4 py-8">
+                  <div className="relative w-full max-w-lg p-4 mx-auto bg-white rounded-md shadow-lg">
+                    <div className="relative p-4 w-full max-w-lg h-full md:h-auto">
+                      <div className="mb-4 text-lg font-light text-gray-500">
+                        <h3 className="mb-3 text-2xl font-bold text-green-600">
+                          Account Successfully Created
+                        </h3>
+                        <p>Verify email is sent which have 5 minutes expires</p>
+                      </div>
+                      <div className="justify-between items-center pt-0 space-y-4 sm:flex sm:space-y-0">
+                        <span></span>
+                        <div className="items-center space-y-4 sm:space-x-4 sm:flex sm:space-y-0">
+                          <a href="../">
+                            <button
+                              type="button"
+                              className="py-2 px-4 w-full text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-auto hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                            >
+                              Confirm
+                            </button>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
+          ) : null}
+        </span>
       </section>
     </>
   );
