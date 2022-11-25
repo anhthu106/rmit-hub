@@ -18,9 +18,9 @@ export default function Header() {
               </div>
               <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
                 <Dropdown label="User">
-                  <div class="py-3 px-4 text-sm text-gray-900 dark:text-white">
+                  <div className="py-3 px-4 text-sm text-gray-900 dark:text-white">
                     <div className="text-lg">{session.user.username}</div>
-                    <div class="font-medium truncate">{session.user.email}</div>
+                    <div className="font-medium truncate">{session.user.email}</div>
                   </div>
                   <Dropdown.Item>
                     <button onClick={() => signOut()}>Sign out</button>

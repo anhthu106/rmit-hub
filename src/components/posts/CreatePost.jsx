@@ -19,31 +19,31 @@ export default function CreatePost({ courseProps, id }) {
   const [showModal, setShowModal] = useState(false);
   return (
     <>
-      <div data-dial-init class="fixed right-6 bottom-6 group">
+      <div data-dial-init className="fixed right-6 bottom-6 group">
         <button
           type="button"
           onClick={() => setShowModal(true)}
           data-dial-toggle="speed-dial-menu-square"
           aria-controls="speed-dial-menu-square"
           aria-expanded="false"
-          class="flex justify-center items-center w-14 h-14 text-white bg-blue-700 rounded-lg hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-800"
+          className="flex justify-center items-center w-14 h-14 text-white bg-blue-700 rounded-lg hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-800"
         >
           <svg
             aria-hidden="true"
-            class="w-8 h-8 transition-transform"
+            className="w-8 h-8 transition-transform"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               d="M12 6v6m0 0v6m0-6h6m-6 0H6"
             ></path>
           </svg>
-          <span class="sr-only">Open actions menu</span>
+          <span className="sr-only">Open actions menu</span>
         </button>
       </div>
       {showModal ? (
