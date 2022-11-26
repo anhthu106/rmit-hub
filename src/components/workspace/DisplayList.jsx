@@ -27,6 +27,8 @@ export default function DisplayList({listID, usernameProps, taskProps}) {
                                 description={doc.description}
                                 createdDate={doc.createdDate}
                                 deadline={doc.deadline}
+                                list_id={listID}
+                                taskID = {doc._id}
                             />
                         </div>
                     )
