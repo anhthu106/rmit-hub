@@ -1,9 +1,9 @@
 // BACKEND
-import {useState} from "react";
-import {useSession} from "next-auth/react";
+import { useState } from "react";
+import { useSession } from "next-auth/react";
 import connectDB from "../../backend/lib/connectDB";
 import importRawData from "../../backend/helper/data/data";
-import {deleteItems, updateItems} from "../../backend/helper/items/items";
+import { deleteItems, updateItems } from "../../backend/helper/items/items";
 
 // model
 import Course from "../../backend/models/course";
@@ -26,19 +26,20 @@ export async function getServerSideProps({ params }) {
     const teamData = await Teams.findById(params.id)
     const teamCourse = await Course.findById(teamData.courseID.toString(), "name")
     const listData = await List.find({ team_id: params.id })
-    // const taskData = await Task.find({}, "desccription user_id list_id createdDate deadline")
-    // console.log('taskData', taskData)
 
     const lists = await Promise.all(
-        listData.map(async  (doc) => {
+        listData.map(async (doc) => {
             const list = doc.toObject()
 
             list._id = list._id.toString()
-            list.team_id =  list.team_id.toString()
+            list.team_id = list.team_id.toString()
 
             list.task_id = await Promise.all(list.task_id.map(async (id) => {
+                console.log(id)
+
                 id = id.toString()
                 const task = await Task.findById(id).lean()
+
                 task._id = task._id.toString()
                 task.list_id = task.list_id.toString()
                 return task
