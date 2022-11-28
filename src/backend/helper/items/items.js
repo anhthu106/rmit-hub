@@ -26,12 +26,19 @@ export async function deleteItems(body, e, setMessage, url) {
     await returnMessage(res, setMessage)
 }
 
-export function searchUsername(query, data) {
+export function searchItem(query, data, key, subdata) {
     //Our search filter function
     const searchFilter = (array) => {
-        return array.filter(
-            (el) => el.username.toLowerCase().includes(query.toLowerCase())
-        )
+        if (subdata == null) {
+            return array.filter(
+                (el) => el[key].toLowerCase().includes(query.toLowerCase())
+            )
+        } else {
+            return array.filter(
+                (el) => el[key][subdata].toLowerCase().includes(query.toLowerCase())
+            )
+        }
+
     }
     return searchFilter(data)
 }

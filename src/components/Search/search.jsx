@@ -1,8 +1,11 @@
-export default function Search({onchange}){
-    return(
-            <div
-                className='w-11/12 m-auto mt-40 flex flex-col md:flex-row justify-between items-start md:items-center gap-5 md:gap-0'>
-                <input onChange={onchange} type='text' placeholder='Search...'/>
-            </div>
-        )
+export default function Search({ onchange }) {
+    return (
+        <input
+            className="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+            type="search"
+            name="search"
+            placeholder="Search"
+            onChange={onchange}
+        />
+    )
 }
