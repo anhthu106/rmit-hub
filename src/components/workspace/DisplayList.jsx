@@ -6,8 +6,6 @@ import DisplayTask from "./DisplayTask";
 export default function DisplayList({listID, usernameProps, taskProps}) {
     const [message, setMessage] = useState(null)
     let title = taskProps.title
-    let teamId = taskProps.team_id
-    let taskId = taskProps.task_id
 
     return (
         <div>
