@@ -1,10 +1,6 @@
 import {SessionProvider, useSession} from "next-auth/react";
 import "../../styles/globals.css";
-import Header from "../components/header/Header";
-import HeroSection from "../components/landing/HeroSection";
-import FeatureSections from "../components/landing/FeatureSections";
-import TeamSection from "../components/landing/TeamSection";
-import Footer from "../components/footer/Footer";
+import LandingPage from "../pageComponents/landingPage/LandingPage";
 
 function MyApp({Component, pageProps: {session, ...pageProps}}) {
     return (
@@ -33,21 +29,7 @@ function Auth({children}) {
 
     if (status === "unauthenticated") {
         return (
-            <>
-                {/* Header */}
-                <Header></Header>
-
-                <HeroSection></HeroSection>
-
-                {/* Feature Sections */}
-                <FeatureSections></FeatureSections>
-
-                {/* Team Section */}
-                <TeamSection></TeamSection>
-
-                {/* Footer */}
-                <Footer></Footer>
-            </>
+            <LandingPage />
         )
     }
 

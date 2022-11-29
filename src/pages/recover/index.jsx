@@ -1,11 +1,7 @@
-import Recover from "../../components/auth/Recover";
+import Recover from "../../pageComponents/auth/Recover";
 
-const recover = () => {
+export default function recover() {
     return (
-        <div>
-            <Recover />
-        </div>
+        <Recover/>
     )
 }
-
-export default recover;

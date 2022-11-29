@@ -1,9 +1,9 @@
 // BACKEND
-import { useState } from "react";
-import { useSession } from "next-auth/react";
+import {useState} from "react";
+import {useSession} from "next-auth/react";
 import connectDB from "../../backend/lib/connectDB";
 import importRawData from "../../backend/helper/data/data";
-import { deleteItems, updateItems } from "../../backend/helper/items/items";
+import {deleteItems, updateItems} from "../../backend/helper/items/items";
 
 // model
 import Course from "../../backend/models/course";
@@ -19,13 +19,13 @@ import Button from "../../components/button/Button";
 import CreateList from "../../components/workspace/CreateList"
 import DisplayList from "../../components/workspace/DisplayList"
 
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps({params}) {
     await connectDB()
 
     const courseData = await Course.find({}, "name")
     const teamData = await Teams.findById(params.id)
     const teamCourse = await Course.findById(teamData.courseID.toString(), "name")
-    const listData = await List.find({ team_id: params.id }, '_id title task_id').populate('task_id', '_id description username createdDate deadline', Task)
+    const listData = await List.find({team_id: params.id}, '_id title task_id').populate('task_id', '_id description username createdDate deadline', Task)
     const list = importRawData(listData)
 
     const lists = await Promise.all(
@@ -68,13 +68,14 @@ export async function getServerSideProps({ params }) {
     }
 }
 
-export default function TeamDetail({ listProps, TeamInfo, courseProps, userName }) {
-    const { data: session } = useSession()
+export default function TeamDetail({listProps, TeamInfo, courseProps, userName}) {
+    const {data: session} = useSession()
     const id = session.user._id
     const [message, setMessage] = useState(null)
-    if (id === TeamInfo.userId[0]) {
+    if (id === TeamInfo.userId[0]) {        //Login user
         return (
             <div>
+                {/*Display Team*/}
                 <TeamInformation
                     Description={TeamInfo.description}
                     Name={TeamInfo.name}
@@ -82,6 +83,7 @@ export default function TeamDetail({ listProps, TeamInfo, courseProps, userName 
                     CourseId={TeamInfo.courseName}
                     User={TeamInfo.user}
                 />
+
                 <EditTeam
                     courseProps={courseProps}
                     preCourse={TeamInfo.courseName}
@@ -89,7 +91,10 @@ export default function TeamDetail({ listProps, TeamInfo, courseProps, userName 
                     id={TeamInfo._id}
                     preDescription={TeamInfo.description}
                 />
-                <CreateList teamID={TeamInfo._id} />
+
+                {/*Working area*/}
+                <h2>Create list</h2>
+                <CreateList teamID={TeamInfo._id}/>
                 {listProps.map((list) => (
                     <div key={list._id}>
                         <DisplayList
@@ -112,7 +117,8 @@ export default function TeamDetail({ listProps, TeamInfo, courseProps, userName 
                     CourseId={TeamInfo.courseName}
                     User={TeamInfo.user}
                 />
-                <CreateList teamID={TeamInfo._id} />
+                <h2>------Create list--------</h2>
+                <CreateList teamID={TeamInfo._id}/>
                 {listProps.map((list) => (
                     <div key={list._id}>
                         <DisplayList
@@ -123,7 +129,7 @@ export default function TeamDetail({ listProps, TeamInfo, courseProps, userName 
                     </div>
                 ))}
                 <Button
-                    fn={(e) => deleteItems({ userId: id }, e, setMessage, `/api/team/${TeamInfo._id}`)}
+                    fn={(e) => deleteItems({userId: id}, e, setMessage, `/api/team/${TeamInfo._id}`)}
                     options={"Out Team"}
                 />
                 <div>{message}</div>
