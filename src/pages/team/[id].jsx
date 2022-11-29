@@ -1,16 +1,15 @@
 // BACKEND
-import {useState} from "react";
-import {useSession} from "next-auth/react";
+import { useState } from "react";
+import { useSession } from "next-auth/react";
 import connectDB from "../../backend/lib/connectDB";
 import importRawData from "../../backend/helper/data/data";
-import {deleteItems, updateItems} from "../../backend/helper/items/items";
+import { deleteItems, updateItems } from "../../backend/helper/items/items";
 
 // model
 import Course from "../../backend/models/course";
 import Users from "../../backend/models/user";
 import Teams from "../../backend/models/team";
 import List from "../../backend/models/list";
-import Task from "../../backend/models/task";
 
 // COMPONENT
 import TeamInformation from "../../components/team/TeamInformation";
@@ -25,29 +24,17 @@ export async function getServerSideProps({ params }) {
     const courseData = await Course.find({}, "name")
     const teamData = await Teams.findById(params.id)
     const teamCourse = await Course.findById(teamData.courseID.toString(), "name")
-    const listData = await List.find({ team_id: params.id })
-    // const taskData = await Task.find({}, "desccription user_id list_id createdDate deadline")
-    // console.log('taskData', taskData)
+    const listData = await List.find({ team_id: params.id }, '_id title task_id').populate('task_id', '_id description username createdDate deadline')
+    const list = importRawData(listData)
 
     const lists = await Promise.all(
-        listData.map(async  (doc) => {
-            const list = doc.toObject()
-
-            list._id = list._id.toString()
-            list.team_id =  list.team_id.toString()
-
-            list.task_id = await Promise.all(list.task_id.map(async (id) => {
-                id = id.toString()
-                const task = await Task.findById(id).lean()
+        list.map(async (doc) => {
+            doc.task_id.map(async (task) => {
                 task._id = task._id.toString()
-                task.list_id = task.list_id.toString()
-                return task
-            }))
-            return list
+            })
+            return doc;
         })
     )
-
-
     const courses = importRawData(courseData)
 
     const userId = teamData.userID.map((data) => {
@@ -134,10 +121,6 @@ export default function TeamDetail({ listProps, TeamInfo, courseProps, userName 
                         />
                     </div>
                 ))}
-                <Button
-                    fn={(e) => updateItems({ userId: id }, e, setMessage, `/api/team/${TeamInfo._id}`)}
-                    options={"Join Team"}
-                />
                 <Button
                     fn={(e) => deleteItems({ userId: id }, e, setMessage, `/api/team/${TeamInfo._id}`)}
                     options={"Out Team"}

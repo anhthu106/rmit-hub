@@ -7,8 +7,7 @@ import mongoose from "mongoose";
 // model 
 import Users from "../../backend/models/user";
 import Major from "../../backend/models/major";
-import Post from "../../backend/models/post";
-import Course from "../../backend/models/course"
+import Post from "../../backend/models/post"
 
 // COMPONENT
 import UserInformation from "../../components/users/UserInformation";
@@ -23,38 +22,19 @@ export async function getServerSideProps({ params }) {
     let Info = {}
     let posts = []
     if (mongoose.Types.ObjectId.isValid(params.id)) {
-        const userData = await Users.findById(params.id, "_id username email campus major_id post_id")
+        const userData = await Users.findById(params.id, "_id username email campus major_id").populate('major_id', 'name -_id')
+        const postData = await Post.find({ userID: params.id }, 'courseID content currentDate').populate('courseID', 'name -_id')
 
-        let UserInfo
+        posts = importRawData(postData)
         if (userData !== null) {
-            const userMajor = await Major.findById(userData.major_id.toString(), "name")
-            for (let i = 0; i < userData.post_id.length; i++) {
-                const postData = await Post.findById(userData.post_id[i], "courseID currentDate content")
-                const course = await Course.findById(
-                    postData.courseID.toString(),
-                    "name"
-                ).lean();
-
-                const postInfo = {
-                    _id: postData._id.toString(),
-                    userID: userData.username,
-                    currentDate: postData.currentDate,
-                    content: postData.content,
-                    courseID: course["name"]
-                }
-                posts.push(postInfo)
-            }
-
-            UserInfo = {
+            Info = {
                 _id: userData._id.toString(),
                 username: userData.username,
                 email: userData.email,
                 campus: userData.campus,
-                major: userMajor.name
+                major: userData.major_id.name
             }
-
         }
-        Info = { ...UserInfo }
     }
 
     return {
@@ -89,10 +69,10 @@ export default function Detail({ Info, majorProps, postProps }) {
                 {postProps.map((post) => (
                     <div key={post._id}>
                         <DisplayPost
-                            author={post.userID}
+                            author={Info.username}
                             date={post.currentDate}
                             content={post.content}
-                            course={post.courseID}
+                            course={post.courseID.name}
                             id={post._id}
                             sessionName={session.user._id}
                             username={Info._id}
@@ -111,6 +91,20 @@ export default function Detail({ Info, majorProps, postProps }) {
                 campus={Info.campus}
                 major={Info.major}
             />
+            <br />
+            {postProps.map((post) => (
+                <div key={post._id}>
+                    <DisplayPost
+                        author={Info.username}
+                        date={post.currentDate}
+                        content={post.content}
+                        course={post.courseID.name}
+                        id={post._id}
+                        sessionName={session.user._id}
+                        username={Info._id}
+                    />
+                </div>
+            ))}
         </div>
     )
 }

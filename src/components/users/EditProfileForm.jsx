@@ -6,7 +6,7 @@ import { updateItems } from "../../backend/helper/items/items";
 
 export default function EditProfileForm({ PreUsername, PreCampus, PreMajor, id, majorProps }) {
     const animated = makeAnimated();
-    const majorOptions = util.major(majorProps)
+    const majorOptions = util.item(majorProps, "name")
     const campusOptions = util.campus()
 
     const [username, setUsername] = useState(PreUsername)
