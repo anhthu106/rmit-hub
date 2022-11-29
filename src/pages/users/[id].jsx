@@ -8,6 +8,7 @@ import mongoose from "mongoose";
 import Users from "../../backend/models/user";
 import Major from "../../backend/models/major";
 import Post from "../../backend/models/post"
+import Course from "../../backend/models/course";
 
 // COMPONENT
 import UserInformation from "../../components/users/UserInformation";
@@ -22,8 +23,8 @@ export async function getServerSideProps({ params }) {
     let Info = {}
     let posts = []
     if (mongoose.Types.ObjectId.isValid(params.id)) {
-        const userData = await Users.findById(params.id, "_id username email campus major_id").populate('major_id', 'name -_id')
-        const postData = await Post.find({ userID: params.id }, 'courseID content currentDate').populate('courseID', 'name -_id')
+        const userData = await Users.findById(params.id, "_id username email campus major_id").populate('major_id', 'name -_id', Major)
+        const postData = await Post.find({ userID: params.id }, 'courseID content currentDate').populate('courseID', 'name -_id', Course)
 
         posts = importRawData(postData)
         if (userData !== null) {

@@ -10,6 +10,7 @@ import Course from "../../backend/models/course";
 import Users from "../../backend/models/user";
 import Teams from "../../backend/models/team";
 import List from "../../backend/models/list";
+import Task from "../../backend/models/task";
 
 // COMPONENT
 import TeamInformation from "../../components/team/TeamInformation";
@@ -24,7 +25,7 @@ export async function getServerSideProps({ params }) {
     const courseData = await Course.find({}, "name")
     const teamData = await Teams.findById(params.id)
     const teamCourse = await Course.findById(teamData.courseID.toString(), "name")
-    const listData = await List.find({ team_id: params.id }, '_id title task_id').populate('task_id', '_id description username createdDate deadline')
+    const listData = await List.find({ team_id: params.id }, '_id title task_id').populate('task_id', '_id description username createdDate deadline', Task)
     const list = importRawData(listData)
 
     const lists = await Promise.all(

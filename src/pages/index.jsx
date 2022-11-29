@@ -8,6 +8,7 @@ import { searchItem } from "../backend/helper/items/items";
 // model
 import Course from "../backend/models/course";
 import Post from "../backend/models/post";
+import Users from "../backend/models/user";
 
 // COMPONENT
 import CreatePost from "../components/posts/CreatePost";
@@ -15,15 +16,15 @@ import DisplayPost from "../components/posts/DisplayPost";
 import Header from "../components/header/Header";
 import Search from "../components/search/Search";
 
+
 export async function getServerSideProps() {
     await connectMongo();
     const data = await Course.find({}, "name");
     const courses = importRawData(data)
 
-    const postData = await Post.find({}, 'courseID content currentDate userID').populate('courseID', 'name -_id').populate('userID', 'username -_id')
+    const postData = await Post.find({}, 'courseID content currentDate userID').populate('courseID', 'name -_id', Course).populate('userID', 'username -_id', Users)
     const posts = importRawData(postData)
 
-    console.log(posts)
     return {
         props: {
             courseProps: courses,
