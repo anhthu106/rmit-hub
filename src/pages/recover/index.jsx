@@ -5,3 +5,5 @@ export default function recover() {
         <Recover/>
     )
 }
+
+recover.authed = true;

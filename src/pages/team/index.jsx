@@ -80,3 +80,5 @@ export default function Team({courseProps, teamProps}) {
         )
     }
 }
+
+Team.authed = true;

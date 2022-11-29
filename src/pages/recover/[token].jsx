@@ -15,3 +15,5 @@ export default function ResetPassword({Payload}) {
         <Repass email={Payload}/>
     );
 }
+
+ResetPassword.authed = true;
