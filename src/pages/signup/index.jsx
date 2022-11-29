@@ -24,3 +24,5 @@ export default function signup({majorProps}) {
         </div>
     )
 }
+
+signup.authed = true
