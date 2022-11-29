@@ -42,7 +42,7 @@ export async function getServerSideProps() {
         return team
     }))
 
-    const courses = importRawData(courseData)
+    const courses = importRawData(courseData, ['_id'])
 
     return {
         props: {

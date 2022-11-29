@@ -1,7 +1,9 @@
-export default function importRawData(data) {
+export default function importRawData(data, ids) {
     return data.map((doc) => {
         const result = doc.toObject()
-        result._id = result._id.toString()
+        for (let i of ids) {
+            result[i] = result[i].toString()
+        }
         return result
     })
 }

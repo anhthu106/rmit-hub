@@ -12,7 +12,7 @@ export async function getServerSideProps() {
     await connectDB()
     /* find all the data in our database */
     const majorData = await Major.find({}, "name")
-    const majors = importRawData(majorData)
+    const majors = importRawData(majorData, ['_id'])
 
     return { props: { majorProps: majors } }
 }

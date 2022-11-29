@@ -20,10 +20,10 @@ import Search from "../components/search/Search";
 export async function getServerSideProps() {
     await connectMongo();
     const data = await Course.find({}, "name");
-    const courses = importRawData(data)
+    const courses = importRawData(data, ['_id'])
 
     const postData = await Post.find({}, 'courseID content currentDate userID').populate('courseID', 'name -_id', Course).populate('userID', 'username -_id', Users)
-    const posts = importRawData(postData)
+    const posts = importRawData(postData, ['_id'])
 
     return {
         props: {

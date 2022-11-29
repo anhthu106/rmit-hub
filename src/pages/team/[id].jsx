@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useSession } from "next-auth/react";
 import connectDB from "../../backend/lib/connectDB";
 import importRawData from "../../backend/helper/data/data";
-import { deleteItems, updateItems } from "../../backend/helper/items/items";
+import { deleteItems } from "../../backend/helper/items/items";
 
 // model
 import Course from "../../backend/models/course";
@@ -25,8 +25,8 @@ export async function getServerSideProps({ params }) {
     const courseData = await Course.find({}, "name")
     const teamData = await Teams.findById(params.id)
     const teamCourse = await Course.findById(teamData.courseID.toString(), "name")
-    const listData = await List.find({ team_id: params.id }, '_id title task_id').populate('task_id', '_id description username createdDate deadline', Task)
-    const list = importRawData(listData)
+    const listData = await List.find({ team_id: params.id }, '_id title task_id team_id').populate('task_id', '_id description username createdDate deadline', Task)
+    const list = importRawData(listData, ['_id', 'team_id'])
 
     const lists = await Promise.all(
         list.map(async (doc) => {
@@ -36,7 +36,9 @@ export async function getServerSideProps({ params }) {
             return doc;
         })
     )
-    const courses = importRawData(courseData)
+
+    console.log(lists)
+    const courses = importRawData(courseData, ['_id'])
 
     const userId = teamData.userID.map((data) => {
         return data.toString()
