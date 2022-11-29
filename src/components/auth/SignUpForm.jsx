@@ -1,7 +1,7 @@
 import makeAnimated from "react-select/animated";
 import {util} from "../../utils/utils";
 import {useEffect, useState} from "react";
-import {validPassword} from "../regularexpression/Regex";
+import {validPassword, validEmailEnding} from "../regularexpression/Regex";
 import Select from "react-select";
 import Button from "../button/Button";
 import {addItems} from "../../backend/helper/items/items";
@@ -71,7 +71,7 @@ const SignUpForm = ({majorProps}) => {
     function checkEmail() {
         if (
             email.length === 20 &&
-            email.endsWith("@rmit.edu.vn") &&
+            email.endsWith(validEmailEnding) &&
             email.startsWith("s", 0)
         ) {
             setEmailError(false);
