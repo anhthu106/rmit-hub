@@ -13,11 +13,11 @@ export default async function handler(req, res) {
                 const data = await Course.findOne({ name: req.body.course }, "_id").lean()
                 const courseId = data._id.toString()
 
+                console.log(req.body)
                 const postValue = {
                     userID: req.body.id,
                     courseID: courseId,
                     content: req.body.content,
-                    currentDate: req.body.currentDate
                 }
 
                 const post = await Posts.create(postValue)
@@ -33,6 +33,7 @@ export default async function handler(req, res) {
         }
     } catch
     (error) {
+        console.log(error)
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: error })
     }
 

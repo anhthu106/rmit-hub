@@ -1,6 +1,6 @@
 // BACKEND
 import connectMongo from "../../backend/lib/connectDB";
-import {useSession} from "next-auth/react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import importRawData from "../../backend/helper/data/data";
 
@@ -40,7 +40,7 @@ export async function getServerSideProps() {
         return team
     }))
 
-    const courses = importRawData(courseData, ['_id'])
+    const courses = importRawData(courseData, ['_id'], null)
 
     return {
         props: {
@@ -50,8 +50,8 @@ export async function getServerSideProps() {
     }
 }
 
-export default function Team({courseProps, teamProps}) {
-    const {data: session, status} = useSession()
+export default function Team({ courseProps, teamProps }) {
+    const { data: session, status } = useSession()
     if (status === "Loading") {
         return (
             <div>Loading</div>

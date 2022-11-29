@@ -18,7 +18,7 @@ import DisplayPost from "../../components/posts/DisplayPost";
 export async function getServerSideProps({ params }) {
     await connectDB()
     const majorData = await Major.find({}, "name")
-    const majors = importRawData(majorData)
+    const majors = importRawData(majorData, ['_id'], null)
 
     let Info = {}
     let posts = []
@@ -26,7 +26,7 @@ export async function getServerSideProps({ params }) {
         const userData = await Users.findById(params.id, "_id username email campus major_id").populate('major_id', 'name -_id', Major)
         const postData = await Post.find({ userID: params.id }, 'courseID content currentDate').populate('courseID', 'name -_id', Course)
 
-        posts = importRawData(postData)
+        posts = importRawData(postData, ['name'], null)
         if (userData !== null) {
             Info = {
                 _id: userData._id.toString(),

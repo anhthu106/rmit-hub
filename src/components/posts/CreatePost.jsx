@@ -1,10 +1,10 @@
 import makeAnimated from "react-select/animated";
-import {useState} from "react";
+import { useState } from "react";
 import Select from "react-select";
-import {util} from "../../utils/utils";
-import {addItems} from "../../backend/helper/items/items";
+import { util } from "../../utils/utils";
+import { addItems } from "../../backend/helper/items/items";
 
-export default function CreatePost({courseProps, id}) {
+export default function CreatePost({ courseProps, id }) {
     const animated = makeAnimated();
     const courseOptions = util.item(courseProps, "name");
 
@@ -12,9 +12,6 @@ export default function CreatePost({courseProps, id}) {
     const [course, setCourse] = useState();
     const [message, setMessage] = useState(null);
 
-    const d = new Date();
-    const currentDate =
-        d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate();
 
     const [showModal, setShowModal] = useState(false);
     return (
@@ -110,25 +107,6 @@ export default function CreatePost({courseProps, id}) {
                                                         .
                                                     </p>
                                                 </div>
-                                                {/* <div className="flex items-center justify-between px-3 py-2 border-t ">
-                          <span></span>
-                          <button
-                            type="submit"
-                            className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 hover:bg-blue-800"
-                            onClick={(e) => {
-                              addItems(
-                                { currentDate, content, course, id },
-                                e,
-                                setMessage,
-                                "/api/posts"
-                              );
-                              setShowModal(false);
-                            }}
-                          >
-                            Create Post
-                          </button>
-                          <div className="flex pl-0 space-x-1 sm:pl-2"></div>
-                        </div> */}
                                                 <p className="py-4 text-lg text-green-600 text-center">
                                                     {message}
                                                 </p>
@@ -140,7 +118,7 @@ export default function CreatePost({courseProps, id}) {
                                                 className="w-full mt-2 p-2.5 flex-1 text-white bg-blue-700 rounded-md outline-none ring-offset-2 ring-blue-700 focus:ring-2"
                                                 onClick={(e) => {
                                                     addItems(
-                                                        {currentDate, content, course, id},
+                                                        { content, course, id },
                                                         e,
                                                         setMessage,
                                                         "/api/posts"

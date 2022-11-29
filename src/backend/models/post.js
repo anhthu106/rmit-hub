@@ -14,11 +14,9 @@ const postSchema = new Schema({
     content: {
         type: String,
         required: true,
-    },
-    currentDate: {
-        type: String,
-        required: true,
     }
+}, {
+    timestamps: true,
 });
 
 const Post = models.Post || model('Post', postSchema);

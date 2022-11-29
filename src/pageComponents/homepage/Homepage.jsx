@@ -1,11 +1,11 @@
-import {useState} from "react";
-import {searchItem} from "../../backend/helper/items/items";
+import { useState } from "react";
+import { searchItem } from "../../backend/helper/items/items";
 import Header from "../../components/header/Header";
 import CreatePost from "../../components/posts/CreatePost";
 import DisplayPost from "../../components/posts/DisplayPost";
 import Search from "../../components/Search/search";
 
-const Homepage = ({courseProps, postProps, session}) => {
+const Homepage = ({ courseProps, postProps, session }) => {
     //UseState
     const [query, setQuery] = useState('');
 
@@ -20,7 +20,7 @@ const Homepage = ({courseProps, postProps, session}) => {
         <div
             className="bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500">
 
-            <Header/>
+            <Header />
 
             <div className="bg-white">
                 <div className="flex justify-center w-screen h-screen px-4 text-gray-700">
@@ -40,7 +40,7 @@ const Homepage = ({courseProps, postProps, session}) => {
                                         <div key={post._id}>
                                             <DisplayPost
                                                 author={post.userID.username}
-                                                date={post.currentDate}
+                                                date={post.createdAt}
                                                 content={post.content}
                                                 course={post.courseID.name}
                                                 id={post._id}
@@ -54,7 +54,7 @@ const Homepage = ({courseProps, postProps, session}) => {
                         </div>
                         <div className="flex flex-col flex-shrink-0 w-1/4 py-4 pl-4">
                             <div className="pt-2 relative mx-auto text-gray-600">
-                                <Search onchange={handleChange}/>
+                                <Search onchange={handleChange} />
                             </div>
                             <div className="flex-grow h-0 overflow-autos">
                                 <h3 className="mt-6 font-semibold">Your Post</h3>
