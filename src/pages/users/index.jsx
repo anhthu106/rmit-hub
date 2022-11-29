@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import connectDB from "../../backend/lib/connectDB";
-import { searchUsername } from "../../backend/helper/items/items";
+import { searchItem } from "../../backend/helper/items/items";
 
 // model
 import Users from "../../backend/models/user";
@@ -40,8 +40,7 @@ export default function Profile({ Info }) {
      * Display all User
      */
     const [query, setQuery] = useState('');
-
-    const filtered = searchUsername(query, Info)
+    const filtered = searchItem(query, Info, 'username', null)
     //Handling the input on our search bar
     const handleChange = (e) => {
         setQuery(e.target.value)
