@@ -14,8 +14,6 @@ export default function CreateTask({ listID, usernameProps }) {
     const [assignedPerson, setAssignedPerson] = useState()
     const [message, setMessage] = useState(null)
 
-    const d = new Date()
-    const createdDate = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate()
     return (
         <div>
             <form>
@@ -52,7 +50,7 @@ export default function CreateTask({ listID, usernameProps }) {
                         placeholder={assignedPerson}
                     />
                 </div>
-                <button onClick={(e) => addItems({ createdDate, description, listID, deadline, assignedPerson }, e, setMessage, "/api/workspace/task")}>
+                <button onClick={(e) => addItems({ description, listID, deadline, assignedPerson }, e, setMessage, "/api/workspace/task")}>
                     Add Task
                 </button>
                 <div>-----------------------</div>

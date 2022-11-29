@@ -14,14 +14,12 @@ const taskSchema = new Schema({
         type: Types.ObjectId,
         ref: "List",
     },
-    createdDate: {
-        type: String,
-        required: true,
-    },
     deadline: {
         type: String,
         required: true,
     }
+}, {
+    timestamps: true,
 });
 
 const Task = models.Task || model('Task', taskSchema);
