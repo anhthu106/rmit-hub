@@ -16,4 +16,4 @@ export default function ResetPassword({Payload}) {
     );
 }
 
-ResetPassword.authed = true;
+ResetPassword.auth = true;

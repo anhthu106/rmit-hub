@@ -66,4 +66,4 @@ export default function Profile({ Info }) {
     )
 }
 
-Profile.authed = true;
+Profile.auth = true;
