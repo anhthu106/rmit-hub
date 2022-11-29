@@ -1,10 +1,11 @@
-import Login from "../../components/auth/Login"
+import Login from "../../pageComponents/auth/Login"
+import {useSession} from "next-auth/react";
+import {redirect} from "next/dist/server/api-utils";
 
-const SignIn = () => {
+export default function SignIn() {
     return (
-        <Login />
+        <Login/>
     )
 }
 
-
-export default SignIn
+SignIn.authed = true;

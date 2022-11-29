@@ -1,10 +1,7 @@
 import {SessionProvider, useSession} from "next-auth/react";
 import "../../styles/globals.css";
-import Header from "../components/header/Header";
-import HeroSection from "../components/landing/HeroSection";
-import FeatureSections from "../components/landing/FeatureSections";
-import TeamSection from "../components/landing/TeamSection";
-import Footer from "../components/footer/Footer";
+import LandingPage from "../pageComponents/landingPage/LandingPage";
+import {useRouter} from "next/router";
 
 function MyApp({Component, pageProps: {session, ...pageProps}}) {
     return (
@@ -13,6 +10,10 @@ function MyApp({Component, pageProps: {session, ...pageProps}}) {
                 <Auth>
                     <Component {...pageProps} />
                 </Auth>
+            ) : Component.authed ? (
+                <Authed>
+                    <Component {...pageProps} />
+                </Authed>
             ) : (
                 <Component {...pageProps} />
             )}
@@ -33,22 +34,25 @@ function Auth({children}) {
 
     if (status === "unauthenticated") {
         return (
-            <>
-                {/* Header */}
-                <Header></Header>
-
-                <HeroSection></HeroSection>
-
-                {/* Feature Sections */}
-                <FeatureSections></FeatureSections>
-
-                {/* Team Section */}
-                <TeamSection></TeamSection>
-
-                {/* Footer */}
-                <Footer></Footer>
-            </>
+            <LandingPage/>
         )
+    }
+    return children
+}
+
+function Authed({children}) {
+    // if `{ required: true }` is supplied, `status` can only be "loading" or "authenticated"
+    const {status} = useSession();
+    const router = useRouter();
+
+    if (status === "loading") {
+        return <div>Loading...</div>
+    }
+
+    if(status === "authenticated"){
+        // Return homepage
+        router.push("/")
+        return ;
     }
 
     return children

@@ -1,6 +1,6 @@
 // BACKEND
 import connectMongo from "../../backend/lib/connectDB";
-import { useSession } from "next-auth/react";
+import {useSession} from "next-auth/react";
 import Link from "next/link";
 import importRawData from "../../backend/helper/data/data";
 
@@ -14,13 +14,11 @@ import CreateTeam from "../../components/team/CreateTeam";
 import TeamInformation from "../../components/team/TeamInformation";
 
 
-
 export async function getServerSideProps() {
     await connectMongo()
 
     const courseData = await Course.find({}, "name")
     const teamData = await Teams.find({})
-
     const teams = await Promise.all(teamData.map(async (doc) => {
         const team = doc.toObject()
         team._id = team._id.toString()
@@ -52,8 +50,8 @@ export async function getServerSideProps() {
     }
 }
 
-const Team = ({ courseProps, teamProps }) => {
-    const { data: session, status } = useSession()
+export default function Team({courseProps, teamProps}) {
+    const {data: session, status} = useSession()
     if (status === "Loading") {
         return (
             <div>Loading</div>
@@ -83,4 +81,4 @@ const Team = ({ courseProps, teamProps }) => {
     }
 }
 
-export default Team
+Team.auth = true;

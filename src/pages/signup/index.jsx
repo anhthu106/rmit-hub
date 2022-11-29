@@ -6,7 +6,7 @@ import importRawData from "../../backend/helper/data/data";
 import Major from "../../backend/models/major";
 
 // COMPONENT
-import SignUp from "../../components/auth/SignUp"
+import SignUp from "../../pageComponents/auth/SignUp"
 
 export async function getServerSideProps() {
     await connectDB()
@@ -14,14 +14,15 @@ export async function getServerSideProps() {
     const majorData = await Major.find({}, "name")
     const majors = importRawData(majorData, ['_id'])
 
-    return { props: { majorProps: majors } }
+    return {props: {majorProps: majors}}
 }
-const signup = ({ majorProps }) => {
+
+export default function signup({majorProps}) {
     return (
         <div>
-            <SignUp majorProps={majorProps} />
+            <SignUp majorProps={majorProps}/>
         </div>
     )
 }
 
-export default signup
+signup.authed = true
