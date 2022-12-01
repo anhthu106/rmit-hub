@@ -1,6 +1,6 @@
 import UserInformation from "../../components/users/UserInformation";
 import EditProfileForm from "../../components/users/EditProfileForm";
-import DisplayPost from "../../components/posts/DisplayPost";
+import DisplayPost from "../post/DisplayPost";
 
 export function Account({ Info, majorProps, postProps, tag, session }) {
   return (

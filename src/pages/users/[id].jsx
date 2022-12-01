@@ -13,9 +13,8 @@ import Course from "../../backend/models/course";
 // COMPONENT
 import UserInformation from "../../components/users/UserInformation";
 import EditProfileForm from "../../components/users/EditProfileForm";
-import DisplayPost from "../../components/posts/DisplayPost";
-import { Account } from "../../pageComponents/user/Account";
-import Header from "../../components/header/Header";
+import DisplayPost from "../../pageComponents/post/DisplayPost";
+import {Account} from "../../pageComponents/user/Account";
 
 export async function getServerSideProps({ params }) {
   await connectDB();
