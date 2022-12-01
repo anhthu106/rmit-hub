@@ -1,19 +1,24 @@
-import CreateTeam from "../../components/team/CreateTeam";
+// BACKEND
 import connectMongo from "../../backend/lib/connectDB";
-import Course from "../../backend/models/course";
 import { useSession } from "next-auth/react";
-import TeamInformation from "../../components/team/TeamInformation";
-import Teams from "../../backend/models/team";
-import Users from "../../backend/models/user";
 import Link from "next/link";
 import importRawData from "../../backend/helper/data/data";
+
+// model
+import Teams from "../../backend/models/team";
+import Users from "../../backend/models/user";
+import Course from "../../backend/models/course";
+
+// COMPONENT
+import CreateTeam from "../../components/team/CreateTeam";
+import TeamInformation from "../../components/team/TeamInformation";
+
 
 export async function getServerSideProps() {
     await connectMongo()
 
     const courseData = await Course.find({}, "name")
     const teamData = await Teams.find({})
-
     const teams = await Promise.all(teamData.map(async (doc) => {
         const team = doc.toObject()
         team._id = team._id.toString()
@@ -35,7 +40,7 @@ export async function getServerSideProps() {
         return team
     }))
 
-    const courses = importRawData(courseData)
+    const courses = importRawData(courseData, ['_id'], null)
 
     return {
         props: {
@@ -45,7 +50,7 @@ export async function getServerSideProps() {
     }
 }
 
-const Team = ({ courseProps, teamProps }) => {
+export default function Team({ courseProps, teamProps }) {
     const { data: session, status } = useSession()
     if (status === "Loading") {
         return (
@@ -76,4 +81,4 @@ const Team = ({ courseProps, teamProps }) => {
     }
 }
 
-export default Team
+Team.auth = true;

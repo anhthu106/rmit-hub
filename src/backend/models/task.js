@@ -5,24 +5,21 @@ const taskSchema = new Schema({
         type: String,
         required: true
     },
-    user_id: [
+    username: [
         {
-            type: Types.ObjectId,
-            ref: "User",
+            type: String,
         }
     ],
-    team_id: {
+    list_id: {
         type: Types.ObjectId,
-        ref: "Team",
-    },
-    createdDate: {
-        type: String,
-        required: true,
+        ref: "List",
     },
     deadline: {
         type: String,
         required: true,
     }
+}, {
+    timestamps: true,
 });
 
 const Task = models.Task || model('Task', taskSchema);

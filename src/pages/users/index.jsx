@@ -1,12 +1,16 @@
+// BACKEND
+import { useState } from "react";
 import Link from "next/link";
 import connectDB from "../../backend/lib/connectDB";
+import { searchItem } from "../../backend/helper/items/items";
+
+// model
 import Users from "../../backend/models/user";
 import Major from "../../backend/models/major";
-import UserInformation from "../../components/users/UserInformation";
-import { useState } from "react";
-import Search from "../../components/Search/search";
-import { searchUsername } from "../../backend/helper/items/items";
 
+// COMPONENT
+import UserInformation from "../../components/users/UserInformation";
+import Search from "../../components/Search/search";
 
 // Fetch data form server
 export async function getServerSideProps() {
@@ -14,7 +18,7 @@ export async function getServerSideProps() {
     /* find all the data in our database */
     const data = await Users.find({}, "_id username email campus major_id")
 
-    const users = await Promise.all(data.map(async (doc) => {// Promise all use for take an iterable of promises
+    const users = await Promise.all(data.map(async (doc) => {
         // Take the name of major base in ID
         const majorData = await Major.findById(doc.major_id.toString(), "name")
 
@@ -36,8 +40,7 @@ export default function Profile({ Info }) {
      * Display all User
      */
     const [query, setQuery] = useState('');
-
-    const filtered = searchUsername(query, Info)
+    const filtered = searchItem(query, Info, 'username', null)
     //Handling the input on our search bar
     const handleChange = (e) => {
         setQuery(e.target.value)
@@ -62,3 +65,5 @@ export default function Profile({ Info }) {
 
     )
 }
+
+Profile.auth = true;

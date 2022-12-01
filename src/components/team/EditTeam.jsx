@@ -7,7 +7,7 @@ import { updateItems } from "../../backend/helper/items/items";
 export default function EditTeam({ preName, preCourse, preDescription, courseProps, id }) {
 
     const animated = makeAnimated();
-    const courseOptions = util.course(courseProps)
+    const courseOptions = util.item(courseProps, "name")
 
 
     const [newName, setName] = useState(preName)

@@ -23,8 +23,9 @@ export default async function handler(req, res) {
 
                     await User.findOneAndUpdate({ username: userName }, { post_id: postArr });
                     res.status(StatusCodes.OK).json({ message: "Deleted" });
-                } catch (e) {
-                    console.log(e);
+                } catch (erorr) {
+                    console.log(error);
+                    return error
                 }
             }
 
@@ -46,8 +47,7 @@ export default async function handler(req, res) {
                 return res.status(StatusCodes.OK).json({ message: "Your post updated" })
             }
         }
-    } catch
-    (error) {
+    } catch (error) {
         return error
     }
 
