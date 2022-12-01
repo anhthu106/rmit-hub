@@ -13,7 +13,7 @@ import Course from "../../backend/models/course";
 // COMPONENT
 import UserInformation from "../../components/users/UserInformation";
 import EditProfileForm from "../../components/users/EditProfileForm";
-import DisplayPost from "../../components/posts/DisplayPost";
+import DisplayPost from "../../pageComponents/post/DisplayPost";
 import {Account} from "../../pageComponents/user/Account";
 
 export async function getServerSideProps({params}) {
