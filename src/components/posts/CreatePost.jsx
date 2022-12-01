@@ -124,6 +124,7 @@ export default function CreatePost({courseProps, id}) {
                                                         "/api/posts"
                                                     );
                                                     setShowModal(false);
+                                                    window.location.reload(false);
                                                 }}
                                             >
                                                 Create Post

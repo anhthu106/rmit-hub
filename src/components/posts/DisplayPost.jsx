@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { deleteItems } from "../../backend/helper/items/items";
-import { Dropdown } from "flowbite-react";
+import { Dropdown, Tooltip } from "flowbite-react";
 console.log();
 export default function DisplayPost({
   author,
@@ -28,22 +28,27 @@ export default function DisplayPost({
               </button> */}
                 <div className="text-xs text-neutral-500">{date}</div>
                 <div>
-                  <Dropdown caret color="secondary" className=""placement="left-start">
-                  <Dropdown.Item className="hover:bg-white" >
-                    <DeleteButton
-                      author={author}
-                      course={course}
-                      content={content}
-                      date={date}
-                      setMessage={setMessage}
-                      id={id}
-                    />
-                  </Dropdown.Item>
-                  {/* <Dropdown.Item>Settings</Dropdown.Item>
+                  <Dropdown
+                    caret
+                    color="secondary"
+                    className=""
+                    placement="left-start"
+                  >
+                    <Dropdown.Item className="hover:bg-white">
+                      <DeleteButton
+                        author={author}
+                        course={course}
+                        content={content}
+                        date={date}
+                        setMessage={setMessage}
+                        id={id}
+                      />
+                    </Dropdown.Item>
+                    {/* <Dropdown.Item>Settings</Dropdown.Item>
                   <Dropdown.Item>Earnings</Dropdown.Item>
                   <Dropdown.Divider />
                   <Dropdown.Item>Separated link</Dropdown.Item> */}
-                </Dropdown>
+                  </Dropdown>
                 </div>
 
                 {/* <div className="p-5">
@@ -87,7 +92,6 @@ export default function DisplayPost({
             <div className="flex items-center space-x-3">
               <div className="h-8 w-8 rounded-full bg-slate-400 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500"></div>
               <div className="text-lg font-bold text-slate-700">{author}</div>
-              
             </div>
             <div className="flex items-center">
               {/* <button className="rounded-2xl border bg-neutral-100 px-3 py-1 text-xs font-semibold">
@@ -95,8 +99,13 @@ export default function DisplayPost({
               </button> */}
               <div className="text-xs text-neutral-500">{date}</div>
               <div>
-                  <Dropdown caret color="secondary" className=""placement="left-start">
-                  <Dropdown.Item className="hover:bg-white" >
+                <Dropdown
+                  caret
+                  color="secondary"
+                  className=""
+                  placement="left-start"
+                >
+                  <Dropdown.Item className="hover:bg-white">
                     Somethingelse
                   </Dropdown.Item>
                   {/* <Dropdown.Item>Settings</Dropdown.Item>
@@ -104,7 +113,7 @@ export default function DisplayPost({
                   <Dropdown.Divider />
                   <Dropdown.Item>Separated link</Dropdown.Item> */}
                 </Dropdown>
-                </div>
+              </div>
             </div>
           </div>
           <ReturnPost course={course} content={content} />
