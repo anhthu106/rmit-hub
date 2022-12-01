@@ -11,8 +11,8 @@ export default function Header() {
           <div className="relative bg-white">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 md:justify-start md:space-x-10">
               <Navbar fluid={true}>
-                <Navbar.Brand href="https://flowbite.com/">
-                  <a href="#">
+                <Navbar.Brand href="../">
+                  <a href="../">
                     <span className="sr-only">Your Company</span>
                     Logo?
                   </a>
@@ -26,6 +26,9 @@ export default function Header() {
                       </div>
                     </div>
                     <Dropdown.Item>
+                    <Link href={`/users/${session.user._id}`}>My account</Link>
+                    </Dropdown.Item>
+                    <Dropdown.Item>
                       <button
                         className="w-full h-full text-left"
                         onClick={() => signOut()}
@@ -38,13 +41,13 @@ export default function Header() {
                 </div>
                 <Navbar.Collapse>
                   <Navbar.Link
-                    href="/navbars"
+                    href="../"
                     // active={true}
                   >
                     Feed
                   </Navbar.Link>
-                  <Navbar.Link href="/navbars">page2</Navbar.Link>
-                  <Navbar.Link href="/navbars">page3</Navbar.Link>
+                  <Navbar.Link href="#">page2</Navbar.Link>
+                  <Navbar.Link href="#">page3</Navbar.Link>
                 </Navbar.Collapse>
               </Navbar>
             </div>
