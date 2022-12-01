@@ -52,6 +52,7 @@ export default function Profile({ Info }) {
             <h1>All User</h1>
             {filtered.map(info => (
                 <div key={info._id}>
+                    <hr />
                     <Link href={`/users/${info._id}`}>{info._id}</Link>
                     <UserInformation
                         username={info.username}

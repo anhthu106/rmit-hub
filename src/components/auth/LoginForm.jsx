@@ -4,7 +4,7 @@ import submitHandler from "../../backend/helper/auth/login";
 import Link from "next/link";
 
 const LoginForm = () => {
-    const [userInfo, setUserInfo] = useState({email: "", password: ""});
+    const [userInfo, setUserInfo] = useState({email: "@rmit.edu.vn", password: ""});
     const {error} = useRouter().query;
 
     return (
