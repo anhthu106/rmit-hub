@@ -48,6 +48,7 @@ export default function Profile({ Info }) {
 
     return (
         <div>
+            
             <Search onchange={handleChange} />
             <h1>All User</h1>
             {filtered.map(info => (

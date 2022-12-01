@@ -26,6 +26,9 @@ export default function Header() {
                       </div>
                     </div>
                     <Dropdown.Item>
+                    <Link href={`/users/${session.user._id}`}>My account</Link>
+                    </Dropdown.Item>
+                    <Dropdown.Item>
                       <button
                         className="w-full h-full text-left"
                         onClick={() => signOut()}
