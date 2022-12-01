@@ -2,9 +2,10 @@ import UserInformation from "../../components/users/UserInformation";
 import EditProfileForm from "../../components/users/EditProfileForm";
 import DisplayPost from "../post/DisplayPost";
 import Header from "../../components/header/Header";
+import Footer from "../../components/footer/Footer"
 export function Account({ Info, majorProps, postProps, tag, session }) {
   return (
-    <div className="h-full bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500">
+    <div className="bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500">
       <Header />
       <div>
         <div className="container mx-auto px-4">
@@ -50,6 +51,8 @@ export function Account({ Info, majorProps, postProps, tag, session }) {
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }
