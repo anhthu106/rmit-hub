@@ -26,7 +26,9 @@ export default function Header() {
                       </div>
                     </div>
                     <Dropdown.Item>
-                    <Link href={`/users/${session.user._id}`}>My account</Link>
+                        <Link href={`/users/${session.user._id}`}>
+                          <a className="w-full">My Account</a>
+                        </Link>
                     </Dropdown.Item>
                     <Dropdown.Item>
                       <button
