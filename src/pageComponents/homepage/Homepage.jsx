@@ -52,7 +52,7 @@ const Homepage = ({ courseProps, postProps, session }) => {
                 <Search onchange={handleChange} />
               </div>
               <div className="flex-grow h-0 overflow-autos">
-                <h3 className="mt-6 font-semibold">Your Post</h3>
+                {/* <h3 className="mt-6 font-semibold">Your Post</h3>
                 <div className="w-full">
                   <div className="flex w-full py-4 border-b border-gray-300">
                     <span className="flex-shrink-0 w-10 h-10 bg-gray-400 rounded-full"></span>
@@ -102,7 +102,7 @@ const Homepage = ({ courseProps, postProps, session }) => {
                       </p>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

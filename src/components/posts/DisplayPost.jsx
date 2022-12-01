@@ -46,9 +46,9 @@ export default function DisplayPost({
                 </Dropdown>
                 </div>
 
-                {/* <div class="p-5">
-                  <div class="justify-center">
-                    <div class="group h-0 ">
+                {/* <div className="p-5">
+                  <div className="justify-center">
+                    <div className="group h-0 ">
                       <div>
                         <div>
                           <div slot="icon">
@@ -56,7 +56,7 @@ export default function DisplayPost({
                           </div>
                         </div>
                       </div>
-                      <div class="w-full hidden group-hover:block border-t-0 z-10">
+                      <div className="w-full hidden group-hover:block border-t-0 z-10">
                         
                       </div>
                     </div>
