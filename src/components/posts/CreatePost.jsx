@@ -1,10 +1,10 @@
 import makeAnimated from "react-select/animated";
-import { useState } from "react";
+import {useState} from "react";
 import Select from "react-select";
-import { util } from "../../utils/utils";
-import { addItems } from "../../backend/helper/items/items";
+import {util} from "../../utils/utils";
+import {addItems} from "../../backend/helper/items/items";
 
-export default function CreatePost({ courseProps, id }) {
+export default function CreatePost({courseProps, id}) {
     const animated = makeAnimated();
     const courseOptions = util.item(courseProps, "name");
 
@@ -118,7 +118,7 @@ export default function CreatePost({ courseProps, id }) {
                                                 className="w-full mt-2 p-2.5 flex-1 text-white bg-blue-700 rounded-md outline-none ring-offset-2 ring-blue-700 focus:ring-2"
                                                 onClick={(e) => {
                                                     addItems(
-                                                        { content, course, id },
+                                                        {content, course, id},
                                                         e,
                                                         setMessage,
                                                         "/api/posts"
