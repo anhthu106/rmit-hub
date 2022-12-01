@@ -17,7 +17,7 @@ const SignUpForm = ({majorProps}) => {
 
     //UseState
     const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
+    const [email, setEmail] = useState("@rmit.edu.vn");
     const [password, setPassword] = useState("");
     const [campus, setCampus] = useState(campusOptions[0].label);
     const [major, setMajor] = useState(majorOptions[0].label);
