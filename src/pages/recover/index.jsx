@@ -6,4 +6,4 @@ export default function recover() {
     )
 }
 
-recover.auth = true;
+recover.authed = true;
