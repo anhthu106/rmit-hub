@@ -15,7 +15,6 @@ const Homepage = ({courseProps, postProps, session}) => {
     const handleChange = (e) => {
         setQuery(e.target.value);
     };
-
     return (
         <div
             className="bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500">
@@ -42,7 +41,9 @@ const Homepage = ({courseProps, postProps, session}) => {
                                                 id={post._id}
                                                 sessionName={session.user.username}
                                                 username={post.userID.username}
+                                                uid={post.userID._id}
                                             />
+                                            
                                         </div>
                                     ))}
                                 </div>

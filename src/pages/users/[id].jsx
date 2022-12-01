@@ -14,7 +14,8 @@ import Course from "../../backend/models/course";
 import UserInformation from "../../components/users/UserInformation";
 import EditProfileForm from "../../components/users/EditProfileForm";
 import DisplayPost from "../../pageComponents/post/DisplayPost";
-import {Account} from "../../pageComponents/user/Account";
+import { Account } from "../../pageComponents/user/Account";
+
 
 export async function getServerSideProps({ params }) {
   await connectDB();
@@ -55,109 +56,39 @@ export async function getServerSideProps({ params }) {
 
 export default function Detail({ Info, majorProps, postProps }) {
   const { data: session } = useSession();
-  if (session.user._id === Info._id) {
-    return (
-      <>
-        <div className="h-full bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500">
-          <Header />
-
-          {/* <div className="bg-white">
-            <div className="flex justify-center w-screen h-screen px-4 text-gray-700">
-              <div className="flex w-4/6">
-                <div className="flex flex-col flex-grow border-l border-r border-gray-300">
-                  <div className="flex justify-between flex-shrink-0 px-8 py-4 border-b border-gray-300">
-                    <h1 className="text-xl font-semibold">Feed Title</h1>
-                  </div>
-                  <div className="flex-grow h-0 overflow-auto">
-                    <div className="w-full">
-                      <Account
-                        Info={Info}
-                        tag={
-                          <EditProfileForm
-                            id={Info._id}
-                            PreCampus={Info.campus}
-                            PreMajor={Info.major}
-                            PreUsername={Info.username}
-                            majorProps={majorProps}
-                          />
-                        }
-                        majorProps={majorProps}
-                        postProps={postProps}
-                        session={session}
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-col flex-shrink-0 w-1/4 py-4 pl-4">
-                  <div className="pt-2 relative mx-auto text-gray-600"></div>
-                  <div className="flex-grow h-0 overflow-autos"></div>
-                </div>
-              </div>
-            </div>
-          </div> */}
-
-          <div>
-            <div className="container mx-auto px-4">
-              <div className="bg-white w-full shadow-xl rounded-lg">
-                <div className="px-6">
-                  <div className="mt-10 py-10 border-t border-blueGray-200">
-                    <div className="flex flex-wrap justify-center">
-                      <div className="w-full lg:w-9/12 px-4">
-                        <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
-                          <div className="mx-auto h-[10rem] w-[10rem] rounded-full bg-slate-400 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500"></div>
-
-                          <Account
-                            Info={Info}
-                            tag={
-                              <EditProfileForm
-                                id={Info._id}
-                                PreCampus={Info.campus}
-                                PreMajor={Info.major}
-                                PreUsername={Info.username}
-                                majorProps={majorProps}
-                              />
-                            }
-                            majorProps={majorProps}
-                            postProps={postProps}
-                            session={session}
-                          />
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </>
-    );
-  }
+    if (session.user._id === Info._id) {
   return (
-    //Normal account
-    <div>
-      <UserInformation
-        username={Info.username}
-        email={Info.email}
-        campus={Info.campus}
-        major={Info.major}
-      />
-      <br />
-      {postProps.map((post) => (
-        <div key={post._id}>
-          <DisplayPost
-            author={Info.username}
-            date={post.currentDate}
-            content={post.content}
-            course={post.courseID.name}
-            id={post._id}
-            sessionName={session.user._id}
-            username={Info._id}
+    <>
+      <Account
+        Info={Info}
+        tag={
+          <EditProfileForm
+            id={Info._id}
+            PreCampus={Info.campus}
+            PreMajor={Info.major}
+            PreUsername={Info.username}
+            majorProps={majorProps}
           />
-        </div>
-      ))}
-    </div>
+        }
+        majorProps={majorProps}
+        postProps={postProps}
+        session={session}
+      />
+    </>
   );
+    }
+    return (
+      //Normal account
+      <Account
+      Info={Info}
+      tag={
+        <></>
+      }
+      majorProps={majorProps}
+      postProps={postProps}
+      session={session}
+      />
+    );
 }
 
 Detail.auth = true;

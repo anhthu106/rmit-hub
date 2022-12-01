@@ -14,8 +14,16 @@ export async function getServerSideProps() {
     const data = await Course.find({}, "name");
     const courses = importRawData(data, ['_id'], null)
 
-    const postData = await Post.find({}, 'courseID content createdAt userID').populate('courseID', 'name -_id', Course).populate('userID', 'username -_id', Users).sort({ createdAt: -1 })
-    const posts = importRawData(postData, ['_id'], 'createdAt')
+    const postData = await Post.find({}, 'courseID content createdAt userID').populate('courseID', 'name -_id', Course).populate('userID', 'username _id', Users).sort({ createdAt: -1 })
+    
+    const post = importRawData(postData, ['_id'], 'createdAt')
+
+    const posts = await Promise.all(
+        post.map(async (doc) => {
+            doc.userID._id = doc.userID._id.toString();
+            return doc;
+        })
+    )
     return {
         props: {
             courseProps: courses,
