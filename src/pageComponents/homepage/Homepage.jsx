@@ -21,7 +21,7 @@ const Homepage = ({ courseProps, postProps, session }) => {
       <Header />
 
       <div className="bg-white">
-        <div className="flex justify-center w-full h-screen px-4 text-gray-700">
+        <div className="flex justify-center w-full h-[calc(100vh-62px)] px-4 text-gray-700">
           <div className="flex w-full md:px-96">
             <div className="flex flex-col flex-grow border-l border-r border-gray-300">
               <div className="flex justify-between px-8 py-4 border-b border-gray-300">

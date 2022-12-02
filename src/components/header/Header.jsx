@@ -65,8 +65,8 @@ export default function Header() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 md:justify-start md:space-x-10">
               <Navbar fluid={true}>
-                <Navbar.Brand href="https://flowbite.com/">
-                  <a href="#">
+                <Navbar.Brand href="">
+                  <a href="../">
                     <span className="sr-only">Your Company</span>
                     Logo?
                   </a>
