@@ -20,6 +20,7 @@
     "next-auth": "^4.12.3",
     "nodemailer": "^6.8.0",
     "react": "18.2.0",
+    "react-beautiful-dnd": "^13.1.1",
     "react-dom": "18.2.0",
     "react-select": "^5.4.0"
   },
