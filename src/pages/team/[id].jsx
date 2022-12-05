@@ -7,6 +7,7 @@ import List from "../../backend/models/list";
 import Task from "../../backend/models/task";
 import importRawData from "../../backend/helper/data/data";
 import Users from "../../backend/models/user";
+import CreateList from "../../components/workspace/CreateList";
 
 
 export async function getServerSideProps({params}) {
@@ -61,16 +62,16 @@ export async function getServerSideProps({params}) {
 }
 
 export default function Test({listProps, TeamInfo, courseProps, userName}) {
-
+    const [columns, setColumns] = useState(listProps);
     const onDragEnd = (result, columns, setColumns) => {
         if (!result.destination) return;
 
-        const { source, destination } = result;
+        const {source, destination} = result;
+
 
         if (source.droppableId !== destination.droppableId) {
-
-            const sourceColumn = columns[source.index];
-            const destColumn = columns[destination.index];
+            const sourceColumn = columns.find(data => data._id === source.droppableId);
+            const destColumn = columns.find(data => data._id === destination.droppableId);
 
             const sourceItems = [...sourceColumn.task_id];
             const destItems = [...destColumn.task_id];
@@ -78,111 +79,104 @@ export default function Test({listProps, TeamInfo, courseProps, userName}) {
             const [removed] = sourceItems.splice(source.index, 1);
 
             destItems.splice(destination.index, 0, removed);
-            setColumns({
-                ...columns,
-                [source.index]: {
-                    ...sourceColumn,
-                    task_id: sourceItems
-                },
-                [destination.index]: {
-                    ...destColumn,
-                    task_id: destItems
-                }
-            });
+
+            sourceColumn.task_id = sourceItems
+            destColumn.task_id = destItems
+
+
         } else {
-            const column = columns[source.index];
+            const column = columns.find(data => data._id === source.droppableId);
             const copiedItems = [...column.task_id];
             const [removed] = copiedItems.splice(source.index, 1);
             copiedItems.splice(destination.index, 0, removed);
-            setColumns({
-                ...columns,
-                [source.index]: {
-                    ...column,
-                    task_id: copiedItems
-                }
-            });
+            columns.task_id = copiedItems
         }
     };
-    const [columns, setColumns] = useState(listProps);
-    console.log(columns)
+
     return (
-        <div style={{display: "flex", justifyContent: "center", height: "100%"}}>
-            <DragDropContext
-                onDragEnd={result => onDragEnd(result, columns, setColumns)}
-            >
-                {columns.map((column) => {
-                    return (
-                        <div
-                            style={{
-                                display: "flex",
-                                flexDirection: "column",
-                                alignItems: "center"
-                            }}
-                            key={column._id}
-                        >
-                            <h2>{column.title}</h2>
-                            <div style={{margin: 8}}>
-                                <Droppable droppableId={column._id} key={column._id}>
-                                    {(provided, snapshot) => {
-                                        return (
-                                            <div
-                                                {...provided.droppableProps}
-                                                ref={provided.innerRef}
-                                                style={{
-                                                    background: snapshot.isDraggingOver
-                                                        ? "lightblue"
-                                                        : "lightgrey",
-                                                    padding: 4,
-                                                    width: 250,
-                                                    minHeight: 500
-                                                }}
-                                            >
-                                                {column.task_id.map((task, index) => {
-                                                    return (
-                                                        <Draggable
-                                                            key={task._id}
-                                                            draggableId={task._id}
-                                                            index={index}
-                                                        >
-                                                            {(provided, snapshot) => {
-                                                                return (
-                                                                    <div
-                                                                        ref={provided.innerRef}
-                                                                        {...provided.draggableProps}
-                                                                        {...provided.dragHandleProps}
-                                                                        style={{
-                                                                            userSelect: "none",
-                                                                            padding: 16,
-                                                                            margin: "0 0 8px 0",
-                                                                            minHeight: "50px",
-                                                                            backgroundColor: snapshot.isDragging
-                                                                                ? "#263B4A"
-                                                                                : "#456C86",
-                                                                            color: "white",
-                                                                            ...provided.draggableProps.style
-                                                                        }}
-                                                                    >
-                                                                        {task.description}
-                                                                    </div>
-                                                                )
-                                                            }}
-                                                        </Draggable>
-                                                    )
-                                                })}
-                                                {provided.placeholder}
-                                            </div>
-                                        )
-                                    }
-                                    }
-                                </Droppable>
+        <div>
+            <CreateList teamID={TeamInfo._id}  />
+
+
+            <div style={{display: "flex", justifyContent: "center", height: "100%"}}>
+                <DragDropContext
+                    onDragEnd={result => onDragEnd(result, columns, setColumns)}
+                >
+                    {columns.map((column) => {
+                        return (
+                            <div
+                                style={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    alignItems: "center"
+                                }}
+                                key={column._id}
+                            >
+                                <h2>{column.title}</h2>
+                                <div style={{margin: 8}}>
+                                    <Droppable droppableId={column._id} key={column._id}>
+                                        {(provided, snapshot) => {
+                                            return (
+                                                <div
+                                                    {...provided.droppableProps}
+                                                    ref={provided.innerRef}
+                                                    style={{
+                                                        background: snapshot.isDraggingOver
+                                                            ? "lightblue"
+                                                            : "lightgrey",
+                                                        padding: 4,
+                                                        width: 250,
+                                                        minHeight: 500
+                                                    }}
+                                                >
+                                                    {column.task_id.map((task, index) => {
+                                                        return (
+                                                            <Draggable
+                                                                key={task._id}
+                                                                draggableId={task._id}
+                                                                mode={"virtual"}
+                                                                index={index}
+                                                            >
+                                                                {(provided, snapshot) => {
+                                                                    return (
+                                                                        <div
+                                                                            ref={provided.innerRef}
+                                                                            {...provided.draggableProps}
+                                                                            {...provided.dragHandleProps}
+                                                                            style={{
+                                                                                userSelect: "none",
+                                                                                padding: 16,
+                                                                                margin: "0 0 8px 0",
+                                                                                minHeight: "50px",
+                                                                                backgroundColor: snapshot.isDragging
+                                                                                    ? "#263B4A"
+                                                                                    : "#456C86",
+                                                                                color: "white",
+                                                                                ...provided.draggableProps.style
+                                                                            }}
+                                                                        >
+                                                                            {task.description}
+                                                                        </div>
+                                                                    )
+                                                                }}
+                                                            </Draggable>
+                                                        )
+                                                    })}
+                                                    {provided.placeholder}
+                                                </div>
+                                            )
+                                        }
+                                        }
+                                    </Droppable>
+                                </div>
+
+
                             </div>
+                        )
+                    })}
 
-
-                        </div>
-                    )
-                })}
-
-            </DragDropContext>
+                </DragDropContext>
+            </div>
         </div>
     )
 }
