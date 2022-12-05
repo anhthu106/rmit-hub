@@ -1,23 +1,37 @@
 import makeAnimated from "react-select/animated";
-import {useState} from "react";
+import { useState } from "react";
 import Select from "react-select";
-import {util} from "../../utils/utils";
-import {addItems} from "../../backend/helper/items/items";
+import { util } from "../../utils/utils";
+import { addItems } from "../../backend/helper/items/items";
 
-export default function CreatePost({courseProps, id}) {
+export default function CreatePost({ courseProps, id }) {
     const animated = makeAnimated();
     const courseOptions = util.item(courseProps, "name");
 
     const [content, setContent] = useState();
     const [course, setCourse] = useState();
     const [message, setMessage] = useState(null);
-
+    const [image, setImage] = useState();
 
     const [showModal, setShowModal] = useState(false);
+
+    function imageHandler(e) {
+        const file = e.target.files[0];
+        setFileToBase(file);
+        console.log(file)
+    }
+
+
+    const setFileToBase = (file) => {
+        const reader = new FileReader()
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            setImage(reader.result)
+        }
+    }
     return (
         <>
-
-        {/* TODO fix create button cuz it have bug with responsive */}
+            {/* TODO fix create button cuz it have bug with responsive */}
             <div data-dial-init className="fixed right-6 bottom-6 group">
                 <button
                     type="button"
@@ -97,6 +111,21 @@ export default function CreatePost({courseProps, id}) {
                                                             placeholder="Content..."
                                                         />
                                                     </div>
+
+                                                    <div>
+                                                        <label
+                                                            htmlFor="image"
+                                                            className="font-semibold leading-none block mb-2 text-2xl text-gray-900 ">
+                                                            Image
+                                                        </label>
+                                                        <input
+                                                            type="file"
+                                                            accept="image/*"
+                                                            name="image"
+                                                            onChange={(e) => imageHandler(e)}
+                                                        />
+                                                    </div>
+
                                                     <p className="ml-auto text-xs text-gray-500 ">
                                                         Remember, contributions to this topic should follow
                                                         our{" "}
@@ -113,31 +142,31 @@ export default function CreatePost({courseProps, id}) {
                                                     {message}
                                                 </p>
                                             </div>
+                                            <div className="items-center gap-2 mt-3 sm:flex">
+                                                <button
+                                                    type="submit"
+                                                    className="w-full mt-2 p-2.5 flex-1 text-white bg-blue-700 rounded-md outline-none ring-offset-2 ring-blue-700 focus:ring-2"
+                                                    onClick={(e) => {
+                                                        addItems(
+                                                            { content, course, message, image, id },
+                                                            e,
+                                                            setMessage,
+                                                            "/api/posts"
+                                                        );
+                                                        setShowModal(false);
+                                                        // window.location.reload(false);
+                                                    }}
+                                                >
+                                                    Create Post
+                                                </button>
+                                                <button
+                                                    className="w-full mt-2 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-indigo-600 focus:ring-2"
+                                                    onClick={() => setShowModal(false)}
+                                                >
+                                                    Cancel
+                                                </button>
+                                            </div>
                                         </form>
-                                        <div className="items-center gap-2 mt-3 sm:flex">
-                                            <button
-                                                type="submit"
-                                                className="w-full mt-2 p-2.5 flex-1 text-white bg-blue-700 rounded-md outline-none ring-offset-2 ring-blue-700 focus:ring-2"
-                                                onClick={(e) => {
-                                                    addItems(
-                                                        {content, course, id},
-                                                        e,
-                                                        setMessage,
-                                                        "/api/posts"
-                                                    );
-                                                    setShowModal(false);
-                                                    window.location.reload(false);
-                                                }}
-                                            >
-                                                Create Post
-                                            </button>
-                                            <button
-                                                className="w-full mt-2 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-indigo-600 focus:ring-2"
-                                                onClick={() => setShowModal(false)}
-                                            >
-                                                Cancel
-                                            </button>
-                                        </div>
                                         <div className="items-center gap-2 mt-3 sm:flex"></div>
                                     </div>
                                 </div>

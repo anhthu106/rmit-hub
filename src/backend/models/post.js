@@ -14,6 +14,16 @@ const postSchema = new Schema({
     content: {
         type: String,
         required: true,
+    },
+    image: {
+        imgPublicID: {
+            type: String,
+            required: true,
+        },
+        imgURL: {
+            type: String,
+            required: true,
+        }
     }
 }, {
     timestamps: true,
