@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { deleteItems } from "../../backend/helper/items/items";
-import { Dropdown } from "flowbite-react";
 import Post from "../../components/posts/Post";
 
 export default function DisplayPost({
