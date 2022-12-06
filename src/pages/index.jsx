@@ -25,8 +25,6 @@ export async function getServerSideProps() {
         })
     )
 
-    console.log(posts)
-    
     return {
         props: {
             courseProps: courses,

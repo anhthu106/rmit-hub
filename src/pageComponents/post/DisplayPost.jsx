@@ -19,16 +19,6 @@ export default function DisplayPost({
     return (
       <Post
         tag={
-          // <Dropdown.Item className="hover:bg-white">
-          //   <DeleteButton
-          //     author={author}
-          //     course={course}
-          //     content={content}
-          //     date={date}
-          //     setMessage={setMessage}
-          //     id={id}
-          //   />
-          // </Dropdown.Item>
           <DeleteButton
             author={author}
             course={course}

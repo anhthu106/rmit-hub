@@ -1,5 +1,5 @@
 // BACKEND
-import {useSession} from "next-auth/react";
+import { useSession } from "next-auth/react";
 import connectDB from "../../backend/lib/connectDB";
 import importRawData from "../../backend/helper/data/data";
 import mongoose from "mongoose";
@@ -12,10 +12,10 @@ import Course from "../../backend/models/course";
 
 // COMPONENT
 import EditProfileForm from "../../components/users/EditProfileForm";
-import {Account} from "../../pageComponents/user/Account";
+import { Account } from "../../pageComponents/user/Account";
 
 
-export async function getServerSideProps({params}) {
+export async function getServerSideProps({ params }) {
     await connectDB();
     const majorData = await Major.find({}, "name");
     const majors = importRawData(majorData, ["_id"], null);
@@ -27,11 +27,11 @@ export async function getServerSideProps({params}) {
             params.id,
             "_id username email campus major_id"
         ).populate("major_id", "name -_id", Major);
-        const postData = await Post.find(
-            {userID: params.id},
-            "courseID content currentDate"
-        ).populate("courseID", "name -_id", Course);
-        posts = importRawData(postData, ["_id"], null);
+
+        const postData = await Post.find({ userID: params.id }, 'courseID content createdAt image').populate('courseID', 'name -_id', Course).sort({ createdAt: -1 })
+
+        posts = importRawData(postData, ['_id'], 'createdAt')
+
         if (userData !== null) {
             Info = {
                 _id: userData._id.toString(),
@@ -42,7 +42,6 @@ export async function getServerSideProps({params}) {
             };
         }
     }
-
     return {
         props: {
             Info,
@@ -52,8 +51,8 @@ export async function getServerSideProps({params}) {
     };
 }
 
-export default function Detail({Info, majorProps, postProps}) {
-    const {data: session} = useSession();
+export default function Detail({ Info, majorProps, postProps }) {
+    const { data: session } = useSession();
     if (session.user._id === Info._id) {
         return (
             <>
