@@ -1,5 +1,5 @@
 // BACKEND
-import {useSession} from "next-auth/react";
+import { useSession } from "next-auth/react";
 import connectMongo from "../backend/lib/connectDB";
 import importRawData from "../backend/helper/data/data";
 // model
@@ -14,7 +14,7 @@ export async function getServerSideProps() {
     const data = await Course.find({}, "name");
     const courses = importRawData(data, ['_id'], null)
 
-    const postData = await Post.find({}, 'courseID content createdAt userID').populate('courseID', 'name -_id', Course).populate('userID', 'username _id', Users).sort({createdAt: -1})
+    const postData = await Post.find({}, 'courseID content createdAt userID image').populate('courseID', 'name -_id', Course).populate('userID', 'username _id', Users).sort({ createdAt: -1 })
 
     const post = importRawData(postData, ['_id'], 'createdAt')
 
@@ -24,6 +24,7 @@ export async function getServerSideProps() {
             return doc;
         })
     )
+
     return {
         props: {
             courseProps: courses,
@@ -32,8 +33,8 @@ export async function getServerSideProps() {
     };
 }
 
-export default function Home({courseProps, postProps}) {
-    const {data: session} = useSession();
+export default function Home({ courseProps, postProps }) {
+    const { data: session } = useSession();
     if (session) {
         return (
             <Homepage

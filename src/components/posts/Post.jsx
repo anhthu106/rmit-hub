@@ -1,44 +1,8 @@
-import { Dropdown } from "flowbite-react";
 import Link from "next/link";
-
-export default function Post({ author, date, content, course, tag, uid }) {
+import Image from "next/image";
+export default function Post({ author, date, content, course, tag, uid, image }) {
   return (
     <>
-      {/* <div className="flex flex-wrap place-items-center h-screen">
-        <div className="overflow-hidden shadow-lg transition duration-500 ease-in-out transform hover:-translate-y-5 hover:shadow-2xl rounded-lg h-90 w-6/12 cursor-pointer m-auto">
-          <a href="#" className="w-full block h-full">
-            <div className="bg-white w-full p-4">
-              <p className="text-indigo-500 text-2xl font-medium">Title??</p>
-              <p className="text-gray-800 text-sm font-medium mb-2">
-                Something goes here
-              </p>
-              <p className="text-gray-600 font-light text-md">
-                {content}
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Molestias delectus asperiores corrupti voluptate atque libero
-                optio deserunt, enim neque. Asperiores rerum accusamus
-                necessitatibus doloremque. Soluta laboriosam vitae dolores saepe
-                corporis dignissimos ratione tempora placeat, odit cum incidunt
-                architecto quas repellat voluptatum quisquam autem dicta enim
-                qui facere deserunt eaque accusantium?
-              </p>
-              <div className="flex flex-wrap justify-starts items-center py-3 border-b-2 text-xs text-white font-medium">
-                <span className="m-1 px-2 py-1 rounded bg-indigo-500">
-                  {course}
-                </span>
-              </div>
-              <div className="flex items-center mt-2">
-                LOL
-                <div className="pl-3">
-                  <div className="font-medium">{author}</div>
-                  <div className="text-gray-600 text-sm">{date}</div>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div> */}
-
       <div className="max-w-4xl px-10 my-10 mx-auto py-6 bg-white rounded-lg shadow-md drop-shadow-lg">
         <div className="flex justify-between">
           <div className="flex justify-between items-center">
@@ -75,12 +39,10 @@ export default function Post({ author, date, content, course, tag, uid }) {
         </div>
 
         <div className="mt-2">
-          <a
-            className="text-2xl text-gray-700 font-bold hover:text-gray-600"
-            href="#"
-          >
-            Title: Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-          </a>
+          <img
+            src={image}
+            alt="post"
+          />
           <p className="mt-2 text-gray-600">{content}</p>
         </div>
         <div className="flex justify-between items-center mt-4">

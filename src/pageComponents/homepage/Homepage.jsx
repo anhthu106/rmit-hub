@@ -43,6 +43,7 @@ const Homepage = ({ courseProps, postProps, session }) => {
                         sessionName={session.user.username}
                         username={post.userID.username}
                         uid={post.userID._id}
+                        image={post.image.imgURL}
                       />
                     </div>
                   ))}

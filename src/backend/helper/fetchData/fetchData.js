@@ -1,4 +1,4 @@
-async function post(url, body){
+async function post(url, body) {
     /**
      * POST METHOD
      */
@@ -11,7 +11,7 @@ async function post(url, body){
     })
 }
 
-async function patch(url, body){
+async function patch(url, body) {
     /**
      * PATCH METHOD
      */
@@ -34,9 +34,8 @@ async function Delete(url, body) {
     })
 }
 
-
 export const fetchData = {
     post,
     patch,
-    Delete,
+    Delete
 }

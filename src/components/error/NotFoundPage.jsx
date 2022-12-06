@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const NotFoundPage = () => {
   return (
     <>
@@ -14,13 +16,9 @@ const NotFoundPage = () => {
               But dont worry, you can find plenty of other things on our
               homepage.
             </p>
-            <a
-              rel="noopener noreferrer"
-              href="../"
-              className="px-8 py-3 font-semibold rounded bg-indigo-500 text-white"
-            >
-              Back to homepage
-            </a>
+            <Link href="/">
+              <a rel="noopener noreferrer" className="px-8 py-3 font-semibold rounded bg-indigo-500 text-white">Back to homepage</a>
+            </Link>
           </div>
         </div>
       </section>
