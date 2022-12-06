@@ -49,13 +49,19 @@ export function Account({ Info, majorProps, postProps, tag, session }) {
                 </div>
               </div>
             </div> */}
+
               <div className="flex leading-relaxed">
+
                 <div className="container mx-auto md:px-8">
                   <div className="lg:flex md:mt-20">
+                  {tag}
                     <div className="lg:w-4/12 mx-auto md:mt-10 h-fit px-8 py-6 shadow-2xl sm:drop-shadow-2xl rounded-lg">
+
+
                       <div className="mb-4">
                         <div className="mx-auto h-[10rem] w-[10rem] rounded-full bg-slate-400 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500"></div>
                       </div>
+
                       <div className="text-center">
                         <UserInformation
                           username={Info.username}
@@ -63,7 +69,6 @@ export function Account({ Info, majorProps, postProps, tag, session }) {
                           campus={Info.campus}
                           major={Info.major}
                         />
-                        {tag}
                       </div>
                     </div>
                     <div className="lg:w-8/12 lg:ml-6">
