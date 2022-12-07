@@ -13,10 +13,12 @@ export default async function handler(req, res) {
         const io = res.socket.server.io
         io.on("connection", socket => {
             socket.on("List", (lists) => {
-                socket.broadcast.emit("MoveTask", lists)
+                socket.join("roomList")
+                socket.broadcast.emit("MoveList", lists)
             })
 
             socket.on("MongoUpdate", (update) => {
+                socket.join("roomUpdate")
                 update.map(async (doc) => {
                     await List.findByIdAndUpdate(doc._id, {
                         "$set" : {
