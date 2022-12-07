@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {DragDropContext, Draggable, Droppable, resetServerContext} from "react-beautiful-dnd";
 import connectDB from "../../backend/lib/connectDB";
 import Course from "../../backend/models/course";
@@ -8,7 +8,9 @@ import Task from "../../backend/models/task";
 import importRawData from "../../backend/helper/data/data";
 import Users from "../../backend/models/user";
 import CreateList from "../../components/workspace/CreateList";
+import {io} from "socket.io-client";
 
+let socket
 
 export async function getServerSideProps({params}) {
     await connectDB()
@@ -51,6 +53,7 @@ export async function getServerSideProps({params}) {
     }
     resetServerContext();
 
+
     return {
         props: {
             TeamInfo,
@@ -62,7 +65,27 @@ export async function getServerSideProps({params}) {
 }
 
 export default function Test({listProps, TeamInfo, courseProps, userName}) {
+
+    const socketInitializer = async () => {
+        await fetch("/api/socket");
+        socket = io()
+
+        socket.on('connect', () => {
+            console.log(`⚡: ${socket.id} user just connected!`);
+        })
+
+        socket.on("moveList", list => {
+            setColumns(list)
+        })
+    }
+
+    useEffect(() => {
+        socketInitializer()
+    })
+
     const [columns, setColumns] = useState(listProps);
+
+
     const onDragEnd = (result, columns, setColumns) => {
         if (!result.destination) return;
 
@@ -92,11 +115,13 @@ export default function Test({listProps, TeamInfo, courseProps, userName}) {
             column.task_id = copiedItems
 
         }
+        socket = io()
+        socket.emit("Task", columns)
     };
 
     return (
         <div>
-            <CreateList teamID={TeamInfo._id}  />
+            <CreateList teamID={TeamInfo._id}/>
 
 
             <div style={{display: "flex", justifyContent: "center", height: "100%"}}>
