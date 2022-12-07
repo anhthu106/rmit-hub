@@ -76,7 +76,7 @@ export default function TeamDetail({listProps, TeamInfo, courseProps, userName})
                 console.log(`⚡: ${socket.id} user just connected!`);
             })
 
-            socket.on("MoveTask", list => {
+            socket.on("MoveList", list => {
                 setColumns(list)
             })
 
@@ -118,7 +118,18 @@ export default function TeamDetail({listProps, TeamInfo, courseProps, userName})
 
         }
         socket = io()
-        socket.emit("Task", columns)
+        socket.emit("List", columns)
+
+        const update = columns.map((data) => {
+            const id = data.task_id.map((doc) => {
+                return doc._id;
+            })
+            return {
+                _id : data._id,
+                task_id: id
+            }
+        })
+        socket.emit("MongoUpdate", update)
     };
 
     return (
