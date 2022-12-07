@@ -64,24 +64,26 @@ export async function getServerSideProps({params}) {
     }
 }
 
-export default function Test({listProps, TeamInfo, courseProps, userName}) {
+export default function TeamDetail({listProps, TeamInfo, courseProps, userName}) {
 
-    const socketInitializer = async () => {
-        await fetch("/api/socket");
-        socket = io()
-
-        socket.on('connect', () => {
-            console.log(`⚡: ${socket.id} user just connected!`);
-        })
-
-        socket.on("moveList", list => {
-            setColumns(list)
-        })
-    }
 
     useEffect(() => {
+        const socketInitializer = async () => {
+            await fetch("/api/socket");
+            socket = io()
+
+            socket.on('connect', () => {
+                console.log(`⚡: ${socket.id} user just connected!`);
+            })
+
+            socket.on("MoveTask", list => {
+                setColumns(list)
+            })
+
+        }
+
         socketInitializer()
-    })
+    }, [])
 
     const [columns, setColumns] = useState(listProps);
 

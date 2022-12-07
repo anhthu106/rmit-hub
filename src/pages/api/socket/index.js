@@ -10,18 +10,13 @@ export default async function handler(req, res) {
             socket.on("Task", (data) => {
                 console.log(data)
                 socket.broadcast.emit("MoveTask", data)
-
             })
         })
         console.log(io.engine.clientsCount)
 
     } else {
         console.log("Socket is initializing")
-        const io = new Server(res.socket.server)
-        console.log(io.engine.clientsCount)
-        res.socket.server.io = io
+        res.socket.server.io = new Server(res.socket.server)
     }
-
-
     res.end()
 }
