@@ -7,6 +7,7 @@ import Task from "../../backend/models/task";
 import importRawData from "../../backend/helper/data/data";
 import Users from "../../backend/models/user";
 import Board from "../../components/workspace/Board";
+import CreateList from "../../components/workspace/CreateList";
 
 export async function getServerSideProps({params}) {
     await connectDB()
@@ -62,7 +63,11 @@ export async function getServerSideProps({params}) {
 
 export default function TeamDetail({listProps, TeamInfo, courseProps, userName}) {
     return(
-        <Board listProps={listProps} />
+        <div>
+            <CreateList teamID={TeamInfo._id} />
+            <Board listProps={listProps} />
+
+        </div>
     )
 
 }

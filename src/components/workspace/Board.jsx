@@ -65,26 +65,12 @@ export default function Board({listProps}) {
 
 
     useEffect(() => {
-        // Fetch data to socket.io
-        const socketInitializer = async () => {
-            await fetch("/api/socket");
-            socket = io()
+        socket = io()
 
-            socket.on('connect', () => { // Connect socket
-                console.log(`⚡: ${socket.id} user just connected!`);
-            })
+        socket.on("MoveList", list => { // Receive from socket
+            setColumns(list)
+        })
 
-            socket.on("MoveList", list => { // Receive from socket
-                setColumns(list)
-            })
-
-            socket.on("disconnect", () => { // Disconnect socket
-                console.log(socket.id);
-            });
-
-        }
-
-        socketInitializer().then() // Call function
     }, [])
 
 

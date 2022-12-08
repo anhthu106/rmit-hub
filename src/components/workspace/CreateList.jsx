@@ -1,7 +1,8 @@
-import { useState } from "react";
-import { addItems } from "../../backend/helper/items/items";
+import {useState} from "react";
+import {io} from "socket.io-client";
 
-export default function CreateList({ teamID }) {
+let socket
+export default function CreateList({teamID}) {
 
     const [title, setTitle] = useState()
     const [message, setMessage] = useState(null)
@@ -21,7 +22,14 @@ export default function CreateList({ teamID }) {
                         onChange={e => setTitle(e.target.value)}
                     />
                 </div>
-                <button onClick={(e) => addItems({ title, teamID }, e, setMessage, "/api/workspace/list")}>
+                <button onClick={(e) => {
+                    const data = {title, teamID}
+
+                    socket = io()
+                    socket.emit("updateList", data)
+
+                    e.preventDefault()
+                }}>
                     Add List
                 </button>
             </form>
