@@ -133,7 +133,6 @@ export default function Post({
           <div className="flex items-center justify-between mx-4 mt-3 mb-2">
             <p>{content}</p>
           </div>
-
           <img
             className="h-fit w-auto mx-auto rounded-lg object-contain px-3"
             src={image}
