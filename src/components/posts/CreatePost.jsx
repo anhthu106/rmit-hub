@@ -32,7 +32,7 @@ export default function CreatePost({ courseProps, id }) {
     return (
         <>
             {/* TODO fix create button cuz it have bug with responsive */}
-            <div data-dial-init className="fixed right-6 bottom-6 group">
+            <div data-dial-init className="fixed right-6 bottom-6 group z-50">
                 <button
                     type="button"
                     onClick={() => setShowModal(true)}
