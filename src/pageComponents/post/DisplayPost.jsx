@@ -11,7 +11,8 @@ export default function DisplayPost({
   sessionName,
   username,
   uid,
-  image
+  image,
+  avatar
 }) {
   const [message, setMessage] = useState(null);
 
@@ -35,6 +36,7 @@ export default function DisplayPost({
         course={course}
         uid={uid}
         image={image}
+        avatar={avatar}
       />
     );
   }
@@ -47,6 +49,7 @@ export default function DisplayPost({
       course={course}
       uid={uid}
       image={image}
+      avatar={avatar}
     />
   );
 }

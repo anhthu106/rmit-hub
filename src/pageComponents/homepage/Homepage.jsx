@@ -44,6 +44,7 @@ const Homepage = ({ courseProps, postProps, session }) => {
                         username={post.userID.username}
                         uid={post.userID._id}
                         image={post.image.imgURL}
+                        avatar={post.userID.image.imgURL}
                       />
 
 
@@ -52,16 +53,10 @@ const Homepage = ({ courseProps, postProps, session }) => {
                 </div>
               </div>
             </div>
-            {/* <div className="flex flex-col flex-shrink-0 w-1/4 py-4 pl-4">
-                            <div className="pt-2 relative mx-auto text-gray-600">
-                                
-                            </div>
-                        </div> */}
           </div>
         </div>
       </div>
 
-      {/* new */}
     </div>
   );
 };
