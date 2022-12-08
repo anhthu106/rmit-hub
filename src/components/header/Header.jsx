@@ -12,10 +12,12 @@ export default function Header() {
             <div className="mx-auto max-w-7xl px-4 sm:px-6 md:justify-start md:space-x-10">
               <Navbar fluid={true}>
                 <Navbar.Brand href="../">
-                  <a href="../">
-                    <span className="sr-only">Your Company</span>
-                    Logo?
-                  </a>
+                  <Link href="../">
+                    <>
+                      <span className="sr-only">Your Company</span>
+                      Logo?
+                    </>
+                  </Link>
                 </Navbar.Brand>
                 <div className="flex md:order-2">
                   <Dropdown label="User">
@@ -26,9 +28,9 @@ export default function Header() {
                       </div>
                     </div>
                     <Dropdown.Item>
-                        <Link href={`/users/${session.user._id}`}>
-                          <a className="w-full">My Account</a>
-                        </Link>
+                      <Link href={`/users/${session.user._id}`}>
+                        <a className="w-full">My Account</a>
+                      </Link>
                     </Dropdown.Item>
                     <Dropdown.Item>
                       <button
