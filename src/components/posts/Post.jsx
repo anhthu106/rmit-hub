@@ -135,7 +135,7 @@ export default function Post({
           </div>
 
           <img
-            className="h-fit w-auto mx-auto rounded-lg object-contain"
+            className="h-fit w-auto mx-auto rounded-lg object-contain px-3"
             src={image}
             alt="post"
           />
