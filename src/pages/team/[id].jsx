@@ -1,5 +1,4 @@
-import {useEffect, useState} from "react";
-import {DragDropContext, Draggable, Droppable, resetServerContext} from "react-beautiful-dnd";
+import { resetServerContext} from "react-beautiful-dnd";
 import connectDB from "../../backend/lib/connectDB";
 import Course from "../../backend/models/course";
 import Teams from "../../backend/models/team";
@@ -7,10 +6,8 @@ import List from "../../backend/models/list";
 import Task from "../../backend/models/task";
 import importRawData from "../../backend/helper/data/data";
 import Users from "../../backend/models/user";
+import Board from "../../components/workspace/Board";
 import CreateList from "../../components/workspace/CreateList";
-import {io} from "socket.io-client";
-
-let socket
 
 export async function getServerSideProps({params}) {
     await connectDB()
@@ -65,156 +62,12 @@ export async function getServerSideProps({params}) {
 }
 
 export default function TeamDetail({listProps, TeamInfo, courseProps, userName}) {
-
-
-    useEffect(() => {
-        const socketInitializer = async () => {
-            await fetch("/api/socket");
-            socket = io()
-
-            socket.on('connect', () => {
-                console.log(`⚡: ${socket.id} user just connected!`);
-            })
-
-            socket.on("MoveList", list => {
-                setColumns(list)
-            })
-
-        }
-
-        socketInitializer()
-    }, [])
-
-    const [columns, setColumns] = useState(listProps);
-
-
-    const onDragEnd = (result, columns, setColumns) => {
-        if (!result.destination) return;
-
-        const {source, destination} = result;
-
-
-        if (source.droppableId !== destination.droppableId) {
-            const sourceColumn = columns.find(data => data._id === source.droppableId);
-            const destColumn = columns.find(data => data._id === destination.droppableId);
-
-            const sourceItems = [...sourceColumn.task_id];
-            const destItems = [...destColumn.task_id];
-
-            const [removed] = sourceItems.splice(source.index, 1);
-
-            destItems.splice(destination.index, 0, removed);
-
-            sourceColumn.task_id = sourceItems
-            destColumn.task_id = destItems
-
-
-        } else {
-            const column = columns.find(data => data._id === source.droppableId);
-            const copiedItems = [...column.task_id];
-            const [removed] = copiedItems.splice(source.index, 1);
-            copiedItems.splice(destination.index, 0, removed);
-            column.task_id = copiedItems
-
-        }
-        socket = io()
-        socket.emit("List", columns)
-
-        const update = columns.map((data) => {
-            const id = data.task_id.map((doc) => {
-                return doc._id;
-            })
-            return {
-                _id : data._id,
-                task_id: id
-            }
-        })
-        socket.emit("MongoUpdate", update)
-    };
-
-    return (
+    return(
         <div>
-            <CreateList teamID={TeamInfo._id}/>
+            <CreateList teamID={TeamInfo._id} />
+            <Board listProps={listProps} />
 
-
-            <div style={{display: "flex", justifyContent: "center", height: "100%"}}>
-                <DragDropContext
-                    onDragEnd={result => onDragEnd(result, columns, setColumns)}
-                >
-                    {columns.map((column) => {
-                        return (
-                            <div
-                                style={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    alignItems: "center"
-                                }}
-                                key={column._id}
-                            >
-                                <h2>{column.title}</h2>
-                                <div style={{margin: 8}}>
-                                    <Droppable droppableId={column._id} key={column._id}>
-                                        {(provided, snapshot) => {
-                                            return (
-                                                <div
-                                                    {...provided.droppableProps}
-                                                    ref={provided.innerRef}
-                                                    style={{
-                                                        background: snapshot.isDraggingOver
-                                                            ? "lightblue"
-                                                            : "lightgrey",
-                                                        padding: 4,
-                                                        width: 250,
-                                                        minHeight: 500
-                                                    }}
-                                                >
-                                                    {column.task_id.map((task, index) => {
-                                                        return (
-                                                            <Draggable
-                                                                key={task._id}
-                                                                draggableId={task._id}
-                                                                index={index}
-                                                            >
-                                                                {(provided, snapshot) => {
-                                                                    return (
-                                                                        <div
-                                                                            ref={provided.innerRef}
-                                                                            {...provided.draggableProps}
-                                                                            {...provided.dragHandleProps}
-                                                                            style={{
-                                                                                userSelect: "none",
-                                                                                padding: 16,
-                                                                                margin: "0 0 8px 0",
-                                                                                minHeight: "50px",
-                                                                                backgroundColor: snapshot.isDragging
-                                                                                    ? "#263B4A"
-                                                                                    : "#456C86",
-                                                                                color: "white",
-                                                                                ...provided.draggableProps.style
-                                                                            }}
-                                                                        >
-                                                                            {task.description}
-                                                                        </div>
-                                                                    )
-                                                                }}
-                                                            </Draggable>
-                                                        )
-                                                    })}
-                                                    {provided.placeholder}
-                                                </div>
-                                            )
-                                        }
-                                        }
-                                    </Droppable>
-                                </div>
-
-
-                            </div>
-                        )
-                    })}
-
-                </DragDropContext>
-            </div>
         </div>
     )
+
 }

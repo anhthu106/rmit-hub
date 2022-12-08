@@ -45,6 +45,8 @@ const Homepage = ({ courseProps, postProps, session }) => {
                         uid={post.userID._id}
                         image={post.image.imgURL}
                       />
+
+
                     </div>
                   ))}
                 </div>
