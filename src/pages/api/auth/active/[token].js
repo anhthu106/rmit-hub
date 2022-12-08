@@ -8,7 +8,7 @@ export default async function handle(req, res) {
         //Check header
         const { token } = req.query
         const payload = jwt.verify(token, process.env.JWT_SECRET)
-        
+
         //    Attach the user to the job routes
         const data = await Major.findOne({ name: payload.major }, "_id").lean()
         const majorId = data._id.toString()
@@ -18,7 +18,7 @@ export default async function handle(req, res) {
             email: payload.email,
             password: payload.password,
             campus: payload.campus,
-            major_id: majorId
+            major_id: majorId,
         }
         await Users.create(req.user)
         res.status(StatusCodes.CREATED).redirect("/signin")

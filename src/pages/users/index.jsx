@@ -16,7 +16,7 @@ import Search from "../../components/Search/search";
 export async function getServerSideProps() {
     await connectDB()
     /* find all the data in our database */
-    const data = await Users.find({}, "_id username email campus major_id")
+    const data = await Users.find({}, "_id username email campus major_id image")
 
     const users = await Promise.all(data.map(async (doc) => {
         // Take the name of major base in ID
@@ -27,9 +27,11 @@ export async function getServerSideProps() {
             username: doc.username,
             email: doc.email,
             campus: doc.campus,
-            major: majorData.name
+            major: majorData.name,
+            image: doc.image.imgURL
         }
     }))
+    console.log(users)
     return { props: { Info: users } }
 
 }
@@ -48,7 +50,7 @@ export default function Profile({ Info }) {
 
     return (
         <div>
-            
+
             <Search onchange={handleChange} />
             <h1>All User</h1>
             {filtered.map(info => (
@@ -60,6 +62,7 @@ export default function Profile({ Info }) {
                         email={info.email}
                         campus={info.campus}
                         major={info.major}
+                        image={info.image}
                     />
                 </div>
             ))}

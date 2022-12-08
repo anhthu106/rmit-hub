@@ -14,7 +14,7 @@ export default async function handler(req, res) {
             case "POST": {
                 const { content, course, message, image, id } = req.body;
                 const result = await cloudinary.uploader.upload(image, {
-                    folder: "posts",
+                    folder: "posts_" + id,
                 })
 
                 const data = await Course.findOne({ name: course }, "_id").lean()
@@ -29,7 +29,6 @@ export default async function handler(req, res) {
                     }
                 }
 
-                console.log(postValue)
                 const post = await Posts.create(postValue)
                 const uid = post.userID
                 await User.findByIdAndUpdate(uid, {
