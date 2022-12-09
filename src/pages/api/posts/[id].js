@@ -19,17 +19,9 @@ export default async function handler(req, res) {
                     await cloudinary.uploader.destroy(post.image.imgPublicID, {
                         folder: "posts_" + id,
                     })
-                    await Posts.findByIdAndDelete(id)
-                    const postID = await User.findOne({ username: userName }, "post_id");
-                    const postArr = postID["post_id"]
+                    const deletePost = await Posts.findByIdAndDelete(id)
 
-                    for (let i = 0; i < postArr.length; i++) {
-                        if (postArr[i].toString() === id) {
-                            postArr.splice(i, 1);
-                        }
-                    }
-
-                    await User.findOneAndUpdate({ username: userName }, { post_id: postArr });
+                    await User.findByIdAndUpdate(deletePost.userID, { $pull: { post_id: deletePost._id } });
                     res.status(StatusCodes.OK).json({ message: "Deleted" });
                 } catch (error) {
                     console.log(error);

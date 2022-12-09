@@ -33,14 +33,6 @@ export default function DisplayPost({
                 id={id}
                 image={image}
               />
-              {/* TODO fix edit post section */}
-              <EditPost
-                preCourse={course}
-                preContent={content}
-                uid={uid}
-                id={id}
-                courseProps={courseProps}
-              />
             </>
           }
           content={content}
@@ -51,7 +43,14 @@ export default function DisplayPost({
           image={image}
           avatar={avatar}
         />
-
+        {/* TODO fix edit post section */}
+        {/* <EditPost
+          preCourse={course}
+          preContent={content}
+          uid={uid}
+          id={id}
+          courseProps={courseProps}
+        /> */}
       </>
 
     );
