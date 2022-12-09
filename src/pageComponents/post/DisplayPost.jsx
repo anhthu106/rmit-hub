@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { deleteItems } from "../../backend/helper/items/items";
+import EditPost from "../../components/posts/EditPost";
 import Post from "../../components/posts/Post";
 
 export default function DisplayPost({
@@ -12,32 +13,47 @@ export default function DisplayPost({
   username,
   uid,
   image,
-  avatar
+  avatar,
+  courseProps
 }) {
   const [message, setMessage] = useState(null);
 
   if (sessionName === username) {
     return (
-      <Post
-        tag={
-          <DeleteButton
-            author={author}
-            course={course}
-            content={content}
-            date={date}
-            setMessage={setMessage}
-            id={id}
-            image={image}
-          />
-        }
-        content={content}
-        date={date}
-        author={author}
-        course={course}
-        uid={uid}
-        image={image}
-        avatar={avatar}
-      />
+      <>
+        <Post
+          tag={
+            <>
+              <DeleteButton
+                author={author}
+                course={course}
+                content={content}
+                date={date}
+                setMessage={setMessage}
+                id={id}
+                image={image}
+              />
+              {/* TODO fix edit post section */}
+              <EditPost
+                preCourse={course}
+                preContent={content}
+                uid={uid}
+                id={id}
+                courseProps={courseProps}
+              />
+            </>
+          }
+          content={content}
+          date={date}
+          author={author}
+          course={course}
+          uid={uid}
+          image={image}
+          avatar={avatar}
+        />
+
+      </>
+
     );
   }
   return (
