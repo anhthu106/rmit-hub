@@ -1,13 +1,13 @@
 import makeAnimated from "react-select/animated";
-import {util} from "../../utils/utils";
-import {useEffect, useState} from "react";
-import {validPassword, validEmailEnding} from "../regularexpression/Regex";
+import { util } from "../../utils/utils";
+import { useEffect, useState } from "react";
+import { validPassword } from "../regularexpression/Regex";
 import Select from "react-select";
 import Button from "../button/Button";
-import {addItems} from "../../backend/helper/items/items";
-import {signIn} from "next-auth/react";
+import { addItems } from "../../backend/helper/items/items";
+import { signIn } from "next-auth/react";
 
-const SignUpForm = ({majorProps}) => {
+const SignUpForm = ({ majorProps }) => {
     //Use animated of react-select
     const animatedComponents = makeAnimated();
 
@@ -21,7 +21,9 @@ const SignUpForm = ({majorProps}) => {
     const [password, setPassword] = useState("");
     const [campus, setCampus] = useState(campusOptions[0].label);
     const [major, setMajor] = useState(majorOptions[0].label);
+
     const [message, setMessage] = useState(null);
+    const [showModal, setShowModal] = useState(false);
 
     const [emailError, setEmailError] = useState(false);
 
@@ -71,7 +73,7 @@ const SignUpForm = ({majorProps}) => {
     function checkEmail() {
         if (
             email.length === 20 &&
-            email.endsWith(validEmailEnding) &&
+            email.endsWith("@rmit.edu.vn") &&
             email.startsWith("s", 0)
         ) {
             setEmailError(false);
@@ -287,29 +289,32 @@ const SignUpForm = ({majorProps}) => {
                 </div>
             </div>
 
-            {formUncompelete && (
-                <button
-                    type="button"
-                    className="w-full text-white bg-blue-400 dark:bg-blue-500 cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                    disabled
-                >
-                    Register
-                </button>
-            )}
-            {formCompelete && (
-                <Button
-                    fn={(e) => {
-                        addItems(
-                            {username, email, password, campus, major},
-                            e,
-                            setMessage,
-                            "/api/auth/register"
-                        );
-                        setShowModal(true);
-                    }}
-                    options={"Register"}
-                />
-            )}
+            {
+                formUncompelete && (
+                    <button
+                        type="button"
+                        className="w-full text-white bg-blue-400 dark:bg-blue-500 cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                        disabled
+                    >
+                        Register
+                    </button>
+                )
+            }
+            {
+                formCompelete && (
+                    <Button
+                        fn={(e) => {
+                            addItems(
+                                { username, email, password, campus, major },
+                                e,
+                                setMessage,
+                                "/api/auth/register"
+                            );
+                            setShowModal(true);
+                        }}
+                        options={"Register"}
+                    />
+                )}
             <p className="text-sm font-light text-gray-500 ">
                 Already have an account yet? &nbsp;
                 <a className="text-sm font-light text-gray-500 ">

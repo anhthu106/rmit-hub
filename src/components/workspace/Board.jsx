@@ -1,10 +1,11 @@
 import {useEffect, useState} from "react";
 import {io} from "socket.io-client";
 import {DragDropContext, Draggable, Droppable} from "react-beautiful-dnd";
+import CreateTask from "./CreateTask";
 
 let socket
 
-export default function Board({listProps}) {
+export default function Board({listProps, usernameProps}) {
     const [columns, setColumns] = useState(listProps);
 
     /**
@@ -94,6 +95,7 @@ export default function Board({listProps}) {
                             {/*Name of the list*/}
                             <h2>{column.title}</h2>
 
+
                             {/*List items*/}
                             <div style={{margin: 8}}>
                                 <Droppable droppableId={column._id} key={column._id}>
@@ -111,6 +113,10 @@ export default function Board({listProps}) {
                                                     minHeight: 500
                                                 }}
                                             >
+                                                <CreateTask
+                                                    usernameProps={usernameProps}
+                                                    listID={column._id}
+                                                />
                                                 {/*Fetch items*/}
                                                 {column.task_id.map((task, index) => {
                                                     return (

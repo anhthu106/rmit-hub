@@ -25,12 +25,20 @@ export async function getServerSideProps({ params }) {
     if (mongoose.Types.ObjectId.isValid(params.id)) {
         const userData = await Users.findById(
             params.id,
-            "_id username email campus major_id"
+            "_id username email campus major_id image"
         ).populate("major_id", "name -_id", Major);
 
-        const postData = await Post.find({ userID: params.id }, 'courseID content createdAt image').populate('courseID', 'name -_id', Course).sort({ createdAt: -1 })
+        const postData = await Post.find({ userID: params.id }, 'courseID content createdAt userID image').populate('courseID', 'name -_id', Course).populate('userID', 'username _id image', Users).sort({ createdAt: -1 })
 
-        posts = importRawData(postData, ['_id'], 'createdAt')
+
+        const post = importRawData(postData, ['_id'], 'createdAt')
+
+        posts = await Promise.all(
+            post.map(async (doc) => {
+                doc.userID._id = doc.userID._id.toString();
+                return doc;
+            })
+        )
 
         if (userData !== null) {
             Info = {
@@ -39,9 +47,12 @@ export async function getServerSideProps({ params }) {
                 email: userData.email,
                 campus: userData.campus,
                 major: userData.major_id.name,
+                image: userData.image.imgURL
             };
         }
     }
+
+
     return {
         props: {
             Info,
@@ -67,7 +78,6 @@ export default function Detail({ Info, majorProps, postProps }) {
                             majorProps={majorProps}
                         />
                     }
-                    majorProps={majorProps}
                     postProps={postProps}
                     session={session}
                 />
@@ -81,7 +91,6 @@ export default function Detail({ Info, majorProps, postProps }) {
             tag={
                 <></>
             }
-            majorProps={majorProps}
             postProps={postProps}
             session={session}
         />

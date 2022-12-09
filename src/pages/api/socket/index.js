@@ -62,6 +62,37 @@ export default async function handler(req, res) {
                 )
                 socket.broadcast.emit("MoveList", lists1)
             })
+
+            socket.on("updateTask", async (data) => {
+                socket.join("roomTaskUpdate")
+                const taskValue = {
+                    description: data.description,
+                    list_id: data.listID,
+                    username: data.assignedPerson,
+                    deadline: data.deadline,
+                }
+                const task = await Task.create(taskValue)
+                const list = await List.findByIdAndUpdate(taskValue.list_id.toString(),
+                    {$push: {task_id: task._id}})
+
+
+                const team1 = await Teams.findById(list.team_id.toString())
+
+                const listData1 = await List.find({team_id: team1._id}, '_id title task_id team_id').populate('task_id', '_id description username createdDate deadline', Task)
+                const list1 = importRawData(listData1, ['_id', 'team_id'], null)
+
+                const lists1 = list1.map((doc) => {
+                        doc.task_id.map((task) => {
+                            task._id = task._id.toString()
+                        })
+                        return doc;
+                    }
+                )
+
+                socket.broadcast.emit("MoveList", lists1)
+
+            })
+
         })
     }
     res.end()

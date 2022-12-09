@@ -19,10 +19,24 @@ export default function EditProfileForm({
   const [username, setUsername] = useState(PreUsername);
   const [campus, setCampus] = useState(PreCampus);
   const [major, setMajor] = useState(PreMajor);
+  const [image, setImage] = useState();
 
   const [message, setMessage] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
+  function imageHandler(e) {
+    const file = e.target.files[0];
+    setFileToBase(file);
+  }
+
+
+  const setFileToBase = (file) => {
+    const reader = new FileReader()
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setImage(reader.result)
+    }
+  }
   return (
     <div>
       <div>
@@ -85,7 +99,7 @@ export default function EditProfileForm({
                             options={campusOptions}
                           />
                         </div>
-                        <div>
+                        <div className="pb-4 md:pb-6">
                           <label
                             className="block mb-2 text-2xl font-medium text-gray-900 "
                             htmlFor="major"
@@ -100,7 +114,22 @@ export default function EditProfileForm({
                             options={majorOptions}
                           />
                         </div>
+                        <div >
+                          <label
+                            htmlFor="image"
+                            className="block mb-2 text-2xl font-medium text-gray-900 "
+                          >
+                            Avatar
+                          </label>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            name="image"
+                            onChange={(e) => imageHandler(e)}
+                          />
+                        </div>
                       </div>
+
                       {/* <p className="py-4 text-lg text-green-600 text-center">
                         {message}
                       </p> */}
@@ -110,7 +139,7 @@ export default function EditProfileForm({
                     <button
                       onClick={(e) => {
                         updateItems(
-                          { username, campus, major },
+                          { username, campus, major, image },
                           e,
                           setMessage,
                           `/api/users/${id}`
@@ -135,7 +164,6 @@ export default function EditProfileForm({
             </div>
           </div>
 
-          <div>ádasdasdasdadsasđá</div>
           <form></form>
         </>
       ) : null}

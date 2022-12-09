@@ -2,6 +2,7 @@ import connectDB from "../../../backend/lib/connectDB";
 import Posts from "../../../backend/models/post";
 import User from "../../../backend/models/user";
 import { StatusCodes } from "http-status-codes";
+import cloudinary from "../../../backend/helper/config/cloudinary";
 
 export default async function handler(req, res) {
     try {
@@ -11,9 +12,14 @@ export default async function handler(req, res) {
                 try {
                     const { id } = req.query;
                     const userName = req.body.author
-                    await Posts.findByIdAndDelete(id);
-                    const postID = await User.find({ username: userName }, "post_id");
-                    const postArr = postID[0]["post_id"]
+                    const post = await Posts.findById(id, "image");
+
+                    await cloudinary.uploader.destroy(post.image.imgPublicID, {
+                        folder: "posts_" + id,
+                    })
+                    await Posts.findByIdAndDelete(id)
+                    const postID = await User.findOne({ username: userName }, "post_id");
+                    const postArr = postID["post_id"]
 
                     for (let i = 0; i < postArr.length; i++) {
                         if (postArr[i].toString() === id) {

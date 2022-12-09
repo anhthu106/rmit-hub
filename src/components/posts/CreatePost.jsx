@@ -18,7 +18,6 @@ export default function CreatePost({ courseProps, id }) {
     function imageHandler(e) {
         const file = e.target.files[0];
         setFileToBase(file);
-        console.log(file)
     }
 
 

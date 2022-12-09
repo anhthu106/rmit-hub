@@ -65,7 +65,7 @@ export default function TeamDetail({listProps, TeamInfo, courseProps, userName})
     return(
         <div>
             <CreateList teamID={TeamInfo._id} />
-            <Board listProps={listProps} />
+            <Board listProps={listProps} usernameProps={userName} />
 
         </div>
     )
