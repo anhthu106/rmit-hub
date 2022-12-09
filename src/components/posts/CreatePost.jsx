@@ -32,7 +32,7 @@ export default function CreatePost({ courseProps, id }) {
         <>
             {/* TODO fix create button cuz it have bug with responsive */}
             <div data-dial-init className="fixed right-6 bottom-6 group z-50">
-                <buttonasdasd
+                <button
                     type="button"
                     onClick={() => setShowModal(true)}
                     data-dial-toggle="speed-dial-menu-square"
@@ -56,7 +56,7 @@ export default function CreatePost({ courseProps, id }) {
                         ></path>
                     </svg>
                     <span className="sr-only">Open actions menu</span>
-                </buttonasdasd>
+                </button>
             </div>
             {showModal ? (
                 <>
@@ -127,7 +127,7 @@ export default function CreatePost({ courseProps, id }) {
 
                                                     <p className="ml-auto text-xs text-gray-500 ">
                                                         Remember, contributions to this topic should follow
-                                                        our{" "}
+                                                        our
                                                         <a
                                                             href="#"
                                                             className="text-blue-600 hover:underline"
