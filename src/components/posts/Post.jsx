@@ -18,7 +18,7 @@ export default function Post({
             <div className="flex justify-between">
               <div className="flex justify-between items-center">
                 <img
-                  className="h-8 w-8 rounded-full"
+                  className="h-8 w-8 rounded-full object-fill"
                   src={avatar}
                   alt="Avatar"
                 />
