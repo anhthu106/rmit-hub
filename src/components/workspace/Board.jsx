@@ -2,7 +2,6 @@ import {useEffect, useState} from "react";
 import {io} from "socket.io-client";
 import {DragDropContext, Draggable, Droppable} from "react-beautiful-dnd";
 import CreateTask from "./CreateTask";
-import {deleteItems} from "../../backend/helper/items/items";
 
 let socket
 
@@ -149,8 +148,18 @@ export default function Board({listProps, usernameProps}) {
                                                                         {task.description}
 
 
-                                                                        <button
-                                                                            onClick={(e) => deleteItems({}, e, `/api/workspace/task/${task._id}`)}>
+                                                                        {/*<button*/}
+                                                                        {/*    onClick={(e) => deleteItems({}, e, `/api/workspace/task/${task._id}`)}>*/}
+                                                                        {/*    Delete Task*/}
+                                                                        {/*</button>*/}
+                                                                        <button onClick={(e) => {
+                                                                            const data = task._id
+
+                                                                            socket = io()
+                                                                            socket.emit("deleteTask", data)
+                                                                            e.preventDefault()
+                                                                        }}>
+
                                                                             Delete Task
                                                                         </button>
                                                                     </div>
@@ -159,8 +168,14 @@ export default function Board({listProps, usernameProps}) {
                                                         </Draggable>
                                                     )
                                                 })}
-                                                <button
-                                                    onClick={(e) => deleteItems({}, e, `/api/workspace/list/${column._id}`)}>
+                                                <button onClick={(e) => {
+                                                    const data = column._id
+
+                                                    socket = io()
+                                                    socket.emit("deleteList", data)
+                                                    e.preventDefault()
+                                                }}>
+
                                                     Delete List
                                                 </button>
                                                 {provided.placeholder}
