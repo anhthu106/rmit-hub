@@ -29,13 +29,14 @@ export default function EditProfileForm({
     setFileToBase(file);
   }
 
+
   const setFileToBase = (file) => {
-    const reader = new FileReader();
+    const reader = new FileReader()
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-      setImage(reader.result);
-    };
-  };
+      setImage(reader.result)
+    }
+  }
   return (
     <div>
       <div>
@@ -111,7 +112,7 @@ export default function EditProfileForm({
                             options={majorOptions}
                           />
                         </div>
-                        <div>
+                        <div >
                           <label
                             htmlFor="image"
                             className="block mb-2 text-2xl font-medium text-gray-900 "

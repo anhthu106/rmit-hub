@@ -14,7 +14,6 @@ export function Account({ Info, postProps, tag, session }) {
               <div className="container mx-auto md:px-8">
                 <div className="lg:flex md:mt-20">
                   <div className="lg:w-4/12 mx-auto md:mt-10 h-fit px-8 py-6 shadow-2xl sm:drop-shadow-2xl rounded-lg">
-                  
                     <div className="text-center">
                       <UserInformation
                         username={Info.username}

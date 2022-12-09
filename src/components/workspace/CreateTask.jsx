@@ -3,7 +3,9 @@ import { useState } from "react";
 import Select from "react-select";
 import { util } from "../../utils/utils";
 import { addItems } from "../../backend/helper/items/items";
+import {io} from "socket.io-client";
 
+let socket
 
 export default function CreateTask({ listID, usernameProps }) {
     const animated = makeAnimated();
@@ -50,10 +52,17 @@ export default function CreateTask({ listID, usernameProps }) {
                         placeholder={assignedPerson}
                     />
                 </div>
-                <button onClick={(e) => addItems({ description, listID, deadline, assignedPerson }, e, setMessage, "/api/workspace/task")}>
+                <button onClick={(e) =>{
+                    const data = { description, listID, deadline, assignedPerson }
+
+                    socket = io()
+                    socket.emit("updateTask", data)
+                    e.preventDefault()
+                }}>
+
                     Add Task
                 </button>
-                <div>-----------------------</div>
+                <hr/>
             </form>
             <div>{message}</div>
         </div>
