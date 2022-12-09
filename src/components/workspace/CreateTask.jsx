@@ -35,7 +35,7 @@ export default function CreateTask({ listID, usernameProps, listName }) {
         </button>
       </div> */}
 
-      <div className="flex items-center flex-shrink-0 h-10 py-8 px-4 border-solid border-2 border-white rounded-t-lg">
+      <div className="flex items-center flex-shrink-0 h-10 py-8 px-4 border-solid border-2 border-white rounded-lg">
         <span className="block text-lg font-semibold">{listName}</span>
         {/* <span className="flex items-center justify-center w-5 h-5 ml-2 text-sm font-semibold text-indigo-500 bg-white rounded bg-opacity-30">
           2

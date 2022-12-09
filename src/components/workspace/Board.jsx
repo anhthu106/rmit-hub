@@ -75,7 +75,6 @@ export default function Board({ listProps, usernameProps }) {
       setColumns(list);
     });
   }, []);
-
   return (
     <div style={{ display: "flex", justifyContent: "center", height: "100%" }}>
       {/*Container of drag function as container of lists*/}
@@ -107,11 +106,9 @@ export default function Board({ listProps, usernameProps }) {
                           /*TODO change style to tailwind*/
                           background: snapshot.isDraggingOver
                             ? "lightblue"
-                            : "lightgrey",
-                          padding: 4,
-                          width: 250,
-                          minHeight: 500,
+                            : "",
                         }}
+                        className="h-fit w-64"
                       >
                         <CreateTask
                           usernameProps={usernameProps}
@@ -134,85 +131,76 @@ export default function Board({ listProps, usernameProps }) {
                                       ref={provided.innerRef}
                                       {...provided.draggableProps}
                                       {...provided.dragHandleProps}
-                                      style={{
-                                        /*TODO change style to tailwind*/
-                                        userSelect: "none",
-                                        padding: 16,
-                                        margin: "0 0 8px 0",
-                                        minHeight: "50px",
-                                        backgroundColor: snapshot.isDragging
-                                          ? "#263B4A"
-                                          : "#456C86",
-                                        color: "white",
-                                        ...provided.draggableProps.style,
-                                      }}
+                                      className="flex flex-col pb-2 overflow-auto"
                                     >
-                                      {/*Name of task*/}
-                                      {task.description}
-                                      
-                                      {/*<button*/}
-                                      {/*    onClick={(e) => deleteItems({}, e, `/api/workspace/task/${task._id}`)}>*/}
-                                      {/*    Delete Task*/}
-                                      {/*</button>*/}
-                                      <button
-                                        onClick={(e) => {
-                                          const data = task._id;
+                                      <div className="relative flex flex-col items-start p-4 mt-3 bg-white rounded-lg cursor-pointer bg-opacity-90 group hover:bg-opacity-100">
+                                        <div className="absolute top-0 right-0 flex w-5 h-5 mt-5 mr-5 tooltip">
+                                          <div className="hover:text-gray-400 px-2 py-1 font-medium">
+                                            <svg
+                                              className="w-4 h-4 fill-current"
+                                              xmlns="http://www.w3.org/2000/svg"
+                                              viewBox="0 0 20 20"
+                                              fill="currentColor"
+                                            >
+                                              <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
+                                            </svg>
+                                          </div>
+                                          <div className="flex flex-col p-4 bg-white w-max h-max rounded-md z-20 absolute right-0 invisible tooltip-item border-solid">
+                                            <ul className="list-disc space-y-2">
+                                              <li className="flex items-start">
+                                                <button
+                                                  onClick={(e) => {
+                                                    const data = task._id;
 
-                                          socket = io();
-                                          socket.emit("deleteTask", data);
-                                          e.preventDefault();
-                                        }}
-                                      >
-                                        Delete Task
-                                      </button>
+                                                    socket = io();
+                                                    socket.emit(
+                                                      "deleteTask",
+                                                      data
+                                                    );
+                                                    e.preventDefault();
+                                                  }}
+                                                >
+                                                  Delete Task
+                                                </button>
+                                              </li>
+                                            </ul>
+                                          </div>
+                                        </div>
+                                        <span className="flex items-center h-6 px-3 text-xs font-semibold text-pink-500 bg-pink-100 rounded-full">
+                                          Design
+                                        </span>
+                                        <h4 className="mt-3 text-sm font-medium">
+                                          {task.description}
+                                        </h4>
+                                        <div className="flex items-center w-full mt-3 text-xs font-medium text-gray-400">
+                                          <div className="flex items-center">
+                                            <svg
+                                              className="w-4 h-4 text-gray-300 fill-current"
+                                              xmlns="http://www.w3.org/2000/svg"
+                                              viewBox="0 0 20 20"
+                                              fill="currentColor"
+                                            >
+                                              <path
+                                                fill-rule="evenodd"
+                                                d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                                clip-rule="evenodd"
+                                              />
+                                            </svg>
+                                            <span className="ml-1 leading-none">
+                                              {task.deadline}
+                                            </span>
+                                          </div>
+                                          <div className="w-6 h-6 ml-auto rounded-full">
+                                            LOL
+                                          </div>
+                                        </div>
+                                      </div>
                                     </div>
                                   );
                                 }}
                               </Draggable>
 
-                              <div class="flex flex-col pb-2 overflow-auto">
-                                <div
-                                  class="relative flex flex-col items-start p-4 mt-3 bg-white rounded-lg cursor-pointer bg-opacity-90 group hover:bg-opacity-100"
-                                  draggable="true"
-                                >
-                                  <button class="absolute top-0 right-0 flex items-center justify-cente w-5 h-5 mt-3 mr-2 text-gray-500 rounded hover:bg-gray-200 hover:text-gray-700 group-hover:flex">
-                                    <svg
-                                      class="w-4 h-4 fill-current"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      viewBox="0 0 20 20"
-                                      fill="currentColor"
-                                    >
-                                      <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
-                                    </svg>
-                                  </button>
-                                  <span class="flex items-center h-6 px-3 text-xs font-semibold text-pink-500 bg-pink-100 rounded-full">
-                                    Design
-                                  </span>
-                                  <h4 class="mt-3 text-sm font-medium">
-                                  {task.description}
-                                  </h4>
-                                  <div class="flex items-center w-full mt-3 text-xs font-medium text-gray-400">
-                                    <div class="flex items-center">
-                                      <svg
-                                        class="w-4 h-4 text-gray-300 fill-current"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 20 20"
-                                        fill="currentColor"
-                                      >
-                                        <path
-                                          fill-rule="evenodd"
-                                          d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                          clip-rule="evenodd"
-                                        />
-                                      </svg>
-                                      <span class="ml-1 leading-none">
-                                      {task.deadline}
-                                      </span>
-                                    </div>
-                                    <div class="w-6 h-6 ml-auto rounded-full">LOL</div>
-                                  </div>
-                                </div>
-                              </div>
+                              
                             </>
                           );
                         })}
