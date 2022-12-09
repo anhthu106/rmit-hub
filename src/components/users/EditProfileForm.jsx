@@ -29,26 +29,23 @@ export default function EditProfileForm({
     setFileToBase(file);
   }
 
-
   const setFileToBase = (file) => {
-    const reader = new FileReader()
+    const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-      setImage(reader.result)
-    }
-  }
+      setImage(reader.result);
+    };
+  };
   return (
     <div>
       <div>
-        <Link href={"#"}>
-          <button
-            type="button"
-            onClick={() => setShowModal(true)}
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base px-6 py-3.5 text-center w-full"
-          >
-            Edit
-          </button>
-        </Link>
+        <button
+          type="button"
+          onClick={() => setShowModal(true)}
+          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base px-6 py-3.5 text-center w-full"
+        >
+          Edit
+        </button>
       </div>
       {showModal ? (
         <>
@@ -114,7 +111,7 @@ export default function EditProfileForm({
                             options={majorOptions}
                           />
                         </div>
-                        <div >
+                        <div>
                           <label
                             htmlFor="image"
                             className="block mb-2 text-2xl font-medium text-gray-900 "
