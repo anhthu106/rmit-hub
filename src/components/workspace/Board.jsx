@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {io} from "socket.io-client";
 import {DragDropContext, Draggable, Droppable} from "react-beautiful-dnd";
 import CreateTask from "./CreateTask";
+import {deleteItems} from "../../backend/helper/items/items";
 
 let socket
 
@@ -117,6 +118,7 @@ export default function Board({listProps, usernameProps}) {
                                                     usernameProps={usernameProps}
                                                     listID={column._id}
                                                 />
+
                                                 {/*Fetch items*/}
                                                 {column.task_id.map((task, index) => {
                                                     return (
@@ -145,12 +147,22 @@ export default function Board({listProps, usernameProps}) {
                                                                     >
                                                                         {/*Name of task*/}
                                                                         {task.description}
+
+
+                                                                        <button
+                                                                            onClick={(e) => deleteItems({}, e, `/api/workspace/task/${task._id}`)}>
+                                                                            Delete Task
+                                                                        </button>
                                                                     </div>
                                                                 )
                                                             }}
                                                         </Draggable>
                                                     )
                                                 })}
+                                                <button
+                                                    onClick={(e) => deleteItems({}, e, `/api/workspace/list/${column._id}`)}>
+                                                    Delete List
+                                                </button>
                                                 {provided.placeholder}
                                             </div>
                                         )

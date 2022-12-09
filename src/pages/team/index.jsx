@@ -1,6 +1,6 @@
 // BACKEND
 import connectMongo from "../../backend/lib/connectDB";
-import { useSession } from "next-auth/react";
+import {useSession} from "next-auth/react";
 import Link from "next/link";
 import importRawData from "../../backend/helper/data/data";
 
@@ -12,6 +12,7 @@ import Course from "../../backend/models/course";
 // COMPONENT
 import CreateTeam from "../../components/team/CreateTeam";
 import TeamInformation from "../../components/team/TeamInformation";
+import {deleteItems} from "../../backend/helper/items/items";
 
 
 export async function getServerSideProps() {
@@ -50,8 +51,8 @@ export async function getServerSideProps() {
     }
 }
 
-export default function Team({ courseProps, teamProps }) {
-    const { data: session, status } = useSession()
+export default function Team({courseProps, teamProps}) {
+    const {data: session, status} = useSession()
     if (status === "Loading") {
         return (
             <div>Loading</div>
@@ -74,7 +75,13 @@ export default function Team({ courseProps, teamProps }) {
                             Name={team.name}
                             Description={team.Description}
                         />
+                        <button onClick={(e) => deleteItems({
+                            id: team._id
+                        }, e, `/api/team/${team._id}`)}>
+                            Delete Team
+                        </button>
                     </div>
+
                 ))}
             </div>
         )
