@@ -2,6 +2,7 @@ import UserInformation from "../../components/users/UserInformation";
 import DisplayPost from "../post/DisplayPost";
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
+
 export function Account({ Info, postProps, tag, session }) {
   return (
     <div className="bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500">
@@ -11,7 +12,7 @@ export function Account({ Info, postProps, tag, session }) {
         <div className="container mx-auto md:px-4">
           <div className="bg-white w-full shadow-xl rounded-lg">
             <div className="flex leading-relaxed">
-              <div className="container mx-auto md:px-8">
+              <div className="container mx-auto md:px-8" id="myportal">
                 <div className="lg:flex md:mt-20">
                   <div className="lg:w-4/12 mx-auto md:mt-10 h-fit px-8 py-6 shadow-2xl sm:drop-shadow-2xl rounded-lg">
                     <div className="text-center">
@@ -22,11 +23,11 @@ export function Account({ Info, postProps, tag, session }) {
                         major={Info.major}
                         image={Info.image}
                       />
-                      <div className="">{tag}</div>
+                      {tag}
                     </div>
                     
                   </div>
-                  
+
                   <div className="lg:w-8/12 lg:ml-6">
                     {postProps.map((post) => (
                       <div key={post._id}>

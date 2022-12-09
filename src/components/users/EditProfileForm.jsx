@@ -3,7 +3,7 @@ import { useState } from "react";
 import Select from "react-select";
 import { util } from "../../utils/utils";
 import { updateItems } from "../../backend/helper/items/items";
-import Link from "next/link";
+import Portal from "../../components/portal/Portal";
 
 export default function EditProfileForm({
   PreUsername,
@@ -50,7 +50,7 @@ export default function EditProfileForm({
       </div>
       {showModal ? (
         <>
-          <div className="fixed inset-0 z-10 overflow-y-auto">
+        <Portal>          <div className="fixed inset-0 z-10 overflow-y-auto">
             <div
               className="fixed inset-0 w-full h-full bg-black opacity-40"
               onClick={() => setShowModal(false)}
@@ -160,9 +160,9 @@ export default function EditProfileForm({
                 </div>
               </div>
             </div>
-          </div>
+          </div></Portal>
 
-          <form></form>
+
         </>
       ) : null}
 
