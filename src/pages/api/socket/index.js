@@ -50,17 +50,20 @@ export default async function handler(req, res) {
                 const team = await Teams.findByIdAndUpdate(listValue.team_id.toString(),
                     {$push: {listID: list._id}})
 
-                const listData1 = await List.find({team_id: team._id}, '_id title task_id team_id').populate('task_id', '_id description username createdDate deadline', Task)
-                const list1 = importRawData(listData1, ['_id', 'team_id'], null)
+                await sendColumn(team, socket)
 
-                const lists1 = list1.map((doc) => {
-                        doc.task_id.map((task) => {
-                            task._id = task._id.toString()
-                        })
-                        return doc;
-                    }
-                )
-                socket.broadcast.emit("MoveList", lists1)
+            })
+
+            socket.on("deleteList", async (data) => {
+                socket.join("roomListDelete")
+
+                const deleteList = await List.findByIdAndDelete(data);
+                const team = await Teams.findByIdAndUpdate(deleteList.team_id, {$pull: {listID: deleteList._id}})
+                await Task.deleteMany({_id: {$in: deleteList.task_id}})
+
+                await sendColumn(team, socket)
+
+
             })
 
             socket.on("updateTask", async (data) => {
@@ -76,24 +79,42 @@ export default async function handler(req, res) {
                     {$push: {task_id: task._id}})
 
 
-                const team1 = await Teams.findById(list.team_id.toString())
+                const team = await Teams.findById(list.team_id.toString())
 
-                const listData1 = await List.find({team_id: team1._id}, '_id title task_id team_id').populate('task_id', '_id description username createdDate deadline', Task)
-                const list1 = importRawData(listData1, ['_id', 'team_id'], null)
-
-                const lists1 = list1.map((doc) => {
-                        doc.task_id.map((task) => {
-                            task._id = task._id.toString()
-                        })
-                        return doc;
-                    }
-                )
-
-                socket.broadcast.emit("MoveList", lists1)
+                await sendColumn(team, socket)
 
             })
 
+            socket.on("deleteTask", async (data) => {
+                socket.join("roomTaskDelete")
+
+
+                const deleteTask = await Task.findByIdAndDelete(data);
+                const list = await List.findByIdAndUpdate(deleteTask.list_id, {$pull: {task_id: deleteTask._id}})
+
+                const team = await Teams.findById(list.team_id.toString())
+
+                await sendColumn(team, socket)
+
+            })
+
+
         })
+
+        const sendColumn = async (team, socket) => {
+            const listData = await List.find({team_id: team._id}, '_id title task_id team_id').populate('task_id', '_id description username createdDate deadline', Task)
+            const list = importRawData(listData, ['_id', 'team_id'], null)
+
+            const lists = list.map((doc) => {
+                    doc.task_id.map((task) => {
+                        task._id = task._id.toString()
+                    })
+                    return doc;
+                }
+            )
+
+            socket.broadcast.emit("MoveList", lists)
+        }
     }
     res.end()
 }

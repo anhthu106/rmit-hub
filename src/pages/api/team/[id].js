@@ -2,6 +2,9 @@ import connectDB from "../../../backend/lib/connectDB";
 import {StatusCodes} from "http-status-codes";
 import Teams from "../../../backend/models/team";
 import Course from "../../../backend/models/course";
+import User from "../../../backend/models/user";
+import List from "../../../backend/models/list";
+import Task from "../../../backend/models/task";
 
 export default async function handler(req, res) {
     /**
@@ -43,8 +46,10 @@ export default async function handler(req, res) {
                         await team.save()
                         return res.status(StatusCodes.OK).json({message: "Welcome"})
                     }
+                    break
                 } catch (e) {
                     console.log(e)
+                    break
                 }
             }
             case "DELETE": {
@@ -55,9 +60,21 @@ export default async function handler(req, res) {
                     const {
                         query: {id}
                     } = req
-                    const team = await Teams.findById(id)
-                    team.userID.pull(req.body.userId)
-                    await team.save()
+
+                    //Delete main
+                    const team = await Teams.findByIdAndDelete(id)
+
+                    //Delete reference
+                    await User.findByIdAndUpdate(team.userID, {$pull: {post_id: team._id}})
+                    const lists = await List.find({_id: {$in: team.listID}}, "task_id").lean()
+
+                    await List.deleteMany({_id: {$in: team.listID}})
+
+                    lists.map(async (list) => {
+                        await Task.deleteMany({_id: {$in: list.task_id}})
+                    })
+
+
                     return res.status(StatusCodes.OK).json({message: "Deleted"})
                 } catch (e) {
                     console.log(e)

@@ -1,6 +1,6 @@
 // BACKEND
 import connectMongo from "../../backend/lib/connectDB";
-import { useSession } from "next-auth/react";
+import {useSession} from "next-auth/react";
 import Link from "next/link";
 import importRawData from "../../backend/helper/data/data";
 
@@ -13,6 +13,7 @@ import Header from "../../components/header/Header";
 // COMPONENT
 import CreateTeam from "../../components/team/CreateTeam";
 import TeamInformation from "../../components/team/TeamInformation";
+import {deleteItems} from "../../backend/helper/items/items";
 
 export async function getServerSideProps() {
   await connectMongo();

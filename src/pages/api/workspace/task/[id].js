@@ -1,7 +1,7 @@
 import connectDB from "../../../../backend/lib/connectDB";
-import { StatusCodes } from "http-status-codes";
+import {StatusCodes} from "http-status-codes";
 import Task from "../../../../backend/models/task";
-import List from "../../../../backend/models/list"
+import List from "../../../../backend/models/list";
 
 export default async function handler(req, res) {
     try {
@@ -9,21 +9,12 @@ export default async function handler(req, res) {
         switch (req.method) {
             case "DELETE": {
                 try {
-                    const { id } = req.query;
-                    const listID = req.body.list_id;
-                    const listData = await List.findById(listID, "task_id")
+                    const {id} = req.query;
 
-                    let taskArr = listData['task_id']
+                    const deleteTask = await Task.findByIdAndDelete(id);
+                    await List.findByIdAndUpdate(deleteTask.list_id, {$pull: {task_id: deleteTask._id}})
 
-                    for (let i of taskArr) {
-                        if (i.toString() == id.toString()) {
-                            taskArr.splice(i, 1);
-                        }
-                    }
-
-                    await List.findOneAndUpdate({ _id: listID }, { task_id: taskArr })
-                    await Task.findByIdAndDelete(id);
-                    res.status(StatusCodes.OK).json({ message: "Deleted" });
+                    res.status(StatusCodes.OK).json({message: "Deleted"});
 
                 } catch (e) {
                     console.log(e);
@@ -31,7 +22,7 @@ export default async function handler(req, res) {
             }
         }
     } catch (Error) {
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ Error })
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({Error})
     }
 
 }
