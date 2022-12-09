@@ -7,7 +7,7 @@ export default function Post({
   tag,
   uid,
   image,
-  avatar
+  avatar,
 }) {
   return (
     <>
@@ -57,9 +57,7 @@ export default function Post({
                     </svg>
                   </div>
                   <div className="flex flex-col p-4 bg-white w-max h-max rounded-md z-20 absolute right-0 invisible tooltip-item border-solid">
-                    <ul className="list-disc space-y-2">
-                      <li className="flex items-start">{tag}</li>
-                    </ul>
+                    {tag}
                     <ul className="list-disc space-y-2">
                       <li className="flex items-start">sth to add</li>
                     </ul>
@@ -68,7 +66,7 @@ export default function Post({
               </div>
             </div>
           </div>
-
+          <div className="overflow-y-auto py-5 px-3 h-full bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700"></div>
           <div className="flex items-center justify-between mx-4 mt-3 mb-2 sm:px-auto">
             <p className="px-2 py-1 bg-indigo-500 text-gray-100 font-bold text-sm md:text-base rounded hover:bg-indigo-600">
               {course}

@@ -17,7 +17,7 @@ const Homepage = ({ courseProps, postProps, session }) => {
   };
 
   return (
-    <div className="bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500">
+    <div id="myportal" className="bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500">
       <Header />
 
       <div className="bg-white">

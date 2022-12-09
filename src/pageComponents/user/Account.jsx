@@ -4,6 +4,7 @@ import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 
 export function Account({ Info, postProps, tag, session }) {
+  console.log(postProps);
   return (
     <div className="bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500">
       <Header />
@@ -25,7 +26,6 @@ export function Account({ Info, postProps, tag, session }) {
                       />
                       {tag}
                     </div>
-                    
                   </div>
 
                   <div className="lg:w-8/12 lg:ml-6">
@@ -41,6 +41,8 @@ export function Account({ Info, postProps, tag, session }) {
                           username={Info._id}
                           image={post.image.imgURL}
                           avatar={post.userID.image.imgURL}
+                          // TODO kéo hộ em cái courseProps vô đây cái :DD
+                          courseProps={postProps} //This is wrong btw
                         />
                       </div>
                     ))}

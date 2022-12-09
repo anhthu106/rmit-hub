@@ -14,7 +14,7 @@ export default function DisplayPost({
   uid,
   image,
   avatar,
-  courseProps
+  courseProps,
 }) {
   const [message, setMessage] = useState(null);
 
@@ -24,15 +24,24 @@ export default function DisplayPost({
         <Post
           tag={
             <>
-              <DeleteButton
-                author={author}
-                course={course}
-                content={content}
-                date={date}
-                setMessage={setMessage}
-                id={id}
-                image={image}
-              />
+              <ul className="space-y-2">
+                <DeleteButton
+                  author={author}
+                  course={course}
+                  content={content}
+                  date={date}
+                  setMessage={setMessage}
+                  id={id}
+                  image={image}
+                />
+                <EditPost
+                  course={course}
+                  content={content}
+                  uid={uid}
+                  id={id}
+                  courseProps={courseProps}
+                />
+              </ul>
             </>
           }
           content={content}
@@ -43,7 +52,6 @@ export default function DisplayPost({
           image={image}
           avatar={avatar}
         />
-        {/* TODO fix edit post section */}
         {/* <EditPost
           preCourse={course}
           preContent={content}
@@ -52,7 +60,6 @@ export default function DisplayPost({
           courseProps={courseProps}
         /> */}
       </>
-
     );
   }
   return (
@@ -69,14 +76,21 @@ export default function DisplayPost({
   );
 }
 
-function DeleteButton({ author, date, content, course, setMessage, id, image }) {
+function DeleteButton({
+  author,
+  date,
+  content,
+  course,
+  setMessage,
+  id,
+  image,
+}) {
   return (
     <>
-      <div className="flex justify-between items-center">
-        <span>{/* place holder (dont delete) */}</span>
+      <li>
         <button
           type="button"
-          className="inline-flex items-center text-slate-700  bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+          className="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
           onClick={(e) => {
             deleteItems(
               { author, date, content, course, image },
@@ -88,7 +102,7 @@ function DeleteButton({ author, date, content, course, setMessage, id, image }) 
           }}
         >
           <svg
-            className="w-5 h-5 mr-1.5 -ml-1"
+            className="flex-shrink-0 w-6 h-6 text-gray-400 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
             fill="currentColor"
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
@@ -99,9 +113,11 @@ function DeleteButton({ author, date, content, course, setMessage, id, image }) 
               clipRule="evenodd"
             />
           </svg>
-          Delete Post
+          <span className="flex-1 ml-3 text-left whitespace-nowrap">
+            Delete Post
+          </span>
         </button>
-      </div>
+      </li>
     </>
   );
 }
