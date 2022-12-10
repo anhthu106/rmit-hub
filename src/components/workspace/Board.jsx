@@ -76,7 +76,12 @@ export default function Board({ listProps, usernameProps }) {
     });
   }, []);
   return (
-    <div style={{ display: "flex", justifyContent: "center", height: "100%" }}>
+    <div
+      // style={{ display: "flex", justifyContent: "center", height: "100%" }}
+      className="flex overflow-auto "
+    >
+      <div className="flex-auto w-96"></div>
+
       {/*Container of drag function as container of lists*/}
       <DragDropContext
         onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
@@ -95,7 +100,8 @@ export default function Board({ listProps, usernameProps }) {
               {/*Name of the list*/}
 
               {/*List items*/}
-              <div style={{ margin: 8 }}>
+              <div className="m-5 overflow-y-auto max-h-96">
+                
                 <Droppable droppableId={column._id} key={column._id}>
                   {(provided, snapshot) => {
                     return (
@@ -108,7 +114,7 @@ export default function Board({ listProps, usernameProps }) {
                             ? "lightblue"
                             : "",
                         }}
-                        className="h-fit w-64"
+                        className="h-fit w-64 "
                       >
                         <CreateTask
                           usernameProps={usernameProps}
@@ -199,8 +205,6 @@ export default function Board({ listProps, usernameProps }) {
                                   );
                                 }}
                               </Draggable>
-
-                              
                             </>
                           );
                         })}
