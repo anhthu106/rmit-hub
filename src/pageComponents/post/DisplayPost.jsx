@@ -44,13 +44,13 @@ export default function DisplayPost({
           avatar={avatar}
         />
         {/* TODO fix edit post section */}
-        {/* <EditPost
+        <EditPost
           preCourse={course}
           preContent={content}
           uid={uid}
           id={id}
           courseProps={courseProps}
-        /> */}
+        />
       </>
 
     );
