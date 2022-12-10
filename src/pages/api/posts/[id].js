@@ -12,9 +12,7 @@ export default async function handler(req, res) {
         switch (req.method) {
             case "DELETE": {
                 try {
-                    const {id} = req.query;
-                    console.log(req.body)
-                    const userName = req.body.author
+                    const { id } = req.query;
                     const post = await Posts.findById(id, "image");
 
                     await cloudinary.uploader.destroy(post.image.imgPublicID, {

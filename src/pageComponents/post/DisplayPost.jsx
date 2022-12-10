@@ -52,13 +52,14 @@ export default function DisplayPost({
           image={image}
           avatar={avatar}
         />
-        {/* <EditPost
+        {/* TODO fix edit post section */}
+        <EditPost
           preCourse={course}
           preContent={content}
           uid={uid}
           id={id}
           courseProps={courseProps}
-        /> */}
+        />
       </>
     );
   }

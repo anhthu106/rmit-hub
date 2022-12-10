@@ -20,6 +20,9 @@ export async function getServerSideProps({ params }) {
     const majorData = await Major.find({}, "name");
     const majors = importRawData(majorData, ["_id"], null);
 
+    const data = await Course.find({}, "name");
+    const courses = importRawData(data, ['_id'], null)
+
     let Info = {};
     let posts = [];
     if (mongoose.Types.ObjectId.isValid(params.id)) {
@@ -29,7 +32,6 @@ export async function getServerSideProps({ params }) {
         ).populate("major_id", "name -_id", Major);
 
         const postData = await Post.find({ userID: params.id }, 'courseID content createdAt userID image').populate('courseID', 'name -_id', Course).populate('userID', 'username _id image', Users).sort({ createdAt: -1 })
-
 
         const post = importRawData(postData, ['_id'], 'createdAt')
 
@@ -58,11 +60,12 @@ export async function getServerSideProps({ params }) {
             Info,
             majorProps: majors,
             postProps: posts,
+            courseProps: courses,
         },
     };
 }
 
-export default function Detail({ Info, majorProps, postProps }) {
+export default function Detail({ Info, majorProps, postProps, courseProps }) {
     const { data: session } = useSession();
     if (session.user._id === Info._id) {
         return (
@@ -80,6 +83,7 @@ export default function Detail({ Info, majorProps, postProps }) {
                     }
                     postProps={postProps}
                     session={session}
+                    courseProps={courseProps}
                 />
             </>
         );
