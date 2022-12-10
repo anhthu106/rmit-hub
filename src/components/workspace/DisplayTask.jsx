@@ -5,7 +5,7 @@ export default function DisplayTask({ taskID, description, username, createdDate
     const [message, setMessage] = useState(null)
 
     return (
-        <div>
+        <div className="">
             <div>{description}</div>
             {username.map((doc) => (
                 <div key={doc}>

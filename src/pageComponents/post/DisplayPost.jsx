@@ -20,7 +20,7 @@ export default function DisplayPost({
 
   if (sessionName === username) {
     return (
-      <>
+      
         <Post
           tag={
             <>
@@ -35,8 +35,8 @@ export default function DisplayPost({
                   image={image}
                 />
                 <EditPost
-                  course={course}
-                  content={content}
+                  preCourse={course}
+                  preContent={content}
                   uid={uid}
                   id={id}
                   courseProps={courseProps}
@@ -52,7 +52,7 @@ export default function DisplayPost({
           image={image}
           avatar={avatar}
         />
-      </>
+      
     );
   }
   return (
