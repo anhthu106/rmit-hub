@@ -77,8 +77,7 @@ export default function Board({ listProps, usernameProps }) {
   }, []);
   return (
     <div
-      // style={{ display: "flex", justifyContent: "center", height: "100%" }}
-      className="flex overflow-auto "
+      className="flex overflow-auto h-full"
     >
       <div className="flex-auto w-96"></div>
 
@@ -90,17 +89,13 @@ export default function Board({ listProps, usernameProps }) {
         {columns.map((column) => {
           return (
             <div
-              style={{
-                /*TODO change style to tailwind*/ display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
+              className="flex flex-col items-center h-96"
               key={column._id}
             >
               {/*Name of the list*/}
 
               {/*List items*/}
-              <div className="m-5 overflow-y-auto max-h-96">
+              <div className="m-5 overflow-y-auto">
                 
                 <Droppable droppableId={column._id} key={column._id}>
                   {(provided, snapshot) => {
@@ -114,7 +109,7 @@ export default function Board({ listProps, usernameProps }) {
                             ? "lightblue"
                             : "",
                         }}
-                        className="h-fit w-64 "
+                        className="h-fit w-64"
                       >
                         <CreateTask
                           usernameProps={usernameProps}
