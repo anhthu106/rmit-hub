@@ -32,7 +32,7 @@ export function Account({ Info, postProps, tag, session, courseProps }) {
                       <div key={post._id}>
                         <DisplayPost
                           author={Info.username}
-                          date={post.createdAt}
+                          date={post.updatedAt}
                           content={post.content}
                           course={post.courseID.name}
                           id={post._id}

@@ -20,7 +20,7 @@ export default function DisplayPost({
 
   if (sessionName === username) {
     return (
-      <>
+      
         <Post
           tag={
             <>
@@ -52,8 +52,7 @@ export default function DisplayPost({
           image={image}
           avatar={avatar}
         />
-        {/* TODO fix edit post section */}
-      </>
+      
     );
   }
   return (

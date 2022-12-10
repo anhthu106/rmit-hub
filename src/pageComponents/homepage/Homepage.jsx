@@ -36,7 +36,7 @@ const Homepage = ({ courseProps, postProps, session }) => {
                     <div key={post._id}>
                       <DisplayPost
                         author={post.userID.username}
-                        date={post.createdAt}
+                        date={post.updatedAt}
                         content={post.content}
                         course={post.courseID.name}
                         id={post._id}
