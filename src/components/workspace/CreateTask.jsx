@@ -17,9 +17,6 @@ export default function CreateTask({ listID, usernameProps, listName }) {
   const [message, setMessage] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
-  useEffect(() => {
-    console.log(deadline);
-  }, []);
   return (
     <div>
       {/* <div data-dial-init className="w-full group z-50">
@@ -51,9 +48,9 @@ export default function CreateTask({ listID, usernameProps, listName }) {
             stroke="currentColor"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               d="M12 6v6m0 0v6m0-6h6m-6 0H6"
             ></path>
           </svg>

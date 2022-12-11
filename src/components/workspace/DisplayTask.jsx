@@ -1,11 +1,11 @@
-import {useState} from "react"
+import { useState } from "react"
 import { deleteItems } from "../../backend/helper/items/items";
 
 export default function DisplayTask({ taskID, description, username, createdDate, deadline, list_id }) {
     const [message, setMessage] = useState(null)
 
     return (
-        <div className="">
+        <div key={taskID}>
             <div>{description}</div>
             {username.map((doc) => (
                 <div key={doc}>

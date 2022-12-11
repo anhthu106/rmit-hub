@@ -8,6 +8,7 @@ let socket;
 export default function Board({ listProps, usernameProps }) {
   const [columns, setColumns] = useState(listProps);
 
+
   /**
    * Function run when the Drag done
    * @param result: JSON
@@ -96,7 +97,6 @@ export default function Board({ listProps, usernameProps }) {
 
               {/*List items*/}
               <div className="m-5 overflow-y-auto">
-                
                 <Droppable droppableId={column._id} key={column._id}>
                   {(provided, snapshot) => {
                     return (
@@ -107,7 +107,7 @@ export default function Board({ listProps, usernameProps }) {
                           /*TODO change style to tailwind*/
                           background: snapshot.isDraggingOver
                             ? "lightblue"
-                            : "",
+                            : "lightgrey",
                         }}
                         className="h-fit w-64"
                       >
@@ -182,9 +182,9 @@ export default function Board({ listProps, usernameProps }) {
                                               fill="currentColor"
                                             >
                                               <path
-                                                fill-rule="evenodd"
+                                                fillRule="evenodd"
                                                 d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                                clip-rule="evenodd"
+                                                clipRule="evenodd"
                                               />
                                             </svg>
                                             <span className="ml-1 leading-none">

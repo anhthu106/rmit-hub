@@ -1,11 +1,17 @@
 import { resetServerContext } from "react-beautiful-dnd";
+
+// BACKEND
 import connectDB from "../../backend/lib/connectDB";
+import importRawData from "../../backend/helper/data/data";
+
+// MODELS
 import Course from "../../backend/models/course";
 import Teams from "../../backend/models/team";
 import List from "../../backend/models/list";
 import Task from "../../backend/models/task";
-import importRawData from "../../backend/helper/data/data";
 import Users from "../../backend/models/user";
+
+// COMPONENT
 import Board from "../../components/workspace/Board";
 import CreateList from "../../components/workspace/CreateList";
 import Header from "../../components/header/Header";
