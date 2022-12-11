@@ -1,35 +1,39 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {io} from "socket.io-client";
 
 let socket
 
 export default function EditList({listTile, listId}) {
     const [title, setTitle] = useState(listTile);
+
+    useEffect(() => {
+        setTitle(listTile)
+    }, [listTile])
+
+
+    const onKeyDown = (e) => {
+        if (e.key === "Enter" || e.key === "Escape") {
+            const data = {title, listId}
+
+            socket = io()
+            socket.emit("editList", data)
+
+            e.preventDefault()
+        }
+    }
     return (
         <div>
             <form>
                 <div>
-                    <label htmlFor="title">Title</label>
                     <input
-                        placeholder={listTile}
                         type="text"
                         id="title"
                         name="title"
-                        required
                         value={title}
                         onChange={e => setTitle(e.target.value)}
+                        onKeyDown={onKeyDown}
                     />
                 </div>
-                <button onClick={(e) => {
-                    const data = {title, listId}
-
-                    socket = io()
-                    socket.emit("editList", data)
-
-                    e.preventDefault()
-                }}>
-                    Edit List
-                </button>
             </form>
         </div>
     )
