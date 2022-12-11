@@ -1,13 +1,14 @@
-import {SessionProvider, useSession} from "next-auth/react";
+import { SessionProvider, useSession } from "next-auth/react";
 import "../../styles/globals.css";
 import LandingPage from "../pageComponents/landingPage/LandingPage";
-import {useRouter} from "next/router";
-import {io} from "socket.io-client";
-import {useEffect} from "react";
+import { useRouter } from "next/router";
+import { io } from "socket.io-client";
+import { useEffect } from "react";
+import Loading from "../components/loading/Loading";
 
 let socket
 
-function MyApp({Component, pageProps: {session, ...pageProps}}) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     useEffect(() => {
         const socketInitializer = async () => {
             await fetch("/api/socket");
@@ -46,29 +47,34 @@ function MyApp({Component, pageProps: {session, ...pageProps}}) {
 export default MyApp;
 
 
-function Auth({children}) {
+function Auth({ children }) {
     // if `{ required: true }` is supplied, `status` can only be "loading" or "authenticated"
-    const {status} = useSession()
+    const { status } = useSession()
 
     if (status === "loading") {
-        return <div>Loading...</div>
+        return (
+            <Loading />
+        )
+
     }
 
     if (status === "unauthenticated") {
         return (
-            <LandingPage/>
+            <LandingPage />
         )
     }
     return children
 }
 
-function Authed({children}) {
+function Authed({ children }) {
     // if `{ required: true }` is supplied, `status` can only be "loading" or "authenticated"
-    const {status} = useSession();
+    const { status } = useSession();
     const router = useRouter();
 
     if (status === "loading") {
-        return <div>Loading...</div>
+        return (
+            <Loading />
+        )
     }
 
     if (status === "authenticated") {
