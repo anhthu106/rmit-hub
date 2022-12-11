@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import CreateTask from "./CreateTask";
+import CreateTask from "./task/CreateTask";
+import EditList from "./list/EditList";
 
 let socket;
 
@@ -111,6 +112,7 @@ export default function Board({ listProps, usernameProps }) {
                         }}
                         className="h-fit w-64"
                       >
+                        <EditList listId={column._id} listTile={column.title} />
                         <CreateTask
                           usernameProps={usernameProps}
                           listID={column._id}

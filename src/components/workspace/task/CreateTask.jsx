@@ -1,8 +1,8 @@
 import makeAnimated from "react-select/animated";
 import { useEffect, useState } from "react";
 import Select from "react-select";
-import { util } from "../../utils/utils";
-import { addItems } from "../../backend/helper/items/items";
+import { util } from "../../../utils/utils";
+import { addItems } from "../../../backend/helper/items/items";
 import { io } from "socket.io-client";
 
 let socket;
@@ -143,8 +143,7 @@ export default function CreateTask({ listID, usernameProps, listName }) {
                             socket = io();
                             socket.emit("updateTask", data);
                             e.preventDefault();
-
-                            // window.location.reload(false);
+                            setShowModal(false)
                           }}
                         >
                           Add Task

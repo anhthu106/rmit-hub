@@ -13,7 +13,7 @@ import Users from "../../backend/models/user";
 
 // COMPONENT
 import Board from "../../components/workspace/Board";
-import CreateList from "../../components/workspace/CreateList";
+import CreateList from "../../components/workspace/list/CreateList";
 import Header from "../../components/header/Header";
 
 export async function getServerSideProps({ params }) {

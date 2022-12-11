@@ -66,6 +66,16 @@ export default async function handler(req, res) {
 
             })
 
+            socket.on("editList", async (data) => {
+                socket.join("roomEditList")
+
+                const list = await List.findByIdAndUpdate(data.listId, { title: data.title})
+                const team = await Teams.findById(list.team_id)
+
+                await sendColumn(team, socket)
+
+            })
+
             socket.on("updateTask", async (data) => {
                 socket.join("roomTaskUpdate")
                 const taskValue = {
@@ -97,8 +107,6 @@ export default async function handler(req, res) {
                 await sendColumn(team, socket)
 
             })
-
-
         })
 
         const sendColumn = async (team, socket) => {
