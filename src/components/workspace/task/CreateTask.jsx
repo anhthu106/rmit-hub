@@ -7,7 +7,7 @@ import { io } from "socket.io-client";
 
 let socket;
 
-export default function CreateTask({ listID, usernameProps, listName }) {
+export default function CreateTask({ listID, usernameProps }) {
   const animated = makeAnimated();
   const personOption = util.username(usernameProps);
 
@@ -32,30 +32,30 @@ export default function CreateTask({ listID, usernameProps, listName }) {
         </button>
       </div> */}
 
-      <div className="flex items-center flex-shrink-0 h-10 py-8 px-4 border-solid border-2 border-white rounded-lg">
-        <span className="block text-lg font-semibold">{listName}</span>
-        {/* <span className="flex items-center justify-center w-5 h-5 ml-2 text-sm font-semibold text-indigo-500 bg-white rounded bg-opacity-30">
-          2
-        </span> */}
+      <div>
         <button
-          className="flex items-center justify-center w-6 h-6 ml-auto text-indigo-500 rounded hover:bg-indigo-700 hover:text-indigo-100"
+          type="button"
+          className="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
           onClick={() => setShowModal(true)}
         >
           <svg
-            className="w-5 h-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+            className="w-6 h-6"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-            ></path>
+              fillRule="evenodd"
+              d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+              clipRule="evenodd"
+            />
           </svg>
+          <span className="flex-1 ml-3 text-left whitespace-nowrap">
+            Create Task
+          </span>
         </button>
       </div>
+
       {showModal ? (
         <>
           <div className="fixed inset-0 z-10 overflow-y-auto">
@@ -143,7 +143,7 @@ export default function CreateTask({ listID, usernameProps, listName }) {
                             socket = io();
                             socket.emit("updateTask", data);
                             e.preventDefault();
-                            setShowModal(false)
+                            setShowModal(false);
                           }}
                         >
                           Add Task
@@ -155,8 +155,6 @@ export default function CreateTask({ listID, usernameProps, listName }) {
                           Cancel
                         </button>
                       </div>
-
-                      <hr />
                     </form>
 
                     <div className="items-center gap-2 mt-3 sm:flex"></div>
