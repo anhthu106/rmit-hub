@@ -1,11 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
 let socket;
 
 export default function EditList({ listTile, listId }) {
-  const [title, setTitle] = useState(listTile);
   const [showModal, setShowModal] = useState(false);
+  const [title, setTitle] = useState(listTile);
+
+  useEffect(() => {
+    setTitle(listTile);
+  }, [listTile]);
+
+  const onKeyDown = (e) => {
+    if (e.key === "Enter" || e.key === "Escape") {
+      const data = { title, listId };
+
+      socket = io();
+      socket.emit("editList", data);
+
+      e.preventDefault();
+    }
+  };
   return (
     <div>
       <div>
@@ -47,37 +62,37 @@ export default function EditList({ listTile, listId }) {
                         <div className="px-4 py-2 bg-white rounded-t-lg">
                           <div className="pb-4 md:pb-6 space-y-5">
                             <div>
-                            <label htmlFor="title">Title</label>
-                        <input
-                          placeholder={listTile}
-                          type="text"
-                          id="title"
-                          name="title"
-                          required
-                          value={title}
-                          onChange={(e) => setTitle(e.target.value)}
+                              <label htmlFor="title">Title</label>
+                              <input
+                                placeholder={listTile}
+                                type="text"
+                                id="title"
+                                name="title"
+                                required
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
+                                onKeyDown={onKeyDown}
                                 className="w-full text-lg text-gray-900 bg-white focus:ring-1 resize-none rounded-md border border-gray-300"
                               />
                             </div>
-
                           </div>
                         </div>
                       </div>
                       <div className="items-center gap-2 mt-3 sm:flex">
-                      <button
-                      className="w-full mt-2 p-2.5 flex-1 text-white bg-blue-700 rounded-md outline-none ring-offset-2 ring-blue-700 focus:ring-2"
-                        onClick={(e) => {
-                          const data = { title, listId };
+                        <button
+                          className="w-full mt-2 p-2.5 flex-1 text-white bg-blue-700 rounded-md outline-none ring-offset-2 ring-blue-700 focus:ring-2"
+                          onClick={(e) => {
+                            const data = { title, listId };
 
-                          socket = io();
-                          socket.emit("editList", data);
+                            socket = io();
+                            socket.emit("editList", data);
 
-                          e.preventDefault();
-                          setShowModal(false)
-                        }}
-                      >
-                        Edit List
-                      </button>
+                            e.preventDefault();
+                            setShowModal(false);
+                          }}
+                        >
+                          Edit List
+                        </button>
                         <button
                           className="w-full mt-2 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-indigo-600 focus:ring-2"
                           onClick={() => setShowModal(false)}
