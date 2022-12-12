@@ -13,12 +13,12 @@ export default function Post({
     <>
       {/* New */}
       <div className="p-4">
-        <div className="bg-white border rounded-3xl shadow-md drop-shadow-lg">
+        <div className="bg-white border rounded-xl shadow-md drop-shadow-lg">
           <div className=" px-4 py-3 ">
             <div className="flex justify-between">
               <div className="flex justify-between items-center">
                 <img
-                  className="h-8 w-8 rounded-full object-fill"
+                  className="h-10 w-10 rounded-full object-fill"
                   src={avatar}
                   alt="Avatar"
                 />
@@ -66,7 +66,7 @@ export default function Post({
               </div>
             </div>
           </div>
-          <div className="overflow-y-auto py-5 px-3 h-full bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700"></div>
+          <div className="overflow-y-auto px-3 h-full bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700"></div>
           <div className="flex items-center justify-between mx-4 mt-3 mb-2 sm:px-auto">
             <div className="px-2 py-1 bg-indigo-500 text-gray-100 font-bold text-sm md:text-base rounded">
               {course}
@@ -76,7 +76,7 @@ export default function Post({
             <p>{content}</p>
           </div>
           <img
-            className="h-fit w-auto mx-auto rounded-lg object-contain px-3"
+            className="h-fit w-auto mx-auto rounded-lg object-contain border-solid border-2 border-gray-100"
             src={image}
             alt="post"
           />

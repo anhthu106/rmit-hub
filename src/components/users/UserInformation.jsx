@@ -8,7 +8,7 @@ export default function UserInformation({ username, email, campus, major, image 
           alt="avatar"
         />
       </div>
-      <div className="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 tẽt">
+      <div className="text-2xl xl:text-4xl font-semibold leading-normal mb-2 text-blueGray-700 ">
         {username}
       </div>
       <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">

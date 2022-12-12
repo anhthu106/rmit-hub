@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { searchItem } from "../../backend/helper/items/items";
 import Header from "../../components/header/Header";
+import Footer from "../../components/footer/Footer";
 
 import CreatePost from "../../components/posts/CreatePost";
 import DisplayPost from "../post/DisplayPost";
@@ -19,10 +20,13 @@ const Homepage = ({ courseProps, postProps, session, Info }) => {
   };
 
   return (
-    <div id="myportal" className="bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500">
+    <div
+      id="myportal"
+      className="bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500"
+    >
       <Header />
 
-      <div className="bg-white">
+      <div className="bg-gray-100">
         <div className="flex justify-center w-full h-[calc(100vh-62px)] px-4 text-gray-700">
           <div className="flex w-full 2xl:px-80">
             <div className="flex flex-col flex-grow border-l border-r border-gray-300">
@@ -32,7 +36,11 @@ const Homepage = ({ courseProps, postProps, session, Info }) => {
               </div>
               <div className="flex-grow h-0 overflow-auto">
                 <div className="w-full space-y-8">
-                  <CreatePost courseProps={courseProps} id={session.user._id} Info = {Info} />
+                  <CreatePost
+                    courseProps={courseProps}
+                    id={session.user._id}
+                    Info={Info}
+                  />
 
                   {filtered.map((post) => (
                     <div key={post._id}>
@@ -58,6 +66,7 @@ const Homepage = ({ courseProps, postProps, session, Info }) => {
         </div>
       </div>
 
+      <Footer />
     </div>
   );
 };
