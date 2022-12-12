@@ -77,7 +77,7 @@ export default function Team({ courseProps, teamProps }) {
                 <div className="flex flex-col flex-grow border-l border-r border-gray-300">
                   <div className="flex justify-between px-8 py-4 border-b border-gray-300">
                     <h1 className="text-xl font-semibold">Teams</h1>
-                    Serch
+                    
                   </div>
                   <div className="flex-grow h-0 overflow-auto">
                     <div className="w-full space-y-8">

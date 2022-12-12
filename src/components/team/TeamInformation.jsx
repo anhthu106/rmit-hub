@@ -22,72 +22,24 @@ export default function TeamInformation({
                 </h1>
                 <p className="leading-relaxed text-base">{Description}</p>
                 <div className="py-4">
-                  {/* <div className=" inline-block mr-2">
-                    <div className="flex  pr-2 h-full items-center">
-                      <svg
-                        className="text-yellow-500 w-6 h-6 mr-1"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        strokeWidth="2"
-                        stroke="currentColor"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path stroke="none" d="M0 0h24v24H0z" />
-                        <circle cx="12" cy="12" r="9" />
-                        <path d="M9 12l2 2l4 -4" />
-                      </svg>
-                      <p className="title-font font-medium">Python</p>
-                    </div>
-                  </div>
-
-                  <div className=" inline-block mr-2">
-                    <div className="flex  pr-2 h-full items-center">
-                      <svg
-                        className="text-gray-500 w-6 h-6 mr-1"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <circle cx="12" cy="12" r="10" />
-                        <line x1="15" y1="9" x2="9" y2="15" />
-                        <line x1="9" y1="9" x2="15" y2="15" />
-                      </svg>
-                      <p className="title-font font-medium">Javascript</p>
-                    </div>
-                  </div> */}
                 </div>
-                <div className="md:flex font-bold text-gray-800">
-                  <div className="w-full md:w-1/2 flex space-x-3">
-                    <div className="w-1/2">
-                      <h2 className="text-gray-500">Title</h2>
-                      <p>Place Holder</p>
-                    </div>
-                    <div className="w-1/2">
-                      <h2 className="text-gray-500">Member</h2>
-                      <p>{Member}</p>
+                <div className="flex font-bold text-gray-800">
+                  <div className="w-full min-w-max space-x-6 flex">
+                    <div className="w-full">
+                      <h2 className="text-gray-500">Member({Member})</h2>
                       <ul>
                         {User.map((id) => (
                           <li key={id}>{id}</li>
                         ))}
                       </ul>
                     </div>
-                  </div>
-                  <div className="w-full md:w-1/2 flex space-x-3">
-                    <div className="w-1/2">
+
+                    <div className="w-full">
                       <h2 className="text-gray-500">Course</h2>
                       <p>{CourseId}</p>
                     </div>
-                    {/* <div className="w-1/2">
-                      <h2 className="text-gray-500">Title</h2>
-                      <p>description</p>
-                    </div> */}
                   </div>
+                  
                 </div>
                 <Link href={`/team/${TeamID}`}>
                   <a className="mt-3 text-indigo-500 font-semibold inline-flex items-center">
