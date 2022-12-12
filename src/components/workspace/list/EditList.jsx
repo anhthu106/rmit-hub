@@ -22,7 +22,7 @@ export default function EditList({listTile, listId}) {
         }
     }
     return (
-        <div>
+        <div className="text-lg font-semibold mb-7">
             <form>
                 <div>
                     <input

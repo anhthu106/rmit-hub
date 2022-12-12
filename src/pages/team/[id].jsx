@@ -85,12 +85,15 @@ export default function TeamDetail({
     <>
       <Header />
 
-      <div className="flex flex-col w-screen max-h-screen ">
-        <div className="px-10 pt-6  text-gray-700 bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200">
-          <h1 className="text-2xl font-bold ">Team Project Board</h1>
-          <CreateList teamID={TeamInfo._id} />
-          <Board listProps={listProps} usernameProps={userName} />
+      <div className="text-gray-700 bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200">
+        <div className="flex flex-col w-screen max-h-screen ">
+          <div className="px-10 pt-6  ">
+            <h1 className="text-2xl font-bold ">Team Project Board</h1>
+            <CreateList teamID={TeamInfo._id} />
+            <Board listProps={listProps} usernameProps={userName} />
+          </div>
         </div>
+        s
       </div>
     </>
   );

@@ -51,7 +51,7 @@ export default NextAuth({
         async session({session, token}) {
             if (token) {
                 await connectDB()
-                session.user = await Users.findOne({email: token.user.email}, "_id username email campus major_id team_id post_id task_id")
+                session.user = await Users.findOne({email: token.user.email}, "_id username email campus major_id team_id post_id task_id image")
             } else {
                 session.user = token.user;
             }

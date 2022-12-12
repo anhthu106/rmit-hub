@@ -42,6 +42,7 @@ export default function Home({ courseProps, postProps }) {
                 courseProps={courseProps}
                 postProps={postProps}
                 session={session}
+                Info = {session}
             />
         )
     }

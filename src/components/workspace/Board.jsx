@@ -77,8 +77,8 @@ export default function Board({ listProps, usernameProps }) {
     });
   }, []);
   return (
-    <div className="flex overflow-auto h-full">
-      <div className="flex-auto w-96"></div>
+    <div className="flex  overflow-auto h-full">
+      {/* <div className="flex-auto w-96"></div> */}
 
       {/*Container of drag function as container of lists*/}
       <DragDropContext
@@ -87,94 +87,91 @@ export default function Board({ listProps, usernameProps }) {
         {/*Create task container*/}
         {columns.map((column) => {
           return (
-            <div className="flex flex-col items-center max-h-[calc(88vh)]" key={column._id}>
+            <div
+              className="flex flex-col items-center max-h-[calc(88vh)] pt-5"
+              key={column._id}
+            >
               {/*Name of the list*/}
+              <div className="relative flex flex-col items-start flex-shrink-0 h-10 py-8 px-4 border-solid border-2 border-white rounded-lg content-center align-middle">
+                <EditList listId={column._id} listTile={column.title} />
+                {/* <span className="flex items-center justify-center w-5 h-5 ml-2 text-sm font-semibold text-indigo-500 bg-white rounded bg-opacity-30">
+          2
+        </span> */}
+                <div className="absolute top-0 right-0 flex w-5 h-5 mt-5 mr-5 tooltip ">
+                  <div className="hover:text-gray-400 px-2 py-1 font-medium">
+                    <svg
+                      className="w-4 h-4 fill-current"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
+                    </svg>
+                  </div>
+                  <div className="flex flex-col p-4 bg-white w-max h-max rounded-md z-20 absolute right-0 invisible tooltip-item border-solid border-2 border-gray-300 ">
+                    <ul className="list-disc space-y-2 ">
+                      <CreateTask
+                        usernameProps={usernameProps}
+                        listID={column._id}
+                      />
+                    </ul>
+                    <hr />
+                    {/* <ul className="list-disc space-y-2">
+                                <EditList
+                                  listId={column._id}
+                                  listTile={column.title}
+                                />
+                              </ul> */}
+                    <hr />
+                    <ul>
+                      <button
+                        type="button"
+                        className="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                        onClick={(e) => {
+                          const data = column._id;
 
+                          socket = io();
+                          socket.emit("deleteList", data);
+                          e.preventDefault();
+                        }}
+                      >
+                        <svg
+                          className="w-6 h-6"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                        <span className="flex-1 ml-3 text-left whitespace-nowrap">
+                          Delete List
+                        </span>
+                      </button>
+                    </ul>
+                  </div>
+                </div>
+              </div>
               {/*List items*/}
               <div className="m-5 overflow-y-auto min-h-[50vh]">
                 <Droppable droppableId={column._id} key={column._id}>
                   {(provided, snapshot) => {
                     return (
                       <div
+                        key={column._id}
                         {...provided.droppableProps}
                         ref={provided.innerRef}
                         style={{
                           /*TODO change style to tailwind*/
                           background: snapshot.isDraggingOver
                             ? "lightgrey"
-                            : "",
+                            : "transparent",
                         }}
-                        className="h-fit w-64 rounded-lg"
+                        className="h-fit w-64 rounded-lg mt-3"
                       >
-                        <div className="relative flex flex-col items-start flex-shrink-0 h-10 py-8 px-4 border-solid border-2 border-white rounded-lg content-center">
-                          <div className="text-lg font-semibold">
-                            <EditList
-                                  listId={column._id}
-                                  listTile={column.title}
-                            />
-                          </div>
-                          {/* <span className="flex items-center justify-center w-5 h-5 ml-2 text-sm font-semibold text-indigo-500 bg-white rounded bg-opacity-30">
-          2
-        </span> */}
-                          <div className="absolute top-0 right-0 flex w-5 h-5 mt-5 mr-5 tooltip ">
-                            <div className="hover:text-gray-400 px-2 py-1 font-medium">
-                              <svg
-                                className="w-4 h-4 fill-current"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                              >
-                                <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
-                              </svg>
-                            </div>
-                            <div className="flex flex-col p-4 bg-white w-max h-max rounded-md z-20 absolute right-0 invisible tooltip-item border-solid border-2 border-gray-300 ">
-                              <ul className="list-disc space-y-2 ">
-                                <CreateTask
-                                  usernameProps={usernameProps}
-                                  listID={column._id}
-                                />
-                              </ul>
-                              <hr />
-                              <ul className="list-disc space-y-2">
-                                <EditList
-                                  listId={column._id}
-                                  listTile={column.title}
-                                />
-                              </ul>
-                              <hr />
-                              <ul>
-                                <button
-                                  type="button"
-                                  className="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                                  onClick={(e) => {
-                                    const data = column._id;
-
-                                    socket = io();
-                                    socket.emit("deleteList", data);
-                                    e.preventDefault();
-                                  }}
-                                >
-                                  <svg
-                                    className="w-6 h-6"
-                                    fill="currentColor"
-                                    viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                  >
-                                    <path
-                                      fillRule="evenodd"
-                                      d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                                      clipRule="evenodd"
-                                    />
-                                  </svg>
-                                  <span className="flex-1 ml-3 text-left whitespace-nowrap">
-                                    Delete List
-                                  </span>
-                                </button>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-
                         {/*Fetch items*/}
                         {column.task_id.map((task, index) => {
                           return (
@@ -187,6 +184,7 @@ export default function Board({ listProps, usernameProps }) {
                                 {(provided, snapshot) => {
                                   return (
                                     <div
+                                      key={column._id}
                                       ref={provided.innerRef}
                                       {...provided.draggableProps}
                                       {...provided.dragHandleProps}
