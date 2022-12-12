@@ -111,7 +111,7 @@ export default function Board({listProps, usernameProps, TeamInfo}) {
                                             <Task
                                                 usernameProps={usernameProps}
                                                 listID={column._id}
-
+                                                task={""}
                                             />}
                                         nameTag={"Create Task"}
                                     />
@@ -171,12 +171,18 @@ export default function Board({listProps, usernameProps, TeamInfo}) {
                                                                             className="flex flex-col pb-2 overflow-auto"
                                                                         >
                                                                             <TaskCard task={task}/>
+                                                                            <Task
+                                                                                task={task}
+                                                                                listID={column._id}
+                                                                                usernameProps={usernameProps}
+                                                                            />
                                                                         </div>
                                                                     )
                                                                 }}
                                                             </Draggable>
                                                         </>
-                                                    );
+                                                    )
+                                                        ;
                                                 })}
                                                 <br/>
                                                 {provided.placeholder}
@@ -186,9 +192,11 @@ export default function Board({listProps, usernameProps, TeamInfo}) {
                                 </Droppable>
                             </div>
                         </div>
-                    );
+                    )
+                        ;
                 })}
             </DragDropContext>
         </div>
-    );
+    )
+        ;
 }
