@@ -69,7 +69,7 @@ export default async function handler(req, res) {
             socket.on("editList", async (data) => {
                 socket.join("roomEditList")
 
-                const list = await List.findByIdAndUpdate(data.listId, { title: data.title})
+                const list = await List.findByIdAndUpdate(data.listId, {title: data.title})
                 const team = await Teams.findById(list.team_id)
 
                 await sendColumn(team, socket)
@@ -84,11 +84,21 @@ export default async function handler(req, res) {
                     username: data.assignedPerson,
                     deadline: data.deadline,
                 }
-                const task = await Task.create(taskValue)
-                const list = await List.findByIdAndUpdate(taskValue.list_id.toString(),
-                    {$push: {task_id: task._id}})
+                const taskId = data.task._id;
 
+                let task
+                let list
 
+                task = await Task.findByIdAndUpdate(taskId, taskValue)
+
+                if (!task) {
+                    task = await Task.create(taskValue)
+                    list = await List.findByIdAndUpdate(taskValue.list_id.toString(),
+                        {$push: {task_id: task._id}})
+                } else {
+                    list = await List.findByIdAndUpdate(taskValue.list_id.toString(), taskValue)
+                }
+                
                 const team = await Teams.findById(list.team_id.toString())
 
                 await sendColumn(team, socket)
