@@ -108,7 +108,10 @@ export default function Board({ listProps, usernameProps }) {
                       >
                         <div className="relative flex flex-col items-start flex-shrink-0 h-10 py-8 px-4 border-solid border-2 border-white rounded-lg content-center">
                           <div className="text-lg font-semibold">
-                            {column.title}
+                            <EditList
+                                  listId={column._id}
+                                  listTile={column.title}
+                            />
                           </div>
                           {/* <span className="flex items-center justify-center w-5 h-5 ml-2 text-sm font-semibold text-indigo-500 bg-white rounded bg-opacity-30">
           2
