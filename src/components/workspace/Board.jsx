@@ -109,7 +109,6 @@ export default function Board({listProps, usernameProps, TeamInfo}) {
                                                 usernameProps={usernameProps}
                                                 listID={column._id}
                                                 task={""}
-
                                             />}
                                         nameTag={"Create Task"}
                                     />
@@ -170,17 +169,17 @@ export default function Board({listProps, usernameProps, TeamInfo}) {
                                                                         >
                                                                             <TaskCard task={task}/>
                                                                             <Task
-                                                                                usernameProps={usernameProps}
-                                                                                listID={column._id}
                                                                                 task={task}
-
+                                                                                listID={column._id}
+                                                                                usernameProps={usernameProps}
                                                                             />
                                                                         </div>
                                                                     )
                                                                 }}
                                                             </Draggable>
                                                         </>
-                                                    );
+                                                    )
+                                                        ;
                                                 })}
                                                 <br/>
                                                 {provided.placeholder}
@@ -190,9 +189,11 @@ export default function Board({listProps, usernameProps, TeamInfo}) {
                                 </Droppable>
                             </div>
                         </div>
-                    );
+                    )
+                        ;
                 })}
             </DragDropContext>
         </div>
-    );
+    )
+        ;
 }
