@@ -34,7 +34,8 @@ export default function Task({listID, usernameProps, task}) {
     }
 
     return (
-        <form>
+        // TODO modal
+        <form className="hidden">
             <div>
                 <label
                     htmlFor="description"
