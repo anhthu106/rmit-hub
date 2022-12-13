@@ -1,6 +1,10 @@
-import { Schema, model, models, Types } from 'mongoose';
+import {model, models, Schema, Types} from 'mongoose';
 
 const taskSchema = new Schema({
+    name: {
+        type: String,
+        required: true
+    },
     description: {
         type: String,
         required: true
