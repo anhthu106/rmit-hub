@@ -1,22 +1,23 @@
-import {resetServerContext} from "react-beautiful-dnd";
+import { resetServerContext } from "react-beautiful-dnd";
 
 // BACKEND
-import connectDB from "../../backend/lib/connectDB";
-import importRawData from "../../backend/helper/data/data";
+import connectDB from "../../../backend/lib/connectDB";
+import importRawData from "../../../backend/helper/data/data";
 
 // MODELS
-import Course from "../../backend/models/course";
-import Teams from "../../backend/models/team";
-import List from "../../backend/models/list";
-import Task from "../../backend/models/task";
-import Users from "../../backend/models/user";
-import {useSession} from "next-auth/react";
-import TeamMember from "../../pageComponents/workingplace/TeamMember";
-import NonTeamMember from "../../pageComponents/workingplace/NonTeamMember";
+import Course from "../../../backend/models/course";
+import Teams from "../../../backend/models/team";
+import List from "../../../backend/models/list";
+import Task from "../../../backend/models/task";
+import Users from "../../../backend/models/user";
+import { useSession } from "next-auth/react";
 
 // COMPONENT
+import TeamMember from "../../../pageComponents/workingplace/TeamMember";
+import NonTeamMember from "../../../pageComponents/workingplace/NonTeamMember";
 
-export async function getServerSideProps({params}) {
+
+export async function getServerSideProps({ params }) {
     await connectDB();
 
     const courseData = await Course.find({}, "name");
@@ -26,7 +27,7 @@ export async function getServerSideProps({params}) {
         "name"
     );
     const listData = await List.find(
-        {team_id: params.id},
+        { team_id: params.id },
         "_id title task_id team_id"
     ).populate("task_id", "_id description username createdDate deadline", Task);
     const list = importRawData(listData, ["_id", "team_id"], null);
@@ -76,23 +77,24 @@ export async function getServerSideProps({params}) {
 }
 
 export default function TeamDetail({
-                                       listProps,
-                                       TeamInfo,
-                                       courseProps,
-                                       userName,
-                                   }) {
-    console.log()
-    const {data: session} = useSession();
+    listProps,
+    TeamInfo,
+    courseProps,
+    userName,
+}) {
+    const { data: session } = useSession();
+    const currentUser = session.user._id
+
     if (TeamInfo.userId.includes(session.user._id)) {
         return (
             <div>
-                <TeamMember userName={userName} TeamInfo={TeamInfo} listProps={listProps}/>
+                <TeamMember userName={userName} TeamInfo={TeamInfo} listProps={listProps} />
             </div>
         )
     } else {
         return (
             <div>
-                <NonTeamMember TeamInfo={TeamInfo}/>
+                <NonTeamMember TeamInfo={TeamInfo} currentUser={currentUser} />
             </div>
 
         )

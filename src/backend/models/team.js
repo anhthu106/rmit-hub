@@ -27,7 +27,12 @@ const teamSchema = new Schema({
     },
     Description: {
         type: String,
-    }
+    },
+    pending: [{
+        type: Types.ObjectId,
+        ref: "Users",
+        default: 0
+    }]
 });
 
 teamSchema.pre("save", function (next) {

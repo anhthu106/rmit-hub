@@ -1,5 +1,10 @@
-export default function NonTeamMember({TeamInfo}) {
-    console.log(TeamInfo)
+import { useState } from "react";
+import { addItems } from "../../backend/helper/items/items";
+import Button from "../../components/button/Button";
+
+export default function NonTeamMember({ TeamInfo, currentUser }) {
+    const [message, setMessage] = useState("")
+    console.log(currentUser)
     return (
         // TODO Display all team information and joining function
         <div>
@@ -15,6 +20,17 @@ export default function NonTeamMember({TeamInfo}) {
             {TeamInfo.user.map((member) => (
                 <div>{member}</div>
             ))}
+
+            <Button
+                fn={(e) =>
+                    addItems({
+                        currentUser: currentUser,
+                        leader: TeamInfo.userId[0],
+                        teamID: TeamInfo._id
+                    }, e, setMessage, "/api/team/join")
+                }
+                options={"Request to join"}
+            />
         </div>
     )
 }

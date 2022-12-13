@@ -1,6 +1,6 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import Button from "../button/Button";
-import {addItems} from "../../backend/helper/items/items";
+import { addItems } from "../../backend/helper/items/items";
 
 const RecoverForm = () => {
     //UseState
@@ -46,12 +46,12 @@ const RecoverForm = () => {
                     placeholder="ID@rmit.edu.vn"
                     required
                     value={email}
-                    onChange={({target}) => setEmail(target.value)}
+                    onChange={({ target }) => setEmail(target.value)}
                 />
             </div>
             <Button
                 fn={(e) =>
-                    addItems({email}, e, setMessage, "/api/auth/recover")
+                    addItems({ email }, e, setMessage, "/api/auth/recover")
                 }
                 options={"Recover"}
             />
