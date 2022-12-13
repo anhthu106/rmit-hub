@@ -6,6 +6,7 @@ import Task from "./task/Task";
 import TaskCard from "./task/TaskCard";
 import Hamburger from "../hamburger/Hamburger";
 import DropDownHamburger from "../hamburger/DropDown.Hamburger";
+import CreateList from "./list/CreateList";
 
 let socket;
 
@@ -80,7 +81,7 @@ export default function Board({ listProps, usernameProps, TeamInfo }) {
     });
   }, []);
   return (
-    <div className="flex  overflow-auto h-full">
+    <div className="flex pt-6 overflow-auto h-full">
       {/* <div className="flex-auto w-96"></div> */}
 
       {/*Container of drag function as container of lists*/}
@@ -95,71 +96,69 @@ export default function Board({ listProps, usernameProps, TeamInfo }) {
               key={column._id}
             >
               {/*List top container*/}
-              <div className="relative  h-10border-solid border-2 border-gray-400 rounded-lg content-center align-middle ">
+              <div className="relative border-solid border-2 border-gray-400 rounded-lg content-center align-middle ">
                 <div className="p-3">
                   {/*Inline edit List*/}
                   <EditList listId={column._id} listTile={column.title} />
-
-                  {/*List hamburger*/}
-                  <div className="absolute top-0 right-0 flex w-5 h-5 mt-5 mr-5 tooltip ">
-                    <Hamburger /> {/*Hamburger button*/}
-                    <div className="flex flex-col border-gray-500 border-2 p-4 bg-white w-max h-max rounded-md z-20 absolute right-0 invisible tooltip-item border-solid">
+                </div>
+                {/*List hamburger*/}
+                <div className="absolute top-0 right-0 flex w-5 h-5 mt-5 mr-5 tooltip">
+                  <Hamburger /> {/*Hamburger button*/}
+                  <div className="flex flex-col border-gray-500 border-2 p-4 bg-white w-max h-max rounded-md z-20 absolute right-0 invisible tooltip-item border-solid">
                     {/* TODO fix */}
-                      <Task
-                        usernameProps={usernameProps}
-                        listID={column._id}
-                        task={""}
-                        
-                        tag3={
-                          <>
-                            <DropDownHamburger /*Hamburger dropdown*/
-                              tag={
-                                <svg
-                                  className="w-6 h-6"
-                                  fill="currentColor"
-                                  viewBox="0 0 20 20"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                >
-                                  <path
-                                    fillRule="evenodd"
-                                    d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                                    clipRule="evenodd"
-                                  />
-                                </svg>
-                              }
-                              nameTag={"Create Task"}
-                            />
-                          </>
-                        }
-                      />
-                      <hr />
-                      <DropDownHamburger
-                        tag={
-                          <svg
-                            className="w-6 h-6"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                            />
-                          </svg>
-                        }
-                        buttonFnc={(e) => {
-                          const data = column._id;
+                    <Task
+                      usernameProps={usernameProps}
+                      listID={column._id}
+                      task={""}
+                      tag3={
+                        <>
+                          <DropDownHamburger /*Hamburger dropdown*/
+                            tag={
+                              <svg
+                                className="w-6 h-6"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            }
+                            nameTag={"Create Task"}
+                          />
+                        </>
+                      }
+                    />
+                    <hr />
+                    <DropDownHamburger
+                      tag={
+                        <svg
+                          className="w-6 h-6"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                          />
+                        </svg>
+                      }
+                      buttonFnc={(e) => {
+                        const data = column._id;
 
-                          socket = io();
-                          socket.emit("deleteList", data);
-                          e.preventDefault();
-                        }}
-                        nameTag={"Delete List"}
-                      />
-                    </div>
+                        socket = io();
+                        socket.emit("deleteList", data);
+                        e.preventDefault();
+                      }}
+                      nameTag={"Delete List"}
+                    />
                   </div>
                 </div>
               </div>
@@ -179,7 +178,7 @@ export default function Board({ listProps, usernameProps, TeamInfo }) {
                             ? "#f3f4f6"
                             : "transparent",
                         }}
-                        className="h-fit w-64 rounded-lg mt-3"
+                        className="h-full w-64 rounded-lg"
                       >
                         {/*Fetch items*/}
                         {column.task_id.map((task, index) => {
@@ -204,55 +203,56 @@ export default function Board({ listProps, usernameProps, TeamInfo }) {
                                         listID={column._id}
                                         usernameProps={usernameProps}
                                         tag1={
-                                            <button className="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-l-lg font-medium w-full  px-4 py-2 inline-flex space-x-1 items-center justify-center">
-                                              <span>
-                                                <svg
-                                                  className="w-4 h-4"
-                                                  fill="none"
-                                                  stroke="currentColor"
-                                                  viewBox="0 0 24 24"
-                                                  xmlns="http://www.w3.org/2000/svg"
-                                                >
-                                                  <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    strokeWidth={2}
-                                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                                                  />
-                                                </svg>
-                                              </span>
-                                              <span>Edit</span>
-                                            </button>                                          
+                                          <button className="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-l-lg font-medium w-full  px-4 py-2 inline-flex space-x-1 items-center justify-center">
+                                            <span>
+                                              <svg
+                                                className="w-4 h-4"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                              >
+                                                <path
+                                                  strokeLinecap="round"
+                                                  strokeLinejoin="round"
+                                                  strokeWidth={2}
+                                                  d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                                                />
+                                              </svg>
+                                            </span>
+                                            <span>Edit</span>
+                                          </button>
                                         }
+                                        tag2={
+                                          <button
+                                            className="text-slate-800 hover:text-red-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-r-lg w-6/12 font-medium px-4 py-2 inline-flex space-x-1 items-center justify-center"
+                                            onClick={(e) => {
+                                              const data = task._id;
 
-                                        tag2 ={<button
-                                          className="text-slate-800 hover:text-red-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-r-lg w-6/12 font-medium px-4 py-2 inline-flex space-x-1 items-center justify-center"
-                                          onClick={(e) => {
-                                            const data = task._id;
-
-                                            socket = io();
-                                            socket.emit("deleteTask", data);
-                                            e.preventDefault();
-                                          }}
-                                        >
-                                          <span>
-                                            <svg
-                                              xmlns="http://www.w3.org/2000/svg"
-                                              fill="none"
-                                              viewBox="0 0 24 24"
-                                              stroke-width="1.5"
-                                              stroke="currentColor"
-                                              class="w-4 h-4"
-                                            >
-                                              <path
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-                                              />
-                                            </svg>
-                                          </span>
-                                          <span>Delete</span>
-                                        </button>}
+                                              socket = io();
+                                              socket.emit("deleteTask", data);
+                                              e.preventDefault();
+                                            }}
+                                          >
+                                            <span>
+                                              <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                strokeWidth="1.5"
+                                                stroke="currentColor"
+                                                className="w-4 h-4"
+                                              >
+                                                <path
+                                                  strokeLinecap="round"
+                                                  strokeLinejoin="round"
+                                                  d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+                                                />
+                                              </svg>
+                                            </span>
+                                            <span>Delete</span>
+                                          </button>
+                                        }
                                       />
                                     </div>
                                   );
@@ -271,6 +271,7 @@ export default function Board({ listProps, usernameProps, TeamInfo }) {
             </div>
           );
         })}
+        <CreateList teamID={TeamInfo._id} />
       </DragDropContext>
     </div>
   );

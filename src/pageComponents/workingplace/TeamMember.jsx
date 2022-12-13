@@ -3,7 +3,7 @@ import Board from "../../components/workspace/Board";
 
 export default function TeamMember({TeamInfo, listProps, userName}) {
     return (
-        <div className="bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200 h-screen ">
+        <div className="bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200 h-screen">
             <Header/>
 
             <div className="text-gray-700">
