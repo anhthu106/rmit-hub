@@ -35,7 +35,7 @@ const Homepage = ({ courseProps, postProps, session, Info }) => {
                 <Search onchange={handleChange} />
               </div>
               <div className="flex-grow h-0 overflow-auto">
-                <div className="w-full space-y-8">
+                <div className="w-full space-y-1">
                   <CreatePost
                     courseProps={courseProps}
                     id={session.user._id}

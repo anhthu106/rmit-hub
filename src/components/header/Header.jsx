@@ -19,11 +19,13 @@ export default function Header() {
                 </Navbar.Brand>
                 <div className="flex md:order-2">
                   <Dropdown label="User">
-                    <div className="py-3 px-4 text-sm text-gray-900 dark:text-white">
-                      <div className="text-lg">{session.user.username}</div>
-                      <div className="font-medium truncate">
-                        {session.user.email}
-                      </div>
+                    <div className="py-3 px-4 text-sm text-gray-900 hover:bg-gray-100">
+                      <a href={`/users/${session.user._id}`}>
+                        <div className="text-lg">{session.user.username}</div>
+                        <div className="font-medium truncate">
+                          {session.user.email}
+                        </div>
+                      </a>
                     </div>
                     <Dropdown.Item>
                       <Link href={`/users/${session.user._id}`}>
@@ -44,7 +46,7 @@ export default function Header() {
                 <Navbar.Collapse>
                   <Navbar.Link
                     href="../"
-                  // active={true}
+                    // active={true}
                   >
                     Feed
                   </Navbar.Link>
@@ -72,9 +74,7 @@ export default function Header() {
                 <div className="flex md:order-2">
                   <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
                     <Link href="#">
-                      <a
-                        className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
-                      >
+                      <a className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
                         <button
                           onClick={() => signIn()}
                           className="font-medium text-indigo-600 hover:text-indigo-500"
@@ -85,9 +85,7 @@ export default function Header() {
                     </Link>
 
                     <Link href="#">
-                      <a
-                        className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-                      >
+                      <a className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700">
                         <Link
                           href={"../signup"}
                           className="border-2 border-indigo-500"
@@ -96,25 +94,28 @@ export default function Header() {
                         </Link>
                       </a>
                     </Link>
-
                   </div>
                   <Navbar.Toggle />
                 </div>
                 <Navbar.Collapse className="md:hidden">
-                  <Navbar.Link href="#" className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
+                  <Navbar.Link
+                    href="#"
+                    className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
+                  >
                     <button
                       onClick={() => signIn()}
                       className="font-medium text-right text-indigo-600 hover:text-indigo-500 w-full"
                     >
                       Sign in
                     </button>
-
                   </Navbar.Link>
-                  <Navbar.Link href={"../signup"} className="border-2 border-indigo-500">
+                  <Navbar.Link
+                    href={"../signup"}
+                    className="border-2 border-indigo-500"
+                  >
                     <div className="font-medium text-right text-indigo-600 hover:text-indigo-500">
                       Sign Up
                     </div>
-
                   </Navbar.Link>
                 </Navbar.Collapse>
               </Navbar>

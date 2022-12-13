@@ -7,10 +7,10 @@ export default function DropDownHamburger({ tag, nameTag, buttonFnc }) {
         onClick={buttonFnc}
       >
         {tag}
-        <span className="flex-1 ml-3 text-left whitespace-nowrap">{nameTag}</span>
+        <span className="flex-1 ml-3 text-left whitespace-nowrap">
+          {nameTag}
+        </span>
       </button>
-
-      
     </div>
   );
 }
