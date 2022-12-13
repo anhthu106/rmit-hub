@@ -20,39 +20,39 @@ export default function DisplayPost({
 
   if (sessionName === username) {
     return (
-      
-        <Post
-          tag={
-            <>
-              <ul className="space-y-2">
-                <DeleteButton
-                  author={author}
-                  course={course}
-                  content={content}
-                  date={date}
-                  setMessage={setMessage}
-                  id={id}
-                  image={image}
-                />
-                <EditPost
-                  preCourse={course}
-                  preContent={content}
-                  uid={uid}
-                  id={id}
-                  courseProps={courseProps}
-                />
-              </ul>
-            </>
-          }
-          content={content}
-          date={date}
-          author={author}
-          course={course}
-          uid={uid}
-          image={image}
-          avatar={avatar}
-        />
-      
+
+      <Post
+        tag={
+          <>
+            <ul className="space-y-2">
+              <DeleteButton
+                author={author}
+                course={course}
+                content={content}
+                date={date}
+                setMessage={setMessage}
+                id={id}
+                image={image}
+              />
+              <EditPost
+                preCourse={course}
+                preContent={content}
+                uid={uid}
+                id={id}
+                courseProps={courseProps}
+              />
+            </ul>
+          </>
+        }
+        content={content}
+        date={date}
+        author={author}
+        course={course}
+        uid={uid}
+        image={image}
+        avatar={avatar}
+      />
+
     );
   }
   return (
@@ -74,7 +74,6 @@ function DeleteButton({
   date,
   content,
   course,
-  setMessage,
   id,
   image,
 }) {
@@ -88,7 +87,6 @@ function DeleteButton({
             deleteItems(
               { author, date, content, course, image },
               e,
-              setMessage,
               `/api/posts/${id}`
             );
             window.location.reload(false);

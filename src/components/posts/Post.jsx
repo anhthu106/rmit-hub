@@ -90,7 +90,6 @@ export default function Post({
             </a>
           </div>
           <div className="font-semibold text-sm mx-4 mt-2 mb-4">
-            {/* LOL */}
           </div>
         </div>
       </div>
