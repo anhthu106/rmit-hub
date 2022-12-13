@@ -79,6 +79,7 @@ export default async function handler(req, res) {
             socket.on("updateTask", async (data) => {
                 socket.join("roomTaskUpdate")
                 const taskValue = {
+                    name: data.name,
                     description: data.description,
                     list_id: data.listID,
                     username: data.assignedPerson,
@@ -98,7 +99,7 @@ export default async function handler(req, res) {
                 } else {
                     list = await List.findByIdAndUpdate(taskValue.list_id.toString(), taskValue)
                 }
-                
+
                 const team = await Teams.findById(list.team_id.toString())
 
                 await sendColumn(team, socket)
