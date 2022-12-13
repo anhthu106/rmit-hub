@@ -6,7 +6,7 @@ import {io} from "socket.io-client";
 
 let socket;
 
-export default function Task({listID, usernameProps, task}) {
+export default function Task({listID, usernameProps, task, tag1, tag2, tag3}) {
     const animated = makeAnimated();
     const personOption = util.username(usernameProps);
 
@@ -14,6 +14,7 @@ export default function Task({listID, usernameProps, task}) {
     const [description, setDescription] = useState(task.description);
     const [deadline, setDeadline] = useState(task.deadline);
     const [assignedPerson, setAssignedPerson] = useState(task.username);
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         setName(task.name);
