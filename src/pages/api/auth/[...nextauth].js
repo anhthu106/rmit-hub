@@ -14,17 +14,17 @@ export default NextAuth({
                     type: "text",
                     placeholder: "johndoe@test.com",
                 },
-                password: { label: "Password", type: "password" },
+                password: {label: "Password", type: "password"},
             },
 
             authorize: async (credentials, req) => {
                 await connectDB()
                 const email = credentials.email;
                 const password = credentials.password;
-                const check = await Users.findOne({ email: email })
+                const check = await Users.findOne({email: email})
                 if (!check) throw new Error("You haven't registered yet!")
                 if (check) {
-                    const user = await Users.findOne({ email: email }, "_id username email campus major_id team_id post_id task_id")
+                    const user = await Users.findOne({email: email}, "_id username email campus major_id team_id post_id task_id")
                     if (!check.password) {
                         throw new Error("Please enter password!")
                     }
@@ -41,16 +41,20 @@ export default NextAuth({
     ],
 
     callbacks: {
-        async jwt({ token, user }) {
+        async jwt({token, user}) {
             if (user) {
                 token.user = user;
             }
             return token;
         },
 
-        async session({ session, token }) {
-            session.user = token.user;
-
+        async session({session, token}) {
+            if (token) {
+                await connectDB()
+                session.user = await Users.findOne({email: token.user.email}, "_id username email campus major_id team_id post_id task_id image")
+            } else {
+                session.user = token.user;
+            }
             return session;
         }
     },

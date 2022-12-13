@@ -14,9 +14,10 @@ export async function getServerSideProps() {
     const data = await Course.find({}, "name");
     const courses = importRawData(data, ['_id'], null)
 
-    const postData = await Post.find({}, 'courseID content createdAt userID').populate('courseID', 'name -_id', Course).populate('userID', 'username _id', Users).sort({ createdAt: -1 })
-    
-    const post = importRawData(postData, ['_id'], 'createdAt')
+    const postData = await Post.find({}, 'courseID content updatedAt userID image').populate('courseID', 'name -_id', Course).populate('userID', 'username _id image', Users).sort({ updatedAt: -1 })
+
+
+    const post = importRawData(postData, ['_id'], 'updatedAt')
 
     const posts = await Promise.all(
         post.map(async (doc) => {
@@ -24,6 +25,7 @@ export async function getServerSideProps() {
             return doc;
         })
     )
+
     return {
         props: {
             courseProps: courses,
@@ -40,6 +42,7 @@ export default function Home({ courseProps, postProps }) {
                 courseProps={courseProps}
                 postProps={postProps}
                 session={session}
+                Info = {session}
             />
         )
     }

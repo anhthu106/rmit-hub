@@ -1,64 +1,74 @@
-import {useState} from "react";
-import {searchItem} from "../../backend/helper/items/items";
+import { useState } from "react";
+import { searchItem } from "../../backend/helper/items/items";
 import Header from "../../components/header/Header";
+import Footer from "../../components/footer/Footer";
+
 import CreatePost from "../../components/posts/CreatePost";
 import DisplayPost from "../post/DisplayPost";
 import Search from "../../components/Search/search";
+import { info } from "autoprefixer";
 
-const Homepage = ({courseProps, postProps, session}) => {
-    //UseState
-    const [query, setQuery] = useState("");
+const Homepage = ({ courseProps, postProps, session, Info }) => {
+  //UseState
+  const [query, setQuery] = useState("");
 
-    //Handling the input on our search bar
-    const filtered = searchItem(query, postProps, "courseID", "name");
+  //Handling the input on our search bar
+  const filtered = searchItem(query, postProps, "courseID", "name");
 
-    const handleChange = (e) => {
-        setQuery(e.target.value);
-    };
-    return (
-        <div
-            className="bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500">
-            <Header/>
+  const handleChange = (e) => {
+    setQuery(e.target.value);
+  };
 
-            <div className="bg-white">
-                <div className="flex justify-center w-screen h-screen px-4 text-gray-700">
-                    <div className="flex w-4/6">
-                        <div className="flex flex-col flex-grow border-l border-r border-gray-300">
-                            <div className="flex justify-between flex-shrink-0 px-8 py-4 border-b border-gray-300">
-                                <h1 className="text-xl font-semibold">Feed Title</h1>
-                            </div>
-                            <div className="flex-grow h-0 overflow-auto">
-                                <div className="w-full">
-                                    <CreatePost courseProps={courseProps} id={session.user._id}/>
+  return (
+    <div
+      id="myportal"
+      className="bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500"
+    >
+      <Header />
 
-                                    {filtered.map((post) => (
-                                        <div key={post._id}>
-                                            <DisplayPost
-                                                author={post.userID.username}
-                                                date={post.createdAt}
-                                                content={post.content}
-                                                course={post.courseID.name}
-                                                id={post._id}
-                                                sessionName={session.user.username}
-                                                username={post.userID.username}
-                                                uid={post.userID._id}
-                                            />
-                                            
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                        <div className="flex flex-col flex-shrink-0 w-1/4 py-4 pl-4">
-                            <div className="pt-2 relative mx-auto text-gray-600">
-                                <Search onchange={handleChange}/>
-                            </div>
-                        </div>
+      <div className="bg-gray-100">
+        <div className="flex justify-center w-full h-[calc(100vh-62px)] px-4 text-gray-700">
+          <div className="flex w-full 2xl:px-80">
+            <div className="flex flex-col flex-grow border-l border-r border-gray-300">
+              <div className="flex justify-between px-8 py-4 border-b border-gray-300">
+                <h1 className="text-xl font-semibold">Feed Title</h1>
+                <Search onchange={handleChange} />
+              </div>
+              <div className="flex-grow h-0 overflow-auto">
+                <div className="w-full space-y-1">
+                  <CreatePost
+                    courseProps={courseProps}
+                    id={session.user._id}
+                    Info={Info}
+                  />
+
+                  {filtered.map((post) => (
+                    <div key={post._id}>
+                      <DisplayPost
+                        author={post.userID.username}
+                        date={post.updatedAt}
+                        content={post.content}
+                        course={post.courseID.name}
+                        id={post._id}
+                        sessionName={session.user.username}
+                        username={post.userID.username}
+                        uid={post.userID._id}
+                        image={post.image.imgURL}
+                        avatar={post.userID.image.imgURL}
+                        courseProps={courseProps}
+                      />
                     </div>
+                  ))}
                 </div>
+              </div>
             </div>
+          </div>
         </div>
-    );
+      </div>
+
+      <Footer />
+    </div>
+  );
 };
 
 export default Homepage;

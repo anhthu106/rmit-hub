@@ -21,9 +21,9 @@ export default async function handler(req, res) {
         if (user.email === body.email && user.username === body.username) {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({message: "This account already created"})
         } else if (user.username === body.username) {
-            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({message: "This username  is used"})
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({message: "This username is used"})
         } else {
-            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({message: "This email  is used"})
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({message: "This email is used"})
         }
     }
 }

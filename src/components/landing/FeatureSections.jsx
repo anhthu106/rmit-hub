@@ -1,5 +1,5 @@
 export default function FeatureSections() {
-    return (<session>
+    return (
         <div className="bg-white py-12">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="lg:text-center">
@@ -49,7 +49,7 @@ export default function FeatureSections() {
                 </div>
             </div>
         </div>
-    </session>);
+    );
 }
 
 function Feature(props) {
@@ -66,7 +66,7 @@ function Feature(props) {
                     stroke="currentColor"
                     aria-hidden="true"
                 >
-                    <path strokeLinecap="round" strokeLinejoin="round" d={props.path}/>
+                    <path strokeLinecap="round" strokeLinejoin="round" d={props.path} />
                 </svg>
             </div>
             <p className="ml-16 text-lg font-medium leading-6 text-gray-900">

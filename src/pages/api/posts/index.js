@@ -4,25 +4,34 @@ import Course from "../../../backend/models/course";
 import User from "../../../backend/models/user";
 import { StatusCodes } from "http-status-codes";
 
+import cloudinary from "../../../backend/helper/config/cloudinary";
+
 export default async function handler(req, res) {
     try {
         await connectDB()
         switch (req.method) {
             // create post
             case "POST": {
-                const data = await Course.findOne({ name: req.body.course }, "_id").lean()
-                const courseId = data._id.toString()
+                const { content, course, message, image, id } = req.body;
+                const result = await cloudinary.uploader.upload(image, {
+                    folder: "posts_" + id,
+                })
 
-                console.log(req.body)
+                const data = await Course.findOne({ name: course }, "_id").lean()
+                const courseId = data._id.toString()
                 const postValue = {
-                    userID: req.body.id,
+                    userID: id,
                     courseID: courseId,
-                    content: req.body.content,
+                    content: content,
+                    image: {
+                        imgPublicID: result.public_id,
+                        imgURL: result.secure_url
+                    }
                 }
 
                 const post = await Posts.create(postValue)
-                const id = post.userID
-                await User.findByIdAndUpdate(id, {
+                const uid = post.userID
+                await User.findByIdAndUpdate(uid, {
                     $push: {
                         post_id: post._id.toString(),
                     }
@@ -31,8 +40,7 @@ export default async function handler(req, res) {
                 res.status(StatusCodes.CREATED).json({ message: "Post created" });
             }
         }
-    } catch
-    (error) {
+    } catch (error) {
         console.log(error)
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: error })
     }
