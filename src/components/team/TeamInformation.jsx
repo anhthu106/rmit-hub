@@ -13,7 +13,7 @@ export default function TeamInformation({
       <section>
         <section className="text-gray-600 body-font">
           <div className="container px-5 py-5 mx-auto">
-            <div className="p-5 bg-white flex items-center mx-auto border-b  mb-10 border-gray-200 rounded-lg sm:flex-row flex-col">
+            <div className="p-5 bg-white flex items-center mx-auto border-b  mb-10 border-gray-200 rounded-xl sm:flex-row flex-col shadow-md">
               <div className="sm:w-32 sm:h-32 h-20 w-20 sm:mr-10 inline-flex items-center justify-center flex-shrink-0 bg-indigo-500">
               </div>
               <div className="flex-grow sm:text-left text-center mt-6 sm:mt-0">

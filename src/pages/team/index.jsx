@@ -70,7 +70,7 @@ export default function Team({courseProps, teamProps}) {
                     className="bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500">
                     <Header/>
 
-                    <div className="bg-white">
+                    <div className="bg-gray-100">
                         <div className="flex justify-center w-full h-[calc(100vh-62px)] px-4 text-gray-700">
                             <div className="flex w-full xl:px-96">
                                 <div className="flex flex-col flex-grow border-l border-r border-gray-300">
@@ -79,11 +79,11 @@ export default function Team({courseProps, teamProps}) {
                     
                                     </div>
                                     <div className="flex-grow h-0 overflow-auto">
-                                        <div className="w-full space-y-8">
+                                        <div className="w-full">
 
                                             <CreateTeam courseProps={courseProps} OwnerUser={id}/>
                                             {teamProps.map((team) => (
-                                                <div key={team._id}>
+                                                <div key={team._id} className="space-y-2">
 
                                                     <TeamInformation
                                                         User={team.userID}

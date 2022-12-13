@@ -95,7 +95,7 @@ export default function Board({ listProps, usernameProps, TeamInfo }) {
               key={column._id}
             >
               {/*List top container*/}
-              <div className="relative flex flex-col items-start flex-shrink-0 h-10 py-8 px-4 border-solid border-2 border-white rounded-lg content-center align-middle">
+              <div className="relative flex flex-col items-start flex-shrink-0 h-10 py-8 px-4 border-solid border-2 border-gray-400 rounded-lg content-center align-middle">
                 {/*Inline edit List*/}
                 <EditList listId={column._id} listTile={column.title} />
 
@@ -167,7 +167,7 @@ export default function Board({ listProps, usernameProps, TeamInfo }) {
                         style={{
                           /*TODO change style to tailwind*/
                           background: snapshot.isDraggingOver
-                            ? "lightgrey"
+                            ? "#f3f4f6"
                             : "transparent",
                         }}
                         className="h-fit w-64 rounded-lg mt-3"

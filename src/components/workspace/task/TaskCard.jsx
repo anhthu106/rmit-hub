@@ -4,7 +4,7 @@ let socket
 export default function TaskCard({task}) {
     return (
         <div
-            className="relative flex flex-col items-start p-4 mt-3 bg-white rounded-lg cursor-pointer bg-opacity-90 group hover:bg-opacity-100">
+            className="relative flex flex-col items-start p-4 mt-3 bg-white rounded-lg cursor-pointer bg-opacity-90 group hover:bg-opacity-100 border-b-2 border-blue-500">
             <div
                 className="absolute top-0 right-0 flex w-5 h-5 mt-5 mr-5 tooltip">
                 <div
