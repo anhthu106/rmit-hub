@@ -16,6 +16,7 @@ export default function CreatePost({ courseProps, id, Info }) {
 
   const [showModal, setShowModal] = useState(false);
   const [formCheck, setFormCheck] = useState(false);
+  const [placeHolder, setPlaceHolder] = useState(false);
 
   function imageHandler(e) {
     const file = e.target.files[0];
@@ -50,7 +51,7 @@ export default function CreatePost({ courseProps, id, Info }) {
             <div className="flex justify-between items-center w-full">
               <Link href={`/users/${Info.user._id}`}>
                 <img
-                  className="h-12 w-12 rounded-full object-fill"
+                  className="h-12 w-12 rounded-full object-fill cursor-pointer	"
                   src={Info.user.image.imgURL}
                   alt="Avatar"
                 />
@@ -63,10 +64,17 @@ export default function CreatePost({ courseProps, id, Info }) {
                   onClick={() => setShowModal(true)}
                 >
                   <p className="text-left ">
-                    <span className="md:inline hidden">
-                      Hey {Info.user.username}!&nbsp;
-                    </span>
-                    Find your teammates now.
+                    {placeHolder ? (
+                      <></>
+                    ) : (
+                      <span>
+                        <span className="md:inline hidden">
+                          Hey {Info.user.username}!&nbsp;
+                        </span>
+                        Find your teammates now.
+                      </span>
+                    )}
+                    {placeHolder}
                   </p>
                 </button>
               </div>
@@ -75,7 +83,9 @@ export default function CreatePost({ courseProps, id, Info }) {
           <hr />
         </div>
 
-        <div className="font-semibold text-sm mx-4 mt-2 mb-4">{/* LOL */}</div>
+        <div className="font-semibold text-sm mx-4 mt-2 mb-4">
+          {/* placeHolder */}
+        </div>
       </div>
 
       {/* <div data-dial-init className="fixed right-6 bottom-6 group z-50">
@@ -151,7 +161,10 @@ export default function CreatePost({ courseProps, id, Info }) {
                               name="content"
                               required
                               value={content}
-                              onChange={(e) => setContent(e.target.value)}
+                              onChange={(e) => {
+                                setContent(e.target.value);
+                                setPlaceHolder(content);
+                              }}
                               rows="4"
                               className="w-full text-lg text-gray-900 bg-white focus:ring-1 resize-none rounded-md border border-gray-300"
                               placeholder="Content..."
