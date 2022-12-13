@@ -8,13 +8,13 @@ export default function CreateList({ teamID }) {
 
   return (
     <div>
-      <form>
+      <form className="bg-gray-50 w-fit p-3 rounded-lg">
         <div>
           <label
             htmlFor="title"
-            class="block mb-2 text-sm font-medium text-gray-900"
+            className="block mb-2 text-sm font-medium text-gray-900"
           >
-            Title
+            New Title
           </label>
           <input
             placeholder="Enter list title..."
@@ -28,7 +28,7 @@ export default function CreateList({ teamID }) {
           />
         </div>
         <button
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center"
+          className="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-lg font-medium w-full mt-3 px-4 py-2 inline-flex space-x-1 items-center justify-center"
           onClick={(e) => {
             const data = { title, teamID };
 
@@ -38,7 +38,23 @@ export default function CreateList({ teamID }) {
             e.preventDefault();
           }}
         >
-          Add List
+          <span>
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+              />
+            </svg>
+          </span>
+          <span>Add List</span>
         </button>
       </form>
       <div>{message}</div>

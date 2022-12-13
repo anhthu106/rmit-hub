@@ -90,25 +90,25 @@ export default function Task({
             {dateIsOK ? (
               <div className="absolute top-0 flex items-center min-h-screen cursor-auto">
                 <div
-                  class="absolute top-0 w-screen flex p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+                  className="absolute top-0 w-screen flex p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
                   role="alert"
                 >
                   <svg
                     aria-hidden="true"
-                    class="flex-shrink-0 inline w-5 h-5 mr-3"
+                    className="flex-shrink-0 inline w-5 h-5 mr-3"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      fill-rule="evenodd"
+                      fillRule="evenodd"
                       d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                      clip-rule="evenodd"
+                      clipRule="evenodd"
                     ></path>
                   </svg>
-                  <span class="sr-only">Info</span>
+                  <span className="sr-only">Info</span>
                   <div>
-                    <span class="font-medium">Danger alert!</span> Make sure the deadline date is a date after today!
+                    <span className="font-medium">Danger alert!</span> Make sure the deadline date is a date after today!
                   </div>
                 </div>
               </div>
@@ -167,7 +167,7 @@ export default function Task({
                         Name
                       </label>
                       <input
-                        autocomplete="off"
+                        autoComplete="off"
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-fit p-2.5"
                         placeholder="Enter name name..."
                         type="text"
@@ -188,7 +188,7 @@ export default function Task({
                         Description
                       </label>
                       <input
-                      autocomplete="off"
+                      autoComplete="off"
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-fit p-2.5"
                         placeholder="Enter list description..."
                         type="text"
@@ -218,7 +218,7 @@ export default function Task({
                         onKeyDown={onKeyDown}
                         onChange={(e) => {
                           setDeadline(e.target.value);
-                          console.log(e.target.value);
+                          // console.log(e.target.value);
                           conpareString(e.target.value);
                         }}
                         // className="w-full text-lg text-gray-900 bg-white focus:ring-1 resize-none rounded-md border border-gray-300"
