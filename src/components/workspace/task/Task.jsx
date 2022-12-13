@@ -7,7 +7,7 @@ import TaskCard from "./TaskCard";
 
 let socket;
 
-export default function Task({ listID, usernameProps, task, tag }) {
+export default function Task({ listID, usernameProps, task, tag1, tag2,tag3 }) {
   const animated = makeAnimated();
   const personOption = util.username(usernameProps);
 
@@ -41,14 +41,18 @@ export default function Task({ listID, usernameProps, task, tag }) {
   return (
     // TODO modal
     <>
+      <div className="inline-flex justify-center items-center rounded-md w-full">
+        <span onClick={() => setShowModal(true)} className="w-6/12">
+          {tag1}
+        </span>
 
-  
-      <div
-        onClick={() => setShowModal(true)}
-        className="w-full"
-      >
-        {tag}
+        {/* TODO fix pop up */}
+        {tag2}
       </div>
+      <span onClick={() => setShowModal(true)}>
+        {tag3}
+      </span>
+      
 
       {showModal ? (
         <>

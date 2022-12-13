@@ -4,29 +4,11 @@ import DropDownHamburger from "../../hamburger/DropDown.Hamburger";
 import Task from "./Task";
 
 let socket;
-export default function TaskCard({ task, listID, usernameProps, tag }) {
+export default function TaskCard({ task, listID, usernameProps, tag1, tag2 }) {
   return (
     <div className="relative w-full h-full flex flex-col items-start p-4 mt-3 bg-white rounded-lg cursor-pointer bg-opacity-90 group hover:bg-opacity-100 border-b-2 border-blue-500">
-      <div className="absolute top-0 right-0 flex w-5 h-5 mt-5 mr-5 tooltip">
+      {/* <div className="absolute top-0 right-0 flex w-5 h-5 mt-5 mr-5 tooltip">
         <Hamburger />
-        {/* <div
-                    className="flex flex-col p-4 bg-white w-max h-max rounded-md z-20 absolute right-0 invisible tooltip-item border-solid">
-                    <ul className="list-disc space-y-2">
-                        <li className="flex items-start">
-                            <button
-                                onClick={(e) => {
-                                    const data = task._id;
-
-                                    socket = io();
-                                    socket.emit("deleteTask", data);
-                                    e.preventDefault();
-                                }}
-                            >
-                                Delete Task
-                            </button>
-                        </li>
-                    </ul>
-                </div> */}
         <div className="flex flex-col p-4 bg-white w-max h-max rounded-md z-20 absolute right-0 invisible tooltip-item border-solid">
           <DropDownHamburger
             tag={
@@ -53,7 +35,7 @@ export default function TaskCard({ task, listID, usernameProps, tag }) {
             nameTag={"Delete Task"}
           />
         </div>
-      </div>
+      </div> */}
       <span className="flex items-center h-6 px-3 text-xs font-semibold text-pink-500 bg-pink-100 rounded-full">
         Design
       </span>
@@ -80,7 +62,8 @@ export default function TaskCard({ task, listID, usernameProps, tag }) {
         task={task}
         listID={listID._id}
         usernameProps={usernameProps}
-        tag={tag}
+        tag1={tag1}
+        tag2={tag2}
       />
     </div>
     
