@@ -95,62 +95,69 @@ export default function Board({ listProps, usernameProps, TeamInfo }) {
               key={column._id}
             >
               {/*List top container*/}
-              <div className="relative flex flex-col items-start flex-shrink-0 h-10 py-8 px-4 border-solid border-2 border-gray-400 rounded-lg content-center align-middle">
-                {/*Inline edit List*/}
-                <EditList listId={column._id} listTile={column.title} />
+              <div className="relative  h-10border-solid border-2 border-gray-400 rounded-lg content-center align-middle ">
+                <div className="p-3">
+                  {/*Inline edit List*/}
+                  <EditList listId={column._id} listTile={column.title} />
 
-                {/*List hamburger*/}
-                <div className="absolute top-0 right-0 flex w-5 h-5 mt-5 mr-5 tooltip ">
-                  <Hamburger /> {/*Hamburger button*/}
-                  <div className="flex flex-col p-4 bg-white w-max h-max rounded-md z-20 absolute right-0 invisible tooltip-item border-solid">
-                    <DropDownHamburger /*Hamburger dropdown*/
-                      tag={
-                        <>
+                  {/*List hamburger*/}
+                  <div className="absolute top-0 right-0 flex w-5 h-5 mt-5 mr-5 tooltip ">
+                    <Hamburger /> {/*Hamburger button*/}
+                    <div className="flex flex-col p-4 bg-white w-max h-max rounded-md z-20 absolute right-0 invisible tooltip-item border-solid">
+                      <Task
+                        usernameProps={usernameProps}
+                        listID={column._id}
+                        task={""}
+                        tag={
+                          <>
+                            <DropDownHamburger /*Hamburger dropdown*/
+                              tag={
+                                <svg
+                                  className="w-6 h-6"
+                                  fill="currentColor"
+                                  viewBox="0 0 20 20"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    fillRule="evenodd"
+                                    d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                    clipRule="evenodd"
+                                  />
+                                </svg>
+                              }
+                              nameTag={"Create Task"}
+                            />
+                          </>
+                        }
+                      />
+
+                      <DropDownHamburger
+                        tag={
                           <svg
                             className="w-6 h-6"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg"
                           >
                             <path
-                              fillRule="evenodd"
-                              d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                              clipRule="evenodd"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
                             />
                           </svg>
-                          <Task
-                            usernameProps={usernameProps}
-                            listID={column._id}
-                            task={""}
-                          />
-                        </>
-                      }
-                      nameTag={"Create Task"}
-                    />
-                    <DropDownHamburger
-                      tag={
-                        <svg
-                          className="w-6 h-6"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      }
-                      buttonFnc={(e) => {
-                        const data = column._id;
+                        }
+                        buttonFnc={(e) => {
+                          const data = column._id;
 
-                        socket = io();
-                        socket.emit("deleteList", data);
-                        e.preventDefault();
-                      }}
-                      nameTag={"Delete List"}
-                    />
+                          socket = io();
+                          socket.emit("deleteList", data);
+                          e.preventDefault();
+                        }}
+                        nameTag={"Delete List"}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -190,11 +197,33 @@ export default function Board({ listProps, usernameProps, TeamInfo }) {
                                       {...provided.dragHandleProps}
                                       className="flex flex-col pb-2 overflow-auto"
                                     >
-                                      <TaskCard task={task} />
-                                      <Task
+                                      <TaskCard
                                         task={task}
                                         listID={column._id}
                                         usernameProps={usernameProps}
+                                        tag={
+                                          <div>
+                                            <button className="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-lg font-medium w-full px-4 py-2 inline-flex space-x-1 items-center justify-center">
+                                              <span>
+                                                <svg
+                                                  className="w-4 h-4"
+                                                  fill="none"
+                                                  stroke="currentColor"
+                                                  viewBox="0 0 24 24"
+                                                  xmlns="http://www.w3.org/2000/svg"
+                                                >
+                                                  <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth={2}
+                                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                                                  />
+                                                </svg>
+                                              </span>
+                                              <span>Edit</span>
+                                            </button>
+                                          </div>
+                                        }
                                       />
                                     </div>
                                   );

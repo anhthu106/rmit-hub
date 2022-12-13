@@ -21,11 +21,11 @@ export default function EditList({ listTile, listId }) {
     }
   };
   return (
-    <div className="text-lg font-semibold mb-7">
+    <div className="text-lg font-semibold pr-8">
       <form>
         <div>
           <input
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full p-2.5"
             type="text"
             id="title"
             name="title"
