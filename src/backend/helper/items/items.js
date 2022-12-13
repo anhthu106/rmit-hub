@@ -1,4 +1,4 @@
-import {fetchData} from "../fetchData/fetchData";
+import { fetchData } from "../fetchData/fetchData";
 
 async function returnMessage(res, setMessage) {
     let data = await res.json()

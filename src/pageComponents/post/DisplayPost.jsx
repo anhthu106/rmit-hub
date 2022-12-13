@@ -72,7 +72,6 @@ function DeleteButton({
   date,
   content,
   course,
-  setMessage,
   id,
   image,
 }) {
@@ -86,7 +85,6 @@ function DeleteButton({
             deleteItems(
               { author, date, content, course, image },
               e,
-              setMessage,
               `/api/posts/${id}`
             );
             window.location.reload(false);
