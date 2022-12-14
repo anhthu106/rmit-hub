@@ -1,5 +1,5 @@
 // BACKEND
-import { useSession } from "next-auth/react";
+import {useSession} from "next-auth/react";
 import connectDB from "../../backend/lib/connectDB";
 import importRawData from "../../backend/helper/data/data";
 import mongoose from "mongoose";
@@ -12,10 +12,11 @@ import Course from "../../backend/models/course";
 
 // COMPONENT
 import EditProfileForm from "../../components/users/EditProfileForm";
-import { Account } from "../../pageComponents/user/Account";
+import {Account} from "../../pageComponents/user/Account";
+import Teams from "../../backend/models/team";
 
 
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps({params}) {
     await connectDB();
     const majorData = await Major.find({}, "name");
     const majors = importRawData(majorData, ["_id"], null);
@@ -28,10 +29,16 @@ export async function getServerSideProps({ params }) {
     if (mongoose.Types.ObjectId.isValid(params.id)) {
         const userData = await Users.findById(
             params.id,
-            "_id username email campus major_id image"
-        ).populate("major_id", "name -_id", Major);
+            "_id username email campus major_id team_id image"
+        ).populate("major_id", "name -_id", Major).populate("team_id", "name -_id", Teams);
 
-        const postData = await Post.find({ userID: params.id }, 'courseID content updatedAt userID image').populate('courseID', 'name -_id', Course).populate('userID', 'username _id image', Users).sort({ updatedAt: -1 })
+        const team = userData.team_id.map((data) => {
+                return data["name"];
+            }
+        )
+
+
+        const postData = await Post.find({userID: params.id}, 'courseID content updatedAt userID image').populate('courseID', 'name -_id', Course).populate('userID', 'username _id image', Users).sort({updatedAt: -1})
 
         const post = importRawData(postData, ['_id'], 'updatedAt')
 
@@ -49,8 +56,11 @@ export async function getServerSideProps({ params }) {
                 email: userData.email,
                 campus: userData.campus,
                 major: userData.major_id.name,
+                team: team,
                 image: userData.image.imgURL
             };
+
+
         }
     }
 
@@ -65,8 +75,8 @@ export async function getServerSideProps({ params }) {
     };
 }
 
-export default function Detail({ Info, majorProps, postProps, courseProps }) {
-    const { data: session } = useSession();
+export default function Detail({Info, majorProps, postProps, courseProps}) {
+    const {data: session} = useSession();
     if (session.user._id === Info._id) {
         return (
             <>

@@ -9,6 +9,10 @@ export function Account({Info, postProps, tag, session, courseProps}) {
         <div
             className="bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500">
             <Header/>
+            <div>Fetch team data</div>
+            {Info.team.map((team) => (
+                <div key={team}>{team}</div>
+            ))}
 
             <div>
                 <div className="container mx-auto md:px-4">
