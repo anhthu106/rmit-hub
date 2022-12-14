@@ -1,6 +1,6 @@
 // BACKEND
 import connectMongo from "../../backend/lib/connectDB";
-import {useSession} from "next-auth/react";
+import { useSession } from "next-auth/react";
 import importRawData from "../../backend/helper/data/data";
 
 // model
@@ -38,6 +38,13 @@ export async function getServerSideProps() {
                 })
             );
 
+            team.pending = await Promise.all(
+                team.pending.map(async (id) => {
+                    id = id.toString();
+                    return id;
+                })
+            );
+
             const course = await Course.findById(
                 team.courseID.toString(),
                 "name"
@@ -58,8 +65,8 @@ export async function getServerSideProps() {
     };
 }
 
-export default function Team({courseProps, teamProps}) {
-    const {data: session, status} = useSession();
+export default function Team({ courseProps, teamProps }) {
+    const { data: session, status } = useSession();
     if (status === "Loading") {
         return <div>Loading</div>;
     } else if (status === "authenticated") {
@@ -68,7 +75,7 @@ export default function Team({courseProps, teamProps}) {
             <>
                 <div
                     className="bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500">
-                    <Header/>
+                    <Header />
 
                     <div className="bg-gray-100">
                         <div className="flex justify-center w-full h-[calc(100vh-62px)] px-4 text-gray-700">
@@ -76,12 +83,12 @@ export default function Team({courseProps, teamProps}) {
                                 <div className="flex flex-col flex-grow border-l border-r border-gray-300">
                                     <div className="flex justify-between px-8 py-4 border-b border-gray-300">
                                         <h1 className="text-xl font-semibold">Teams</h1>
-                    
+
                                     </div>
                                     <div className="flex-grow h-0 overflow-auto">
                                         <div className="w-full">
 
-                                            <CreateTeam courseProps={courseProps} OwnerUser={id}/>
+                                            <CreateTeam courseProps={courseProps} OwnerUser={id} />
                                             {teamProps.map((team) => (
                                                 <div key={team._id} className="space-y-2">
 
