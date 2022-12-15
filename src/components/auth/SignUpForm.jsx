@@ -1,13 +1,13 @@
 import makeAnimated from "react-select/animated";
-import { util } from "../../utils/utils";
-import { useEffect, useState } from "react";
-import { validPassword } from "../regularexpression/Regex";
+import {util} from "../../utils/utils";
+import {useEffect, useState} from "react";
+import {validPassword} from "../regularexpression/Regex";
 import Select from "react-select";
 import Button from "../button/Button";
-import { addItems } from "../../backend/helper/items/items";
-import { signIn } from "next-auth/react";
+import {addItems} from "../../backend/helper/items/items";
+import {signIn} from "next-auth/react";
 
-const SignUpForm = ({ majorProps }) => {
+const SignUpForm = ({majorProps}) => {
     //Use animated of react-select
     const animatedComponents = makeAnimated();
 
@@ -190,7 +190,7 @@ const SignUpForm = ({ majorProps }) => {
                 />
                 {emailError && (
                     <p className="mt-2 text-xs text-red-600">
-                        Your email should be an RMIT's email (sID@rmit.edu.vn)
+                        Your email should be an RMIT&aposs email (sID@rmit.edu.vn)
                     </p>
                 )}
                 {emailIsUsed && (
@@ -243,7 +243,7 @@ const SignUpForm = ({ majorProps }) => {
                     />
                     {passwordFail && (
                         <p className="mt-2 text-xs text-red-600">
-                            Your passwords don't match, please try again
+                            Your passwords do not match, please try again
                         </p>
                     )}
                     {passwordPass && (
@@ -305,7 +305,7 @@ const SignUpForm = ({ majorProps }) => {
                     <Button
                         fn={(e) => {
                             addItems(
-                                { username, email, password, campus, major },
+                                {username, email, password, campus, major},
                                 e,
                                 setMessage,
                                 "/api/auth/register"

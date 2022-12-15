@@ -94,7 +94,7 @@ const NewPasswordForm = () => {
                 />
                 {passwordFail && (
                     <p className="mt-2 text-xs text-red-600">
-                        Your passwords don't match, please try again
+                        Your passwords do not match, please try again
                     </p>
                 )}
                 {passwordPass && (

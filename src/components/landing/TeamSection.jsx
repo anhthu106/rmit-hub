@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function TeamSection() {
     return (
         <section className="bg-white">
@@ -7,7 +9,7 @@ export default function TeamSection() {
                         About us
                     </h2>
                     <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-                        Let's meet the team
+                        Let &apos s meet the team
                     </p>
                 </div>
                 <div className="grid gap-8 lg:gap-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
@@ -41,7 +43,7 @@ export default function TeamSection() {
 function Member(props) {
     return (
         <div className="text-center text-gray-500 ">
-            <img
+            <Image
                 className="mx-auto mb-4 w-36 h-36 rounded-full"
                 src={props.avaUrl}
                 alt="memberImg"
