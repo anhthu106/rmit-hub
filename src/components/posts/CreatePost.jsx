@@ -48,9 +48,10 @@ export default function CreatePost({ courseProps, id, Info }) {
       <div className="bg-white border rounded-xl shadow-md drop-shadow-lg m-4">
         <div className=" px-4 py-3 ">
           <div className="flex justify-between">
-            <div className="flex justify-between items-center w-full">
+            <div className="flex justify-between items-center w-full" key={Info.user._id}>
               <Link href={`/users/${Info.user._id}`}>
                 <img
+                key={Info.user.image.imgURL}
                   className="h-12 w-12 rounded-full object-fill cursor-pointer	"
                   src={Info.user.image.imgURL}
                   alt="Avatar"
@@ -68,7 +69,7 @@ export default function CreatePost({ courseProps, id, Info }) {
                       <></>
                     ) : (
                       <span>
-                        <span className="md:inline hidden">
+                        <span className="md:inline hidden" key={Info.user.username}>
                           Hey {Info.user.username}!&nbsp;
                         </span>
                         Find your teammates now.

@@ -6,7 +6,6 @@ import Footer from "../../components/footer/Footer";
 import Link from "next/link";
 
 export function Account({ Info, postProps, tag, session, courseProps }) {
-  console.log(Info);
   return (
     <div className="bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500">
       <Header />
@@ -50,7 +49,10 @@ export function Account({ Info, postProps, tag, session, courseProps }) {
                               </div>
                               <div key={team._id}>
                                 <Link href={`/team/${team._id}`}>
-                                  <a className="flex-1 min-w-0 text-sm font-medium text-gray-900 truncate">
+                                  <a
+                                    key={team.name}
+                                    className="flex-1 min-w-0 text-sm font-medium text-gray-900 truncate"
+                                  >
                                     {team.name}
                                   </a>
                                 </Link>
