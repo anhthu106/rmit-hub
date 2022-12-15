@@ -27,10 +27,10 @@ export default function NonTeamMember({ TeamInfo, currentUser }) {
               <div className="flex font-bold text-gray-800">
                 <div className="w-full min-w-max space-x-6 flex">
                   <div className="w-full">
-                    <h2 className="text-gray-500">Member</h2>
+                    <h2 className="text-gray-500">Member({TeamInfo.members})</h2>
                     <ul>
                       {TeamInfo.user.map((member) => (
-                        <li>{member}</li>
+                        <li key={member}>{member}</li>
                       ))}
                     </ul>
                   </div>
