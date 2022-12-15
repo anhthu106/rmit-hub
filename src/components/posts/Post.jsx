@@ -2,15 +2,15 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function Post({
-                                 author,
-                                 date,
-                                 content,
-                                 course,
-                                 tag,
-                                 uid,
-                                 image,
-                                 avatar,
-                             }) {
+    author,
+    date,
+    content,
+    course,
+    tag,
+    uid,
+    image,
+    avatar,
+}) {
     return (
         <>
             {/* New */}
@@ -24,18 +24,20 @@ export default function Post({
                                         className="h-10 w-10 rounded-full object-fill cursor-pointer	"
                                         src={avatar}
                                         alt="Avatar"
+                                        width='80'
+                                        height='80'
                                     />
                                 </Link>
                                 <div className="ml-3 ">
-                  <span className="text-sm font-semibold antialiased block leading-tight">
-                    <div>
-                      <Link href={`/users/${uid}`}>
-                        <a className="flex items-center space-x-3">
-                          <h1 className="text-gray-700 font-bold">{author}</h1>
-                        </a>
-                      </Link>
-                    </div>
-                  </span>
+                                    <span className="text-sm font-semibold antialiased block leading-tight">
+                                        <div>
+                                            <Link href={`/users/${uid}`}>
+                                                <a className="flex items-center space-x-3">
+                                                    <h1 className="text-gray-700 font-bold">{author}</h1>
+                                                </a>
+                                            </Link>
+                                        </div>
+                                    </span>
                                     <span className="text-gray-600 text-xs block">{date}</span>
                                 </div>
                             </div>
@@ -100,6 +102,8 @@ export default function Post({
                         className="h-fit w-auto mx-auto rounded-lg object-contain border-solid border-2 border-gray-100"
                         src={image}
                         alt="post"
+                        width='100'
+                        height='100'
                     />
                     <div className="flex items-center justify-between mx-4 mt-3 mb-2">
                         <div className="flex gap-5">{/* LOL */}</div>

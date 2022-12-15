@@ -1,12 +1,12 @@
 import makeAnimated from "react-select/animated";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import Select from "react-select";
-import {util} from "../../utils/utils";
-import {addItems} from "../../backend/helper/items/items";
+import { util } from "../../utils/utils";
+import { addItems } from "../../backend/helper/items/items";
 import Link from "next/link";
 import Image from "next/image";
 
-export default function CreatePost({courseProps, id, Info}) {
+export default function CreatePost({ courseProps, id, Info }) {
     const animated = makeAnimated();
     const courseOptions = util.item(courseProps, "name");
 
@@ -56,6 +56,8 @@ export default function CreatePost({courseProps, id, Info}) {
                                     className="h-12 w-12 rounded-full object-fill cursor-pointer	"
                                     src={Info.user.image.imgURL}
                                     alt="Avatar"
+                                    width='80'
+                                    height='80'
                                 />
                             </Link>
 
@@ -70,11 +72,11 @@ export default function CreatePost({courseProps, id, Info}) {
                                             <></>
                                         ) : (
                                             <span>
-                        <span className="md:inline hidden" key={Info.user.username}>
-                          Hey {Info.user.username}!&nbsp;
-                        </span>
-                        Find your teammates now.
-                      </span>
+                                                <span className="md:inline hidden" key={Info.user.username}>
+                                                    Hey {Info.user.username}!&nbsp;
+                                                </span>
+                                                Find your teammates now.
+                                            </span>
                                         )}
                                         {placeHolder}
                                     </p>
@@ -82,7 +84,7 @@ export default function CreatePost({courseProps, id, Info}) {
                             </div>
                         </div>
                     </div>
-                    <hr/>
+                    <hr />
                 </div>
 
                 <div className="font-semibold text-sm mx-4 mt-2 mb-4">
@@ -212,7 +214,7 @@ export default function CreatePost({courseProps, id, Info}) {
                                                         className="w-6/12 mt-2 p-2.5 flex-1 text-white bg-blue-700 rounded-md outline-none ring-offset-2 ring-blue-700 focus:ring-2"
                                                         onClick={(e) => {
                                                             addItems(
-                                                                {content, course, message, image, id},
+                                                                { content, course, message, image, id },
                                                                 e,
                                                                 setMessage,
                                                                 "/api/posts"

@@ -1,12 +1,12 @@
 import Image from "next/image";
 
 export default function UserInformation({
-                                            username,
-                                            email,
-                                            campus,
-                                            major,
-                                            image,
-                                        }) {
+    username,
+    email,
+    campus,
+    major,
+    image,
+}) {
     return (
         <div>
             <div className="mb-4">
@@ -15,6 +15,8 @@ export default function UserInformation({
                     className="mx-auto h-[10rem] w-[10rem] rounded-full"
                     src={image}
                     alt="avatar"
+                    width='80'
+                    height='80'
                 />
             </div>
             <div
