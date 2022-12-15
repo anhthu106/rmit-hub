@@ -30,10 +30,12 @@ export async function getServerSideProps({params}) {
         const userData = await Users.findById(
             params.id,
             "_id username email campus major_id team_id image"
-        ).populate("major_id", "name -_id", Major).populate("team_id", "name -_id", Teams);
+        ).populate("major_id", "name -_id", Major).populate("team_id", "name ", Teams);
 
         const team = userData.team_id.map((data) => {
-                return data["name"];
+                data = data.toObject();
+                data._id = data._id.toString();
+                return data;
             }
         )
 
@@ -59,7 +61,6 @@ export async function getServerSideProps({params}) {
                 team: team,
                 image: userData.image.imgURL
             };
-
 
         }
     }
