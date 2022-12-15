@@ -9,12 +9,13 @@ import Users from "../../backend/models/user";
 import Major from "../../backend/models/major";
 import Post from "../../backend/models/post";
 import Course from "../../backend/models/course";
+import Teams from "../../backend/models/team";
+import dynamic from "next/dynamic";
+
 
 // COMPONENT
-import EditProfileForm from "../../components/users/EditProfileForm";
-import {Account} from "../../pageComponents/user/Account";
-import Teams from "../../backend/models/team";
-
+const EditProfileForm = dynamic(() => import( "../../components/users/EditProfileForm"));
+const Account = dynamic(() => import("../../pageComponents/user/Account"));
 
 export async function getServerSideProps({params}) {
     await connectDB();

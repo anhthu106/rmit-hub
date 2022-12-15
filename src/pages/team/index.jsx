@@ -1,6 +1,6 @@
 // BACKEND
 import connectMongo from "../../backend/lib/connectDB";
-import { useSession } from "next-auth/react";
+import {useSession} from "next-auth/react";
 import importRawData from "../../backend/helper/data/data";
 
 // model
@@ -8,10 +8,11 @@ import Teams from "../../backend/models/team";
 import Users from "../../backend/models/user";
 import Course from "../../backend/models/course";
 import Header from "../../components/header/Header";
+import dynamic from "next/dynamic";
 
 // COMPONENT
-import CreateTeam from "../../components/team/CreateTeam";
-import TeamInformation from "../../components/team/TeamInformation";
+const CreateTeam = dynamic(() => import( "../../components/team/CreateTeam"));
+const TeamInformation = dynamic(() => import( "../../components/team/TeamInformation"));
 
 export async function getServerSideProps() {
     await connectMongo();
@@ -65,8 +66,8 @@ export async function getServerSideProps() {
     };
 }
 
-export default function Team({ courseProps, teamProps }) {
-    const { data: session, status } = useSession();
+export default function Team({courseProps, teamProps}) {
+    const {data: session, status} = useSession();
     if (status === "Loading") {
         return <div>Loading</div>;
     } else if (status === "authenticated") {
@@ -75,7 +76,7 @@ export default function Team({ courseProps, teamProps }) {
             <>
                 <div
                     className="bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500">
-                    <Header />
+                    <Header/>
 
                     <div className="bg-gray-100">
                         <div className="flex justify-center w-full h-[calc(100vh-62px)] px-4 text-gray-700">
@@ -88,7 +89,7 @@ export default function Team({ courseProps, teamProps }) {
                                     <div className="flex-grow h-0 overflow-auto">
                                         <div className="w-full">
 
-                                            <CreateTeam courseProps={courseProps} OwnerUser={id} />
+                                            <CreateTeam courseProps={courseProps} OwnerUser={id}/>
                                             {teamProps.map((team) => (
                                                 <div key={team._id} className="space-y-2">
 
