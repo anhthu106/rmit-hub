@@ -89,6 +89,7 @@ export default function Detail({Info, majorProps, postProps, courseProps}) {
                             PreCampus={Info.campus}
                             PreMajor={Info.major}
                             PreUsername={Info.username}
+                            PreImage={Info.image}
                             majorProps={majorProps}
                         />
                     }
