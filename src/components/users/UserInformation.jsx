@@ -9,18 +9,18 @@ export default function UserInformation({
 }) {
     return (
         <div>
-            <div className="mb-4">
+            <div className="mx-auto">
                 <Image
                     key={image}
-                    className="mx-auto h-[10rem] w-[10rem] rounded-full"
+                    className="mx-auto rounded-full"
                     src={image}
                     alt="avatar"
-                    width='80'
-                    height='80'
+                    width='150'
+                    height='150'
                 />
             </div>
             <div
-                className="text-2xl xl:text-4xl font-semibold leading-normal mb-2 text-blueGray-700 "
+                className="text-2xl xl:text-4xl font-semibold leading-normal mb-2 md:pt-10 text-blueGray-700 "
                 key={username}
             >
                 {username}
