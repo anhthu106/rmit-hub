@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { io } from "socket.io-client";
+import { useRef } from "react";
 
 let socket;
 export default function CreateList({ teamID }) {
   const [title, setTitle] = useState();
-  const [message, setMessage] = useState(null);
+  const input = useRef(null);
 
+  const handleClick = () => {
+    input.current.focus();
+  };
   return (
     <div>
       <form className="bg-gray-50 w-fit p-3 rounded-lg">
@@ -17,6 +21,8 @@ export default function CreateList({ teamID }) {
             New Title
           </label>
           <input
+          ref={input}
+            autoFocus   
             placeholder="Enter list title..."
             type="text"
             id="title"
@@ -36,6 +42,8 @@ export default function CreateList({ teamID }) {
             socket.emit("updateList", data);
 
             e.preventDefault();
+            setTitle("");
+            handleClick();
           }}
         >
           <span>
@@ -57,7 +65,6 @@ export default function CreateList({ teamID }) {
           <span>Add List</span>
         </button>
       </form>
-      <div>{message}</div>
     </div>
   );
 }

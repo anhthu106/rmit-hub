@@ -3,16 +3,32 @@ import { useState } from "react";
 import Select from "react-select";
 import { util } from "../../utils/utils";
 import { addItems } from "../../backend/helper/items/items";
+import { useEffect } from "react";
 
 export default function CreateTeam({ courseProps, OwnerUser }) {
   const animated = makeAnimated();
   const courseOptions = util.item(courseProps, "name");
 
-  const [name, setName] = useState();
-  const [course, setCourse] = useState();
-  const [description, setDescription] = useState(null);
+  const [name, setName] = useState("");
+  const [course, setCourse] = useState("");
+  const [description, setDescription] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [message, setMessage] = useState(null);
+  const [formCheck, setFormCheck] = useState(false);
+
+  function checkForm() {
+    if (description === "" || course === "" || name === null) {
+      setFormCheck(false);
+    } else {
+      setFormCheck(true);
+    }
+  }
+
+  useEffect(() => {
+    checkForm();
+    console.log(formCheck);
+  });
+
   return (
     <div>
       <div data-dial-init className="group z-50 flex justify-center">
@@ -114,7 +130,7 @@ export default function CreateTeam({ courseProps, OwnerUser }) {
                               </label>
                               <Select
                                 onChange={(course) => setCourse(course.label)}
-                                closeMenuOnSelect={false}
+                                closeMenuOnSelect={true}
                                 components={animated}
                                 placeholder={course}
                                 options={courseOptions}
@@ -141,7 +157,9 @@ export default function CreateTeam({ courseProps, OwnerUser }) {
                         </div>
                       </div>
                       <div className="items-center gap-2 mt-3 sm:flex">
-                        <button
+
+                      {formCheck ? (
+                          <button
                           type="submit"
                           className="w-full mt-2 p-2.5 flex-1 text-white bg-blue-700 rounded-md outline-none ring-offset-2 ring-blue-700 focus:ring-2"
                           onClick={(e) =>
@@ -160,6 +178,15 @@ export default function CreateTeam({ courseProps, OwnerUser }) {
                         >
                           Create Team
                         </button>
+                        ) : (
+                          <button
+                            className="w-6/12 mt-2 p-2.5 text-white bg-blue-400 cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                            disabled
+                          >
+                            Create Team
+                          </button>
+                        )}
+                        
                         <button
                           className="w-full mt-2 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-indigo-600 focus:ring-2"
                           onClick={() => setShowModal(false)}

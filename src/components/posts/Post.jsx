@@ -19,7 +19,7 @@ export default function Post({
           <div className=" px-4 py-3 ">
             <div className="flex justify-between">
               <div className="flex justify-between items-center w-fit">
-                <Link href={`/users/${uid}`}>
+                <Link href={`/users/${uid}`} >
                   <Image
                     className="h-10 w-10 rounded-full object-fill cursor-pointer	"
                     src={avatar}
@@ -65,9 +65,9 @@ export default function Post({
                   </div>
                   <div className="flex flex-col p-4 bg-white w-max h-max rounded-md z-20 absolute right-0 invisible tooltip-item border-solid">
                     {tag}
-                    <ul className="list-disc space-y-2">
+                    {/* <ul className="list-disc space-y-2">
                       <li className="flex items-start">sth to add</li>
-                    </ul>
+                    </ul> */}
                   </div>
                 </div>
               </div>
@@ -97,7 +97,7 @@ export default function Post({
           <div className="flex items-center justify-between mx-4 mt-3 mb-2">
             <p>{content}</p>
           </div>
-          <div className="px-4 grid place-content-center">
+          <div className="px-4 grid place-content-center pb-6">
             <Image
               className="h-fit w-auto rounded-lg object-contain border-solid border-2 border-gray-100"
               src={image}
@@ -108,8 +108,8 @@ export default function Post({
               objectFit="cover" // change to suit your needs
             />
           </div>
-          <div className="flex items-center justify-between mx-4 mt-3 mb-2">
-            <div className="flex gap-5">{/* LOL */}</div>
+          {/* <div className="flex items-center justify-between mx-4 mt-3 mb-2">
+            <div className="flex gap-5">LOL</div>
             <a
               className="flex font-medium text-blue-600 hover:underline"
               href="#"
@@ -117,7 +117,7 @@ export default function Post({
               View Team
             </a>
           </div>
-          <div className="font-semibold text-sm mx-4 mt-2 mb-4"></div>
+          <div className="font-semibold text-sm mx-4 mt-2 mb-4"></div> */}
         </div>
       </div>
     </>
