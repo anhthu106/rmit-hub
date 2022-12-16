@@ -5,7 +5,7 @@ import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 import Link from "next/link";
 
-export default function Account({Info, postProps, tag, session, courseProps}) {
+export default function Account({Info, postProps, tag, session, courseProps, createPost}) {
     return (
         <div
             className="bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500">
@@ -70,11 +70,12 @@ export default function Account({Info, postProps, tag, session, courseProps}) {
                                     </div>
 
                                     <div className="lg:w-8/12 lg:ml-6">
-                                        <CreatePost
+                                        {/* <CreatePost
                                             courseProps={courseProps}
                                             id={session.user._id}
                                             Info={session}
-                                        />
+                                        /> */}
+                                        {createPost}
                                         {postProps.map((post) => (
                                             <div key={post._id}>
                                                 <DisplayPost

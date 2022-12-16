@@ -13,9 +13,11 @@ import Teams from "../../backend/models/team";
 import dynamic from "next/dynamic";
 
 
+
 // COMPONENT
 const EditProfileForm = dynamic(() => import( "../../components/users/EditProfileForm"));
 const Account = dynamic(() => import("../../pageComponents/user/Account"));
+const CreatePost = dynamic(() => import("../../components/posts/CreatePost"))
 
 export async function getServerSideProps({params}) {
     await connectDB();
@@ -97,6 +99,11 @@ export default function Detail({Info, majorProps, postProps, courseProps}) {
                     postProps={postProps}
                     session={session}
                     courseProps={courseProps}
+                    createPost={<CreatePost
+                                            courseProps={courseProps}
+                                            id={session.user._id}
+                                            Info={session}
+                                />}
                 />
             </>
         );
@@ -110,6 +117,7 @@ export default function Detail({Info, majorProps, postProps, courseProps}) {
             }
             postProps={postProps}
             session={session}
+            createPost={""}
         />
     );
 }
