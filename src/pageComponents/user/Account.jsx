@@ -1,6 +1,5 @@
 import UserInformation from "../../components/users/UserInformation";
 import DisplayPost from "../post/DisplayPost";
-import CreatePost from "../../components/posts/CreatePost";
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 import Link from "next/link";
@@ -89,6 +88,7 @@ export default function Account({Info, postProps, tag, session, courseProps, cre
                                                     image={post.image.imgURL}
                                                     avatar={post.userID.image.imgURL}
                                                     courseProps={courseProps}
+                                                    uid={Info._id}
                                                 />
                                             </div>
                                         ))}
