@@ -14,14 +14,14 @@ import { useState } from "react";
 export async function getServerSideProps({ params }) {
     await connectDB();
 
-    const teamData = await Teams.findById(params.id, "pending userID")
+    const teamData = await Teams.findById(params.id, "pending userID courseID")
 
     const team = {
         id: teamData._id.toString(),
-        leader: teamData.userID[0].toString()
+        leader: teamData.userID[0].toString(),
+        courseID: teamData.courseID.toString()
     }
 
-    console.log(team)
     let user = []
     let userData
     for (let i of teamData.pending) {
@@ -42,11 +42,12 @@ export async function getServerSideProps({ params }) {
 
 export default function TeamDetail({ userProps, team }) {
     const [message, setMessage] = useState("")
-    const teamID = team.id
-    const leaderID = team.leader
+
+    const { id, leader, courseID } = team;
+
     const { data: session } = useSession();
 
-    if (session.user._id === leaderID) {
+    if (session.user._id === leader) {
         return (
             <div>
                 {userProps.map((user) => (
@@ -63,9 +64,10 @@ export default function TeamDetail({ userProps, team }) {
                             fn={(e) =>
                                 addItems(
                                     {
-                                        teamID: teamID,
+                                        teamID: id,
                                         status: "accept",
-                                        userID: user._id
+                                        userID: user._id,
+                                        courseID: courseID
                                     },
                                     e,
                                     setMessage,
@@ -78,9 +80,10 @@ export default function TeamDetail({ userProps, team }) {
                             fn={(e) =>
                                 addItems(
                                     {
-                                        teamID: teamID,
+                                        teamID: team,
                                         status: "reject",
-                                        userID: user._id
+                                        userID: user._id,
+                                        courseID: courseID
                                     },
                                     e,
                                     setMessage,

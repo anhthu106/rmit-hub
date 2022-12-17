@@ -5,28 +5,25 @@ import Teams from "../../../backend/models/team";
 import { StatusCodes } from "http-status-codes";
 
 export default async function handler(req, res) {
-    await connectDB();
+    await connectDB()
+    const leader = await Users.findById(req.body.leader, "email username")
+    const member = await Users.findById(req.body.currentUser, "username team_id course_id")
 
-    console.log(req.body);
+    const team = await Teams.findById(req.body.teamID, "pending courseID");
 
-    const leader = await Users.findById(req.body.leader, "email")
-    const member = await Users.findById(req.body.currentUser, "username")
-
-    const team = await Teams.findById(req.body.teamID, "pending");
-
-    if (!team.pending.includes(member._id)) {
+    if ((!team.pending.includes(member._id)) && (leader) && (!member.course_id.includes(team.courseID))) {
         await Teams.findByIdAndUpdate(req.body.teamID,
             { $push: { pending: member._id } })
-        if (leader) {
-            const leaderEmail = leader.email
-            const memberName = member.username
-            const teamID = team._id
-            await requestToJoinTeam({ leaderEmail, memberName, teamID })
+        const leaderEmail = leader.email
+        const leaderName = leader.username
+        const memberName = member.username
+        const teamID = team._id
 
-            res.status(StatusCodes.OK).json({ message: "Verify email is sent which have 5 minutes expires" })
-        } else {
-            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: "Invalid email or not found" })
-        }
+        await requestToJoinTeam({ leaderEmail, leaderName, memberName, teamID })
+        res.status(StatusCodes.OK).json({ message: "Please check you email" })
+    } else {
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: "Cannot join the team" })
+
     }
 
 }

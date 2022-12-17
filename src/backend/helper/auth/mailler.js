@@ -161,13 +161,13 @@ exports.recoverPasswordEmail = function ({ email, token }) {
 }
 
 // Request to join team
-exports.requestToJoinTeam = function ({ leaderEmail, memberName, teamID }) {
+exports.requestToJoinTeam = function ({ leaderEmail, leaderName, memberName, teamID }) {
     const message = {
         from: process.env.GOOGLE_USER,
         to: `${leaderEmail}`,
         subject: "Request to join team",
         html: `
-            <div> Hello ${leaderEmail} </div>
+            <div> Hello ${leaderName} </div>
             <div> ${memberName} requests to join your team! </div>
             <a href="${process.env.DOMAIN}/team/${teamID}/pendingList";
                 style="background:#ffa350;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;text-align:center;">
