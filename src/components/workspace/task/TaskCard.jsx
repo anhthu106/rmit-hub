@@ -1,13 +1,11 @@
 import { io } from "socket.io-client";
-import Hamburger from "../../hamburger/Hamburger";
-import DropDownHamburger from "../../hamburger/DropDown.Hamburger";
 import Task from "./Task";
 
 let socket;
 
 export default function TaskCard({ task, listID, usernameProps, tag1, tag2 }) {
-  console.log(task);
   // TODO task doesn't have the person in charge of the task info inside
+
   return (
     <div className="relative w-full h-full flex flex-col items-start p-4 mt-3 bg-white rounded-lg bg-opacity-90 group hover:bg-opacity-100 border-b-2 border-gray-500 cursor-grab shadow-md">
       <span className="flex items-center h-6 px-3 text-xs font-semibold text-pink-500 bg-pink-100 rounded-full">

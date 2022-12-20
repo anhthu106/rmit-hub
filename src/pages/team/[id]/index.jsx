@@ -31,7 +31,7 @@ export async function getServerSideProps({ params }) {
   const listData = await List.find(
     { team_id: params.id },
     "_id title task_id team_id"
-  ).populate("task_id", "_id description username createdDate deadline", Task);
+  ).populate("task_id", "_id name description username createdDate deadline", Task);
   const list = importRawData(listData, ["_id", "team_id"], null);
 
   const lists = await Promise.all(

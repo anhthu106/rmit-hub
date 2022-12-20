@@ -186,6 +186,7 @@ export default function Board({ listProps, usernameProps, TeamInfo }) {
                       >
                         {/*Fetch items*/}
                         {column.task_id.map((task, index) => {
+                            
                           return (
                             <>
                               <Draggable

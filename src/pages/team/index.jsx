@@ -81,7 +81,7 @@ export default function Team({courseProps, teamProps}) {
 
                     <div className="bg-gray-100">
                         <div className="flex justify-center w-full h-[calc(100vh-62px)] px-4 text-gray-700">
-                            <div className="flex w-full xl:px-96">
+                            <div className="flex w-full xl:px-40 2xl:px-80">
                                 <div className="flex flex-col flex-grow border-l border-r border-gray-300 w-0">
                                     <div className="flex justify-between px-8 py-4 border-b border-gray-300">
                                         <h1 className="text-xl font-semibold">Teams</h1>
