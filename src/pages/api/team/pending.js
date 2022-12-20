@@ -2,17 +2,24 @@ import connectDB from "../../../backend/lib/connectDB";
 import Teams from "../../../backend/models/team";
 import Users from "../../../backend/models/user";
 
-import { StatusCodes } from "http-status-codes";
+import {StatusCodes} from "http-status-codes";
 
 export default async function handler(req, res) {
     await connectDB();
 
-    const { teamID, status, userID, courseID } = req.body;
+    const {teamID, status, userID, courseID} = req.body;
 
-    if (status == "accept") {
+    if (status === "accept") {
         await Teams.findByIdAndUpdate(
             teamID,
-            { $push: { userID: userID } }
+            {
+                $push: {
+                    userID: userID,
+                },
+                $inc: {
+                    Member: 1
+                }
+            }
         );
 
         await Users.findByIdAndUpdate(
@@ -25,7 +32,7 @@ export default async function handler(req, res) {
             }
         )
     }
-    await Teams.findByIdAndUpdate(teamID, { $pull: { pending: userID } });
-    return res.status(StatusCodes.OK).json({ message: "Team updated" })
+    await Teams.findByIdAndUpdate(teamID, {$pull: {pending: userID}});
+    return res.status(StatusCodes.OK).json({message: "Team updated"})
 
 }
