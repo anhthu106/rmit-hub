@@ -1,13 +1,13 @@
 const campus = () => {
     return [
-        { value: 'sgs', label: "Saigon South Campus" },
-        { value: 'hn', label: "Hanoi Campus" },
+        {value: 'sgs', label: "Saigon South Campus"},
+        {value: 'hn', label: "Hanoi Campus"},
     ]
 }
 
 const item = (itemProps, item) => {
     const itemOptions = []
-    for (let i = 0; i < itemProps.length - 1; i++) {
+    for (let i = 0; i < itemProps.length; i++) {
         let updateitemDict = {}
         updateitemDict['value'] = itemProps[i][item]
         updateitemDict['label'] = itemProps[i][item]
@@ -26,4 +26,4 @@ const username = (usernameProps) => {
     }
     return props
 }
-export const util = { campus, item, username }
+export const util = {campus, item, username}
