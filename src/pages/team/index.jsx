@@ -8,6 +8,7 @@ import Teams from "../../backend/models/team";
 import Users from "../../backend/models/user";
 import Course from "../../backend/models/course";
 import Header from "../../components/header/Header";
+import Footer from "../../components/footer/Footer"
 import dynamic from "next/dynamic";
 
 // COMPONENT
@@ -81,17 +82,18 @@ export default function Team({courseProps, teamProps}) {
                     <div className="bg-gray-100">
                         <div className="flex justify-center w-full h-[calc(100vh-62px)] px-4 text-gray-700">
                             <div className="flex w-full xl:px-96">
-                                <div className="flex flex-col flex-grow border-l border-r border-gray-300">
+                                <div className="flex flex-col flex-grow border-l border-r border-gray-300 w-0">
                                     <div className="flex justify-between px-8 py-4 border-b border-gray-300">
                                         <h1 className="text-xl font-semibold">Teams</h1>
 
                                     </div>
+                                    <CreateTeam courseProps={courseProps} OwnerUser={id}/>
                                     <div className="flex-grow h-0 overflow-auto">
                                         <div className="w-full">
 
-                                            <CreateTeam courseProps={courseProps} OwnerUser={id}/>
+                                            
                                             {teamProps.map((team) => (
-                                                <div key={team._id} className="space-y-2">
+                                                <div key={team._id} className="space-y-2 ">
 
                                                     <TeamInformation
                                                         User={team.userID}
@@ -109,6 +111,7 @@ export default function Team({courseProps, teamProps}) {
                             </div>
                         </div>
                     </div>
+                    <Footer/>
                 </div>
             </>
         );

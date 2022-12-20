@@ -21,7 +21,7 @@ export default function TeamInformation({
               <p className="leading-relaxed text-base">{Description}</p>
               <div className="py-4"></div>
               <div className="flex font-bold text-gray-800">
-                <div className="w-full min-w-max space-x-6 flex">
+                <div className="w-full min-w-max sm:space-x-6 sm:flex space-y-6 sm:space-y-0">
                   <div className="w-full">
                     <h2 className="text-gray-500">Member({Member})</h2>
                     <ul>

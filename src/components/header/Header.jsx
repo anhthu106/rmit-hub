@@ -51,7 +51,7 @@ export default function Header() {
                     Feed
                   </Navbar.Link>
                   <Navbar.Link href="../team">Teams</Navbar.Link>
-                  <Navbar.Link href="#">page3</Navbar.Link>
+                  {/* <Navbar.Link href="#">page3</Navbar.Link> */}
                 </Navbar.Collapse>
               </Navbar>
             </div>

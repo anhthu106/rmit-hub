@@ -108,7 +108,8 @@ export default function Task({
                   </svg>
                   <span className="sr-only">Info</span>
                   <div>
-                    <span className="font-medium">Danger alert!</span> Make sure the deadline date is a date after today!
+                    <span className="font-medium">Danger alert!</span> Make sure
+                    the deadline date is a date after today!
                   </div>
                 </div>
               </div>
@@ -133,7 +134,7 @@ export default function Task({
                           d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
                         />
                       </svg>
-                      Insert Name
+                      {name}
                     </div>
                     <div className="absolute top-0 right-0 flex w-5 h-5 mt-5 mr-5 tooltip ">
                       <button
@@ -158,17 +159,17 @@ export default function Task({
                     </div>
                   </div>
 
-                  <form className="pl-8">
-                    <div>
+                  <form className="px-8">
+                    <div className="mb-6">
                       <label
                         htmlFor="name"
-                        // className="block mb-2 text-2xl font-medium text-gray-900 "
+                        className="block mb-2 text-2xl font-medium text-gray-900 "
                       >
                         Name
                       </label>
                       <input
                         autoComplete="off"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-fit p-2.5"
+                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         placeholder="Enter name name..."
                         type="text"
                         id="name"
@@ -180,16 +181,16 @@ export default function Task({
                         // className="w-full text-lg text-gray-900 bg-white focus:ring-1 resize-none rounded-md border border-gray-300"
                       />
                     </div>
-                    <div>
+                    <div className="mb-6">
                       <label
                         htmlFor="description"
-                        // className="block mb-2 text-2xl font-medium text-gray-900 "
+                        className="block mb-2 text-2xl font-medium text-gray-900 "
                       >
                         Description
                       </label>
                       <input
-                      autoComplete="off"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-fit p-2.5"
+                        autoComplete="off"
+                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         placeholder="Enter list description..."
                         type="text"
                         id="description"
@@ -201,15 +202,15 @@ export default function Task({
                         // className="w-full text-lg text-gray-900 bg-white focus:ring-1 resize-none rounded-md border border-gray-300"
                       />
                     </div>
-                    <div>
+                    <div className="mb-6">
                       <label
                         htmlFor="deadline"
-                        // className="block mb-2 text-2xl font-medium text-gray-900 "
+                        className="block mb-2 text-2xl font-medium text-gray-900 "
                       >
                         Deadline
                       </label>
                       <input
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-fit p-2.5"
+                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         type="date"
                         id="deadline"
                         name="deadline"
@@ -224,15 +225,15 @@ export default function Task({
                         // className="w-full text-lg text-gray-900 bg-white focus:ring-1 resize-none rounded-md border border-gray-300"
                       />
                     </div>
-                    <div>
+                    <div className="mb-6">
                       <label
                         htmlFor="assignedPerson"
-                        // className="block mb-2 text-2xl font-medium text-gray-900 "
+                        className="block mb-2 text-2xl font-medium text-gray-900 "
                       >
                         Person In Charge
                       </label>
                       <Select
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-fit p-2.5"
+                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         onChange={(assignedPerson) =>
                           setAssignedPerson(assignedPerson.label)
                         }

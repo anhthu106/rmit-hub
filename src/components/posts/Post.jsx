@@ -20,13 +20,13 @@ export default function Post({
             <div className="flex justify-between">
               <div className="flex justify-between items-center w-fit">
                 <Link href={`/users/${uid}`} >
-                  <Image
+                  <a><Image
                     className="h-10 w-10 rounded-full object-fill cursor-pointer	"
                     src={avatar}
                     alt="Avatar"
                     width="50"
                     height="50"
-                  />
+                  /></a>
                 </Link>
 
                 <div className="ml-3 ">
@@ -42,34 +42,8 @@ export default function Post({
                   <span className="text-gray-600 text-xs block">{date}</span>
                 </div>
               </div>
-              <div className="flex items-center justify-center">
-                <div className="relative inline-block tooltip">
-                  <div
-                    to=""
-                    className="hover:text-gray-400 px-2 py-1 font-medium"
-                  >
-                    <svg
-                      className="w-6 h-6"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
-                      />
-                    </svg>
-                  </div>
-                  <div className="flex flex-col p-4 bg-white w-max h-max rounded-md z-20 absolute right-0 invisible tooltip-item border-solid">
-                    {tag}
-                    {/* <ul className="list-disc space-y-2">
-                      <li className="flex items-start">sth to add</li>
-                    </ul> */}
-                  </div>
-                </div>
+              <div className="flex items-center justify-center">{tag}
+                
               </div>
             </div>
           </div>
