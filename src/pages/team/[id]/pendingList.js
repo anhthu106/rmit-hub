@@ -180,7 +180,9 @@ export default function TeamDetail({ userProps, team }) {
                               setMessage,
                               "/api/team/pending"
                             );
-                            window.location.reload(false);
+                            window.setTimeout(function () {
+                              location.reload();
+                            }, 2000);
                           }}
                           options={"Accept Request"}
                         />

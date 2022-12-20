@@ -64,7 +64,7 @@ export default function Task({
       setDeadline(date);
     }
   }
-
+console.log(assignedPerson);
   return (
     // TODO modal
     <>
@@ -219,7 +219,6 @@ export default function Task({
                         onKeyDown={onKeyDown}
                         onChange={(e) => {
                           setDeadline(e.target.value);
-                          // console.log(e.target.value);
                           conpareString(e.target.value);
                         }}
                         // className="w-full text-lg text-gray-900 bg-white focus:ring-1 resize-none rounded-md border border-gray-300"
@@ -233,6 +232,9 @@ export default function Task({
                         Person In Charge
                       </label>
                       <Select
+                        isMulti
+                        isClearable
+                        isSearchable
                         className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         onChange={(assignedPerson) =>
                           setAssignedPerson(assignedPerson.label)
