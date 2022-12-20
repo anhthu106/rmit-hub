@@ -1,6 +1,7 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
 import { Dropdown, Navbar } from "flowbite-react";
+import Button from "../button/Button";
 
 export default function Header() {
   const { data: session } = useSession();
@@ -33,12 +34,11 @@ export default function Header() {
                       </Link>
                     </Dropdown.Item>
                     <Dropdown.Item>
-                      <button
-                        className="w-full h-full text-left"
-                        onClick={() => signOut()}
-                      >
-                        Sign out
-                      </button>
+                      <Button
+                        style="w-full h-full text-left"
+                        fn={() => signOut()}
+                        options={"Sign out"}
+                      />
                     </Dropdown.Item>
                   </Dropdown>
                   <Navbar.Toggle />
@@ -75,12 +75,11 @@ export default function Header() {
                   <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
                     <Link href="#">
                       <a className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
-                        <button
-                          onClick={() => signIn()}
-                          className="font-medium text-indigo-600 hover:text-indigo-500"
-                        >
-                          Sign in
-                        </button>
+                        <Button
+                          style="font-medium text-indigo-600 hover:text-indigo-500"
+                          fn={() => signIn()}
+                          options={"Sign in"}
+                        />
                       </a>
                     </Link>
 
@@ -102,12 +101,11 @@ export default function Header() {
                     href="#"
                     className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
                   >
-                    <button
-                      onClick={() => signIn()}
-                      className="font-medium text-right text-indigo-600 hover:text-indigo-500 w-full"
-                    >
-                      Sign in
-                    </button>
+                    <Button
+                      style="font-medium text-right text-indigo-600 hover:text-indigo-500 w-full"
+                      fn={() => signIn()}
+                      options={"Sign in"}
+                    />
                   </Navbar.Link>
                   <Navbar.Link
                     href={"../signup"}

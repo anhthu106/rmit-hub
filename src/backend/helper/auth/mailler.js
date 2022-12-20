@@ -101,7 +101,7 @@ exports.recoverPasswordEmail = function ({ email, token }) {
     const content = "Thank you for using our application. If you forget your password, please click on the button below to recover your password: "
     const title = "Recover your password"
     const link = `${process.env.DOMAIN}/api/auth/active/${token}`
-    const mail = emailTemplate(link, content, title, leaderName)
+    const mail = emailTemplate(link, content, title, email)
 
     const message = {
         from: process.env.GOOGLE_USER,

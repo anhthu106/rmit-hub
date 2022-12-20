@@ -9,6 +9,7 @@ export default async function handler(req, res) {
 
     //Take the user value
     const user = await Users.findOne({email: req.body.email})
+    console.log(user);
 
     if (user) {
         const email = user.email;
