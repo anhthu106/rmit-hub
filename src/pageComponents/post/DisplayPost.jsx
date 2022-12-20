@@ -25,8 +25,8 @@ export default function DisplayPost({
       <Post
         tag={
           <>
-            <div className="relative inline-block tooltip">
-              <div to="" className="hover:text-gray-400 px-2 py-1 font-medium">
+            <div className="relative inline-block tooltip ">
+              <div to="" className="hover:text-gray-400 px-2 py-1 font-medium ">
                 <svg
                   className="w-6 h-6"
                   fill="none"
@@ -42,7 +42,7 @@ export default function DisplayPost({
                   />
                 </svg>
               </div>
-              <div className="flex flex-col p-4 bg-white w-max h-max rounded-md z-20 absolute right-0 invisible tooltip-item border-solid">
+              <div className="flex flex-col border-2 border-gray-500 p-4 bg-white w-max h-max rounded-md z-20 absolute right-0 invisible tooltip-item border-solid">
                 <ul className="space-y-2">
                   <DeleteButton
                     author={author}

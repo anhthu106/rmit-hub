@@ -57,8 +57,6 @@ export default function EditPost({
           <span className="flex-1 ml-3 text-left whitespace-nowrap">Edit Post</span>
         </button>
       </li>
-
-      <br />
       {showModal ? (
         <>
           <Portal><div className="fixed inset-0 z-10 overflow-y-auto">

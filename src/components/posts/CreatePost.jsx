@@ -5,6 +5,7 @@ import {util} from "../../utils/utils";
 import {addItems} from "../../backend/helper/items/items";
 import Link from "next/link";
 import Image from "next/image";
+import Button from "../button/Button";
 
 export default function CreatePost({courseProps, id, Info}) {
     const animated = makeAnimated();

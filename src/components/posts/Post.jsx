@@ -42,7 +42,7 @@ export default function Post({
                   <span className="text-gray-600 text-xs block">{date}</span>
                 </div>
               </div>
-              <div className="flex items-center justify-center">{tag}
+              <div className="flex items-center justify-center ">{tag}
                 
               </div>
             </div>
