@@ -3,7 +3,7 @@ import { util } from "../../../utils/utils";
 import { useEffect, useState } from "react";
 import Select from "react-select";
 import { io } from "socket.io-client";
-import Button from "../../button/Button";
+import { Button } from "../../button/Button";
 
 let socket;
 
@@ -140,25 +140,27 @@ export default function Task({
                       {name}
                     </div>
                     <div className="absolute top-0 right-0 flex w-5 h-5 mt-5 mr-5 tooltip ">
-                      <button
-                        className="hover:text-gray-400 font-medium"
-                        onClick={() => setShowModal(false)}
-                      >
-                        <svg
-                          className="w-4 h-4 fill-current"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M6 18L18 6M6 6l12 12"
-                          />
-                        </svg>
-                      </button>
+                      <Button
+                        type="button"
+                        style="hover:text-gray-400 font-medium"
+                        fn={() => setShowModal(false)}
+                        options={
+                          <svg
+                            className="w-4 h-4 fill-current"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M6 18L18 6M6 6l12 12"
+                            />
+                          </svg>
+                        }
+                      />
                     </div>
                   </div>
 
@@ -249,6 +251,7 @@ export default function Task({
                       />
                     </div>
                     <Button
+                      type="button"
                       style="w-full px-8 bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-white text-center"
                       fn={(e) => {
                         const data = {

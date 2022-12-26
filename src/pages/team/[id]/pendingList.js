@@ -10,7 +10,7 @@ import Teams from "../../../backend/models/team";
 import Users from "../../../backend/models/user";
 import Majors from "../../../backend/models/major";
 
-import Button from "../../../components/button/Button";
+import {Button} from "../../../components/button/Button";
 import UserInformation from "../../../components/users/UserInformation";
 import Header from "../../../components/header/Header";
 import { useState } from "react";
@@ -167,6 +167,7 @@ export default function TeamDetail({ userProps, team }) {
                     <div className="flex p-4 space-x-2">
                       <div className="w-1/2">
                         <Button
+                        type="button"
                           style="w-full bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-white text-center"
                           fn={(e) => {
                             addItems(
@@ -190,6 +191,7 @@ export default function TeamDetail({ userProps, team }) {
                       <div className="w-0 border border-gray-300"></div>
                       <div className="w-1/2">
                         <Button
+                        type="button"
                           style="w-full focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5"
                           fn={(e) => {
                             addItems(
