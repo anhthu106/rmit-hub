@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { validPassword } from "../regularexpression/Regex";
-import Button from "../button/Button";
 import { addItems } from "../../backend/helper/items/items";
 import { signIn } from "next-auth/react";
+import { DisabledButton, Button } from "../button/Button";
 
 const NewPasswordForm = () => {
   //UseState
@@ -102,16 +102,15 @@ const NewPasswordForm = () => {
         )}
       </div>
       {formUncompelete && (
-        <button
+        <DisabledButton
           type="button"
-          className="w-full text-white bg-blue-400  cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-          disabled
-        >
-          Reset Password
-        </button>
+          style="w-full text-white bg-blue-400  cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+          options={"Reset Password"}
+        />
       )}
       {formCompelete && (
         <Button
+          type="button"
           style="w-full  bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-white text-center"
           fn={(e) =>
             addItems({ password }, e, setMessage, `/api/auth/reset/${email}`)
@@ -125,6 +124,7 @@ const NewPasswordForm = () => {
         Return to&nbsp;
         <a className="text-sm font-light text-gray-500 ">
           <Button
+            type="button"
             style="font-medium text-primary-600 hover:underline"
             fn={() => signIn()}
             options={"Sign in"}

@@ -3,7 +3,7 @@ import { util } from "../../utils/utils";
 import { useEffect, useState } from "react";
 import { validPassword } from "../regularexpression/Regex";
 import Select from "react-select";
-import Button from "../button/Button";
+import { Button, DisabledButton } from "../button/Button";
 import { addItems } from "../../backend/helper/items/items";
 import { signIn } from "next-auth/react";
 
@@ -286,21 +286,15 @@ const SignUpForm = ({ majorProps }) => {
       </div>
 
       {formUncompelete && (
-        // <button
-        //   type="button"
-        //   className="w-full text-white bg-blue-400 dark:bg-blue-500 cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-        //   disabled
-        // >
-        //   Register
-        // </button>
-
-        <Button
+        <DisabledButton
+          type="button"
           style="w-full text-white bg-blue-400 dark:bg-blue-500 cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 text-center"
           options={"Register"}
         />
       )}
       {formCompelete && (
         <Button
+          type="button"
           style="w-full  bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-white text-center"
           fn={(e) => {
             addItems(
@@ -318,6 +312,7 @@ const SignUpForm = ({ majorProps }) => {
         Already have an account yet? &nbsp;
         <a className="text-sm font-light text-gray-500 ">
           <Button
+            type="button"
             style="font-medium text-primary-600 hover:underline"
             fn={() => signIn()}
             options={"Sign in"}

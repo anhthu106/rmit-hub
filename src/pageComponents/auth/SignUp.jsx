@@ -2,6 +2,11 @@ import Header from "../../components/header/Header";
 import { useState } from "react";
 import LoginForm from "../../components/auth/LoginForm";
 import SignUpForm from "../../components/auth/SignUpForm";
+import {
+  Button,
+  DisabledButton,
+  ButtonWithLoading,
+} from "../../components/button/Button";
 
 const SignUp = ({ majorProps }) => {
   const [showModal, setShowModal] = useState(false);
@@ -57,12 +62,11 @@ const SignUp = ({ majorProps }) => {
                         <span></span>
                         <div className="items-center space-y-4 sm:space-x-4 sm:flex sm:space-y-0">
                           <a href="../../components">
-                            <button
+                            <Button
                               type="button"
-                              className="py-2 px-4 w-full text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-auto hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                            >
-                              Confirm
-                            </button>
+                              style="py-2 px-4 w-full text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-auto hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300"
+                              options={"Confirm"}
+                            />
                           </a>
                         </div>
                       </div>

@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 const Board = dynamic(() => import("../../components/workspace/Board"));
 
 export default function TeamMember({TeamInfo, listProps, userName}) {
+    
     return (
         <div className="bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200 min-h-screen">
             <Header/>

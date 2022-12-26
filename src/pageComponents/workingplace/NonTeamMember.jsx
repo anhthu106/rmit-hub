@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { addItems } from "../../backend/helper/items/items";
-import Button from "../../components/button/Button";
+import { Button, DisabledButton, ButtonWithLoading } from "../../components/button/Button";
 import Header from "../../components/header/Header";
 
 export default function NonTeamMember({ TeamInfo, currentUser }) {
@@ -29,27 +29,6 @@ export default function NonTeamMember({ TeamInfo, currentUser }) {
           <div className="ml-3 text-sm font-medium text-blue-700">
             Join request sent! Waiting for teams leader to respond
           </div>
-          <button
-            type="button"
-            className="ml-auto -mx-1.5 -my-1.5 bg-blue-100 text-blue-500 rounded-lg focus:ring-2 focus:ring-blue-400 p-1.5 hover:bg-blue-200 inline-flex h-8 w-8"
-            data-dismiss-target="#alert-border-1"
-            aria-label="Close"
-          >
-            <span className="sr-only">Dismiss</span>
-            <svg
-              aria-hidden="true"
-              className="w-5 h-5"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              ></path>
-            </svg>
-          </button>
         </div>
       );
     } else {
@@ -74,27 +53,6 @@ export default function NonTeamMember({ TeamInfo, currentUser }) {
           <div className="ml-3 text-sm font-medium text-red-700">
             Somethings went wrong! Please try again later.
           </div>
-          <button
-            type="button"
-            className="ml-auto -mx-1.5 -my-1.5 bg-red-100 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200  inline-flex h-8 w-8"
-            data-dismiss-target="#alert-border-2"
-            aria-label="Close"
-          >
-            <span className="sr-only">Dismiss</span>
-            <svg
-              aria-hidden="true"
-              className="w-5 h-5"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              ></path>
-            </svg>
-          </button>
         </div>
       );
     }
@@ -150,6 +108,7 @@ export default function NonTeamMember({ TeamInfo, currentUser }) {
             <hr />
             <div className="p-5">
               <Button
+              type="button"
                 style="w-full  bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-white text-center"
                 fn={(e) => {
                   addItems(

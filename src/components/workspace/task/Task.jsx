@@ -3,6 +3,7 @@ import { util } from "../../../utils/utils";
 import { useEffect, useState } from "react";
 import Select from "react-select";
 import { io } from "socket.io-client";
+import { Button } from "../../button/Button";
 
 let socket;
 
@@ -17,7 +18,7 @@ export default function Task({
   const animated = makeAnimated();
   const personOption = util.username(usernameProps);
 
-  const [name, setName] = useState(task.name || null);
+  const [name, setName] = useState(task.name);
   const [description, setDescription] = useState(task.description);
   const [deadline, setDeadline] = useState(task.deadline);
   const [assignedPerson, setAssignedPerson] = useState(task.username);
@@ -45,10 +46,13 @@ export default function Task({
       socket = io();
       socket.emit("updateTask", data);
       e.preventDefault();
+      setAssignedPerson("");
+      setDeadline("");
+      setName("");
+      setDescription("");
       // setShowModal(false);
     }
   };
-
   function conpareString(pick) {
     let current = new Date();
     let date = `${current.getFullYear()}-${
@@ -64,7 +68,6 @@ export default function Task({
       setDeadline(date);
     }
   }
-console.log(assignedPerson);
   return (
     // TODO modal
     <>
@@ -137,25 +140,27 @@ console.log(assignedPerson);
                       {name}
                     </div>
                     <div className="absolute top-0 right-0 flex w-5 h-5 mt-5 mr-5 tooltip ">
-                      <button
-                        className="hover:text-gray-400 font-medium"
-                        onClick={() => setShowModal(false)}
-                      >
-                        <svg
-                          className="w-4 h-4 fill-current"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M6 18L18 6M6 6l12 12"
-                          />
-                        </svg>
-                      </button>
+                      <Button
+                        type="button"
+                        style="hover:text-gray-400 font-medium"
+                        fn={() => setShowModal(false)}
+                        options={
+                          <svg
+                            className="w-4 h-4 fill-current"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M6 18L18 6M6 6l12 12"
+                            />
+                          </svg>
+                        }
+                      />
                     </div>
                   </div>
 
@@ -232,19 +237,43 @@ console.log(assignedPerson);
                         Person In Charge
                       </label>
                       <Select
-                        isMulti
-                        isClearable
-                        isSearchable
+                        closeMenuOnSelect={false}
+                        // isMulti
                         className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         onChange={(assignedPerson) =>
                           setAssignedPerson(assignedPerson.label)
                         }
+                        // defaultValue={assignedPerson}
                         components={animated}
                         options={personOption}
                         onKeyDown={onKeyDown}
                         placeholder={assignedPerson}
                       />
                     </div>
+                    <Button
+                      type="button"
+                      style="w-full px-8 bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-white text-center"
+                      fn={(e) => {
+                        const data = {
+                          task,
+                          name,
+                          description,
+                          listID,
+                          deadline,
+                          assignedPerson,
+                        };
+
+                        socket = io();
+                        socket.emit("updateTask", data);
+                        e.preventDefault();
+                        // setShowModal(false);
+                        setAssignedPerson("");
+                        setDeadline("");
+                        setName("");
+                        setDescription("");
+                      }}
+                      options={"Update?"}
+                    />
                   </form>
 
                   <div className="items-center gap-2 mt-3 sm:flex"></div>
