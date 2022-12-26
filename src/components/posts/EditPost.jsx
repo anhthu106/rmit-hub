@@ -1,5 +1,5 @@
 import makeAnimated from "react-select/animated";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Select from "react-select";
 import { util } from "../../utils/utils";
 import { updateItems } from "../../backend/helper/items/items";
@@ -20,11 +20,23 @@ export default function EditPost({
   const [newImage, setNewImage] = useState();
   const [message, setMessage] = useState(null);
   const [showModal, setShowModal] = useState(false);
-
+  console.log(message);
   function imageHandler(e) {
     const file = e.target.files[0];
     setFileToBase(file);
   }
+
+  function reloadHandler(){
+    if (message === "Your post updated"){
+      window.setTimeout(function () {
+        location.reload();
+      }, 300);
+    }
+  }
+
+  useEffect(() => {
+    reloadHandler();
+  });
 
   const setFileToBase = (file) => {
     const reader = new FileReader();
@@ -168,9 +180,7 @@ export default function EditPost({
                                 setMessage,
                                 `/api/posts/${id}`
                               );
-                              window.setTimeout(function () {
-                                location.reload();
-                              }, 2000);
+
                             }}
                             options={"Update Post"}
                           />

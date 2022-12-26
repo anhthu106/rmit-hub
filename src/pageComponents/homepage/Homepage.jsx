@@ -14,7 +14,7 @@ const Homepage = ({courseProps, postProps, session, Info}) => {
 
     //Handling the input on our search bar
     const filtered = searchItem(query, postProps, "courseID", "name");
-    console.log(postProps)
+    // console.log(postProps)
 
     const handleChange = (e) => {
         setQuery(e.target.value);

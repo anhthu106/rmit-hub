@@ -75,7 +75,7 @@ export default function Post({
                     </div>
                     <div className="px-4 grid place-content-center pb-6">
                         <Image
-                            className="h-fit w-auto rounded-lg object-contain border-solid border-2 border-gray-100"
+                            className="h-fit w-auto rounded-lg object-contain border-solid border-3 border-gray-100"
                             src={image}
                             alt="post"
                             layout="intrinsic"
@@ -85,7 +85,7 @@ export default function Post({
                         />
                     </div>
                     <div className="flex items-center justify-between mx-4 mt-3 mb-2">
-                        <div className="flex gap-5">LOL</div>
+                        <div className="flex gap-5"></div>
                         <Link href={`/team/${TeamID}`}>
                             <a
                                 className="flex font-medium text-blue-600 hover:underline"
