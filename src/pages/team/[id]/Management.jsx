@@ -7,6 +7,8 @@ import importRawData from "../../../backend/helper/data/data";
 import PendingList from "../../../pageComponents/team/PendingList";
 import DisplayTeamMembers from "../../../pageComponents/team/DisplayTeamMembers";
 import Header from "../../../components/header/Header";
+import {Button} from "../../../components/button/Button";
+import {deleteItems} from "../../../backend/helper/items/items";
 
 export async function getServerSideProps({params}) {
     await connectDB();
@@ -47,14 +49,28 @@ export async function getServerSideProps({params}) {
 export default function Management({userProps, userPending, team}) {
     const {data: session} = useSession();
     const currentUser = session.user._id;
+    console.log(team)
     if (currentUser === team.leader) {
         return (
             <div>
                 <Header/>
                 {/*TODO Brings style of pendingList to here*/}
                 <PendingList team={team} userPending={userPending}/>
+
                 {/*TODO Make the list of teammate and the team leader can delete them*/}
-                <DisplayTeamMembers userProps={userProps}/>
+                <DisplayTeamMembers userProps={userProps} team={team}/>
+
+                {/*Delete Team*/}
+                <Button
+                    type={"button"}
+                    // style={}
+                    fn={(e) => {
+                        deleteItems(
+                            null, e, `../../api/team/${team.id}`
+                        )
+                    }}
+                    options={"Delete Team"}
+                />
             </div>
 
         )

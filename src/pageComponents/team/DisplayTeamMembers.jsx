@@ -1,18 +1,19 @@
 import {Button} from "../../components/button/Button";
+import {deleteItems} from "../../backend/helper/items/items";
 
-export default function DisplayTeamMembers({userProps}) {
+export default function DisplayTeamMembers({userProps, team, url}) {
     return (
         <div>
-            {userProps.map((doc) => {
+            {userProps.map((user) => {
                     return (
-                        <div key={doc._id}>
+                        <div key={user._id}>
                             <div>Picture</div>
-                            <div>{doc.username}</div>
+                            <div>{user.username}</div>
                             <Button
                                 type={"button"}
                                 options={"Kick"}
                                 fn={(e) => {
-                                    de
+                                    deleteItems({userID: user._id}, e, `../../api/team/${team.id}`)
                                 }}
                                 style={null}
                             />

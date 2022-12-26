@@ -1,6 +1,4 @@
 import Link from "next/link";
-import {Button} from "../button/Button";
-import {deleteItems} from "../../backend/helper/items/items";
 
 export default function TeamInformation({
                                             Name,
@@ -57,16 +55,6 @@ export default function TeamInformation({
                                     </svg>
                                 </a>
                             </Link>
-                            <Button
-                                type={"button"}
-                                // style={}
-                                fn={(e) => {
-                                    deleteItems(
-                                        null, e, `api/team/${TeamID}`
-                                    )
-                                }}
-                                options={"Delete Team"}
-                            />
                         </div>
                     </div>
                 </div>

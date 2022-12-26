@@ -1,4 +1,4 @@
-import { Schema, Types, model, models } from "mongoose";
+import {model, models, Schema, Types} from "mongoose";
 import bcrypt from "bcrypt";
 
 const userSchema = new Schema({
@@ -41,12 +41,6 @@ const userSchema = new Schema({
         {
             type: Types.ObjectId,
             ref: "Post"
-        }
-    ],
-    task_id: [
-        {
-            type: Types.ObjectId,
-            ref: "Tasks",
         }
     ],
     image: {

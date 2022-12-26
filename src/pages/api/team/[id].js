@@ -5,6 +5,7 @@ import Course from "../../../backend/models/course";
 import User from "../../../backend/models/user";
 import List from "../../../backend/models/list";
 import Task from "../../../backend/models/task";
+import Post from "../../../backend/models/post";
 
 export default async function handler(req, res) {
     /**
@@ -27,14 +28,10 @@ export default async function handler(req, res) {
                         const courseId = courseName._id.toString()
 
                         const newTeam = {
-                            name: req.body.newName,
-                            courseID: courseId,
-                            Description: req.body.newDescription
+                            name: req.body.newName, courseID: courseId, Description: req.body.newDescription
                         }
 
-                        const team = await Teams.findByIdAndUpdate(
-                            id, newTeam, {new: true, runValidators: true}
-                        )
+                        const team = await Teams.findByIdAndUpdate(id, newTeam, {new: true, runValidators: true})
                         if (!team) {
                             new Error.json({message: "Team not found"})
                         }
@@ -61,14 +58,46 @@ export default async function handler(req, res) {
                     } = req
 
                     if (req.body) {
-                        console.log(req.body)
+                        const team = await Teams.findByIdAndUpdate(id, {
+                            $pull: {
+                                userID: req.body.userID
+                            },
+                            $inc: {
+                                Member: -1
+                            }
+                        }).populate("listID", "_id", List).populate("postID", "_id", Post)
+
+
+                        const user = await User.findByIdAndUpdate(req.body.userID, {
+                            $pull: {
+                                team_id: team._id,
+                                post_id: {$in: team.postID}
+                            }
+                        })
+
+                        team.listID.map(async (listID) => {
+                            const list = await List.findById(listID._id.toString())
+                            await Task.findByIdAndUpdate(list.task_id.toString(), {
+                                $pull: {
+                                    username: user.username
+                                }
+                            })
+                        })
+
+                        team.postID.map(async (postID) => {
+                            const post = await Post.findById(postID._id.toString())
+                            if (post.userID.toString() === req.body.userID) {
+                                post.deleteOne();
+                            }
+                        })
+
                         res.status(StatusCodes.OK).json(req.body);
                     } else {
                         //Delete main
                         const team = await Teams.findByIdAndDelete(id)
 
                         //Delete reference
-                        await User.findByIdAndUpdate(team.userID, {$pull: {post_id: team._id}})
+                        await User.findByIdAndUpdate(team.userID, {$pull: {team_id: team._id}})
                         const lists = await List.find({_id: {$in: team.listID}}, "task_id").lean()
 
                         await List.deleteMany({_id: {$in: team.listID}})
@@ -77,16 +106,18 @@ export default async function handler(req, res) {
                             await Task.deleteMany({_id: {$in: list.task_id}})
                         })
 
+                        await Post.deleteMany({_id: {$in: team.postID}})
 
-                        return res.status(StatusCodes.OK).json({message: "Deleted"})
+                        res.status(StatusCodes.OK).json({message: "Deleted"})
+
                     }
+
                 } catch (e) {
                     return e
                 }
             }
         }
-    } catch
-        (Error) {
+    } catch (Error) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({Error})
     }
 

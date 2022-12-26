@@ -24,6 +24,7 @@ export async function getServerSideProps() {
         teamData.map(async (doc) => {
             const team = doc.toObject();
             team._id = team._id.toString();
+            team.postID = team.postID.toString();
 
             team.userID = await Promise.all(
                 team.userID.map(async (id) => {
@@ -91,7 +92,7 @@ export default function Team({courseProps, teamProps}) {
                                     <div className="flex-grow h-0 overflow-auto">
                                         <div className="w-full">
 
-                                            
+
                                             {teamProps.map((team) => (
                                                 <div key={team._id} className="space-y-2 ">
 
