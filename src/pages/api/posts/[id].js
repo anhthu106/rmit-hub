@@ -4,7 +4,8 @@ import User from "../../../backend/models/user";
 import Course from "../../../backend/models/course";
 import cloudinary from "../../../backend/helper/config/cloudinary"
 
-import { StatusCodes } from "http-status-codes";
+import {StatusCodes} from "http-status-codes";
+import Team from "../../../backend/models/team";
 
 export default async function handler(req, res) {
     try {
@@ -12,7 +13,7 @@ export default async function handler(req, res) {
         switch (req.method) {
             case "DELETE": {
                 try {
-                    const { id } = req.query;
+                    const {id} = req.query;
                     const post = await Posts.findById(id, "image");
 
                     await cloudinary.uploader.destroy(post.image.imgPublicID, {
@@ -20,8 +21,9 @@ export default async function handler(req, res) {
                     })
                     const deletePost = await Posts.findByIdAndDelete(id)
 
-                    await User.findByIdAndUpdate(deletePost.userID, { $pull: { post_id: deletePost._id } });
-                    res.status(StatusCodes.OK).json({ message: "Deleted" });
+                    await User.findByIdAndUpdate(deletePost.userID, {$pull: {post_id: deletePost._id}});
+                    await Team.findByIdAndUpdate(deletePost.teamID, {$pull: {postID: deletePost._id}})
+                    res.status(StatusCodes.OK).json({message: "Deleted"});
                 } catch (error) {
                     console.log(error);
                     return error
@@ -29,8 +31,8 @@ export default async function handler(req, res) {
             }
 
             case "PATCH": {
-                const { newCourse, newContent, newImage, messgae, uid, id } = req.body;
-                const data = await Course.findOne({ name: newCourse }, "_id").lean()
+                const {newCourse, newContent, newImage, messgae, uid, id} = req.body;
+                const data = await Course.findOne({name: newCourse}, "_id").lean()
                 const courseId = data._id.toString()
                 const image = await Posts.findById(id, "image")
 
@@ -62,13 +64,13 @@ export default async function handler(req, res) {
                 }
 
                 const post = await Posts.findByIdAndUpdate(
-                    id, updatedPost, { new: true, runValidators: true }
+                    id, updatedPost, {new: true, runValidators: true}
                 )
                 if (!post) {
-                    new Error.json({ message: "Post not found" })
+                    new Error.json({message: "Post not found"})
                 }
 
-                return res.status(StatusCodes.OK).json({ message: "Your post updated" })
+                return res.status(StatusCodes.OK).json({message: "Your post updated"})
             }
         }
     } catch (error) {

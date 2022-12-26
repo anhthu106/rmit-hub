@@ -5,6 +5,7 @@ import User from "../../../backend/models/user";
 import {StatusCodes} from "http-status-codes";
 
 import cloudinary from "../../../backend/helper/config/cloudinary";
+import Team from "../../../backend/models/team";
 
 export default async function handler(req, res) {
     try {
@@ -35,6 +36,12 @@ export default async function handler(req, res) {
                 await User.findByIdAndUpdate(uid, {
                     $push: {
                         post_id: post._id.toString(),
+                    }
+                })
+
+                await Team.findByIdAndUpdate(teamID, {
+                    $push: {
+                        postID: post._id.toString()
                     }
                 })
 
