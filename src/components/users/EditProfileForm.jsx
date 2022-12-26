@@ -1,11 +1,10 @@
 import makeAnimated from "react-select/animated";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Select from "react-select";
 import { util } from "../../utils/utils";
 import { updateItems } from "../../backend/helper/items/items";
 import Portal from "../../components/portal/Portal";
 import { Button, ButtonWithLoading } from "../button/Button";
-
 export default function EditProfileForm({
   PreUsername,
   PreCampus,
@@ -30,6 +29,18 @@ export default function EditProfileForm({
     const file = e.target.files[0];
     setFileToBase(file);
   }
+
+  function reloadHandler() {
+    if (message === "Your account updated") {
+      window.setTimeout(function () {
+        location.reload();
+      }, 300);
+    }
+  }
+
+  useEffect(() => {
+    reloadHandler();
+  });
 
   const setFileToBase = (file) => {
     const reader = new FileReader();
@@ -128,12 +139,12 @@ export default function EditProfileForm({
                             />
                           </div>
                         </div>
-
-                        {/* <p className="py-4 text-lg text-green-600 text-center">
-                        {message}
-                      </p> */}
                       </div>
+                      <p className="text-lg text-green-600 text-center">
+                        {message}
+                      </p>
                     </form>
+
                     <div className="items-center gap-2 mt-3 sm:flex">
                       {formSent ? (
                         <ButtonWithLoading />
@@ -155,9 +166,6 @@ export default function EditProfileForm({
                               setMessage,
                               `/api/users/${id}`
                             );
-                            window.setTimeout(function () {
-                              location.reload();
-                            }, 2000);
                           }}
                           options={"Update"}
                         />
@@ -178,8 +186,6 @@ export default function EditProfileForm({
           </Portal>
         </>
       ) : null}
-
-      <div>{message}</div>
     </div>
   );
 }

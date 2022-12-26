@@ -35,7 +35,7 @@ const Homepage = ({courseProps, postProps, session, Info}) => {
                                 <h1 className="text-xl font-semibold">Feed Title</h1>
                                 <Search onchange={handleChange}/>
                             </div>
-                            <div className="flex-grow h-0 overflow-auto">
+                            <div className="flex-grow h-0 overflow-auto lg:px-40">
                                 <div className="w-full space-y-1">
                                     <CreatePost
                                         courseProps={courseProps}
