@@ -23,7 +23,7 @@ export default async function handler(req, res) {
 
                     await User.findByIdAndUpdate(deletePost.userID, {$pull: {post_id: deletePost._id}});
                     await Team.findByIdAndUpdate(deletePost.teamID, {$pull: {postID: deletePost._id}})
-                    res.status(StatusCodes.OK).json({message: "Deleted"});
+                    res.status(StatusCodes.OK).json({message: "Post Deleted"});
                 } catch (error) {
                     console.log(error);
                     return error
