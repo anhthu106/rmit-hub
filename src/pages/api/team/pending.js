@@ -1,14 +1,18 @@
 import connectDB from "../../../backend/lib/connectDB";
+import { StatusCodes } from "http-status-codes";
+
 import Teams from "../../../backend/models/team";
 import Users from "../../../backend/models/user";
+import Course from "../../../backend/models/course";
 
-import {StatusCodes} from "http-status-codes";
 
 export default async function handler(req, res) {
     await connectDB();
 
-    const {teamID, status, userID, courseID} = req.body;
+    const { teamID, status, userID, courseName } = req.body;
 
+    const courseID = await Course.findOne({ name: courseName });
+    
     if (status === "accept") {
         await Teams.findByIdAndUpdate(
             teamID,
@@ -27,12 +31,12 @@ export default async function handler(req, res) {
             {
                 $push: {
                     team_id: teamID,
-                    course_id: courseID
+                    course_id: courseID._id
                 }
             }
         )
     }
-    await Teams.findByIdAndUpdate(teamID, {$pull: {pending: userID}});
-    return res.status(StatusCodes.OK).json({message: "Team updated"})
+    await Teams.findByIdAndUpdate(teamID, { $pull: { pending: userID } });
+    return res.status(StatusCodes.OK).json({ message: "Team updated" })
 
 }

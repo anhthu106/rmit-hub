@@ -1,10 +1,9 @@
-import {Button} from "../button/Button";
-import {deleteItems} from "../../backend/helper/items/items";
-import {useState} from "react";
+import { Button } from "../button/Button";
+import { deleteItems } from "../../backend/helper/items/items";
+import { useState } from "react";
 import Image from "next/image";
 
-export default function DisplayTeamMembers({userProps, team, session}) {
-    const [message, setMessage] = useState(null);
+export default function DisplayTeamMembers({ userProps, team, session }) {
     return (
         <div>
             <div className="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
@@ -25,19 +24,19 @@ export default function DisplayTeamMembers({userProps, team, session}) {
                                             if (session.user._id === team.leader) {
                                                 if (user._id !== team.leader) {
                                                     return (
-                                                        <DisplayWithButton key={user._id} button={"Kick"} user={user}/>
+                                                        <DisplayWithButton key={user._id} button={"Kick"} user={user} team={team} />
                                                     );
                                                 }
                                             } else {
                                                 if (user._id === session.user._id) {
                                                     return (
-                                                        <DisplayWithButton key={user._id} user={user}
-                                                                           button={"Out Team"}/>
+                                                        <DisplayWithButton key={user._id} user={user} team={team}
+                                                            button={"Out Team"} />
                                                     );
                                                 }
                                             }
                                             return (
-                                                <DisplayWithoutButton key={user._id} user={user}/>
+                                                <DisplayWithoutButton key={user._id} user={user} />
                                             )
                                         })}
                                     </ul>
@@ -51,7 +50,7 @@ export default function DisplayTeamMembers({userProps, team, session}) {
     );
 }
 
-function DisplayWithoutButton({user}) {
+function DisplayWithoutButton({ user }) {
     return (
         <li
             key={user._id}
@@ -76,7 +75,9 @@ function DisplayWithoutButton({user}) {
     )
 }
 
-function DisplayWithButton({user, button}) {
+function DisplayWithButton({ user, button, team }) {
+    const [message, setMessage] = useState(null)
+    console.log(team)
     return (
         <li
             key={user._id}
@@ -103,7 +104,7 @@ function DisplayWithButton({user, button}) {
                         options={button}
                         fn={(e) => {
                             deleteItems(
-                                {userID: user._id},
+                                { userID: user._id },
                                 e,
                                 setMessage,
                                 `../../api/team/${team.id}`

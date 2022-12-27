@@ -1,10 +1,11 @@
 import connectDB from "../../../backend/lib/connectDB";
-import {StatusCodes} from "http-status-codes";
+import { StatusCodes } from "http-status-codes";
 import Teams from "../../../backend/models/team";
 import User from "../../../backend/models/user";
 import List from "../../../backend/models/list";
 import Task from "../../../backend/models/task";
 import Post from "../../../backend/models/post";
+import Course from "../../../backend/models/course";
 
 export default async function handler(req, res) {
     /**
@@ -19,7 +20,7 @@ export default async function handler(req, res) {
                      * Update Information
                      */
                     const {
-                        query: {id}
+                        query: { id }
                     } = req
                     //Update Team information
                     if (req.body.newName && req.body.newDescription) {
@@ -28,17 +29,17 @@ export default async function handler(req, res) {
                             name: req.body.newName, Description: req.body.newDescription
                         }
 
-                        const team = await Teams.findByIdAndUpdate(id, newTeam, {new: true, runValidators: true})
+                        const team = await Teams.findByIdAndUpdate(id, newTeam, { new: true, runValidators: true })
                         if (!team) {
-                            new Error.json({message: "Team not found"})
+                            new Error.json({ message: "Team not found" })
                         }
 
-                        return res.status(StatusCodes.OK).json({message: "Your account updated"})
+                        return res.status(StatusCodes.OK).json({ message: "Your account updated" })
                     } else if (req.body.userId) { //Update Team members
                         const team = await Teams.findById(id)
                         team.userID.push(req.body.userId)
                         await team.save()
-                        return res.status(StatusCodes.OK).json({message: "Welcome"})
+                        return res.status(StatusCodes.OK).json({ message: "Welcome" })
                     }
                     break
                 } catch (e) {
@@ -51,7 +52,7 @@ export default async function handler(req, res) {
                      * Delete User from Team
                      */
                     const {
-                        query: {id}
+                        query: { id }
                     } = req
 
                     if (req.body) {
@@ -68,7 +69,8 @@ export default async function handler(req, res) {
                         const user = await User.findByIdAndUpdate(req.body.userID, {
                             $pull: {
                                 team_id: team._id,
-                                post_id: {$in: team.postID}
+                                post_id: { $in: team.postID },
+                                course_id: team.courseID,
                             }
                         })
 
@@ -95,18 +97,18 @@ export default async function handler(req, res) {
 
                         //Delete reference
                         await User.findByIdAndUpdate(team.userID, { $pull: { course_id: team.courseID } })
-                        await User.findByIdAndUpdate(team.userID, {$pull: {team_id: team._id}})
-                        const lists = await List.find({_id: {$in: team.listID}}, "task_id").lean()
+                        await User.findByIdAndUpdate(team.userID, { $pull: { team_id: team._id } })
+                        const lists = await List.find({ _id: { $in: team.listID } }, "task_id").lean()
 
-                        await List.deleteMany({_id: {$in: team.listID}})
+                        await List.deleteMany({ _id: { $in: team.listID } })
 
                         lists.map(async (list) => {
-                            await Task.deleteMany({_id: {$in: list.task_id}})
+                            await Task.deleteMany({ _id: { $in: list.task_id } })
                         })
 
-                        await Post.deleteMany({_id: {$in: team.postID}})
+                        await Post.deleteMany({ _id: { $in: team.postID } })
 
-                        res.status(StatusCodes.OK).json({message: "Deleted"})
+                        res.status(StatusCodes.OK).json({ message: "Deleted" })
 
                     }
 
@@ -116,7 +118,7 @@ export default async function handler(req, res) {
             }
         }
     } catch (Error) {
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({Error})
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ Error })
     }
 
 }

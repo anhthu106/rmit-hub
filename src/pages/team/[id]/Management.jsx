@@ -54,17 +54,10 @@ export async function getServerSideProps({ params }) {
       ).populate("major_id", "name -_id", Majors);
       user.push(userData);
     }
+    userPending = importRawData(userPending, ["_id"], null);
+
+    user = importRawData(user, ["_id"], null);
   }
-  userPending = importRawData(userPending, ["_id"], null);
-
-  for (let x of teamData.userID) {
-    userData = await Users.findById(x, "image username email campus major_id").populate("major_id", "name -_id", Majors);
-    user.push(userData);
-  }
-
-  userPending = importRawData(userPending, ["_id"], null);
-
-  user = importRawData(user, ["_id"], null);
 
   return {
     props: {
@@ -76,7 +69,6 @@ export async function getServerSideProps({ params }) {
 export default function Management({ userProps, userPending, team, tag }) {
   const { data: session } = useSession();
   const currentUser = session.user._id;
-  const [message, setMessage] = useState(null);
 
   if (Object.keys(team).length == 0) {
     return <NotFoundPage />;
