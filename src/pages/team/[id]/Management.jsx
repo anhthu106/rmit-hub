@@ -114,10 +114,10 @@ export default function Management({ userProps, userPending, team }) {
                         em
                         {/* <EditTeam
                           preName= {team.name}
-  preCourse= {}
-  preDescription= {team.Description}
-  courseProps= {}
-  id= {team.id}
+                          preCourse= {}
+                          preDescription= {team.Description}
+                          courseProps= {}
+                          id= {team.id}
                         /> */}
                       </div>
                       <DisplayTeamMembers userProps={userProps} team={team} />
