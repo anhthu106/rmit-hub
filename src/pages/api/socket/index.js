@@ -78,6 +78,7 @@ export default async function handler(req, res) {
 
             socket.on("updateTask", async (data) => {
                 socket.join("roomTaskUpdate")
+                console.log(data)
                 const taskValue = {
                     name: data.name,
                     description: data.description,
@@ -86,7 +87,7 @@ export default async function handler(req, res) {
                     deadline: data.deadline,
                 }
 
-            
+
                 const taskId = data.task._id;
 
                 let task
