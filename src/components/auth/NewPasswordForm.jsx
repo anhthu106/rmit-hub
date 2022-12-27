@@ -76,7 +76,7 @@ const NewPasswordForm = () => {
           </p>
         )}
       </div>
-      <div class="mb-3 font-light text-gray-500 dark:text-gray-400">
+      <div className="mb-3 font-light text-gray-500 dark:text-gray-400">
         <label
           htmlFor="retypePassword"
           className="block mb-2 text-sm font-medium text-gray-900 "

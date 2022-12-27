@@ -2,6 +2,7 @@ import { useState } from "react";
 import { deleteItems } from "../../backend/helper/items/items";
 import dynamic from "next/dynamic";
 import { Button } from "../../components/button/Button";
+import { useEffect } from "react";
 
 const EditPost = dynamic(() => import("../../components/posts/EditPost"));
 const Post = dynamic(() => import("../../components/posts/Post"));
@@ -94,7 +95,18 @@ function DeleteButton({ author, date, content, course, id, image }) {
   const [buttonClicked, setButtonClicked] = useState(false);
   const [message, setMessage] = useState(null);
 
-  console.log(message)
+  function reloadHandler() {
+    if(message === "Post Deleted"){
+        window.setTimeout(function () {
+                location.reload();
+              }, 300);
+    }
+  }
+
+  useEffect(() => {
+    reloadHandler();
+  });
+
   return (
     <>
       <li>

@@ -15,7 +15,7 @@ export default function TaskCard({ task, listID, usernameProps, tag1, tag2 }) {
       <div className="flex items-center w-full mt-3 text-xs font-medium text-gray-400">
         <div className="flex items-center">
           <svg
-            className="w-4 h-4 text-gray-300 fill-current"
+            className="w-4 h-4 text-blue-600 fill-current"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
@@ -26,7 +26,7 @@ export default function TaskCard({ task, listID, usernameProps, tag1, tag2 }) {
               clipRule="evenodd"
             />
           </svg>
-          <span className="ml-1 leading-none">{task.deadline}</span>
+          <span className="ml-1 leading-none text-blue-600 text-xs font-bold">Due: {task.deadline}</span>
         </div>
         <div className="w-6 h-6 ml-auto rounded-full">LOL</div>
       </div>

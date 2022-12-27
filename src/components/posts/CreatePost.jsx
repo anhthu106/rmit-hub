@@ -25,10 +25,10 @@ export default function CreatePost({ courseProps, id, Info }) {
   const [formSent, setFormSent] = useState(false);
 
   function reloadHandler() {
-    if(message === "Post created"){
-        window.setTimeout(function () {
-                location.reload();
-              }, 300);
+    if (message === "Post created") {
+      window.setTimeout(function () {
+        location.reload();
+      }, 300);
     }
   }
 
@@ -228,17 +228,50 @@ export default function CreatePost({ courseProps, id, Info }) {
                               onChange={(e) => imageHandler(e)}
                             />
                           </div>
-                          <p className="ml-auto text-xs text-gray-500 pt-3">
+                          <div className="ml-auto text-xs text-gray-500 pt-3">
                             Remember, contributions to this topic should follow
-                            our
-                            <a
+                            our&nbsp;
+                            <span className="">
+                              <span className="group relative inline-blockduration-300 text-blue-600 hover:underline cursor-pointer	">
+                                Community Guidelines
+                                <span className="absolute hidden group-hover:flex -left-auto  lg:-left-5 -top-2 -translate-y-full max-w-screen-sm md:w-96 bg-white rounded-lg text-left text-sm py-2 px-3  text-gray-700 shadow-sm border-gray-700 border-solid border-2 ">
+                                  <div>
+                                    <h1 className="font-medium text-base ">
+                                      Rmit-Hub is a place where everyone should
+                                      feel safe.
+                                    </h1>
+                                    <li>
+                                      No hateful content is allowed in any way
+                                      is allowed including anything racist,
+                                      anything based on ones ethnicity, gender
+                                      identity, sexual orientation, age,
+                                      disability or otherwise.
+                                    </li>
+                                    <li>
+                                      No violence or threats, bullying,
+                                      harassment, or harmful or suicidal content
+                                      is allowed.
+                                    </li>
+                                    <li>
+                                      No nudity or sexually explicit content is
+                                      allowed.
+                                    </li>
+                                    <li>
+                                      No inaccurate content is allowed in any
+                                      shape or form.
+                                    </li>
+                                  </div>
+                                </span>
+                              </span>
+                            </span>
+                            {/* <a
                               href="#"
                               className="text-blue-600 hover:underline"
                             >
                               Community Guidelines
-                            </a>
+                            </a> */}
                             .
-                          </p>
+                          </div>
                         </div>
                         <p className="py-4 text-lg text-green-600 text-center">
                           {message}
@@ -269,9 +302,9 @@ export default function CreatePost({ courseProps, id, Info }) {
                                     "/api/posts"
                                   );
                                   setFormSent(true);
-                                //   window.setTimeout(function () {
-                                //     location.reload();
-                                //   }, 3000);
+                                  //   window.setTimeout(function () {
+                                  //     location.reload();
+                                  //   }, 3000);
                                 }}
                                 options={"Create Post"}
                               />
