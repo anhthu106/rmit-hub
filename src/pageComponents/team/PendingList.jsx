@@ -15,7 +15,7 @@ export default function PendingList({ userPending, team }) {
               Pending List
             </h3>
             <span className="text-base font-normal text-gray-500">
-              This is a list of pending reques
+              This is a list of pending request
             </span>
           </div>
         </div>

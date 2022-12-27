@@ -17,6 +17,9 @@ export default async function handler(req, res) {
                 const data = await Course.findOne({ name: course }, "_id").lean()
                 const courseId = data._id.toString()
 
+                console.log('courseID: ', courseId);
+                console.log(userData.course_id);
+                
                 if (!userData.course_id.includes(courseId)) {
                     const teamValue = {
                         name: name,

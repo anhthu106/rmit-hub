@@ -1,58 +1,71 @@
+// BACKEND
 import { useSession } from "next-auth/react";
 import connectDB from "../../../backend/lib/connectDB";
+import { deleteItems } from "../../../backend/helper/items/items";
+import importRawData from "../../../backend/helper/data/data";
+import { Types } from "mongoose";
+import { useState } from "react";
+
+// MODEL
 import Teams from "../../../backend/models/team";
 import Users from "../../../backend/models/user";
 import Majors from "../../../backend/models/major";
-import importRawData from "../../../backend/helper/data/data";
+
+// COMPONENT
+import EditTeam from "../../../components/team/EditTeam";
 import PendingList from "../../../pageComponents/team/PendingList";
 import DisplayTeamMembers from "../../../pageComponents/team/DisplayTeamMembers";
 import Header from "../../../components/header/Header";
 import { Button } from "../../../components/button/Button";
-import { deleteItems } from "../../../backend/helper/items/items";
 import SideBar from "../../../components/sidebar/SideBar";
-import EditTeam from "../../../components/team/EditTeam";
+import NotFoundPage from "../../../components/error/NotFoundPage"
+
 export async function getServerSideProps({ params }) {
   await connectDB();
-
-  const teamData = await Teams.findById(
-    params.id,
-    "pending userID courseID name Description"
-  );
-  const team = {
-    id: teamData._id.toString(),
-    leader: teamData.userID[0].toString(),
-    courseID: teamData.courseID.toString(),
-    name: teamData.name.toString(),
-    Description: teamData.Description.toString(),
-  };
-
-  // preName, ok
-  // preCourse,
-  // preDescription,
-  // courseProps,
-  // id, ok
-
+  let teamData;
+  if (Types.ObjectId.isValid(params.id)) {
+    teamData = await Teams.findById(
+      params.id,
+      "pending userID courseID name Description"
+    );
+  }
+  let team = {}
   let userPending = [];
   let userDataPending;
   let user = [];
   let userData;
 
-  for (let i of teamData.pending) {
-    userDataPending = await Users.findById(
-      i,
-      "image username email campus major_id"
-    ).populate("major_id", "name -_id", Majors);
-    userPending.push(userDataPending);
-  }
+  if (teamData != null) {
+    team = {
+      id: teamData._id.toString(),
+      leader: teamData.userID[0].toString(),
+      courseID: teamData.courseID.toString(),
+      name: teamData.name.toString(),
+      Description: teamData.Description.toString(),
+    };
 
-  for (let x of teamData.userID) {
-    userData = await Users.findById(
-      x,
-      "image username email campus major_id"
-    ).populate("major_id", "name -_id", Majors);
-    user.push(userData);
-  }
+    // preName, ok
+    // preCourse,
+    // preDescription,
+    // courseProps,
+    // id, ok
 
+    for (let i of teamData.pending) {
+      userDataPending = await Users.findById(
+        i,
+        "image username email campus major_id"
+      ).populate("major_id", "name -_id", Majors);
+      userPending.push(userDataPending);
+    }
+
+    for (let x of teamData.userID) {
+      userData = await Users.findById(
+        x,
+        "image username email campus major_id"
+      ).populate("major_id", "name -_id", Majors);
+      user.push(userData);
+    }
+  }
   userPending = importRawData(userPending, ["_id"], null);
 
   user = importRawData(user, ["_id"], null);
@@ -69,6 +82,11 @@ export async function getServerSideProps({ params }) {
 export default function Management({ userProps, userPending, team }) {
   const { data: session } = useSession();
   const currentUser = session.user._id;
+  const [message, setMessage] = useState(null);
+
+  if (Object.keys(team).length == 0) {
+    return <NotFoundPage />;
+  }
   if (currentUser === team.leader) {
     return (
       <div className="bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200 min-h-screen">
@@ -137,7 +155,10 @@ export default function Management({ userProps, userPending, team }) {
                             type={"button"}
                             style="ml-5 w-0 flex items-center justify-end flex-1 text-red-500 text-base font-bold hover:bg-red-300"
                             fn={(e) => {
-                              deleteItems(null, e, `../../api/team/${team.id}`);
+                              deleteItems(null, e, setMessage, `../../api/team/${team.id}`);
+                              window.setTimeout(function () {
+                                location.replace("../../");
+                              }, 1000);
                             }}
                             options={"Delete Team"}
                           />
@@ -152,7 +173,8 @@ export default function Management({ userProps, userPending, team }) {
         </div>
       </div>
     );
-  } else {
+  }
+  else {
     return <div>You do not have authorization to access to this page!</div>;
   }
 }

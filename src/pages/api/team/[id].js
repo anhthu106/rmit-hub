@@ -97,6 +97,7 @@ export default async function handler(req, res) {
                         const team = await Teams.findByIdAndDelete(id)
 
                         //Delete reference
+                        await User.findByIdAndUpdate(team.userID, { $pull: { course_id: team.courseID } })
                         await User.findByIdAndUpdate(team.userID, {$pull: {team_id: team._id}})
                         const lists = await List.find({_id: {$in: team.listID}}, "task_id").lean()
 
