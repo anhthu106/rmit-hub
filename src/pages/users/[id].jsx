@@ -1,5 +1,5 @@
 // BACKEND
-import {useSession} from "next-auth/react";
+import { useSession } from "next-auth/react";
 import connectDB from "../../backend/lib/connectDB";
 import importRawData from "../../backend/helper/data/data";
 import mongoose from "mongoose";
@@ -15,11 +15,12 @@ import dynamic from "next/dynamic";
 
 
 // COMPONENT
-const EditProfileForm = dynamic(() => import( "../../components/users/EditProfileForm"));
+const EditProfileForm = dynamic(() => import("../../components/users/EditProfileForm"));
 const Account = dynamic(() => import("../../pageComponents/user/Account"));
 const CreatePost = dynamic(() => import("../../components/posts/CreatePost"))
+const NotFoundPage = dynamic(() => import("../../components/error/NotFoundPage"));
 
-export async function getServerSideProps({params}) {
+export async function getServerSideProps({ params }) {
     await connectDB();
     const majorData = await Major.find({}, "name");
     const majors = importRawData(majorData, ["_id"], null);
@@ -28,23 +29,16 @@ export async function getServerSideProps({params}) {
     const courses = importRawData(data, ['_id'], null)
 
     let Info = {};
-    let posts = [];
+    let userData = {};
+    let postData = {};
+    let posts = {};
+
     if (mongoose.Types.ObjectId.isValid(params.id)) {
-        const userData = await Users.findById(
+        userData = await Users.findById(
             params.id,
             "_id username email campus major_id team_id image"
         ).populate("major_id", "name -_id", Major).populate("team_id", "name ", Teams);
-
-        const team = userData.team_id.map((data) => {
-                data = data.toObject();
-                data._id = data._id.toString();
-                return data;
-            }
-        )
-
-
-        const postData = await Post.find({userID: params.id}, 'courseID content updatedAt userID image').populate('courseID', 'name -_id', Course).populate('userID', 'username _id image', Users).sort({updatedAt: -1})
-
+        postData = await Post.find({ userID: params.id }, 'courseID content updatedAt userID image').populate('courseID', 'name -_id', Course).populate('userID', 'username _id image', Users).sort({ updatedAt: -1 })
         const post = importRawData(postData, ['_id'], 'updatedAt')
 
         posts = await Promise.all(
@@ -53,8 +47,14 @@ export async function getServerSideProps({params}) {
                 return doc;
             })
         )
-
         if (userData !== null) {
+            const team = userData.team_id.map((data) => {
+                data = data.toObject();
+                data._id = data._id.toString();
+                return data;
+            })
+
+
             Info = {
                 _id: userData._id.toString(),
                 username: userData.username,
@@ -79,8 +79,11 @@ export async function getServerSideProps({params}) {
     };
 }
 
-export default function Detail({Info, majorProps, postProps, courseProps}) {
-    const {data: session} = useSession();
+export default function Detail({ Info, majorProps, postProps, courseProps }) {
+    const { data: session } = useSession();
+    if (Object.keys(Info).length == 0) {
+        return (<NotFoundPage />);
+    }
     if (session.user._id === Info._id) {
         return (
             <>
@@ -100,10 +103,10 @@ export default function Detail({Info, majorProps, postProps, courseProps}) {
                     session={session}
                     courseProps={courseProps}
                     createPost={<CreatePost
-                                            courseProps={courseProps}
-                                            id={session.user._id}
-                                            Info={session}
-                                />}
+                        courseProps={courseProps}
+                        id={session.user._id}
+                        Info={session}
+                    />}
                 />
             </>
         );
