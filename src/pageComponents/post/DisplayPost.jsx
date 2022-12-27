@@ -20,11 +20,7 @@ export default function DisplayPost({
   courseProps,
   teamID,
 }) {
-  const [message, setMessage] = useState(null);
-
-
   if (sessionName === username) {
-    console.log(message);
     return (
       <Post
         tag={
@@ -53,7 +49,6 @@ export default function DisplayPost({
                     course={course}
                     content={content}
                     date={date}
-                    setMessage={setMessage}
                     id={id}
                     image={image}
                   />
@@ -96,7 +91,10 @@ export default function DisplayPost({
 }
 
 function DeleteButton({ author, date, content, course, id, image }) {
-    const [buttonClicked, setButtonClicked] = useState(false);
+  const [buttonClicked, setButtonClicked] = useState(false);
+  const [message, setMessage] = useState(null);
+
+  console.log(message)
   return (
     <>
       <li>
@@ -132,15 +130,16 @@ function DeleteButton({ author, date, content, course, id, image }) {
             type="button"
             style="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 "
             fn={(e) => {
-                setButtonClicked(true);
+              setButtonClicked(true);
               deleteItems(
                 { author, date, content, course, image },
                 e,
+                setMessage,
                 `/api/posts/${id}`
               );
-            //   window.setTimeout(function () {
-            //     location.reload();
-            //   }, 2000);
+              //   window.setTimeout(function () {
+              //     location.reload();
+              //   }, 2000);
             }}
             options={
               <>

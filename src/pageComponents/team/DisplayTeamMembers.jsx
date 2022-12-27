@@ -2,6 +2,8 @@ import {Button} from "../../components/button/Button";
 import {deleteItems} from "../../backend/helper/items/items";
 
 export default function DisplayTeamMembers({userProps, team, url}) {
+    const [message, setMessage] = useState(null);
+
     return (
         <div>
             {userProps.map((user) => {
@@ -13,7 +15,7 @@ export default function DisplayTeamMembers({userProps, team, url}) {
                                 type={"button"}
                                 options={"Kick"}
                                 fn={(e) => {
-                                    deleteItems({userID: user._id}, e, `../../api/team/${team.id}`)
+                                    deleteItems({ userID: user._id }, e, setMessage, `../../api/team/${team.id}`)
                                 }}
                                 style={null}
                             />
