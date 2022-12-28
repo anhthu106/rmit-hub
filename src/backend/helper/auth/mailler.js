@@ -81,7 +81,7 @@ function emailTemplate(link, content, title, name) {
         `
 }
 
-exports.sendConfirmationEmail = function ({ toUser, token }) {
+exports.sendConfirmationEmail = function ({toUser, token}) {
     const content = "Thank you for registering our application! Before we get started, we need to confirm that it is really you. Please click on the button below to verify your email address: "
     const title = "Verify your email"
     const link = `${process.env.DOMAIN}/api/auth/active/${token}`
@@ -97,10 +97,10 @@ exports.sendConfirmationEmail = function ({ toUser, token }) {
     return sendEmail(message)
 }
 
-exports.recoverPasswordEmail = function ({ email, token }) {
+exports.recoverPasswordEmail = function ({email, token}) {
     const content = "Thank you for using our application. If you forget your password, please click on the button below to recover your password: "
     const title = "Recover your password"
-    const link = `${process.env.DOMAIN}/api/auth/active/${token}`
+    const link = `${process.env.DOMAIN}/recover/${token}`
     const mail = emailTemplate(link, content, title, email)
 
     const message = {
@@ -113,7 +113,7 @@ exports.recoverPasswordEmail = function ({ email, token }) {
 }
 
 // Request to join team
-exports.requestToJoinTeam = function ({ leaderEmail, leaderName, memberName, teamID }) {
+exports.requestToJoinTeam = function ({leaderEmail, leaderName, memberName, teamID}) {
     const content = memberName + " requests to join your team! "
     const title = "Team Pending List"
     const link = `${process.env.DOMAIN}/team/${teamID}/pendingList`
