@@ -116,7 +116,7 @@ exports.recoverPasswordEmail = function ({email, token}) {
 exports.requestToJoinTeam = function ({leaderEmail, leaderName, memberName, teamID}) {
     const content = memberName + " requests to join your team! "
     const title = "Team Pending List"
-    const link = `${process.env.DOMAIN}/team/${teamID}/pendingList`
+    const link = `${process.env.DOMAIN}/team/${teamID}/Management`
     const email = emailTemplate(link, content, title, leaderName)
 
     const message = {
