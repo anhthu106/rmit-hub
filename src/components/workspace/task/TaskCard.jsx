@@ -4,7 +4,6 @@ let socket;
 
 export default function TaskCard({task, listID, usernameProps, tag1, tag2}) {
     // TODO task doesn't have the person in charge of the task info inside
-    console.log(task)
 
     return (
         <div
