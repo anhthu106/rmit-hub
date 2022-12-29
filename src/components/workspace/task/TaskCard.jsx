@@ -27,7 +27,7 @@ export default function TaskCard({ task, listID, usernameProps, tag1, tag2 }) {
           </span>
         </div>
         <hr />
-        <div className="flex justify-end items-center w-full p-2 bg-gray-100 rounded-b-lg">
+        <div className="flex justify-end items-center p-2 bg-gray-100 rounded-b-lg">
           <span className="group relative inline-blockduration-300 text-blue-600 hover:underline cursor-pointer	">
             <span className="flex">
               <svg

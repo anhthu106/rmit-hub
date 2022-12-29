@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { addItems } from "../../backend/helper/items/items";
-import { Button, DisabledButton, ButtonWithLoading } from "../../components/button/Button";
+import {
+  Button,
+  DisabledButton,
+  ButtonWithLoading,
+} from "../../components/button/Button";
 import Header from "../../components/header/Header";
 
 export default function NonTeamMember({ TeamInfo, currentUser }) {
@@ -57,21 +61,18 @@ export default function NonTeamMember({ TeamInfo, currentUser }) {
       );
     }
   }
+
+  console.log(TeamInfo);
   return (
     <div>
       <Header />
 
       <section className="bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200">
-        {alert ? (
-          <>
-            {AlertCheck()}
-          </>
-        ) : null}
+        {alert ? <>{AlertCheck()}</> : null}
 
         <div className=" flex flex-row justify-center items-center h-[calc(100vh-62px)] w-full">
           <div className="card w-96 md:mx-auto bg-white rounded-lg  shadow-xl hover:shadow mx-4">
-            <div className="w-32 h-32 mx-auto rounded-full -mt-20 border-8 border-white bg-indigo-500"></div>
-            <div className="text-center mt-2 text-3xl font-medium">
+            <div className="text-center mt-5 text-3xl font-medium">
               {TeamInfo.name}
             </div>
             {/* <div className="text-center mt-2 font-light text-sm">placeholder 1</div> */}
@@ -107,7 +108,7 @@ export default function NonTeamMember({ TeamInfo, currentUser }) {
             <hr />
             <div className="p-5">
               <Button
-              type="button"
+                type="button"
                 style="w-full  bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-white text-center"
                 fn={(e) => {
                   addItems(

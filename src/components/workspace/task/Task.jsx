@@ -17,7 +17,6 @@ export default function Task({
                              }) {
     const animated = makeAnimated();
     const personOption = util.username(usernameProps);
-
     const [name, setName] = useState(task.name);
     const [description, setDescription] = useState(task.description);
     const [deadline, setDeadline] = useState(task.deadline);

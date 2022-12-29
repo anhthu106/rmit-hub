@@ -20,7 +20,7 @@ export default function Header() {
                 </Navbar.Brand>
                 <div className="flex md:order-2">
                   <Dropdown label="User">
-                    <div className="py-3 px-4 text-sm text-gray-900 hover:bg-gray-100">
+                    <div className="py-3 mx-2 px-2 rounded-lg text-sm text-gray-900 hover:bg-indigo-100 hover:text-indigo-700">
                       <a href={`/users/${session.user._id}`}>
                         <div className="text-lg">{session.user.username}</div>
                         <div className="font-medium truncate">
@@ -30,7 +30,7 @@ export default function Header() {
                     </div>
                     <Dropdown.Item>
                       <Link href={`/users/${session.user._id}`}>
-                        <a className="w-full">My Account</a>
+                        <a className="w-full ">My Account</a>
                       </Link>
                     </Dropdown.Item>
                     <Dropdown.Item>

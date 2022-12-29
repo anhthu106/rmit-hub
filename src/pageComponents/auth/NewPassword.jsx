@@ -15,7 +15,7 @@ const Repass = ({email}) => {
                         <div className="align-middle md:align-top w-full">
                             <div
                                 className="bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-pink-500 via-red-500 to-yellow-500 rounded-t-[50px] h-fit p-8">
-                                <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-3xl">
+                                <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-3xl break-words">
                                     {email}
                                 </h1>
                                 <h2 className="text-xl leading-tight tracking-tight text-gray-900">

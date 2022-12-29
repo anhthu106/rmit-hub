@@ -5,7 +5,7 @@ import { addItems } from "../../backend/helper/items/items";
 
 export default function PendingList({ userPending, team }) {
     const [message, setMessage] = useState("");
-
+    console.log(userPending);
     return (
         <div>
             <div className="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-4">
