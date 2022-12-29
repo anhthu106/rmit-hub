@@ -13,7 +13,7 @@ export default function CreateList({ teamID }) {
   };
   return (
     <div>
-      <form className="bg-gray-50 w-fit p-3 rounded-lg">
+      <form className="bg-gray-50 min-w-fit w-40 h-[156px] p-3 rounded-2xl">
         <div>
           <label
             htmlFor="title"
@@ -50,7 +50,6 @@ export default function CreateList({ teamID }) {
           }}
           options={
             <>
-              {" "}
               <span>
                 <svg
                   className="w-4 h-4"
@@ -67,7 +66,7 @@ export default function CreateList({ teamID }) {
                   />
                 </svg>
               </span>
-              <span>Add List</span>
+              <p >Add List</p>
             </>
           }
         />

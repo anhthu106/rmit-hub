@@ -14,7 +14,7 @@ export default function DisplayTeamMembers({ userProps, team, session }) {
                         </h3>
                     </div>
                 </div>
-                <div className="flex flex-col mt-8">
+                <div className="flex flex-col">
                     <div className="overflow-x-auto rounded-lg">
                         <div className="align-middle inline-block min-w-full">
                             <div className="shadow overflow-hidden sm:rounded-lg">

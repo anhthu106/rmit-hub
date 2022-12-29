@@ -20,7 +20,7 @@ export default function UserInformation({
                 />
             </div>
             <div
-                className="text-2xl xl:text-4xl font-semibold leading-normal mb-2 md:pt-10 text-blueGray-700 "
+                className="text-2xl xl:text-4xl font-semibold leading-normal mb-2 md:pt-10 text-blueGray-700 break-words"
                 key={username}
             >
                 {username}

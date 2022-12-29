@@ -21,7 +21,7 @@ export default function EditList({ listTile, listId }) {
     }
   };
   return (
-    <div className="text-lg font-semibold pr-8">
+    <div className="text-lg font-semibold pr-8 ">
       <form>
         <div>
           <input

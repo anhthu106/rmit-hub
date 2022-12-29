@@ -92,7 +92,7 @@ export default function Management({userProps, userPending, team, userID}) {
                                 <h1 className="text-2xl font-bold ">{team.name}</h1>
                                 <div className="flex">
                                     <SideBar teamID={team.id} state1={0} state2={1}/>
-                                    <section className="w-3/4">
+                                    <section className="w-full 2xl:px-40">
                                         <TeamLeaderPage
                                             team={team}
                                             userPending={userPending}
