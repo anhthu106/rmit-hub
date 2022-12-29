@@ -126,9 +126,8 @@ const SignUpForm = ({majorProps}) => {
                 setFormCompelete(false);
                 setFormUncompelete(true);
                 setTimeout(() => {
-                    console.log("run")
                     setMessage("Send again, if you did not received email")
-                }, 120000)
+                }, 60000)
             } else {
                 setFormCompelete(true);
                 setFormUncompelete(false);
