@@ -3,6 +3,7 @@ import {validPassword} from "../regularexpression/Regex";
 import {addItems} from "../../backend/helper/items/items";
 import {signIn} from "next-auth/react";
 import {Button, DisabledButton} from "../button/Button";
+import {useRouter} from "next/router";
 
 const NewPasswordForm = ({email}) => {
     //UseState
@@ -46,8 +47,16 @@ const NewPasswordForm = ({email}) => {
         }
     }
 
+    const router = useRouter();
+
     useEffect(() => {
         checkPassword();
+        if (message === "Updated") {
+            setTimeout(() => {
+                router.push("/")
+
+            }, 300)
+        }
     });
 
     return (<form className="px-6 pb-6 space-y-4 md:space-y-6 sm:px-8 sm:pb-8 pt-8">
@@ -104,9 +113,7 @@ const NewPasswordForm = ({email}) => {
         {formCompelete && (<Button
             type="button"
             style="w-full  bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-white text-center"
-            fn={(e) =>
-                addItems({password}, e, setMessage, `/api/auth/reset/${email}`)
-            }
+            fn={(e) => addItems({password}, e, setMessage, `/api/auth/reset/${email}`)}
             options={"Reset Password"}
         />)}
 

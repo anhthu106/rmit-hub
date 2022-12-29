@@ -45,25 +45,29 @@ export default function Task({
         }
     }
 
+    function submit(e) {
+        const data = {
+            task,
+            name,
+            description,
+            listID,
+            deadline,
+            assignedPerson,
+        };
+
+        socket = io();
+        socket.emit("updateTask", data);
+        e.preventDefault();
+        setAssignedPerson("");
+        setDeadline("");
+        setName("");
+        setDescription("");
+        // setShowModal(false);
+    }
+
     const onKeyDown = (e) => {
         if (e.key === "Enter" || e.key === "Escape") {
-            const data = {
-                task,
-                name,
-                description,
-                listID,
-                deadline,
-                assignedPerson,
-            };
-
-            socket = io();
-            socket.emit("updateTask", data);
-            e.preventDefault();
-            setAssignedPerson("");
-            setDeadline("");
-            setName("");
-            setDescription("");
-            // setShowModal(false);
+            submit(e);
         }
     };
 
@@ -277,23 +281,7 @@ export default function Task({
                                             type="button"
                                             style="w-full px-8 bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-white text-center"
                                             fn={(e) => {
-                                                const data = {
-                                                    task,
-                                                    name,
-                                                    description,
-                                                    listID,
-                                                    deadline,
-                                                    assignedPerson,
-                                                };
-
-                                                socket = io();
-                                                socket.emit("updateTask", data);
-                                                e.preventDefault();
-                                                // setShowModal(false);
-                                                setAssignedPerson("");
-                                                setDeadline("");
-                                                setName("");
-                                                setDescription("");
+                                                submit(e);
                                             }}
                                             options={"Update?"}
                                         />

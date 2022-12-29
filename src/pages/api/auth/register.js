@@ -15,8 +15,8 @@ export default async function handler(req, res) {
             expiresIn: process.env.JWT_VERIFY_LIFETIME
         })
         //Send Email
-        await sendConfirmationEmail({toUser: body, token})
         res.status(StatusCodes.CREATED).json({message: "Verify email is sent which have 5 minutes expires"})
+        await sendConfirmationEmail({toUser: body, token})
     } else {
         if (user.email === body.email && user.username === body.username) {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({message: "This account already created"})

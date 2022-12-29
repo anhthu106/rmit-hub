@@ -9,7 +9,7 @@ const teamSchema = new Schema({
     userID: [{
         type: Types.ObjectId,
         ref: "Users",
-        validate: {validator: membersLimit, message: "Out of range"},
+        // validate: {validator: membersLimit, message: "Out of range"},
         default: 0
     }],
     courseID: {
@@ -46,9 +46,9 @@ teamSchema.pre("save", function (next) {
 })
 
 
-function membersLimit() {
-    return this.userID.length <= 4
-}
+// function membersLimit() {
+//     return this.userID.length <= 4
+// }
 
 
 const Teams = models.Teams || model('Teams', teamSchema);
