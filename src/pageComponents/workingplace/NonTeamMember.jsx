@@ -58,7 +58,6 @@ export default function NonTeamMember({ TeamInfo, currentUser }) {
     }
   }
   return (
-    // TODO Display all team information and joining function
     <div>
       <Header />
 
@@ -77,7 +76,7 @@ export default function NonTeamMember({ TeamInfo, currentUser }) {
             </div>
             {/* <div className="text-center mt-2 font-light text-sm">placeholder 1</div> */}
             <div className="text-center font-normal text-lg">
-              {TeamInfo.courseName}{" "}
+              {TeamInfo.courseName}
             </div>
             <div className="px-6 text-center mt-2 font-light text-sm">
               <p>{TeamInfo.description}</p>
@@ -88,8 +87,8 @@ export default function NonTeamMember({ TeamInfo, currentUser }) {
                 Members <span className="font-bold">{TeamInfo.members}</span>
               </div>
               <div className="w-0 border border-gray-300"></div>
-              <div className="w-1/2 text-center">
-                <span className="font-bold">
+              <div className="w-1/2 text-center px-2">
+                <span className="font-bold break-words">
                   <ul>
                     {TeamInfo.user.map((member) => (
                       <li key={member}>{member}</li>
