@@ -1,14 +1,15 @@
 import makeAnimated from "react-select/animated";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Select from "react-select";
 import { util } from "../../utils/utils";
 import { updateItems } from "../../backend/helper/items/items";
 import Portal from "../../components/portal/Portal";
-
+import { Button, ButtonWithLoading } from "../button/Button";
 export default function EditProfileForm({
   PreUsername,
   PreCampus,
   PreMajor,
+  PreImage,
   id,
   majorProps,
 }) {
@@ -19,15 +20,27 @@ export default function EditProfileForm({
   const [username, setUsername] = useState(PreUsername);
   const [campus, setCampus] = useState(PreCampus);
   const [major, setMajor] = useState(PreMajor);
-  const [image, setImage] = useState();
+  const [image, setImage] = useState(PreImage);
 
   const [message, setMessage] = useState(null);
   const [showModal, setShowModal] = useState(false);
-
+  const [formSent, setFormSent] = useState(false);
   function imageHandler(e) {
     const file = e.target.files[0];
     setFileToBase(file);
   }
+
+  function reloadHandler() {
+    if (message === "Your account updated") {
+      window.setTimeout(function () {
+        location.reload();
+      }, 300);
+    }
+  }
+
+  useEffect(() => {
+    reloadHandler();
+  });
 
   const setFileToBase = (file) => {
     const reader = new FileReader();
@@ -39,13 +52,12 @@ export default function EditProfileForm({
   return (
     <div>
       <div>
-        <button
+        <Button
           type="button"
-          onClick={() => setShowModal(true)}
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base px-6 py-3.5 text-center w-full"
-        >
-          Edit
-        </button>
+          style="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base px-6 py-3.5 text-center w-full"
+          fn={() => setShowModal(true)}
+          options={"Edit"}
+        />
       </div>
       {showModal ? (
         <>
@@ -127,34 +139,44 @@ export default function EditProfileForm({
                             />
                           </div>
                         </div>
-
-                        {/* <p className="py-4 text-lg text-green-600 text-center">
-                        {message}
-                      </p> */}
                       </div>
+                      <p className="text-lg text-green-600 text-center">
+                        {message}
+                      </p>
                     </form>
+
                     <div className="items-center gap-2 mt-3 sm:flex">
-                      <button
-                        onClick={(e) => {
-                          updateItems(
-                            { username, campus, major, image },
-                            e,
-                            setMessage,
-                            `/api/users/${id}`
-                          );
-                          setShowModal(false);
-                          window.location.reload(false);
-                        }}
-                        className="w-full mt-2 p-2.5 flex-1 text-white bg-blue-700 rounded-md outline-none ring-offset-2 ring-blue-700 focus:ring-2"
-                      >
-                        Update
-                      </button>
-                      <button
-                        className="w-full mt-2 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-indigo-600 focus:ring-2"
-                        onClick={() => setShowModal(false)}
-                      >
-                        Cancel
-                      </button>
+                      {formSent ? (
+                        <ButtonWithLoading />
+                      ) : (
+                        <Button
+                          type=""
+                          style="w-full mt-2 p-2.5 flex-1 text-white bg-blue-700 rounded-md outline-none ring-offset-2 ring-blue-700 focus:ring-2"
+                          fn={(e) => {
+                            setFormSent(true);
+
+                            updateItems(
+                              {
+                                username,
+                                campus,
+                                major,
+                                image,
+                              },
+                              e,
+                              setMessage,
+                              `/api/users/${id}`
+                            );
+                          }}
+                          options={"Update"}
+                        />
+                      )}
+
+                      <Button
+                        type=""
+                        style="w-full mt-2 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-indigo-600 focus:ring-2"
+                        fn={() => setShowModal(false)}
+                        options={"Cancel"}
+                      />
                     </div>
                     <div className="items-center gap-2 mt-3 sm:flex"></div>
                   </div>
@@ -164,8 +186,6 @@ export default function EditProfileForm({
           </Portal>
         </>
       ) : null}
-
-      <div>{message}</div>
     </div>
   );
 }

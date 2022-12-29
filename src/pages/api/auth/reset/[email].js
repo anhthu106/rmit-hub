@@ -1,26 +1,21 @@
 import {StatusCodes} from "http-status-codes";
-import connectDB from "../../../../backend/lib/connectDB";
 import Users from "../../../../backend/models/user";
 import bcrypt from "bcrypt";
 
-export default async function handle(req, res){
-    try{
+export default async function handle(req, res) {
+    try {
         //Check header
-        const { email } = req.query
-
-        await connectDB()
+        const {email} = req.query
 
 
         const salt = await bcrypt.genSalt(10)
         req.body.password = await bcrypt.hash(req.body.password, salt)
-        console.log(req.body)
-
 
         const user = await Users.findOneAndUpdate({email: email}, req.body, {new: true, runValidators: true})
 
         res.status(StatusCodes.OK).json({message: "Updated"})
 
-    }catch (e) {
+    } catch (e) {
         console.log(e)
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({error: e})
     }

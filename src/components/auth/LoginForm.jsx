@@ -2,6 +2,7 @@ import {useState} from "react";
 import {useRouter} from "next/router";
 import submitHandler from "../../backend/helper/auth/login";
 import Link from "next/link";
+import {Button} from "../button/Button";
 
 const LoginForm = () => {
     const [userInfo, setUserInfo] = useState({email: "", password: ""});
@@ -10,9 +11,6 @@ const LoginForm = () => {
     return (
         <form
             className="px-6 pb-6 space-y-4 md:space-y-6 sm:px-8 sm:pb-8 pt-8"
-            onSubmit={(e) =>
-                submitHandler(e, userInfo.email, userInfo.password)
-            }
         >
             <div>
                 <label
@@ -48,6 +46,7 @@ const LoginForm = () => {
                     placeholder="••••••••"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                     required
+                    autoComplete={"on"}
                     value={userInfo.password}
                     onChange={({target}) =>
                         setUserInfo({...userInfo, password: target.value})
@@ -84,12 +83,14 @@ const LoginForm = () => {
                     Forgot password?
                 </a>
             </div>
-            <button
+
+            <Button
                 type="submit"
-                className="w-full  bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-white text-center"
-            >
-                Sign in
-            </button>
+                style="w-full  bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-white text-center"
+                fn={(e) => submitHandler(e, userInfo.email, userInfo.password)}
+                options={"Sign in"}
+            />
+
             <p className="text-sm font-light text-gray-500 ">
                 Don’t have an account yet?
                 <Link href="../signup">
@@ -99,7 +100,7 @@ const LoginForm = () => {
                 </Link>
             </p>
         </form>
-    )
-}
+    );
+};
 
 export default LoginForm;

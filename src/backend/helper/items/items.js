@@ -1,4 +1,4 @@
-import {fetchData} from "../fetchData/fetchData";
+import { fetchData } from "../fetchData/fetchData";
 
 async function returnMessage(res, setMessage) {
     let data = await res.json()
@@ -20,10 +20,10 @@ export async function updateItems(body, e, setMessage, url) {
     await returnMessage(res, setMessage)
 }
 
-export async function deleteItems(body, e, url) {
+export async function deleteItems(body, e, setMessage, url) {
     e.preventDefault()
     const res = await fetchData.Delete(url, body)
-    // await returnMessage(res, setMessage)
+    await returnMessage(res, setMessage)
 }
 
 export function searchItem(query, data, key, subdata) {

@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function HeroSection() {
     return (
         <section>
@@ -12,7 +14,7 @@ export default function HeroSection() {
                             preserveAspectRatio="none"
                             aria-hidden="true"
                         >
-                            <polygon points="50,0 100,0 50,100 0,100"/>
+                            <polygon points="50,0 100,0 50,100 0,100" />
                         </svg>
 
                         <div className="relative px-4 pt-6 sm:px-6 lg:px-8"></div>
@@ -22,10 +24,10 @@ export default function HeroSection() {
                             <div className="sm:text-center lg:text-left">
                                 <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
                                     <span className="block xl:inline">RMIT-HUB</span>
-                                    <br/>
+                                    <br />
                                     <span className="block text-indigo-600 xl:inline">
-                    Find Your Teammate
-                  </span>
+                                        Find Your Teammate
+                                    </span>
                                 </h1>
                                 <p className="mt-3 text-base text-gray-500 sm:mx-auto sm:mt-5 sm:max-w-xl sm:text-lg md:mt-5 md:text-xl lg:mx-0">
                                     Find your teams and start working together
@@ -45,10 +47,12 @@ export default function HeroSection() {
                     </div>
                 </div>
                 <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-                    <img
+                    <Image
                         className="h-56 w-full object-cover sm:h-72 md:h-96 lg:h-full lg:w-full"
                         src="https://www.rmit.edu.vn/content/dam/rmit/vn/en/assets-for-production/images/rmit-sgs-campus-facilities/2019-campus-photos/sgs-campus-night-05.jpg"
                         alt=""
+                        width='1000'
+                        height='500'
                     />
                 </div>
             </div>

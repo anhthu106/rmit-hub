@@ -1,55 +1,21 @@
-import {io} from "socket.io-client";
+import Task from "./Task";
 
-let socket
-export default function TaskCard({task}) {
+let socket;
+
+export default function TaskCard({task, listID, usernameProps, tag1, tag2}) {
+    // TODO task doesn't have the person in charge of the task info inside
+
     return (
         <div
-            className="relative flex flex-col items-start p-4 mt-3 bg-white rounded-lg cursor-pointer bg-opacity-90 group hover:bg-opacity-100 border-b-2 border-blue-500">
-            <div
-                className="absolute top-0 right-0 flex w-5 h-5 mt-5 mr-5 tooltip">
-                <div
-                    className="hover:text-gray-400 px-2 py-1 font-medium">
-                    <svg
-                        className="w-4 h-4 fill-current"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                    >
-                        <path
-                            d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"/>
-                    </svg>
-                </div>
-                <div
-                    className="flex flex-col p-4 bg-white w-max h-max rounded-md z-20 absolute right-0 invisible tooltip-item border-solid">
-                    <ul className="list-disc space-y-2">
-                        <li className="flex items-start">
-                            <button
-                                onClick={(e) => {
-                                    const data = task._id;
-
-                                    socket = io();
-                                    socket.emit("deleteTask", data);
-                                    e.preventDefault();
-                                }}
-                            >
-                                Delete Task
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <span
-                className="flex items-center h-6 px-3 text-xs font-semibold text-pink-500 bg-pink-100 rounded-full">
-                                          Design
-                                        </span>
-            <h4 className="mt-3 text-sm font-medium">
-                {task.description}
-            </h4>
-            <div
-                className="flex items-center w-full mt-3 text-xs font-medium text-gray-400">
+            className="relative w-full h-full flex flex-col items-start p-4 mt-3 bg-white rounded-lg bg-opacity-90 group hover:bg-opacity-100 border-b-2 border-gray-500 cursor-grab shadow-md">
+      <span className="flex items-center h-6 px-3 text-xs font-semibold text-pink-500 bg-pink-100 rounded-full">
+        {task.name}
+      </span>
+            <h4 className="mt-3 text-sm font-medium break-all">{task.description}</h4>
+            <div className="flex items-center w-full mt-3 text-xs font-medium text-gray-400">
                 <div className="flex items-center">
                     <svg
-                        className="w-4 h-4 text-gray-300 fill-current"
+                        className="w-4 h-4 text-blue-600 fill-current"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
                         fill="currentColor"
@@ -60,15 +26,17 @@ export default function TaskCard({task}) {
                             clipRule="evenodd"
                         />
                     </svg>
-                    <span
-                        className="ml-1 leading-none">
-                                              {task.deadline}
-                                            </span>
+                    <span className="ml-1 leading-none text-blue-600 text-xs font-bold">Due: {task.deadline}</span>
                 </div>
-                <div
-                    className="w-6 h-6 ml-auto rounded-full">
-                    LOL
-                </div>
+                <div className="w-6 h-6 ml-auto rounded-full">LOL</div>
             </div>
-        </div>)
+            <Task
+                task={task}
+                listID={listID}
+                usernameProps={usernameProps}
+                tag1={tag1}
+                tag2={tag2}
+            />
+        </div>
+    );
 }

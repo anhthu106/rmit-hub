@@ -1,4 +1,4 @@
-import { Schema, Types, model, models } from "mongoose";
+import {model, models, Schema, Types} from "mongoose";
 import bcrypt from "bcrypt";
 
 const userSchema = new Schema({
@@ -43,21 +43,14 @@ const userSchema = new Schema({
             ref: "Post"
         }
     ],
-    task_id: [
-        {
-            type: Types.ObjectId,
-            ref: "Tasks",
-        }
-    ],
     image: {
         imgPublicID: {
             type: String,
-            required: true,
         },
         imgURL: {
             type: String,
             required: true,
-            default: "https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o="
+            default: "https://res.cloudinary.com/dxga3vikf/image/upload/v1671089808/posts_635cf97e41bd986fc802c060/kmleuvx9df9ehtiu7v3o.jpg"
         }
     }
 })

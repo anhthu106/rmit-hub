@@ -23,7 +23,7 @@ const Repass = ({email}) => {
                                 </h2>
                             </div>
                             <div className="bg-white rounded-b-[50px] pt-0">
-                                <NewPasswordForm/>
+                                <NewPasswordForm email={email}/>
                             </div>
                         </div>
                     </div>

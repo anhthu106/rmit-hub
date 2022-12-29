@@ -10,33 +10,43 @@ export default async function handler(req, res) {
         await connectDB()
         switch (req.method) {
             case "POST": {
-                const data = await Course.findOne({ name: req.body.course }, "_id").lean()
+                const { name, userID, description, course } = req.body;
+
+                const userData = await User.findById(userID, "course_id");
+
+                const data = await Course.findOne({ name: course }, "_id").lean()
                 const courseId = data._id.toString()
 
-                const teamValue = {
-                    name: req.body.name,
-                    userID: req.body.userID,
-                    courseID: courseId,
-                    Description: req.body.description
-                }
-                const team = await Teams.create(teamValue)
+                console.log('courseID: ', courseId);
+                console.log(userData.course_id);
+                
+                if (!userData.course_id.includes(courseId)) {
+                    const teamValue = {
+                        name: name,
+                        userID: userID,
+                        courseID: courseId,
+                        Description: description
+                    }
+                    const team = await Teams.create(teamValue)
 
-                const userID = team.userID
-                for (let i = 0; i < userID.length; i++) {
-                    const id = userID[i].toString()
-                    await User.findByIdAndUpdate(id, {
-                        $push: {
-                            team_id: team._id.toString(),
-                            course_id: req.body.courseID
-                        }
-                    })
+                    const userId = team.userID
+                    for (let i = 0; i < userId.length; i++) {
+                        const id = userId[i].toString()
+                        await User.findByIdAndUpdate(id, {
+                            $push: {
+                                team_id: team._id.toString(),
+                                course_id: courseId
+                            }
+                        })
+                    }
+                    return res.status(StatusCodes.CREATED).json({ message: "Team created" });
+                } else {
+                    return res.status(StatusCodes.FORBIDDEN).json({ message: "You have already create a team in this course!" })
                 }
-                res.status(StatusCodes.CREATED).json({ message: "Team created" });
             }
         }
     } catch (error) {
-        console.log(error)
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: error })
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: error })
     }
 
 }

@@ -1,4 +1,4 @@
-import { Schema, model, models, Types } from 'mongoose';
+import {model, models, Schema, Types} from 'mongoose';
 
 const postSchema = new Schema({
     userID: {
@@ -18,12 +18,16 @@ const postSchema = new Schema({
     image: {
         imgPublicID: {
             type: String,
-            required: true,
         },
         imgURL: {
             type: String,
             required: true,
         }
+    },
+    teamID: {
+        type: Types.ObjectId,
+        ref: "Team",
+        required: true
     }
 }, {
     timestamps: true,

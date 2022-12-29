@@ -2,9 +2,10 @@ import connectDB from "../../../backend/lib/connectDB";
 import Posts from "../../../backend/models/post";
 import Course from "../../../backend/models/course";
 import User from "../../../backend/models/user";
-import { StatusCodes } from "http-status-codes";
+import {StatusCodes} from "http-status-codes";
 
 import cloudinary from "../../../backend/helper/config/cloudinary";
+import Team from "../../../backend/models/team";
 
 export default async function handler(req, res) {
     try {
@@ -12,12 +13,12 @@ export default async function handler(req, res) {
         switch (req.method) {
             // create post
             case "POST": {
-                const { content, course, message, image, id } = req.body;
+                const {content, course, message, image, id, teamID} = req.body;
                 const result = await cloudinary.uploader.upload(image, {
                     folder: "posts_" + id,
                 })
 
-                const data = await Course.findOne({ name: course }, "_id").lean()
+                const data = await Course.findOne({name: course}, "_id").lean()
                 const courseId = data._id.toString()
                 const postValue = {
                     userID: id,
@@ -26,7 +27,8 @@ export default async function handler(req, res) {
                     image: {
                         imgPublicID: result.public_id,
                         imgURL: result.secure_url
-                    }
+                    },
+                    teamID: teamID
                 }
 
                 const post = await Posts.create(postValue)
@@ -37,12 +39,18 @@ export default async function handler(req, res) {
                     }
                 })
 
-                res.status(StatusCodes.CREATED).json({ message: "Post created" });
+                await Team.findByIdAndUpdate(teamID, {
+                    $push: {
+                        postID: post._id.toString()
+                    }
+                })
+
+                res.status(StatusCodes.CREATED).json({message: "Post created"});
             }
         }
     } catch (error) {
         console.log(error)
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: error })
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({message: error})
     }
 
 }

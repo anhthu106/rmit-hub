@@ -1,14 +1,19 @@
 import makeAnimated from "react-select/animated";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Select from "react-select";
 import { util } from "../../utils/utils";
 import { addItems } from "../../backend/helper/items/items";
 import Link from "next/link";
+import Image from "next/image";
+import { Button, ButtonWithLoading, DisabledButton } from "../button/Button";
 
 export default function CreatePost({ courseProps, id, Info }) {
   const animated = makeAnimated();
-  const courseOptions = util.item(courseProps, "name");
+  // const courseOptions = util.item(courseProps, "name");
+  const teamOptions = util.item(Info.user.team_id, "name");
 
+  const [team, setTeam] = useState("");
+  const [teamID, setTeamID] = useState("");
   const [content, setContent] = useState("");
   const [course, setCourse] = useState("");
   const [message, setMessage] = useState(null);
@@ -17,6 +22,15 @@ export default function CreatePost({ courseProps, id, Info }) {
   const [showModal, setShowModal] = useState(false);
   const [formCheck, setFormCheck] = useState(false);
   const [placeHolder, setPlaceHolder] = useState(false);
+  const [formSent, setFormSent] = useState(false);
+
+  function reloadHandler() {
+    if (message === "Post created") {
+      window.setTimeout(function () {
+        location.reload();
+      }, 300);
+    }
+  }
 
   function imageHandler(e) {
     const file = e.target.files[0];
@@ -39,8 +53,25 @@ export default function CreatePost({ courseProps, id, Info }) {
     }
   }
 
+  function takeCourse(teamValue) {
+    let courseId;
+    for (let i = 0; i < Info.user.team_id.length; i++) {
+      if (teamValue === Info.user.team_id[i].name) {
+        setTeamID(Info.user.team_id[i]._id);
+        courseId = Info.user.team_id[i].courseID;
+      }
+    }
+
+    courseProps.map((courseName) => {
+      if (courseName._id === courseId) {
+        setCourse(courseName.name);
+      }
+    });
+  }
+
   useEffect(() => {
     checkForm();
+    reloadHandler();
   });
 
   return (
@@ -48,35 +79,47 @@ export default function CreatePost({ courseProps, id, Info }) {
       <div className="bg-white border rounded-xl shadow-md drop-shadow-lg m-4">
         <div className=" px-4 py-3 ">
           <div className="flex justify-between">
-            <div className="flex justify-between items-center w-full">
+            <div
+              className="flex justify-between items-center w-full"
+              key={Info.user._id}
+            >
               <Link href={`/users/${Info.user._id}`}>
-                <img
-                  className="h-12 w-12 rounded-full object-fill cursor-pointer	"
-                  src={Info.user.image.imgURL}
-                  alt="Avatar"
-                />
+                <a>
+                  <Image
+                    key={Info.user.image.imgURL}
+                    className="h-12 w-12 rounded-full object-fill cursor-pointer	"
+                    src={Info.user.image.imgURL}
+                    alt="Avatar"
+                    width="50"
+                    height="50"
+                  />
+                </a>
               </Link>
 
               <div className="py-5 px-3 h-full bg-white w-full">
-                <button
+                <Button
                   type="button"
-                  className="p-3 md:py-3 md:px-5 w-full text-xs sm:text-sm text-gray-900 focus:outline-none bg-gray-100 rounded-full border border-gray-200 hover:bg-gray-200 focus:z-10 focus:ring-4 focus:ring-gray-200"
-                  onClick={() => setShowModal(true)}
-                >
-                  <p className="text-left ">
-                    {placeHolder ? (
-                      <></>
-                    ) : (
-                      <span>
-                        <span className="md:inline hidden">
-                          Hey {Info.user.username}!&nbsp;
+                  style="p-3 md:py-3 md:px-5 w-full text-xs sm:text-sm text-gray-900 focus:outline-none bg-gray-100 rounded-full border border-gray-200 hover:bg-gray-200 focus:z-10 focus:ring-4 focus:ring-gray-200"
+                  fn={() => setShowModal(true)}
+                  options={
+                    <p className="text-left ">
+                      {placeHolder ? (
+                        <></>
+                      ) : (
+                        <span>
+                          <span
+                            className="md:inline hidden"
+                            key={Info.user.username}
+                          >
+                            Hey {Info.user.username}!&nbsp;
+                          </span>
+                          Find your teammates now.
                         </span>
-                        Find your teammates now.
-                      </span>
-                    )}
-                    {placeHolder}
-                  </p>
-                </button>
+                      )}
+                      {placeHolder}
+                    </p>
+                  }
+                />
               </div>
             </div>
           </div>
@@ -87,34 +130,6 @@ export default function CreatePost({ courseProps, id, Info }) {
           {/* placeHolder */}
         </div>
       </div>
-
-      {/* <div data-dial-init className="fixed right-6 bottom-6 group z-50">
-        <button
-          type="button"
-          onClick={() => setShowModal(true)}
-          data-dial-toggle="speed-dial-menu-square"
-          aria-controls="speed-dial-menu-square"
-          aria-expanded="false"
-          className="flex justify-center items-center w-14 h-14 text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 focus:outline-none"
-        >
-          <svg
-            aria-hidden="true"
-            className="w-8 h-8 transition-transform"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-            ></path>
-          </svg>
-          <span className="sr-only">Open actions menu</span>
-        </button>
-      </div> */}
       {showModal ? (
         <>
           <div className="fixed inset-0 z-10 overflow-y-auto">
@@ -137,14 +152,40 @@ export default function CreatePost({ courseProps, id, Info }) {
                               htmlFor="course"
                               className="block mb-2 text-left text-xl md:text-2xl font-medium text-gray-900 "
                             >
-                              Course
+                              Team
                             </label>
                             <Select
-                              onChange={(course) => setCourse(course.label)}
+                              onChange={(team) => {
+                                setTeam(team.label);
+                                takeCourse(team.label);
+                              }}
                               closeMenuOnSelect={true}
                               components={animated}
-                              placeholder={course}
-                              options={courseOptions}
+                              placeholder={team}
+                              options={teamOptions}
+                            />
+                          </div>
+                          <div className="pb-4 md:pb-6">
+                            <label
+                              htmlFor="course"
+                              className="block mb-2 text-left text-xl md:text-2xl font-medium text-gray-900 "
+                            >
+                              Course
+                            </label>
+                            {/*<Select*/}
+                            {/*    onChange={(course) => setCourse(course.label)}*/}
+                            {/*    closeMenuOnSelect={true}*/}
+                            {/*    components={animated}*/}
+                            {/*    placeholder={course}*/}
+                            {/*    options={courseOptions}*/}
+                            {/*/>*/}
+                            <input
+                              type="text"
+                              id="course"
+                              name="course"
+                              value={course}
+                              readOnly={true}
+                              className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                             />
                           </div>
 
@@ -187,55 +228,102 @@ export default function CreatePost({ courseProps, id, Info }) {
                               onChange={(e) => imageHandler(e)}
                             />
                           </div>
-                          <p className="ml-auto text-xs text-gray-500 pt-3">
+                          <div className="ml-auto text-xs text-gray-500 pt-3">
                             Remember, contributions to this topic should follow
-                            our
-                            <a
+                            our&nbsp;
+                            <span className="">
+                              <span className="group relative inline-blockduration-300 text-blue-600 hover:underline cursor-pointer	">
+                                Community Guidelines
+                                <span className="absolute hidden group-hover:flex -left-auto  lg:-left-5 -top-2 -translate-y-full max-w-screen-sm md:w-96 bg-white rounded-lg text-left text-sm py-2 px-3  text-gray-700 shadow-sm border-gray-700 border-solid border-2 ">
+                                  <div>
+                                    <h1 className="font-medium text-base ">
+                                      Rmit-Hub is a place where everyone should
+                                      feel safe.
+                                    </h1>
+                                    <li>
+                                      No hateful content is allowed in any way
+                                      is allowed including anything racist,
+                                      anything based on ones ethnicity, gender
+                                      identity, sexual orientation, age,
+                                      disability or otherwise.
+                                    </li>
+                                    <li>
+                                      No violence or threats, bullying,
+                                      harassment, or harmful or suicidal content
+                                      is allowed.
+                                    </li>
+                                    <li>
+                                      No nudity or sexually explicit content is
+                                      allowed.
+                                    </li>
+                                    <li>
+                                      No inaccurate content is allowed in any
+                                      shape or form.
+                                    </li>
+                                  </div>
+                                </span>
+                              </span>
+                            </span>
+                            {/* <a
                               href="#"
                               className="text-blue-600 hover:underline"
                             >
                               Community Guidelines
-                            </a>
+                            </a> */}
                             .
-                          </p>
+                          </div>
                         </div>
                         <p className="py-4 text-lg text-green-600 text-center">
                           {message}
                         </p>
                       </div>
+
                       <div className="items-center gap-2 mt-3 sm:flex">
                         {formCheck ? (
-                          <button
-                            type="submit"
-                            className="w-6/12 mt-2 p-2.5 flex-1 text-white bg-blue-700 rounded-md outline-none ring-offset-2 ring-blue-700 focus:ring-2"
-                            onClick={(e) => {
-                              addItems(
-                                { content, course, message, image, id },
-                                e,
-                                setMessage,
-                                "/api/posts"
-                              );
-                              setShowModal(false);
-                              window.location.reload(false);
-                            }}
-                          >
-                            Create Post
-                          </button>
+                          <>
+                            {formSent ? (
+                              <ButtonWithLoading />
+                            ) : (
+                              <Button
+                                type="submit"
+                                style="w-6/12 mt-2 p-2.5 flex-1 text-white bg-blue-700 rounded-md outline-none ring-offset-2 ring-blue-700 focus:ring-2"
+                                fn={(e) => {
+                                  addItems(
+                                    {
+                                      content,
+                                      course,
+                                      message,
+                                      image,
+                                      teamID,
+                                      id,
+                                    },
+                                    e,
+                                    setMessage,
+                                    "/api/posts"
+                                  );
+                                  setFormSent(true);
+                                  //   window.setTimeout(function () {
+                                  //     location.reload();
+                                  //   }, 3000);
+                                }}
+                                options={"Create Post"}
+                              />
+                            )}
+                          </>
                         ) : (
-                          <button
-                            className="w-6/12 mt-2 p-2.5 text-white bg-blue-400 cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                            disabled
-                          >
-                            Create Post
-                          </button>
+                          <DisabledButton
+                            type="button"
+                            style="w-6/12 mt-2 p-2.5 text-white bg-blue-400 cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                            options={"Create Post"}
+                          />
                         )}
 
-                        <button
-                          className="w-6/12 mt-2 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-indigo-600 focus:ring-2"
-                          onClick={() => setShowModal(false)}
-                        >
-                          Cancel
-                        </button>
+                        <Button
+                          type=""
+                          style="w-6/12 mt-2 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-indigo-600 focus:ring-2"
+                          fn={() => setShowModal(false)}
+                          options={"Cancel"}
+                        />
                       </div>
                     </form>
                     <div className="items-center gap-2 mt-3 sm:flex"></div>

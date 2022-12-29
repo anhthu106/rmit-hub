@@ -78,12 +78,16 @@ export default async function handler(req, res) {
 
             socket.on("updateTask", async (data) => {
                 socket.join("roomTaskUpdate")
+                console.log(data)
                 const taskValue = {
+                    name: data.name,
                     description: data.description,
                     list_id: data.listID,
                     username: data.assignedPerson,
                     deadline: data.deadline,
                 }
+
+
                 const taskId = data.task._id;
 
                 let task
@@ -98,7 +102,7 @@ export default async function handler(req, res) {
                 } else {
                     list = await List.findByIdAndUpdate(taskValue.list_id.toString(), taskValue)
                 }
-                
+
                 const team = await Teams.findById(list.team_id.toString())
 
                 await sendColumn(team, socket)
@@ -120,7 +124,7 @@ export default async function handler(req, res) {
         })
 
         const sendColumn = async (team, socket) => {
-            const listData = await List.find({team_id: team._id}, '_id title task_id team_id').populate('task_id', '_id description username createdDate deadline', Task)
+            const listData = await List.find({team_id: team._id}, '_id title task_id team_id').populate('task_id', '_id name description username createdDate deadline', Task)
             const list = importRawData(listData, ['_id', 'team_id'], null)
 
             const lists = list.map((doc) => {

@@ -3,6 +3,7 @@ import CredentialProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 import Users from "../../../backend/models/user";
 import connectDB from "../../../backend/lib/connectDB";
+import Teams from "../../../backend/models/team";
 
 export default NextAuth({
     providers: [
@@ -51,7 +52,7 @@ export default NextAuth({
         async session({session, token}) {
             if (token) {
                 await connectDB()
-                session.user = await Users.findOne({email: token.user.email}, "_id username email campus major_id team_id post_id task_id image")
+                session.user = await Users.findOne({email: token.user.email}, "_id username email campus major_id team_id post_id task_id image").populate("team_id", "name courseID", Teams)
             } else {
                 session.user = token.user;
             }

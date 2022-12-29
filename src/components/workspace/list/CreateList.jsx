@@ -1,22 +1,29 @@
 import { useState } from "react";
 import { io } from "socket.io-client";
+import { useRef } from "react";
+import { Button, DisabledButton, ButtonWithLoading } from "../../button/Button";
 
 let socket;
 export default function CreateList({ teamID }) {
   const [title, setTitle] = useState();
-  const [message, setMessage] = useState(null);
+  const input = useRef(null);
 
+  const handleClick = () => {
+    input.current.focus();
+  };
   return (
     <div>
-      <form>
+      <form className="bg-gray-50 w-fit p-3 rounded-lg">
         <div>
           <label
             htmlFor="title"
-            class="block mb-2 text-sm font-medium text-gray-900"
+            className="block mb-2 text-sm font-medium text-gray-900"
           >
-            Title
+            New Title
           </label>
           <input
+            ref={input}
+            autoFocus
             placeholder="Enter list title..."
             type="text"
             id="title"
@@ -27,21 +34,44 @@ export default function CreateList({ teamID }) {
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           />
         </div>
-        <button
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center"
-          onClick={(e) => {
+
+        <Button
+          type="button"
+          style="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-lg font-medium w-full mt-3 px-4 py-2 inline-flex space-x-1 items-center justify-center"
+          fn={(e) => {
             const data = { title, teamID };
 
             socket = io();
             socket.emit("updateList", data);
 
             e.preventDefault();
+            setTitle("");
+            handleClick();
           }}
-        >
-          Add List
-        </button>
+          options={
+            <>
+              {" "}
+              <span>
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  />
+                </svg>
+              </span>
+              <span>Add List</span>
+            </>
+          }
+        />
       </form>
-      <div>{message}</div>
     </div>
   );
 }

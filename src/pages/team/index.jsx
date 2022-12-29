@@ -8,10 +8,12 @@ import Teams from "../../backend/models/team";
 import Users from "../../backend/models/user";
 import Course from "../../backend/models/course";
 import Header from "../../components/header/Header";
+import Footer from "../../components/footer/Footer"
+import dynamic from "next/dynamic";
 
 // COMPONENT
-import CreateTeam from "../../components/team/CreateTeam";
-import TeamInformation from "../../components/team/TeamInformation";
+const CreateTeam = dynamic(() => import( "../../components/team/CreateTeam"));
+const TeamInformation = dynamic(() => import( "../../components/team/TeamInformation"));
 
 export async function getServerSideProps() {
     await connectMongo();
@@ -22,6 +24,7 @@ export async function getServerSideProps() {
         teamData.map(async (doc) => {
             const team = doc.toObject();
             team._id = team._id.toString();
+            team.postID = team.postID.toString();
 
             team.userID = await Promise.all(
                 team.userID.map(async (id) => {
@@ -33,6 +36,13 @@ export async function getServerSideProps() {
 
             team.listID = await Promise.all(
                 team.listID.map(async (id) => {
+                    id = id.toString();
+                    return id;
+                })
+            );
+
+            team.pending = await Promise.all(
+                team.pending.map(async (id) => {
                     id = id.toString();
                     return id;
                 })
@@ -72,18 +82,19 @@ export default function Team({courseProps, teamProps}) {
 
                     <div className="bg-gray-100">
                         <div className="flex justify-center w-full h-[calc(100vh-62px)] px-4 text-gray-700">
-                            <div className="flex w-full xl:px-96">
-                                <div className="flex flex-col flex-grow border-l border-r border-gray-300">
+                            <div className="flex w-full xl:px-40 2xl:px-80">
+                                <div className="flex flex-col flex-grow border-l border-r border-gray-300 w-0">
                                     <div className="flex justify-between px-8 py-4 border-b border-gray-300">
                                         <h1 className="text-xl font-semibold">Teams</h1>
-                    
+
                                     </div>
+                                    <CreateTeam courseProps={courseProps} OwnerUser={id}/>
                                     <div className="flex-grow h-0 overflow-auto">
                                         <div className="w-full">
 
-                                            <CreateTeam courseProps={courseProps} OwnerUser={id}/>
+
                                             {teamProps.map((team) => (
-                                                <div key={team._id} className="space-y-2">
+                                                <div key={team._id} className="space-y-2 ">
 
                                                     <TeamInformation
                                                         User={team.userID}
@@ -101,6 +112,7 @@ export default function Team({courseProps, teamProps}) {
                             </div>
                         </div>
                     </div>
+                    <Footer/>
                 </div>
             </>
         );

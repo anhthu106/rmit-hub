@@ -1,4 +1,4 @@
-import { model, models, Schema, Types } from 'mongoose';
+import {model, models, Schema, Types} from 'mongoose';
 
 
 const teamSchema = new Schema({
@@ -9,7 +9,7 @@ const teamSchema = new Schema({
     userID: [{
         type: Types.ObjectId,
         ref: "Users",
-        validate: { validator: membersLimit, message: "Out of range" },
+        validate: {validator: membersLimit, message: "Out of range"},
         default: 0
     }],
     courseID: {
@@ -27,7 +27,16 @@ const teamSchema = new Schema({
     },
     Description: {
         type: String,
-    }
+    },
+    postID: [{
+        type: Types.ObjectId,
+        ref: "Post"
+    }],
+    pending: [{
+        type: Types.ObjectId,
+        ref: "Users",
+        default: 0
+    }]
 });
 
 teamSchema.pre("save", function (next) {
