@@ -1,8 +1,8 @@
 // BACKEND
-import {useSession} from "next-auth/react";
+import { useSession } from "next-auth/react";
 import connectDB from "../../../backend/lib/connectDB";
 import importRawData from "../../../backend/helper/data/data";
-import {Types} from "mongoose";
+import { Types } from "mongoose";
 
 // MODEL
 import Teams from "../../../backend/models/team";
@@ -16,9 +16,9 @@ import SideBar from "../../../components/sidebar/SideBar";
 import NotFoundPage from "../../../components/error/NotFoundPage"
 import TeamLeaderPage from "../../../pageComponents/team/TeamLeaderPage";
 import TeamMemberPage from "../../../pageComponents/team/TeamMemberPage";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 
-export async function getServerSideProps({params}) {
+export async function getServerSideProps({ params }) {
     await connectDB();
     let teamData;
     if (Types.ObjectId.isValid(params.id)) {
@@ -55,7 +55,10 @@ export async function getServerSideProps({params}) {
             ).populate("major_id", "name -_id", Majors);
             user.push(userData);
         }
-        userPending = importRawData(userPending, ["_id"], null);
+        
+        if (userDataPending != null) {
+            userPending = importRawData(userPending, ["_id"], null);
+        }
 
         user = importRawData(user, ["_id"], null);
     }
@@ -69,13 +72,13 @@ export async function getServerSideProps({params}) {
     };
 }
 
-export default function Management({userProps, userPending, team, userID}) {
-    const {data: session} = useSession();
+export default function Management({ userProps, userPending, team, userID }) {
+    const { data: session } = useSession();
     const currentUser = session.user._id;
     const router = useRouter();
 
     if (Object.keys(team).length === 0) {
-        return <NotFoundPage/>;
+        return <NotFoundPage />;
     }
 
     if (!userID.includes(session.user._id)) {
@@ -84,7 +87,7 @@ export default function Management({userProps, userPending, team, userID}) {
         if (currentUser === team.leader) {
             return (
                 <div className="bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200 min-h-screen">
-                    <Header/>
+                    <Header />
 
                     <div className="text-gray-700">
                         <div className="flex-col w-screen max-h-screen ">
@@ -109,14 +112,14 @@ export default function Management({userProps, userPending, team, userID}) {
         } else {
             return (
                 <div className="bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200 min-h-screen">
-                    <Header/>
+                    <Header />
 
                     <div className="text-gray-700">
                         <div className="flex-col w-screen max-h-screen ">
                             <div className="md:px-10 px-3 pt-6  ">
                                 <h1 className="text-2xl font-bold ">{team.name}</h1>
                                 <div className="flex">
-                                    <SideBar teamID={team.id} state1={0} state2={1}/>
+                                    <SideBar teamID={team.id} state1={0} state2={1} />
                                     <section className="w-3/4">
                                         <TeamMemberPage
                                             team={team}
