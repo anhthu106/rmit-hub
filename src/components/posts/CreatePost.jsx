@@ -228,6 +228,7 @@ export default function CreatePost({ courseProps, id, Info }) {
                               onChange={(e) => imageHandler(e)}
                             />
                           </div>
+                          
                           <div className="ml-auto text-xs text-gray-500 pt-3">
                             Remember, contributions to this topic should follow
                             our&nbsp;

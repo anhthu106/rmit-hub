@@ -82,7 +82,6 @@ export async function getServerSideProps({params}) {
             user: userName,
             userPicture: userPicture
         };
-        console.log(TeamInfo)
 
         resetServerContext();
     }
@@ -110,7 +109,6 @@ export default function TeamDetail({
     if (Object.keys(TeamInfo).length === 0) {
         return (<NotFoundPage/>);
     }
-    console.log(TeamInfo)
 
     if (TeamInfo.userId.includes(session.user._id)) {
         return (

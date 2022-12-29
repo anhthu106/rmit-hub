@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { addItems } from "../../backend/helper/items/items";
+import Image from "next/image";
 import {
   Button,
   DisabledButton,
@@ -10,6 +11,7 @@ import Header from "../../components/header/Header";
 export default function NonTeamMember({ TeamInfo, currentUser }) {
   const [message, setMessage] = useState("");
   const [alert, setAlert] = useState(false);
+
   function AlertCheck() {
     if (message !== "Cannot join the team") {
       return (
@@ -61,8 +63,6 @@ export default function NonTeamMember({ TeamInfo, currentUser }) {
       );
     }
   }
-
-  console.log(TeamInfo);
   return (
     <div>
       <Header />
@@ -84,24 +84,33 @@ export default function NonTeamMember({ TeamInfo, currentUser }) {
             </div>
             <hr className="mt-8" />
             <div className="flex p-4">
-              <div className="w-1/2 text-center">
+              <div className="w-1/2 text-center m-auto">
                 Members <span className="font-bold">{TeamInfo.members}</span>
               </div>
               <div className="w-0 border border-gray-300"></div>
               <div className="w-1/2 text-center px-2">
-                <span className="font-bold break-words">
+                {/* <span className="font-bold break-words">
                   <ul>
                     {TeamInfo.user.map((member) => (
                       <li key={member}>{member}</li>
                     ))}
                   </ul>
-                </span>
+                </span> */}
                 <div className="flex -space-x-4 justify-center">
-                  {/* TODO Anh Dong keo cho em them cai ava nguoi dung vo day la no se nhu the nay */}
-                  <div className="w-10 h-10 rounded-full border-2 border-white bg-indigo-200"></div>
-                  <div className="w-10 h-10 rounded-full border-2 border-white bg-indigo-300"></div>
-                  <div className="w-10 h-10 rounded-full border-2 border-white bg-indigo-400"></div>
-                  <div className="w-10 h-10 rounded-full border-2 border-white bg-indigo-500"></div>
+                  {TeamInfo.userPicture.map((imgUrl) => (
+                    <div
+                      key={imgUrl.imgURL}
+                      className="w-10 h-10 rounded-full border-2 border-gray-500-700"
+                    >
+                      <Image
+                        className="rounded-full"
+                        src={imgUrl.imgURL}
+                        alt="ava"
+                        width="40px"
+                        height="40px"
+                      />
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>

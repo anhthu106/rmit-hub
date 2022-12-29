@@ -77,7 +77,6 @@ function DisplayWithoutButton({ user }) {
 
 function DisplayWithButton({ user, button, team }) {
     const [message, setMessage] = useState(null)
-    console.log(team)
     return (
         <li
             key={user._id}
