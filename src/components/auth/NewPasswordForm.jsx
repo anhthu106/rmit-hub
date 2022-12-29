@@ -3,6 +3,7 @@ import {validPassword} from "../regularexpression/Regex";
 import {addItems} from "../../backend/helper/items/items";
 import {signIn} from "next-auth/react";
 import {Button, DisabledButton} from "../button/Button";
+import {useRouter} from "next/router";
 
 const NewPasswordForm = ({email}) => {
     //UseState
@@ -46,8 +47,16 @@ const NewPasswordForm = ({email}) => {
         }
     }
 
+    const router = useRouter();
+
     useEffect(() => {
         checkPassword();
+        if (message === "Updated") {
+            setTimeout(() => {
+                router.push("/")
+
+            }, 300)
+        }
     });
 
     return (<form className="px-6 pb-6 space-y-4 md:space-y-6 sm:px-8 sm:pb-8 pt-8">
