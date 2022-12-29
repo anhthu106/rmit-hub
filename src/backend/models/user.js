@@ -50,7 +50,7 @@ const userSchema = new Schema({
         imgURL: {
             type: String,
             required: true,
-            default: "https://res.cloudinary.com/dxga3vikf/image/upload/v1671089808/posts_635cf97e41bd986fc802c060/kmleuvx9df9ehtiu7v3o.jpg"
+            default: "https://res.cloudinary.com/dxga3vikf/image/upload/v1672323779/image/defaultimg_thf4qq.jpg"
         }
     }
 })
