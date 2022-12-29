@@ -47,26 +47,24 @@ const SignUpForm = ({majorProps}) => {
 
     function accountCreateCheck() {
         if (message != null) {
-            console.log("Error: " + message);
             if (message.toLowerCase().includes("username")) {
-                console.log("username lol");
                 setUsernameIsUsed(true);
                 setEmailIsUsed(false);
                 setAccountIsCreated(false);
+                setMessage(null);
             }
-            if (message.toLowerCase().includes("email")) {
-                console.log("email lol");
+            if (message === "This email is used") {
                 setEmailIsUsed(true);
                 setUsernameIsUsed(false);
                 setAccountIsCreated(false);
+                setMessage(null);
             }
             if (message.toLowerCase().includes("account")) {
-                console.log("account lol");
                 setAccountIsCreated(true);
                 setUsernameIsUsed(false);
                 setEmailIsUsed(false);
+                setMessage(null);
             }
-            setMessage(null);
         }
     }
 
@@ -123,8 +121,18 @@ const SignUpForm = ({majorProps}) => {
             campus !== "" &&
             major !== ""
         ) {
-            setFormCompelete(true);
-            setFormUncompelete(false);
+            if (message === "Verify email is sent which have 5 minutes expires") {
+                setMessage(message)
+                setFormCompelete(false);
+                setFormUncompelete(true);
+                setTimeout(() => {
+                    console.log("run")
+                    setMessage("Send again, if you did not received email")
+                }, 120000)
+            } else {
+                setFormCompelete(true);
+                setFormUncompelete(false);
+            }
         } else {
             setFormCompelete(false);
             setFormUncompelete(true);
@@ -167,7 +175,6 @@ const SignUpForm = ({majorProps}) => {
                         This username is already used.
                     </p>
                 )}
-                <span className="mt-2 text-sm text-red-600">{message}</span>
             </div>
             <div>
                 <label
@@ -310,6 +317,8 @@ const SignUpForm = ({majorProps}) => {
                     options={"Register"}
                 />
             )}
+            <span className="mt-2 text-sm text-green-600">{message}</span>
+
             <p className="text-sm font-light text-gray-500 ">
                 Already have an account yet? &nbsp;
                 <a className="text-sm font-light text-gray-500 ">
