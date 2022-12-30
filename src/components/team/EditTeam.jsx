@@ -136,7 +136,7 @@ export default function EditTeam({ preName, preDescription, id }) {
                               required
                               id="newDescription"
                               name="newDescription"
-                              value={preDescription}
+                              value={newDescription}
                               onChange={(e) => setDescription(e.target.value)}
                             />
                           </div>

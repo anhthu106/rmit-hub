@@ -33,7 +33,7 @@ export default async function handler(req, res) {
                             new Error.json({message: "Team not found"})
                         }
 
-                        return res.status(StatusCodes.OK).json({message: "Your account updated"})
+                        return res.status(StatusCodes.OK).json({message: "Your team information updated"})
                     } else if (req.body.userId) { //Update Team members
                         const team = await Teams.findById(id)
                         team.userID.push(req.body.userId)
