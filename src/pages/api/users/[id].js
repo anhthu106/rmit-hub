@@ -1,6 +1,6 @@
 import connectDB from "../../../backend/lib/connectDB";
 import Users from "../../../backend/models/user";
-import {StatusCodes} from "http-status-codes";
+import { StatusCodes } from "http-status-codes";
 import Major from "../../../backend/models/major";
 
 import cloudinary from "../../../backend/helper/config/cloudinary";
@@ -16,16 +16,16 @@ export default async function handler(req, res) {
                 /**
                  * Update Information
                  */
-                console.log(req.body)
+
                 const {
-                    body: {username, campus, major, image},
-                    query: {id}
+                    body: { username, campus, major, image },
+                    query: { id }
                 } = req
 
                 if (username === "" || campus === "" || major === "") {
-                    new Error.json({message: "Please fill out the box"})
+                    new Error.json({ message: "Please fill out the box" })
                 }
-                const majorName = await Major.findOne({name: req.body.major}, "_id").lean()
+                const majorName = await Major.findOne({ name: req.body.major }, "_id").lean()
                 const majorID = majorName._id.toString()
 
                 const result = await cloudinary.uploader.upload(image, {
@@ -42,16 +42,23 @@ export default async function handler(req, res) {
                     }
                 }
                 const user = await Users.findByIdAndUpdate(
-                    id, newUser, {new: true, runValidators: true}
+                    id, newUser, { new: true, runValidators: true }
                 )
                 if (!user) {
-                    new Error.json({message: "User not found"})
+                    new Error.json({ message: "User not found" })
                 }
-                return res.status(StatusCodes.OK).json({message: "Your account updated"})
+                return res.status(StatusCodes.OK).json({ message: "Your account updated" })
             }
         }
     } catch (Error) {
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({Error})
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ Error })
     }
 
+}
+export const config = {
+    api: {
+        bodyParser: {
+            sizeLimit: '4mb',
+        },
+    },
 }

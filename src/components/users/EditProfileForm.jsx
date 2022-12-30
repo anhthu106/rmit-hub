@@ -5,6 +5,8 @@ import { util } from "../../utils/utils";
 import { updateItems } from "../../backend/helper/items/items";
 import Portal from "../../components/portal/Portal";
 import { Button, ButtonWithLoading } from "../button/Button";
+import setFileToBase from "../img/img";
+
 export default function EditProfileForm({
   PreUsername,
   PreCampus,
@@ -27,9 +29,10 @@ export default function EditProfileForm({
   const [formSent, setFormSent] = useState(false);
   const [selectedFile, setSelectedFile] = useState();
   const [checkFile, setCheckFile] = useState(false);
+
   function imageHandler(e) {
     const file = e.target.files[0];
-    setFileToBase(file);
+    setFileToBase(file, setImage);
     setSelectedFile(e.target.files[0]);
     setCheckFile(true);
   }
@@ -48,13 +51,7 @@ export default function EditProfileForm({
     reloadHandler();
   });
 
-  const setFileToBase = (file) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setImage(reader.result);
-    };
-  };
+
   return (
     <div>
       <div>
@@ -79,7 +76,7 @@ export default function EditProfileForm({
                     <h1 className="text-xl font-medium leading-tight tracking-tight text-gray-900 md:text-3xl text-center">
                       Edit Profile
                     </h1>
-                    <form className="w-full pb-6 space-y-4 md:space-y-6 sm:pb-8 pt-8">
+                    <form id="form" className="w-full pb-6 space-y-4 md:space-y-6 sm:pb-8 pt-8">
                       <div className="mb-4 border border-gray-200 rounded-lg bg-gray-50">
                         <div className="px-4 py-2 bg-white rounded-t-lg">
                           <div className="pb-4 md:pb-6">
@@ -143,21 +140,7 @@ export default function EditProfileForm({
                               name="image"
                               onChange={(e) => imageHandler(e)}
                             />
-                            {/* -Image Preview- */}
-                            {/* <span className="text-[18px] w-56 truncate">
-                            {checkFile ? selectedFile.name : "choose a file"}
-                          </span> */}
-
-                            <img
-                              className={`h-40 mx-auto py-1 ${
-                                checkFile ? "opacity-1" : "opacity-0 hidden"
-                              }`}
-                              src={
-                                selectedFile
-                                  ? URL.createObjectURL(selectedFile)
-                                  : null
-                              }
-                            />
+                            <div id="preview"></div>
                           </div>
                         </div>
                       </div>

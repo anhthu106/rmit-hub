@@ -3,10 +3,7 @@ import EditTeam from "../../components/team/EditTeam";
 import DisplayTeamMembers from "../../components/team/DisplayTeamMembers";
 import PendingList from "../../components/team/PendingList";
 
-import { useState } from "react";
-
 export default function TeamLeaderPage({ team, userPending, userProps, session }) {
-    const [message, setMessage] = useState(null);
     return (
         <div className="pt-6 px-4">
             <div className="w-full grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4">

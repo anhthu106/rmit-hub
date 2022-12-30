@@ -7,6 +7,7 @@ export default function UserInformation({
     major,
     image,
 }) {
+    const mailTo = "mailto:" + email
     return (
         <div>
             <div className="mx-auto">
@@ -26,10 +27,10 @@ export default function UserInformation({
                 {username}
             </div>
             <div
-                className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase"
+                className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase hover:text-blue-700"
                 key={email}
             >
-                {email}
+                <a href={mailTo}>{email}</a>
             </div>
             <div className="mb-2 mt-10 text-left ">
                 <div

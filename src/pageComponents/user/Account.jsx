@@ -33,12 +33,6 @@ export default function Account({Info, postProps, tag, session, courseProps, cre
                                             <h3 className="text-xl font-bold leading-none text-gray-900">
                                                 Teams
                                             </h3>
-                                            {/* <a
-                        href="#"
-                        className="text-sm font-medium text-blue-700 hover:underline"
-                      >
-                        View all
-                      </a> */}
                                         </div>
                                         <div className="flow-root">
                                             {Info.team.map((team) => (
