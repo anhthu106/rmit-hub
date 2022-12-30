@@ -27,14 +27,10 @@ export default function EditProfileForm({
   const [message, setMessage] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [formSent, setFormSent] = useState(false);
-  const [selectedFile, setSelectedFile] = useState();
-  const [checkFile, setCheckFile] = useState(false);
 
   function imageHandler(e) {
     const file = e.target.files[0];
     setFileToBase(file, setImage);
-    setSelectedFile(e.target.files[0]);
-    setCheckFile(true);
   }
 
   function reloadHandler() {
@@ -50,7 +46,6 @@ export default function EditProfileForm({
   useEffect(() => {
     reloadHandler();
   });
-
 
   return (
     <div>
@@ -76,7 +71,10 @@ export default function EditProfileForm({
                     <h1 className="text-xl font-medium leading-tight tracking-tight text-gray-900 md:text-3xl text-center">
                       Edit Profile
                     </h1>
-                    <form id="form" className="w-full pb-6 space-y-4 md:space-y-6 sm:pb-8 pt-8">
+                    <form
+                      id="form"
+                      className="w-full pb-6 space-y-4 md:space-y-6 sm:pb-8 pt-8"
+                    >
                       <div className="mb-4 border border-gray-200 rounded-lg bg-gray-50">
                         <div className="px-4 py-2 bg-white rounded-t-lg">
                           <div className="pb-4 md:pb-6">
@@ -140,7 +138,10 @@ export default function EditProfileForm({
                               name="image"
                               onChange={(e) => imageHandler(e)}
                             />
-                            <div id="preview"></div>
+                            <div
+                              className="grid place-items-center"
+                              id="preview"
+                            ></div>
                           </div>
                         </div>
                       </div>
@@ -177,7 +178,7 @@ export default function EditProfileForm({
 
                       <Button
                         type=""
-                        style="w-6/12 mt-2 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-gray-600 focus:ring-2 font-medium text-sm px-5 py-2.5 text-center outline-none" 
+                        style="w-6/12 mt-2 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-gray-600 focus:ring-2 font-medium text-sm px-5 py-2.5 text-center outline-none"
                         fn={() => setShowModal(false)}
                         options={"Cancel"}
                       />

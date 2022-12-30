@@ -1,45 +1,36 @@
 function resize(img) {
-    let preview = document.getElementById('preview');
-    let canvas = document.createElement('canvas');
+  const preview = document.getElementById("preview");
+  const canvas = document.createElement("canvas");
 
-    let width = img.width;
-    let height = img.height;
+  const imageResizeWidth = 300; //<- change this value to change default width resize :>
 
-    let max_width = 800;
+  canvas.width = imageResizeWidth;
+  canvas.height = ~~(img.height * (imageResizeWidth / img.width));
 
-    if (width > max_width) {
-        height *= (max_width / width)
-        width = max_width;
-    }
+  let ctx = canvas.getContext("2d");
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-    canvas.width = width;
-    canvas.height = height;
-    let ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0, width, height);
+  if (preview.childElementCount == 0) {
+    preview.appendChild(canvas);
+  } else {
+    preview.removeChild(preview.firstChild);
+    preview.appendChild(canvas);
+  }
 
-
-    if (preview.childElementCount == 0) {
-        preview.appendChild(canvas);
-    } else {
-        preview.removeChild(preview.firstChild);
-        preview.appendChild(canvas);
-    }
-
-    return canvas.toDataURL("image/jpeg", 1);
-
+  return canvas.toDataURL("image/jpeg", 1);
 }
 
 export default function setFileToBase(file, setImage) {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    let resized
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+  let resized;
 
-    reader.onloadend = (event) => {
-        const img = new Image();
-        img.src = event.target.result;
-        img.onload = function () {
-            resized = resize(img);
-            setImage(resized);
-        }
+  reader.onloadend = (event) => {
+    const img = new Image();
+    img.src = event.target.result;
+    img.onload = function () {
+      resized = resize(img);
+      setImage(resized);
     };
-};
+  };
+}

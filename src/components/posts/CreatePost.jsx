@@ -24,8 +24,6 @@ export default function CreatePost({ courseProps, id, Info }) {
   const [formCheck, setFormCheck] = useState(false);
   const [placeHolder, setPlaceHolder] = useState(false);
   const [formSent, setFormSent] = useState(false);
-  const [selectedFile, setSelectedFile] = useState();
-  const [checkFile, setCheckFile] = useState(false);
 
   function reloadHandler() {
     if (message === "Post created") {
@@ -36,11 +34,9 @@ export default function CreatePost({ courseProps, id, Info }) {
   }
   function imageHandler(e) {
     const file = e.target.files[0];
+    console.log(file);
     setFileToBase(file, setImage);
-    setSelectedFile(e.target.files[0]);
-    setCheckFile(true);
   }
-
 
   function checkForm() {
     if (content === "" || course === "" || image === null) {
@@ -217,8 +213,10 @@ export default function CreatePost({ courseProps, id, Info }) {
                               onChange={(e) => imageHandler(e)}
                             />
 
-                            <div id="preview"></div>
-
+                            <div
+                              className="grid place-items-center"
+                              id="preview"
+                            ></div>
                           </div>
 
                           <hr />
@@ -321,7 +319,7 @@ export default function CreatePost({ courseProps, id, Info }) {
                         ) : (
                           <Button
                             type=""
-                            style="w-6/12 mt-2 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-gray-600 focus:ring-2 font-medium text-sm px-5 py-2.5 text-center outline-none" 
+                            style="w-6/12 mt-2 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-gray-600 focus:ring-2 font-medium text-sm px-5 py-2.5 text-center outline-none"
                             fn={() => setShowModal(false)}
                             options={"Cancel"}
                           />

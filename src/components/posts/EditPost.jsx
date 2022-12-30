@@ -5,6 +5,7 @@ import { util } from "../../utils/utils";
 import { updateItems } from "../../backend/helper/items/items";
 import Portal from "../portal/Portal";
 import { Button } from "../button/Button";
+import setFileToBase from "../img/img";
 export default function EditPost({
   preCourse,
   preContent,
@@ -20,17 +21,15 @@ export default function EditPost({
   const [newImage, setNewImage] = useState();
   const [message, setMessage] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [selectedFile, setSelectedFile] = useState();
-  const [checkFile, setCheckFile] = useState(false);
+
   function imageHandler(e) {
     const file = e.target.files[0];
-    setFileToBase(file);
-    setSelectedFile(e.target.files[0]);
-    setCheckFile(true);
+    console.log(file);
+    setFileToBase(file, setNewImage);
   }
 
-  function reloadHandler(){
-    if (message === "Your post updated"){
+  function reloadHandler() {
+    if (message === "Your post updated") {
       window.setTimeout(function () {
         location.reload();
       }, 300);
@@ -40,14 +39,6 @@ export default function EditPost({
   useEffect(() => {
     reloadHandler();
   });
-
-  const setFileToBase = (file) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setNewImage(reader.result);
-    };
-  };
 
   return (
     <>
@@ -137,36 +128,25 @@ export default function EditPost({
                             <div>
                               <label
                                 htmlFor="image"
-                                className="font-semibold leading-none block mb-2 text-2xl text-gray-900 "
+                                className="font-semibold leading-none block mb-2 text-left text-xl md:text-2xl text-gray-900 "
                               >
                                 Image
                               </label>
                               <input
-                                className="pb-2"
+                                className="block w-full h-fit text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+                                id="file_input"
                                 type="file"
                                 accept="image/*"
                                 name="image"
                                 onChange={(e) => imageHandler(e)}
                               />
-                              {/* -Image Preview- */}
-                            {/* <span className="text-[18px] w-56 truncate">
-                            {checkFile ? selectedFile.name : "choose a file"}
-                          </span> */}
-
-                            <img
-                              className={`h-40 mx-auto py-1 ${
-                                checkFile ? "opacity-1" : "opacity-0 hidden"
-                              }`}
-                              src={
-                                selectedFile
-                                  ? URL.createObjectURL(selectedFile)
-                                  : null
-                              }
-                            />
+                              <div
+                                className="grid place-items-center"
+                                id="preview"
+                              ></div>
                             </div>
-
-
-                            <p className="ml-auto text-xs text-gray-500 ">
+                            <hr />
+                            <p className="ml-auto text-xs text-gray-500 pt-3">
                               Remember, contributions to this topic should
                               follow our&nbsp;
                               <a
@@ -200,13 +180,12 @@ export default function EditPost({
                                 setMessage,
                                 `/api/posts/${id}`
                               );
-
                             }}
                             options={"Update Post"}
                           />
                           <Button
                             type=""
-                            style="w-full mt-2 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-indigo-600 focus:ring-2"
+                            style="w-6/12 mt-2 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-gray-600 focus:ring-2 font-medium text-sm px-5 py-2.5 text-center outline-none"
                             fn={() => setShowModal(false)}
                             options={"Cancel"}
                           />
