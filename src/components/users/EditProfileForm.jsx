@@ -25,9 +25,13 @@ export default function EditProfileForm({
   const [message, setMessage] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [formSent, setFormSent] = useState(false);
+  const [selectedFile, setSelectedFile] = useState();
+  const [checkFile, setCheckFile] = useState(false);
   function imageHandler(e) {
     const file = e.target.files[0];
     setFileToBase(file);
+    setSelectedFile(e.target.files[0]);
+    setCheckFile(true);
   }
 
   function reloadHandler() {
@@ -136,6 +140,21 @@ export default function EditProfileForm({
                               accept="image/*"
                               name="image"
                               onChange={(e) => imageHandler(e)}
+                            />
+                            {/* -Image Preview- */}
+                            {/* <span className="text-[18px] w-56 truncate">
+                            {checkFile ? selectedFile.name : "choose a file"}
+                          </span> */}
+
+<img
+                              className={`h-40 mx-auto py-1 ${
+                                checkFile ? "opacity-1" : "opacity-0"
+                              }`}
+                              src={
+                                selectedFile
+                                  ? URL.createObjectURL(selectedFile)
+                                  : null
+                              }
                             />
                           </div>
                         </div>

@@ -23,6 +23,8 @@ export default function CreatePost({ courseProps, id, Info }) {
   const [formCheck, setFormCheck] = useState(false);
   const [placeHolder, setPlaceHolder] = useState(false);
   const [formSent, setFormSent] = useState(false);
+  const [selectedFile, setSelectedFile] = useState();
+  const [checkFile, setCheckFile] = useState(false);
 
   function reloadHandler() {
     if (message === "Post created") {
@@ -31,10 +33,11 @@ export default function CreatePost({ courseProps, id, Info }) {
       }, 300);
     }
   }
-
   function imageHandler(e) {
     const file = e.target.files[0];
     setFileToBase(file);
+    setSelectedFile(e.target.files[0]);
+    setCheckFile(true);
   }
 
   const setFileToBase = (file) => {
@@ -188,7 +191,6 @@ export default function CreatePost({ courseProps, id, Info }) {
                               className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                             />
                           </div>
-
                           <div>
                             <label
                               htmlFor="content"
@@ -211,7 +213,6 @@ export default function CreatePost({ courseProps, id, Info }) {
                               placeholder="Content..."
                             />
                           </div>
-
                           <div>
                             <label
                               htmlFor="image"
@@ -227,8 +228,24 @@ export default function CreatePost({ courseProps, id, Info }) {
                               name="image"
                               onChange={(e) => imageHandler(e)}
                             />
+                            {/* -Image Preview- */}
+                            {/* <span className="text-[18px] w-56 truncate">
+                            {checkFile ? selectedFile.name : "choose a file"}
+                          </span> */}
+
+                            <img
+                              className={`h-40 mx-auto py-1 ${
+                                checkFile ? "opacity-1" : "opacity-0"
+                              }`}
+                              src={
+                                selectedFile
+                                  ? URL.createObjectURL(selectedFile)
+                                  : null
+                              }
+                            />
                           </div>
-                          
+
+                          <hr />
                           <div className="ml-auto text-xs text-gray-500 pt-3">
                             Remember, contributions to this topic should follow
                             our&nbsp;

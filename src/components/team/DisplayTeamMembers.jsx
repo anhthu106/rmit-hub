@@ -15,9 +15,9 @@ export default function DisplayTeamMembers({ userProps, team, session }) {
                     </div>
                 </div>
                 <div className="flex flex-col">
-                    <div className="overflow-x-auto rounded-lg">
+                    <div className="overflow-x-hidden rounded-lg">
                         <div className="align-middle inline-block min-w-full">
-                            <div className="shadow overflow-hidden sm:rounded-lg">
+                            <div className="shadow sm:rounded-lg">
                                 <div className="flow-root">
                                     <ul role="list" className="divide-y divide-gray-200">
                                         {userProps.map((user) => {
@@ -66,7 +66,7 @@ function DisplayWithoutButton({ user }) {
                     height="32"
                 />
                 <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-gray-900 truncate">
+                    <p className="text-sm font-medium text-gray-900 break-all">
                         {user.username}
                     </p>
                 </div>
@@ -92,7 +92,7 @@ function DisplayWithButton({ user, button, team }) {
                     height="32"
                 />
                 <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-gray-900 truncate">
+                    <p className="text-sm font-medium text-gray-900 break-all">
                         {user.username}
                     </p>
                 </div>

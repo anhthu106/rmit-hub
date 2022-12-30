@@ -20,10 +20,14 @@ export default function EditPost({
   const [newImage, setNewImage] = useState();
   const [message, setMessage] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [selectedFile, setSelectedFile] = useState();
+  const [checkFile, setCheckFile] = useState(false);
   console.log(message);
   function imageHandler(e) {
     const file = e.target.files[0];
     setFileToBase(file);
+    setSelectedFile(e.target.files[0]);
+    setCheckFile(true);
   }
 
   function reloadHandler(){
@@ -144,11 +148,27 @@ export default function EditPost({
                                 name="image"
                                 onChange={(e) => imageHandler(e)}
                               />
+                              {/* -Image Preview- */}
+                            {/* <span className="text-[18px] w-56 truncate">
+                            {checkFile ? selectedFile.name : "choose a file"}
+                          </span> */}
+
+                            <img
+                              className={`h-40 mx-auto py-1 ${
+                                checkFile ? "opacity-1" : "opacity-0"
+                              }`}
+                              src={
+                                selectedFile
+                                  ? URL.createObjectURL(selectedFile)
+                                  : null
+                              }
+                            />
                             </div>
+
 
                             <p className="ml-auto text-xs text-gray-500 ">
                               Remember, contributions to this topic should
-                              follow our
+                              follow our&nbsp;
                               <a
                                 href="#"
                                 className="text-blue-600 hover:underline"
