@@ -1,12 +1,13 @@
-import {useState} from "react";
-import {useRouter} from "next/router";
+import { useState } from "react";
+import { useRouter } from "next/router";
 import submitHandler from "../../backend/helper/auth/login";
 import Link from "next/link";
-import {Button} from "../button/Button";
+import { Button } from "../button/Button";
 
 const LoginForm = () => {
-    const [userInfo, setUserInfo] = useState({email: "", password: ""});
-    const {error} = useRouter().query;
+    const [userInfo, setUserInfo] = useState({ sid: "", password: "" });
+    const { error } = useRouter().query;
+    const email = userInfo.sid + "@rmit.edu.vn"
 
     return (
         <form
@@ -19,18 +20,22 @@ const LoginForm = () => {
                 >
                     Your email
                 </label>
-                <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                    placeholder="ID@rmit.edu.vn"
-                    required
-                    value={userInfo.email}
-                    onChange={({target}) =>
-                        setUserInfo({...userInfo, email: target.value})
-                    }
-                />
+                <div className="w-full flex flex-row">
+
+                    <input
+                        type="text"
+                        name="email"
+                        id="email"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm focus:ring-primary-600 focus:border-primary-600 p-2.5 w-4/5 rounded-l-lg"
+                        placeholder="s1234567"
+                        required
+                        value={userInfo.sid}
+                        onChange={({ target }) =>
+                            setUserInfo({ ...userInfo, sid: target.value })
+                        }
+                    />
+                    <div className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm p-2.5 rounded-r-lg">@rmit.edu.vn</div>
+                </div>
             </div>
             <div>
                 <label
@@ -48,34 +53,14 @@ const LoginForm = () => {
                     required
                     autoComplete={"on"}
                     value={userInfo.password}
-                    onChange={({target}) =>
-                        setUserInfo({...userInfo, password: target.value})
+                    onChange={({ target }) =>
+                        setUserInfo({ ...userInfo, password: target.value })
                     }
                 />
             </div>
-            {/* {error && (
-                  <p className="mt-2 text-sm text-red-600">
-                    We do not recognize the email or password. Please try again.
-                  </p>
-                )} */}
+
             <span className="mt-2 text-sm text-red-600">{error}</span>
-            <div className="flex items-center justify-between">
-                <div className="flex items-start">
-                    <div className="flex items-center h-5">
-                        <input
-                            id="remember"
-                            aria-describedby="remember"
-                            type="checkbox"
-                            className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300"
-                            required=""
-                        />
-                    </div>
-                    <div className="ml-3 text-sm">
-                        <label htmlFor="remember" className="text-gray-500 ">
-                            Remember me
-                        </label>
-                    </div>
-                </div>
+            <div>
                 <a
                     href="../recover"
                     className="text-sm font-medium text-primary-600 hover:underline "
@@ -87,7 +72,7 @@ const LoginForm = () => {
             <Button
                 type="submit"
                 style="w-full  bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-white text-center"
-                fn={(e) => submitHandler(e, userInfo.email, userInfo.password)}
+                fn={(e) => submitHandler(e, email, userInfo.password)}
                 options={"Sign in"}
             />
 

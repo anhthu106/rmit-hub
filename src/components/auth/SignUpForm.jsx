@@ -189,7 +189,7 @@ const SignUpForm = ({ majorProps }) => {
                 </label>
                 <div className="w-full flex flex-row">
                     <input
-                        type="email"
+                        type="text"
                         id="email"
                         name="email"
                         className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm focus:ring-primary-600 focus:border-primary-600 p-2.5 w-4/5 rounded-l-lg"
