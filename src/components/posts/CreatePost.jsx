@@ -221,7 +221,7 @@ export default function CreatePost({ courseProps, id, Info }) {
                               Image
                             </label>
                             <input
-                              className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+                              className="block w-full h-fit text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
                               id="file_input"
                               type="file"
                               accept="image/*"
@@ -234,8 +234,8 @@ export default function CreatePost({ courseProps, id, Info }) {
                           </span> */}
 
                             <img
-                              className={`h-40 mx-auto py-1 ${
-                                checkFile ? "opacity-1" : "opacity-0"
+                              className={`h-40 max-w-xs mx-auto py-1 ${
+                                checkFile ? "opacity-1" : "opacity-0 hidden"
                               }`}
                               src={
                                 selectedFile
@@ -304,7 +304,7 @@ export default function CreatePost({ courseProps, id, Info }) {
                             ) : (
                               <Button
                                 type="submit"
-                                style="w-6/12 mt-2 p-2.5 flex-1 text-white bg-blue-700 rounded-md outline-none ring-offset-2 ring-blue-700 focus:ring-2"
+                                style="w-6/12 mt-2 p-2.5 text-white bg-blue-700 font-medium rounded-md text-sm px-5 py-2.5 text-center flex-1 outline-none ring-offset-2 ring-blue-700 focus:ring-2"
                                 fn={(e) => {
                                   addItems(
                                     {
@@ -331,17 +331,25 @@ export default function CreatePost({ courseProps, id, Info }) {
                         ) : (
                           <DisabledButton
                             type="button"
-                            style="w-6/12 mt-2 p-2.5 text-white bg-blue-400 cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                            style="w-6/12 mt-2 p-2.5 text-white bg-blue-400 font-medium rounded-md text-sm px-5 py-2.5 text-center flex-1 outline-none ring-offset-2 ring-blue-700 focus:ring-2"
                             options={"Create Post"}
                           />
                         )}
 
-                        <Button
-                          type=""
-                          style="w-6/12 mt-2 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-indigo-600 focus:ring-2"
-                          fn={() => setShowModal(false)}
-                          options={"Cancel"}
-                        />
+                        {formSent ? (
+                          <DisabledButton
+                            type=""
+                            style="w-6/12 mt-2 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-gray-600 focus:ring-2 font-medium text-sm px-5 py-2.5 text-center outline-none"
+                            options={"Cancel"}
+                          />
+                        ) : (
+                          <Button
+                            type=""
+                            style="w-6/12 mt-2 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-gray-600 focus:ring-2 font-medium text-sm px-5 py-2.5 text-center outline-none" 
+                            fn={() => setShowModal(false)}
+                            options={"Cancel"}
+                          />
+                        )}
                       </div>
                     </form>
                     <div className="items-center gap-2 mt-3 sm:flex"></div>

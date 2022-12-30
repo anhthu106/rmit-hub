@@ -8,7 +8,7 @@ export function Button({ fn, options, style, type }) {
 
 export function DisabledButton({ options, style, type }) {
   return (
-    <button type={type} className={style} disabled>
+    <button type={type} className={"cursor-not-allowed " +  style} disabled>
       {options}
     </button>
   );
