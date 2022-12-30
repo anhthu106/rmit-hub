@@ -12,10 +12,12 @@ export default function Header() {
           <div className="relative bg-white">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 md:justify-start md:space-x-10">
               <Navbar fluid={true}>
-                <Navbar.Brand href="../">
+                <Navbar.Brand href="/">
                   <>
                     <span className="sr-only">Your Company</span>
-                    Logo?
+                    <span className=" text-center font-bold text-white bg-gradient-to-r from-blue-600  to-pink-600 p-2 rounded-lg">
+                      RMIT-HUB
+                    </span>
                   </>
                 </Navbar.Brand>
                 <div className="flex md:order-2">
@@ -67,9 +69,11 @@ export default function Header() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 md:justify-start md:space-x-10">
               <Navbar fluid={true}>
-                <Navbar.Brand href="../">
+                <Navbar.Brand href="/">
                   <span className="sr-only">Your Company</span>
-                  Logo?
+                  <span className=" text-center font-bold text-white bg-gradient-to-r from-blue-600  to-pink-600 p-2 rounded-lg">
+                      RMIT-HUB
+                    </span>
                 </Navbar.Brand>
                 <div className="flex md:order-2">
                   <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">

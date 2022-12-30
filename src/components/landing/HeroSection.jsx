@@ -1,5 +1,4 @@
 import Image from "next/image";
-
 export default function HeroSection() {
     return (
         <section>
@@ -25,17 +24,18 @@ export default function HeroSection() {
                                 <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
                                     <span className="block xl:inline">RMIT-HUB</span>
                                     <br />
-                                    <span className="block text-indigo-600 xl:inline">
+                                    <span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 xl:inline">
                                         Find Your Teammate
                                     </span>
                                 </h1>
                                 <p className="mt-3 text-base text-gray-500 sm:mx-auto sm:mt-5 sm:max-w-xl sm:text-lg md:mt-5 md:text-xl lg:mx-0">
-                                    Find your teams and start working together
+                                    Rmit-Hub is a website for user to create posts and collaborate on kanban style all in in a completely visual canvas 
+                                   <span className="font-medium bg-gradient-to-r from-blue-600  to-pink-600 bg-clip-text text-transparent"> — all in one website.</span>
                                 </p>
                                 <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                                     <div className="rounded-md shadow">
                                         <a
-                                            href="#"
+                                            href="#more"
                                             className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 md:py-4 md:px-10 md:text-lg"
                                         >
                                             Find Out More

@@ -2,7 +2,6 @@ import DisplayTeamInfo from "../../components/team/DisplayTeamInfo";
 import EditTeam from "../../components/team/EditTeam";
 import DisplayTeamMembers from "../../components/team/DisplayTeamMembers";
 import PendingList from "../../components/team/PendingList";
-import { useState } from "react";
 
 export default function TeamLeaderPage({ team, userPending, userProps, session }) {
     return (
@@ -14,6 +13,7 @@ export default function TeamLeaderPage({ team, userPending, userProps, session }
                         team={team}
                         tag={
                             <EditTeam
+                            team={team}
                                 preName={team.name}
                                 preDescription={team.Description}
                                 id={team.id}
