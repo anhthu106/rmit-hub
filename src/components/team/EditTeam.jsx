@@ -2,9 +2,12 @@ import makeAnimated from "react-select/animated";
 import { useState, useEffect } from "react";
 import { updateItems } from "../../backend/helper/items/items";
 import { Button } from "../button/Button";
+import { deleteItems } from "../../backend/helper/items/items";
+import { useRouter } from 'next/router';
 
 export default function EditTeam({ preName, preDescription, id }) {
   const animated = makeAnimated();
+  const router = useRouter()
 
   const [newName, setName] = useState(preName);
   const [newDescription, setDescription] = useState(preDescription);
@@ -23,7 +26,7 @@ export default function EditTeam({ preName, preDescription, id }) {
 
   useEffect(() => {
     reloadHandler();
-});
+  });
 
   return (
     <div>
@@ -58,10 +61,8 @@ export default function EditTeam({ preName, preDescription, id }) {
           type={"button"}
           style="md:w-full md:rounded-lg text-white bg-red-600 outline-none ring-offset-2 ring-red-600 focus:ring-2 text-sm  hover:bg-red-700 border rounded-r-lg font-medium w-6/12  px-4 py-2 inline-flex space-x-1 items-center justify-center"
           fn={(e) => {
-            deleteItems(null, e, setMessage, `../../api/team/${team.id}`);
-            window.setTimeout(function () {
-              location.replace("../../");
-            }, 1000);
+            deleteItems(null, e, setMessage, `../../api/team/${id}`);
+            router.push('/team');
           }}
           options={
             <>
