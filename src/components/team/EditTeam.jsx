@@ -2,8 +2,9 @@ import makeAnimated from "react-select/animated";
 import { useState, useEffect } from "react";
 import { updateItems } from "../../backend/helper/items/items";
 import { Button } from "../button/Button";
+import { deleteItems } from "../../backend/helper/items/items";
 
-export default function EditTeam({ preName, preDescription, id }) {
+export default function EditTeam({ team, preName, preDescription, id }) {
   const animated = makeAnimated();
 
   const [newName, setName] = useState(preName);
@@ -11,7 +12,6 @@ export default function EditTeam({ preName, preDescription, id }) {
 
   const [message, setMessage] = useState(null);
   const [showModal, setShowModal] = useState(false);
-
 
   function reloadHandler() {
     if (message !== null) {
@@ -23,7 +23,7 @@ export default function EditTeam({ preName, preDescription, id }) {
 
   useEffect(() => {
     reloadHandler();
-});
+  });
 
   return (
     <div>
@@ -136,7 +136,8 @@ export default function EditTeam({ preName, preDescription, id }) {
                               required
                               id="newDescription"
                               name="newDescription"
-                              value={preDescription}
+                              value={newDescription}
+                              placeholder={preDescription}
                               onChange={(e) => setDescription(e.target.value)}
                             />
                           </div>

@@ -22,7 +22,6 @@ export default function EditPost({
   const [showModal, setShowModal] = useState(false);
   const [selectedFile, setSelectedFile] = useState();
   const [checkFile, setCheckFile] = useState(false);
-  console.log(message);
   function imageHandler(e) {
     const file = e.target.files[0];
     setFileToBase(file);

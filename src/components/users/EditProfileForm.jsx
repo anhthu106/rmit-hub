@@ -39,6 +39,8 @@ export default function EditProfileForm({
       window.setTimeout(function () {
         location.reload();
       }, 300);
+    } else{
+      setFormSent(false); 
     }
   }
 
@@ -146,7 +148,7 @@ export default function EditProfileForm({
                             {checkFile ? selectedFile.name : "choose a file"}
                           </span> */}
 
-<img
+                            <img
                               className={`h-40 mx-auto py-1 ${
                                 checkFile ? "opacity-1" : "opacity-0"
                               }`}

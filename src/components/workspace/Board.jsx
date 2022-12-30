@@ -97,7 +97,7 @@ export default function Board({ listProps, usernameProps, TeamInfo }) {
           return (
             /* task container*/
             <div
-              className="flex flex-col items-center h-fit max-h-[calc(75vh)] sm:max-h-[calc(80vh)] pt-5 mx-3 bg-gray-100 rounded-2xl snap-center sm:snap-end" 
+              className="flex flex-col items-center h-fit max-h-[calc(75vh)] sm:max-h-[calc(80vh)] pt-5 mx-3 bg-gray-100 rounded-2xl snap-center md:snap-none" 
               key={column._id}
             >
               {/*List top container*/}

@@ -10,19 +10,16 @@ const RecoverForm = () => {
   const [messageFail, setMessageFail] = useState(false);
 
   const [formUncompelete, setFormUncompelete] = useState(null);
-console.log(message);
   //Function
   function MessageCheck() {
     if (message !== null) {
       if (message.toLowerCase().includes("verify")) {
         setMessagePass(true);
         setMessageFail(false);
-        console.log("Pass");
       }
       if (message.toLowerCase().includes("invalid")) {
         setMessagePass(false);
         setMessageFail(true);
-        console.log("Fail");
       }
       if (message === "Verify email is sent which have 5 minutes expires") {
         setMessage(message);
