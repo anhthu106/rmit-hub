@@ -1,20 +1,17 @@
 import makeAnimated from "react-select/animated";
-import { useState, useEffect } from "react";
-import Select from "react-select";
-import { util } from "../../utils/utils";
-import { updateItems } from "../../backend/helper/items/items";
+import {useEffect, useState} from "react";
+import {updateItems} from "../../backend/helper/items/items";
 import Portal from "../portal/Portal";
 import { Button } from "../button/Button";
 import setFileToBase from "../img/img";
 export default function EditPost({
-  preCourse,
-  preContent,
-  uid,
-  id,
-  courseProps,
-}) {
-  const animated = makeAnimated();
-  const courseOptions = util.item(courseProps, "name");
+                                     preCourse,
+                                     preContent,
+                                     uid,
+                                     id,
+                                     courseProps,
+                                 }) {
+    const animated = makeAnimated();
 
   const [newContent, setNewContent] = useState(preContent);
   const [newCourse, setNewCourse] = useState(preCourse);
@@ -40,90 +37,73 @@ export default function EditPost({
     reloadHandler();
   });
 
-  return (
-    <>
-      <li>
-        <Button
-          type="button"
-          style="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-          fn={() => setShowModal(true)}
-          options={
-            <>
-              <svg
-                className="flex-shrink-0 w-6 h-6 text-gray-400 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-                <path
-                  fillRule="evenodd"
-                  d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              <span className="flex-1 ml-3 text-left whitespace-nowrap">
+    return (
+        <>
+            <li>
+                <Button
+                    type="button"
+                    style="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                    fn={() => setShowModal(true)}
+                    options={
+                        <>
+                            <svg
+                                className="flex-shrink-0 w-6 h-6 text-gray-400 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"/>
+                                <path
+                                    fillRule="evenodd"
+                                    d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                                    clipRule="evenodd"
+                                />
+                            </svg>
+                            <span className="flex-1 ml-3 text-left whitespace-nowrap">
                 Edit Post
               </span>
-            </>
-          }
-        />
-      </li>
-      {showModal ? (
-        <>
-          <Portal>
-            <div className="fixed inset-0 z-10 overflow-y-auto">
-              <div
-                className="fixed inset-0 w-full h-full bg-black opacity-40"
-                onClick={() => setShowModal(false)}
-              ></div>
-              <div className="flex items-center min-h-screen px-4 py-8">
-                <div className="relative w-full max-w-lg p-4 mx-auto bg-white rounded-md shadow-lg">
-                  <div className="mt-3 sm:flex">
-                    <div className="mt-2 text-center sm:ml-4 sm:text-left">
-                      <h1 className="text-xl font-medium leading-tight tracking-tight text-gray-900 md:text-3xl text-center">
-                        Edit Post
-                      </h1>
-                      <form className="w-full pb-6 space-y-4 md:space-y-6 sm:pb-8 pt-8">
-                        <div className="mb-4 border border-gray-200 rounded-lg bg-gray-50">
-                          <div className="px-4 py-2 bg-white rounded-t-lg">
-                            <div className="pb-4 md:pb-6">
-                              <label
-                                htmlFor="course"
-                                className="block mb-2 text-2xl font-medium text-gray-900 "
-                              >
-                                Course
-                              </label>
-                              <Select
-                                onChange={(course) =>
-                                  setNewCourse(course.label)
-                                }
-                                closeMenuOnSelect={false}
-                                components={animated}
-                                placeholder={preCourse}
-                                options={courseOptions}
-                              />
-                            </div>
-
-                            <div>
-                              <label
-                                htmlFor="content"
-                                className="font-semibold leading-none block mb-2 text-2xl text-gray-900 "
-                              >
-                                Content
-                              </label>
-                              <textarea
-                                type="text"
-                                id="content"
-                                name="content"
-                                required
-                                value={newContent}
-                                onChange={(e) => setNewContent(e.target.value)}
-                                rows="4"
-                                className="w-full text-lg text-gray-900 bg-white focus:ring-1 resize-none rounded-md border border-gray-300"
-                                placeholder="Content..."
-                              />
-                            </div>
+                        </>
+                    }
+                />
+            </li>
+            {showModal ? (
+                <>
+                    <Portal>
+                        <div className="fixed inset-0 z-10 overflow-y-auto">
+                            <div
+                                className="fixed inset-0 w-full h-full bg-black opacity-40"
+                                onClick={() => setShowModal(false)}
+                            ></div>
+                            <div className="flex items-center min-h-screen px-4 py-8">
+                                <div className="relative w-full max-w-lg p-4 mx-auto bg-white rounded-md shadow-lg">
+                                    <div className="mt-3 sm:flex">
+                                        <div className="mt-2 text-center sm:ml-4 sm:text-left">
+                                            <h1 className="text-xl font-medium leading-tight tracking-tight text-gray-900 md:text-3xl text-center">
+                                                Edit Post
+                                            </h1>
+                                            <form className="w-full pb-6 space-y-4 md:space-y-6 sm:pb-8 pt-8">
+                                                <div className="mb-4 border border-gray-200 rounded-lg bg-gray-50">
+                                                    <div className="px-4 py-2 bg-white rounded-t-lg">
+                                                        <div>
+                                                            <label
+                                                                htmlFor="content"
+                                                                className="font-semibold leading-none block mb-2 text-2xl text-gray-900 "
+                                                            >
+                                                                Content
+                                                            </label>
+                                                            <textarea
+                                                                type="text"
+                                                                id="content"
+                                                                name="content"
+                                                                required
+                                                                value={newContent}
+                                                                onChange={(e) => setNewContent(e.target.value)}
+                                                                rows="4"
+                                                                className="w-full text-lg text-gray-900 bg-white focus:ring-1 resize-none rounded-md border border-gray-300"
+                                                                placeholder="Content..."
+                                                            />
+                                                        </div>
 
                             <div>
                               <label
