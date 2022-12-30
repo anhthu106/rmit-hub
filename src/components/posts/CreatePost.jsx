@@ -6,6 +6,7 @@ import { addItems } from "../../backend/helper/items/items";
 import Link from "next/link";
 import Image from "next/image";
 import { Button, ButtonWithLoading, DisabledButton } from "../button/Button";
+import setFileToBase from "../img/img";
 
 export default function CreatePost({ courseProps, id, Info }) {
   const animated = makeAnimated();
@@ -35,18 +36,11 @@ export default function CreatePost({ courseProps, id, Info }) {
   }
   function imageHandler(e) {
     const file = e.target.files[0];
-    setFileToBase(file);
+    setFileToBase(file, setImage);
     setSelectedFile(e.target.files[0]);
     setCheckFile(true);
   }
 
-  const setFileToBase = (file) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setImage(reader.result);
-    };
-  };
 
   function checkForm() {
     if (content === "" || course === "" || image === null) {
@@ -175,13 +169,7 @@ export default function CreatePost({ courseProps, id, Info }) {
                             >
                               Course
                             </label>
-                            {/*<Select*/}
-                            {/*    onChange={(course) => setCourse(course.label)}*/}
-                            {/*    closeMenuOnSelect={true}*/}
-                            {/*    components={animated}*/}
-                            {/*    placeholder={course}*/}
-                            {/*    options={courseOptions}*/}
-                            {/*/>*/}
+
                             <input
                               type="text"
                               id="course"
@@ -228,21 +216,9 @@ export default function CreatePost({ courseProps, id, Info }) {
                               name="image"
                               onChange={(e) => imageHandler(e)}
                             />
-                            {/* -Image Preview- */}
-                            {/* <span className="text-[18px] w-56 truncate">
-                            {checkFile ? selectedFile.name : "choose a file"}
-                          </span> */}
 
-                            <img
-                              className={`h-40 mx-auto py-1 ${
-                                checkFile ? "opacity-1" : "opacity-0"
-                              }`}
-                              src={
-                                selectedFile
-                                  ? URL.createObjectURL(selectedFile)
-                                  : null
-                              }
-                            />
+                            <div id="preview"></div>
+
                           </div>
 
                           <hr />

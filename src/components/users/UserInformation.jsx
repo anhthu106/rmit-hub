@@ -1,5 +1,5 @@
 import Image from "next/image";
-add l
+
 export default function UserInformation({
     username,
     email,
