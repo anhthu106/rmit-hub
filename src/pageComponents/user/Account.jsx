@@ -12,7 +12,7 @@ export default function Account({Info, postProps, tag, session, courseProps, cre
 
             <div className="min-h-[calc(100vh-62px-80px)]">
                 <div className="container mx-auto md:px-4">
-                    <div className="bg-gray-100 w-full shadow-xl rounded-lg">
+                    <div className="bg-gray-100 w-full shadow-xl">
                         <div className="flex leading-relaxed">
                             <div className="container mx-auto md:px-8" id="myportal">
                                 <div className="lg:flex md:my-20">

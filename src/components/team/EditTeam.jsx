@@ -147,7 +147,7 @@ export default function EditTeam({ team, preName, preDescription, id }) {
                       <div className="items-center gap-2 mt-3 flex">
                         <Button
                           type="button"
-                          style="w-full mt-2 p-2.5 flex-1 text-white bg-blue-700 rounded-md outline-none ring-offset-2 ring-blue-700 focus:ring-2"
+                          style="w-6/12 mt-2 p-2.5 text-white bg-blue-700 font-medium rounded-md text-sm px-5 py-2.5 text-center flex-1 outline-none ring-offset-2 ring-blue-700 focus:ring-2"
                           fn={(e) =>
                             updateItems(
                               {
@@ -163,7 +163,7 @@ export default function EditTeam({ team, preName, preDescription, id }) {
                         />
                         <Button
                           type=""
-                          style="w-full mt-2 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-indigo-600 focus:ring-2"
+                          style="w-6/12 mt-2 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-gray-600 focus:ring-2 font-medium text-sm px-5 py-2.5 text-center outline-none" 
                           fn={() => setShowModal(false)}
                           options={"Cancel"}
                         />
