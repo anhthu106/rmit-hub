@@ -13,7 +13,7 @@ export default function Post({
   TeamID,
 }) {
   return (
-    <>
+    <span>
       {/* New */}
       <div className="px-4 py-1">
         <div className="bg-white border rounded-xl shadow-md">
@@ -94,6 +94,6 @@ export default function Post({
           <div className="font-semibold text-sm mx-4 mt-2 mb-4"></div>
         </div>
       </div>
-    </>
+    </span>
   );
 }

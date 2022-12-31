@@ -60,8 +60,7 @@ export default function CreateList({ teamID }) {
             submit(e);
           }}
           options={
-            <>
-              {" "}
+            <span>
               <span>
                 <svg
                   className="w-4 h-4"
@@ -79,7 +78,7 @@ export default function CreateList({ teamID }) {
                 </svg>
               </span>
               <span>Add List</span>
-            </>
+            </span>
           }
         />
       </form>

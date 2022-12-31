@@ -1,7 +1,6 @@
 export default function Footer() {
   return (
-    <>
-      <footer className="bg-white ">
+    <footer className="bg-white ">
         <hr />
         <div className="container flex flex-col items-center justify-between p-6 mx-auto space-y-4 sm:space-y-0 sm:flex-row">
           <a
@@ -16,6 +15,5 @@ export default function Footer() {
           </p>
         </div>
       </footer>
-    </>
   );
 }

@@ -68,7 +68,7 @@ export default function NonTeamMember({ TeamInfo, currentUser }) {
       <Header />
 
       <section className="bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200">
-        {alert ? <>{AlertCheck()}</> : null}
+        {alert ? <span>{AlertCheck()}</span> : null}
 
         <div className=" flex flex-row justify-center items-center h-[calc(100vh-62px)] w-full">
           <div className="card w-96 md:mx-auto bg-white rounded-lg  shadow-xl hover:shadow mx-4">

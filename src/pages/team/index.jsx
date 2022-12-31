@@ -77,8 +77,7 @@ export default function Team({ courseProps, teamProps }) {
   } else if (status === "authenticated") {
     const id = session.user._id.toString();
     return (
-      <>
-        <div className="bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500">
+      <div className="bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500">
           <Header />
           <div className="bg-gray-100">
             <div className="flex justify-center w-full h-[calc(100vh-62px)] px-4 text-gray-700">
@@ -115,7 +114,6 @@ export default function Team({ courseProps, teamProps }) {
             <Footer />
           </span>
         </div>
-      </>
     );
   }
 }

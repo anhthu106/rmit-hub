@@ -3,7 +3,7 @@ import NewPasswordForm from "../../components/auth/NewPasswordForm";
 const Repass = ({email}) => {
 
     return (
-        <>
+        <span>
             <section
                 className="bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500 grid h-screen">
                 <span></span>
@@ -29,7 +29,7 @@ const Repass = ({email}) => {
                     </div>
                 </div>
             </section>
-        </>
+        </span>
     );
 };
 

@@ -7,7 +7,7 @@ const SignUp = ({ majorProps }) => {
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <>
+    <span>
       <section
         className="
           bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500
@@ -38,7 +38,7 @@ const SignUp = ({ majorProps }) => {
         {/* Modal */}
         <span>
           {showModal ? (
-            <>
+            <span>
               <div className="fixed inset-0 z-10 overflow-y-auto">
                 <div
                   className="fixed inset-0 w-full h-full bg-black opacity-40"
@@ -69,11 +69,11 @@ const SignUp = ({ majorProps }) => {
                   </div>
                 </div>
               </div>
-            </>
+            </span>
           ) : null}
         </span>
       </section>
-    </>
+    </span>
   );
 };
 

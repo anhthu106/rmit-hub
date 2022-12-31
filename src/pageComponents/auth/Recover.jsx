@@ -3,7 +3,7 @@ import RecoverForm from "../../components/auth/RecoverForm";
 
 const Recover = () => {
     return (
-        <>
+        <span>
             <section
                 className="bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500 grid h-screen">
 
@@ -31,7 +31,7 @@ const Recover = () => {
                     </div>
                 </div>
             </section>
-        </>
+        </span>
     );
 };
 

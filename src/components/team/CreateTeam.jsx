@@ -38,7 +38,7 @@ export default function CreateTeam({ courseProps, OwnerUser }) {
           style="text-white bg-blue-700 hover:bg-blue-700/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center my-5"
           fn={() => setShowModal(true)}
           options={
-            <>
+            <span>
               <svg
                 className="mr-2 -ml-1 w-4 h-4"
                 fill="none"
@@ -54,13 +54,13 @@ export default function CreateTeam({ courseProps, OwnerUser }) {
                 />
               </svg>
               Create your team now!
-            </>
+            </span>
           }
         />
       </div>
 
       {showModal ? (
-        <>
+        <span>
           <div className="fixed inset-0 z-10 overflow-y-auto">
             <div
               className="fixed inset-0 w-full h-full bg-black opacity-40"
@@ -132,7 +132,7 @@ export default function CreateTeam({ courseProps, OwnerUser }) {
                       </div>
                       <div className="items-center gap-2 mt-3 sm:flex">
                         {formCheck ? (
-                          <>
+                          <span>
                             {formSent ? (
                               <ButtonWithLoading />
                             ) : (
@@ -159,7 +159,7 @@ export default function CreateTeam({ courseProps, OwnerUser }) {
                                 options={"Create Team"}
                               />
                             )}
-                          </>
+                          </span>
                         ) : (
                           <DisabledButton
                             type="button"
@@ -183,7 +183,7 @@ export default function CreateTeam({ courseProps, OwnerUser }) {
               </div>
             </div>
           </div>
-        </>
+        </span>
       ) : null}
     </div>
   );

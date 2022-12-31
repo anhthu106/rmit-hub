@@ -28,32 +28,32 @@ export default function TaskCard({ task, listID, usernameProps, tag1, tag2 }) {
         </div>
         <hr />
         <div className="flex justify-end items-center p-2 bg-gray-100 rounded-b-lg">
-        <span class="t group relative flex justify-center rounded bg-blue-50 px-2 text-blue-700">
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
-                />
-              </svg>
-              {task.username.length}
-              <span class="absolute min-w-fit right-full top-1/2 ml-4 -translate-y-1/2 rounded bg-white px-3 py-1 text-xs font-medium text-black opacity-0 group-hover:opacity-100 border-2 border-black">
-                <ul className="text-xs list-disc list-inside">
-                  {task.username.map((username) => (
-                    <li key={username} className="min-w-fit whitespace-nowrap">
-                      {username}
-                    </li>
-                  ))}
-                </ul>
-              </span>
+          <span className="group relative flex justify-center rounded bg-blue-50 px-2 text-blue-700">
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
+              />
+            </svg>
+            {task.username.length}
+            <span className="absolute min-w-fit right-full top-1/2 ml-4 -translate-y-1/2 rounded bg-white px-3 py-1 text-xs font-medium text-black opacity-0 group-hover:opacity-100 border-2 border-black">
+              <ul className="text-xs list-disc list-inside">
+                {task.username.map((username) => (
+                  <li key={username} className="min-w-fit whitespace-nowrap">
+                    {username}
+                  </li>
+                ))}
+              </ul>
             </span>
+          </span>
         </div>
       </div>
       <Task
