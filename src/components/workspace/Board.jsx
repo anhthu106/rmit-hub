@@ -97,7 +97,7 @@ export default function Board({ listProps, usernameProps, TeamInfo }) {
           return (
             /* task container*/
             <div
-              className="flex flex-col items-center h-fit max-h-[calc(75vh)] sm:max-h-[calc(80vh)] pt-5 mx-3 bg-gray-100 rounded-2xl snap-center md:snap-none" 
+              className="flex flex-col items-center h-fit max-h-[calc(75vh)] sm:max-h-[calc(80vh)] pt-5 mx-3 bg-gray-100 rounded-2xl snap-center md:snap-none"
               key={column._id}
             >
               {/*List top container*/}
@@ -106,64 +106,42 @@ export default function Board({ listProps, usernameProps, TeamInfo }) {
                   {/*Inline edit List*/}
                   <EditList listId={column._id} listTile={column.title} />
                 </div>
+
                 {/*List hamburger*/}
                 <div className="absolute top-0 right-0 flex w-5 h-5 mt-5 mr-5 tooltip">
                   <Hamburger /> {/*Hamburger button*/}
                   <div className="flex flex-col border-gray-500 border-2 p-4 bg-white w-max h-max rounded-md z-20 absolute right-0 invisible tooltip-item border-solid">
-                    {/* TODO fix */}
-                    <Task
-                      usernameProps={usernameProps}
-                      listID={column._id}
-                      task={""}
-                      tag3={
-                        <>
-                          <DropDownHamburger /*Hamburger dropdown*/
-                            tag={
-                              <svg
-                                className="w-6 h-6"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  fillRule="evenodd"
-                                  d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                                  clipRule="evenodd"
-                                />
-                              </svg>
-                            }
-                            // buttonFnc={() => setShowModal(true)}
-                            nameTag={"Create Task"}
-                          />
-                        </>
-                      }
-                    />
-                    <hr />
-                    <DropDownHamburger
-                      tag={
-                        <svg
-                          className="w-6 h-6"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                          />
-                        </svg>
-                      }
-                      buttonFnc={(e) => {
+                    <Button
+                      type="button"
+                      style="text-slate-800 hover:text-red-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-lg w-full font-medium px-4 py-2 inline-flex space-x-1 items-center justify-center"
+                      fn={(e) => {
                         const data = column._id;
 
                         socket = io();
                         socket.emit("deleteList", data);
                         e.preventDefault();
                       }}
-                      nameTag={"Delete List"}
+                      options={
+                        <span>
+                          <span>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="currentColor"
+                              className="w-4 h-4"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+                              />
+                            </svg>
+                          </span>
+                          <span>Delete</span>
+                        </span>
+                      }
                     />
                   </div>
                 </div>
@@ -179,7 +157,6 @@ export default function Board({ listProps, usernameProps, TeamInfo }) {
                         {...provided.droppableProps}
                         ref={provided.innerRef}
                         style={{
-                          /*TODO change style to tailwind*/
                           background: snapshot.isDraggingOver
                             ? "#f3f4f6"
                             : "transparent",
@@ -277,8 +254,44 @@ export default function Board({ listProps, usernameProps, TeamInfo }) {
                             </div>
                           );
                         })}
-                        <br />
                         {provided.placeholder}
+                        {/* Testing */}
+                        <Task
+                          usernameProps={usernameProps}
+                          listID={column._id}
+                          task={""}
+                          status={"hidden"}
+                          tag3={
+                            <>
+                              <Button
+                                type="button"
+                                style="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-lg font-medium w-full  px-4 py-2 inline-flex space-x-1 items-center justify-center"
+                                options={
+                                  <>
+                                    <span>
+                                      <svg
+                                        className="w-4 h-4"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                      >
+                                        <path
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                          strokeWidth={2}
+                                          d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                                        />
+                                      </svg>
+                                    </span>
+                                    <span>Create Task</span>
+                                  </>
+                                }
+                              />
+                            </>
+                          }
+                        />
+                        {/* Testing end */}
                       </div>
                     );
                   }}

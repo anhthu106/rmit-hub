@@ -14,6 +14,7 @@ export default function Task({
   tag1,
   tag2,
   tag3,
+  status
 }) {
   const animated = makeAnimated();
   const personOption = util.username(usernameProps);
@@ -89,8 +90,9 @@ export default function Task({
   return (
     // TODO modal
     <>
-      <div className="inline-flex justify-center items-center rounded-md w-full">
-        <span onClick={() => setShowModal(true)} className="w-6/12">
+      <div 
+      className= {`inline-flex justify-center items-center rounded-md w-full ${status} `}>
+        <span onClick={() => setShowModal(true)} className="w-6/12 ">
           {tag1}
         </span>
 
