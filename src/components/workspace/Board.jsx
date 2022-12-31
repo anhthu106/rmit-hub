@@ -87,9 +87,6 @@ export default function Board({ listProps, usernameProps, TeamInfo }) {
   }, []);
   return (
     <div className="flex pt-6 overflow-auto h-full snap-x snap-always">
-      {/* <div className="flex-auto w-96"></div> */}
-
-      {/*Container of drag function as container of lists*/}
       <DragDropContext
         onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
       >
@@ -110,7 +107,6 @@ export default function Board({ listProps, usernameProps, TeamInfo }) {
                 <div className="absolute top-0 right-0 flex w-5 h-5 mt-5 mr-5 tooltip">
                   <Hamburger /> {/*Hamburger button*/}
                   <div className="flex flex-col border-gray-500 border-2 p-4 bg-white w-max h-max rounded-md z-20 absolute right-0 invisible tooltip-item border-solid">
-                    {/* TODO fix */}
                     <Task
                       usernameProps={usernameProps}
                       listID={column._id}
@@ -132,7 +128,6 @@ export default function Board({ listProps, usernameProps, TeamInfo }) {
                                 />
                               </svg>
                             }
-                            // buttonFnc={() => setShowModal(true)}
                             nameTag={"Create Task"}
                           />
                         </>
@@ -179,7 +174,6 @@ export default function Board({ listProps, usernameProps, TeamInfo }) {
                         {...provided.droppableProps}
                         ref={provided.innerRef}
                         style={{
-                          /*TODO change style to tailwind*/
                           background: snapshot.isDraggingOver
                             ? "#f3f4f6"
                             : "transparent",

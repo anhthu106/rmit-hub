@@ -13,8 +13,7 @@ export default function Post({
   TeamID,
 }) {
   return (
-    <>
-      {/* New */}
+    <>      
       <div className="px-4 py-1">
         <div className="bg-white border rounded-xl shadow-md">
           <div className=" px-4 py-3 ">

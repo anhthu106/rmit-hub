@@ -63,11 +63,6 @@ export default function Account({Info, postProps, tag, session, courseProps, cre
                                     </div>
 
                                     <div className="lg:w-8/12 lg:ml-6">
-                                        {/* <CreatePost
-                                            courseProps={courseProps}
-                                            id={session.user._id}
-                                            Info={session}
-                                        /> */}
                                         {createPost}
                                         {postProps.map((post) => (
                                             <div key={post._id}>

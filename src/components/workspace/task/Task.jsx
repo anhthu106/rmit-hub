@@ -61,7 +61,6 @@ export default function Task({
         setDeadline("");
         setName("");
         setDescription("");
-        // setShowModal(false);
     }
 
     const onKeyDown = (e) => {
@@ -87,14 +86,11 @@ export default function Task({
     }
 
     return (
-        // TODO modal
         <>
             <div className="inline-flex justify-center items-center rounded-md w-full">
         <span onClick={() => setShowModal(true)} className="w-6/12">
           {tag1}
         </span>
-
-                {/* TODO fix pop up */}
                 {tag2}
             </div>
             <span onClick={() => setShowModal(true)}>{tag3}</span>
@@ -106,8 +102,6 @@ export default function Task({
                             className="fixed inset-0 w-full h-full bg-black opacity-40"
                             onClick={() => setShowModal(false)}
                         ></div>
-
-                        {/* TODO Date check alert */}
                         {dateIsOK ? (
                             <div className="absolute top-0 flex items-center min-h-screen cursor-auto">
                                 <div
@@ -203,7 +197,6 @@ export default function Task({
                                                 value={name}
                                                 onKeyDown={onKeyDown}
                                                 onChange={(e) => setName(e.target.value)}
-                                                // className="w-full text-lg text-gray-900 bg-white focus:ring-1 resize-none rounded-md border border-gray-300"
                                             />
                                         </div>
                                         <div className="mb-6">
@@ -224,7 +217,6 @@ export default function Task({
                                                 value={description}
                                                 onKeyDown={onKeyDown}
                                                 onChange={(e) => setDescription(e.target.value)}
-                                                // className="w-full text-lg text-gray-900 bg-white focus:ring-1 resize-none rounded-md border border-gray-300"
                                             />
                                         </div>
                                         <div className="mb-6">
@@ -246,7 +238,6 @@ export default function Task({
                                                     setDeadline(e.target.value);
                                                     conpareString(e.target.value);
                                                 }}
-                                                // className="w-full text-lg text-gray-900 bg-white focus:ring-1 resize-none rounded-md border border-gray-300"
                                             />
                                         </div>
                                         <div className="mb-6">
@@ -264,15 +255,12 @@ export default function Task({
                                                     const personArr = [];
                                                     data.map((person) => {
                                                         personArr.push(person.label);
-                                                        // setAssignedPerson(person => [person, person.label])
-                                                        // setAssignedPerson(assignedPerson.push(person.label))
                                                     });
                                                     setAssignedPerson(personArr);
                                                 }}
                                                 components={animated}
                                                 options={personOption}
                                                 onKeyDown={onKeyDown}
-                                                // placeholder={assignedPerson}
                                                 defaultValue={assignedPersonValue}
                                             />
                                         </div>

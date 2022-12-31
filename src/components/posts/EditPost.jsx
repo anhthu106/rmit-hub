@@ -11,7 +11,6 @@ export default function EditPost({
                                      id,
                                      courseProps,
                                  }) {
-    const animated = makeAnimated();
 
   const [newContent, setNewContent] = useState(preContent);
   const [newCourse, setNewCourse] = useState(preCourse);
@@ -21,7 +20,6 @@ export default function EditPost({
 
   function imageHandler(e) {
     const file = e.target.files[0];
-    console.log(file);
     setFileToBase(file, setNewImage);
   }
 
