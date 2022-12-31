@@ -14,7 +14,7 @@ export default function Task({
   tag1,
   tag2,
   tag3,
-  status
+  status,
 }) {
   const animated = makeAnimated();
   const personOption = util.username(usernameProps);
@@ -88,15 +88,13 @@ export default function Task({
   }
 
   return (
-    // TODO modal
     <>
-      <div 
-      className= {`inline-flex justify-center items-center rounded-md w-full ${status} `}>
+      <div
+        className={`inline-flex justify-center items-center rounded-md w-full ${status} `}
+      >
         <span onClick={() => setShowModal(true)} className="w-6/12 ">
           {tag1}
         </span>
-
-        {/* TODO fix pop up */}
         {tag2}
       </div>
       <span onClick={() => setShowModal(true)}>{tag3}</span>
@@ -108,8 +106,6 @@ export default function Task({
               className="fixed inset-0 w-full h-full bg-black opacity-40"
               onClick={() => setShowModal(false)}
             ></div>
-
-            {/* TODO Date check alert */}
             {dateIsOK ? (
               <div className="absolute top-0 flex items-center min-h-screen cursor-auto">
                 <div

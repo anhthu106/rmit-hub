@@ -8,9 +8,6 @@ const EditList = dynamic(() => import("./list/EditList"));
 const Task = dynamic(() => import("./task/Task"));
 const TaskCard = dynamic(() => import("./task/TaskCard"));
 const Hamburger = dynamic(() => import("../hamburger/Hamburger"));
-const DropDownHamburger = dynamic(() =>
-  import("../hamburger/DropDown.Hamburger")
-);
 const CreateList = dynamic(() => import("./list/CreateList"));
 
 let socket;
