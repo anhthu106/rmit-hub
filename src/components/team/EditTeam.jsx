@@ -35,7 +35,7 @@ export default function EditTeam({ team, preName, preDescription, id }) {
           style="md:w-full md:rounded-lg text-white bg-blue-700 outline-none ring-offset-2 ring-blue-700 focus:ring-2 text-sm hover:bg-blue-800 border rounded-l-lg font-medium w-6/12  px-4 py-2 inline-flex space-x-1 items-center justify-center"
           fn={() => setShowModal(true)}
           options={
-            <span>
+            <>
               <span>
                 <svg
                   className="w-4 h-4"
@@ -53,7 +53,7 @@ export default function EditTeam({ team, preName, preDescription, id }) {
                 </svg>
               </span>
               <span>Edit</span>
-            </span>
+            </>
           }
         />
         <Button
@@ -64,7 +64,7 @@ export default function EditTeam({ team, preName, preDescription, id }) {
             router.push('/team');
           }}
           options={
-            <span>
+            <>
               <span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -82,13 +82,13 @@ export default function EditTeam({ team, preName, preDescription, id }) {
                 </svg>
               </span>
               <span>Delete</span>
-            </span>
+            </>
           }
         />
       </div>
 
       {showModal ? (
-        <span>
+        <>
           <div className="fixed inset-0 z-10 overflow-y-auto">
             <div
               className="fixed inset-0 w-full h-full bg-black opacity-40"
@@ -178,7 +178,7 @@ export default function EditTeam({ team, preName, preDescription, id }) {
               </div>
             </div>
           </div>
-        </span>
+        </>
       ) : null}
     </div>
   );

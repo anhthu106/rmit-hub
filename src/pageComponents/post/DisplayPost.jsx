@@ -25,7 +25,7 @@ export default function DisplayPost({
     return (
       <Post
         tag={
-          <span>
+          <>
             <div className="relative inline-block tooltip ">
               <div to="" className="hover:text-gray-400 px-2 py-1 font-medium ">
                 <svg
@@ -63,7 +63,7 @@ export default function DisplayPost({
                 </ul>
               </div>
             </div>
-          </span>
+          </>
         }
         content={content}
         date={date}
@@ -78,7 +78,7 @@ export default function DisplayPost({
   }
   return (
     <Post
-      tag={<span></span>}
+      tag={<></>}
       content={content}
       date={date}
       author={author}
@@ -108,7 +108,7 @@ function DeleteButton({ author, date, content, course, id, image }) {
   });
 
   return (
-    <span>
+    <>
       <li>
         {buttonClicked ? (
           <button
@@ -154,7 +154,7 @@ function DeleteButton({ author, date, content, course, id, image }) {
               //   }, 2000);
             }}
             options={
-              <span>
+              <>
                 <svg
                   className="flex-shrink-0 w-6 h-6 text-gray-400 transition duration-75 group-hover:text-gray-900"
                   fill="currentColor"
@@ -170,11 +170,11 @@ function DeleteButton({ author, date, content, course, id, image }) {
                 <span className="flex-1 ml-3 text-left whitespace-nowrap">
                   Delete Post
                 </span>
-              </span>
+              </>
             }
           />
         )}
       </li>
-    </span>
+    </>
   );
 }

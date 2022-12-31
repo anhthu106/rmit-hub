@@ -18,7 +18,7 @@ export default function FeatureSections() {
               description="Keep track of everything you do. Build yourself a profile with basic information which will support you in finding a team."
               svg={
                 <svg
-                  className="w-6 h-6"
+                  class="w-6 h-6"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -38,7 +38,7 @@ export default function FeatureSections() {
               description="Make a post to search for team members. The website only display 'finding member post' so you don't have to worry about your post getting mix-up with other."
               svg={
                 <svg
-                  className="w-6 h-6"
+                  class="w-6 h-6"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -59,7 +59,7 @@ export default function FeatureSections() {
               description="Having trouble find team when entering a new courses? Worry no more because you can scroll through your feed and look a team right away."
               svg={
                 <svg
-                  className="w-6 h-6"
+                  class="w-6 h-6"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -80,7 +80,7 @@ export default function FeatureSections() {
               description="Collaborate with other team members using Kanban board without the trouble of switching between many different sites. Each team can have a workplace to engaged with each other."
               svg={
                 <svg
-                  className="w-6 h-6"
+                  class="w-6 h-6"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"

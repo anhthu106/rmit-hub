@@ -6,7 +6,7 @@ import Footer from "../../components/footer/Footer";
 
 const LandingPage = () => {
     return (
-        <span>
+        <>
             {/* Header */}
             <Header></Header>
 
@@ -20,7 +20,7 @@ const LandingPage = () => {
 
             {/* Footer */}
             <Footer></Footer>
-        </span>
+        </>
     )
 }
 

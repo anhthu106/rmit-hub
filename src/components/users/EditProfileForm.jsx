@@ -58,7 +58,7 @@ export default function EditProfileForm({
         />
       </div>
       {showModal ? (
-        <span>
+        <>
           <Portal>
             <div className="fixed inset-0 z-10 overflow-y-auto">
               <div
@@ -189,7 +189,7 @@ export default function EditProfileForm({
               </div>
             </div>
           </Portal>
-        </span>
+        </>
       ) : null}
     </div>
   );

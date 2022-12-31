@@ -97,7 +97,7 @@ export default function CreatePost({ courseProps, id, Info }) {
                   options={
                     <p className="text-left ">
                       {placeHolder ? (
-                        <span></span>
+                        <></>
                       ) : (
                         <span>
                           <span
@@ -124,7 +124,7 @@ export default function CreatePost({ courseProps, id, Info }) {
         </div>
       </div>
       {showModal ? (
-        <span>
+        <>
           <div className="fixed inset-0 z-10 overflow-y-auto">
             <div
               className="fixed inset-0 w-full h-full bg-black opacity-40"
@@ -272,7 +272,7 @@ export default function CreatePost({ courseProps, id, Info }) {
 
                       <div className="items-center gap-2 mt-3 sm:flex">
                         {formCheck ? (
-                          <span>
+                          <>
                             {formSent ? (
                               <ButtonWithLoading />
                             ) : (
@@ -301,7 +301,7 @@ export default function CreatePost({ courseProps, id, Info }) {
                                 options={"Create Post"}
                               />
                             )}
-                          </span>
+                          </>
                         ) : (
                           <DisabledButton
                             type="button"
@@ -332,7 +332,7 @@ export default function CreatePost({ courseProps, id, Info }) {
               </div>
             </div>
           </div>
-        </span>
+        </>
       ) : null}
     </div>
   );

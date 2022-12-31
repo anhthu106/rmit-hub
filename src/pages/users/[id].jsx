@@ -86,7 +86,8 @@ export default function Detail({ Info, majorProps, postProps, courseProps }) {
     }
     if (session.user._id === Info._id) {
         return (
-            <Account
+            <>
+                <Account
                     Info={Info}
                     tag={
                         <EditProfileForm
@@ -107,6 +108,7 @@ export default function Detail({ Info, majorProps, postProps, courseProps }) {
                         Info={session}
                     />}
                 />
+            </>
         );
     }
     return (
@@ -114,7 +116,7 @@ export default function Detail({ Info, majorProps, postProps, courseProps }) {
         <Account
             Info={Info}
             tag={
-                <span></span>
+                <></>
             }
             postProps={postProps}
             session={session}
