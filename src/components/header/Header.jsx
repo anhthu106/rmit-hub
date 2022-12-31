@@ -47,13 +47,11 @@ export default function Header() {
                 </div>
                 <Navbar.Collapse>
                   <Navbar.Link
-                    href="../"
-                    // active={true}
+                    href="/"
                   >
                     Feed
                   </Navbar.Link>
                   <Navbar.Link href="/team">Teams</Navbar.Link>
-                  {/* <Navbar.Link href="#">page3</Navbar.Link> */}
                 </Navbar.Collapse>
               </Navbar>
             </div>
