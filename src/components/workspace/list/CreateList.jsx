@@ -29,7 +29,7 @@ export default function CreateList({ teamID }) {
   };
 
   return (
-    <div>
+    <div className="snap-center md:snap-end">
       <form className="bg-gray-50 w-36 p-3 rounded-lg md:h-[156px]">
         <div>
           <label

@@ -44,10 +44,10 @@ export default function TaskCard({ task, listID, usernameProps, tag1, tag2 }) {
                 />
               </svg>
               {task.username.length}
-              <span class="absolute right-full top-1/2 ml-4 -translate-y-1/2 rounded bg-white px-3 py-1 text-xs font-medium text-black opacity-0 group-hover:opacity-100 border-2 border-black">
-                <ul className="text-xs list-disc pl-2">
+              <span class="absolute min-w-fit right-full top-1/2 ml-4 -translate-y-1/2 rounded bg-white px-3 py-1 text-xs font-medium text-black opacity-0 group-hover:opacity-100 border-2 border-black">
+                <ul className="text-xs list-disc list-inside">
                   {task.username.map((username) => (
-                    <li key={username} className="">
+                    <li key={username} className="min-w-fit whitespace-nowrap">
                       {username}
                     </li>
                   ))}
