@@ -57,16 +57,6 @@ export default function TeamInformation({
           </div>
         </div>
       </section>
-
-      {/* <div>Team Lead: {Name}</div>
-      <ul>
-        {User.map((id) => (
-          <li key={id}>{id}</li>
-        ))}
-      </ul>
-      <div>{CourseId}</div>
-      <div>{Member}</div>
-      <div>{Description}</div> */}
     </div>
   );
 }

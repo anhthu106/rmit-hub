@@ -1,6 +1,5 @@
 import Header from "../../components/header/Header";
 import LoginForm from "../../components/auth/LoginForm";
-import Footer from "../../components/footer/Footer";
 
 // Login Page
 const Login = () => {
@@ -33,10 +32,6 @@ const Login = () => {
                         </div>
                     </div>
                 </div>
-
-                {/*Footer*/}
-                {/* <Footer />*/}
-
             </section>
         </>
     );

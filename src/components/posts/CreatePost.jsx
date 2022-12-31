@@ -10,7 +10,6 @@ import setFileToBase from "../img/img";
 
 export default function CreatePost({ courseProps, id, Info }) {
   const animated = makeAnimated();
-  // const courseOptions = util.item(courseProps, "name");
   const teamOptions = util.item(Info.user.team_id, "name");
 
   const [team, setTeam] = useState("");
@@ -34,7 +33,6 @@ export default function CreatePost({ courseProps, id, Info }) {
   }
   function imageHandler(e) {
     const file = e.target.files[0];
-    console.log(file);
     setFileToBase(file, setImage);
   }
 
@@ -120,7 +118,6 @@ export default function CreatePost({ courseProps, id, Info }) {
         </div>
 
         <div className="font-semibold text-sm mx-4 mt-2 mb-4">
-          {/* placeHolder */}
         </div>
       </div>
       {showModal ? (
@@ -256,13 +253,6 @@ export default function CreatePost({ courseProps, id, Info }) {
                                 </span>
                               </span>
                             </span>
-                            {/* <a
-                              href="#"
-                              className="text-blue-600 hover:underline"
-                            >
-                              Community Guidelines
-                            </a> */}
-                            .
                           </div>
                         </div>
                         <p className="py-4 text-lg text-green-600 text-center">
@@ -294,9 +284,6 @@ export default function CreatePost({ courseProps, id, Info }) {
                                     "/api/posts"
                                   );
                                   setFormSent(true);
-                                  //   window.setTimeout(function () {
-                                  //     location.reload();
-                                  //   }, 3000);
                                 }}
                                 options={"Create Post"}
                               />

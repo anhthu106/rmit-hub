@@ -87,9 +87,6 @@ export default function Board({ listProps, usernameProps, TeamInfo }) {
   }, []);
   return (
     <div className="flex pt-6 overflow-auto h-full snap-x snap-always">
-      {/* <div className="flex-auto w-96"></div> */}
-
-      {/*Container of drag function as container of lists*/}
       <DragDropContext
         onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
       >

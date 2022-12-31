@@ -16,7 +16,6 @@ export default async function handle(req, res) {
         res.status(StatusCodes.OK).json({message: "Updated"})
 
     } catch (e) {
-        console.log(e)
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({error: e})
     }
 

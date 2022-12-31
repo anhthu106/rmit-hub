@@ -17,7 +17,7 @@ export default async function handler(req, res) {
                     res.status(StatusCodes.OK).json({message: "Deleted"});
 
                 } catch (e) {
-                    console.log(e);
+                    return e;
                 }
             }
         }

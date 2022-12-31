@@ -1,11 +1,7 @@
 import { useState } from "react";
 import { addItems } from "../../backend/helper/items/items";
 import Image from "next/image";
-import {
-  Button,
-  DisabledButton,
-  ButtonWithLoading,
-} from "../../components/button/Button";
+import {Button} from "../../components/button/Button";
 import Header from "../../components/header/Header";
 
 export default function NonTeamMember({ TeamInfo, currentUser }) {
@@ -75,7 +71,6 @@ export default function NonTeamMember({ TeamInfo, currentUser }) {
             <div className="text-center mt-5 text-3xl font-medium">
               {TeamInfo.name}
             </div>
-            {/* <div className="text-center mt-2 font-light text-sm">placeholder 1</div> */}
             <div className="text-center font-normal text-lg">
               {TeamInfo.courseName}
             </div>
@@ -89,13 +84,6 @@ export default function NonTeamMember({ TeamInfo, currentUser }) {
               </div>
               <div className="w-0 border border-gray-300"></div>
               <div className="w-1/2 text-center px-2">
-                {/* <span className="font-bold break-words">
-                  <ul>
-                    {TeamInfo.user.map((member) => (
-                      <li key={member}>{member}</li>
-                    ))}
-                  </ul>
-                </span> */}
                 <div className="flex -space-x-4 justify-center">
                   {TeamInfo.userPicture.map((imgUrl) => (
                     <div
@@ -130,11 +118,7 @@ export default function NonTeamMember({ TeamInfo, currentUser }) {
                     setMessage,
                     "/api/team/join"
                   );
-                  // window.location="../";
                   setAlert(true);
-                  // window.setTimeout(function () {
-                  //   location.reload();
-                  // }, 3000);
                 }}
                 options={"Request to join"}
               />

@@ -149,9 +149,6 @@ function DeleteButton({ author, date, content, course, id, image }) {
                 setMessage,
                 `/api/posts/${id}`
               );
-              //   window.setTimeout(function () {
-              //     location.reload();
-              //   }, 2000);
             }}
             options={
               <>
