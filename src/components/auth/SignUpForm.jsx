@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import makeAnimated from "react-select/animated";
 import { util } from "../../utils/utils";
 import { useEffect, useState } from "react";
