@@ -1,19 +1,36 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { io } from "socket.io-client";
-import { useRef } from "react";
-import { Button, DisabledButton, ButtonWithLoading } from "../../button/Button";
+import { Button } from "../../button/Button";
 
 let socket;
 export default function CreateList({ teamID }) {
-  const [title, setTitle] = useState();
+  const [title, setTitle] = useState("");
   const input = useRef(null);
+
+  function submit(e) {
+    const data = { title, teamID };
+
+    socket = io();
+    socket.emit("updateList", data);
+
+    e.preventDefault();
+    setTitle("");
+    handleClick();
+  }
+
+  const onKeyDown = (e) => {
+    if (e.key === "Enter" || e.key === "Escape") {
+      submit(e);
+    }
+  };
 
   const handleClick = () => {
     input.current.focus();
   };
+
   return (
-    <div>
-      <form className="bg-gray-50 w-fit p-3 rounded-lg">
+    <div className="snap-center md:snap-end">
+      <form className="bg-gray-50 w-36 p-3 rounded-lg md:h-[156px]">
         <div>
           <label
             htmlFor="title"
@@ -30,6 +47,7 @@ export default function CreateList({ teamID }) {
             name="title"
             required
             value={title}
+            onKeyDown={onKeyDown}
             onChange={(e) => setTitle(e.target.value)}
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           />
@@ -39,14 +57,7 @@ export default function CreateList({ teamID }) {
           type="button"
           style="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-lg font-medium w-full mt-3 px-4 py-2 inline-flex space-x-1 items-center justify-center"
           fn={(e) => {
-            const data = { title, teamID };
-
-            socket = io();
-            socket.emit("updateList", data);
-
-            e.preventDefault();
-            setTitle("");
-            handleClick();
+            submit(e);
           }}
           options={
             <>

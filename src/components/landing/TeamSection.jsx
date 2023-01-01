@@ -15,21 +15,21 @@ export default function TeamSection() {
         <div className="grid gap-8 lg:gap-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
           <Member
             name="Pham Vo Dong"
-            avaUrl="https://res.cloudinary.com/eeeps/image/upload/c_thumb,g_face,ar_1:1,w_512/on_the_phone.jpg"
+            avaUrl="https://res.cloudinary.com/dxga3vikf/image/upload/v1672323309/image/dong_fsaexm.jpg"
             role="Project manager - Backend leader"
             linkFB="https://www.facebook.com/phamvodong0811"
             linkGitHub="https://github.com/phamvodong"
           />
           <Member
             name="Pham Anh Thu"
-            avaUrl="https://res.cloudinary.com/eeeps/image/upload/c_thumb,g_face,ar_1:1,w_512/on_the_phone.jpg"
+            avaUrl="https://res.cloudinary.com/dxga3vikf/image/upload/v1672324459/image/thu_lxrlpc.jpg"
             role="Backend developer - Researcher"
             linkFB="https://www.facebook.com/ahthupham02"
             linkGitHub="https://github.com/anhthu106"
           />
           <Member
             name="Tran Ngoc Khang"
-            avaUrl="https://res.cloudinary.com/eeeps/image/upload/c_thumb,g_face,ar_1:1,w_512/on_the_phone.jpg"
+            avaUrl="https://res.cloudinary.com/dxga3vikf/image/upload/v1672324270/image/319696695_892637752100114_5782622464191116213_n_xazw8n.jpg"
             role="Frontend leader"
             linkFB="https://www.facebook.com/Oct.13rd.k.u.z.e"
             linkGitHub="https://github.com/KN2222"

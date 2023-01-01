@@ -12,7 +12,7 @@ export default function Account({Info, postProps, tag, session, courseProps, cre
 
             <div className="min-h-[calc(100vh-62px-80px)]">
                 <div className="container mx-auto md:px-4">
-                    <div className="bg-gray-100 w-full shadow-xl rounded-lg">
+                    <div className="bg-gray-100 w-full shadow-xl">
                         <div className="flex leading-relaxed">
                             <div className="container mx-auto md:px-8" id="myportal">
                                 <div className="lg:flex md:my-20">
@@ -33,12 +33,6 @@ export default function Account({Info, postProps, tag, session, courseProps, cre
                                             <h3 className="text-xl font-bold leading-none text-gray-900">
                                                 Teams
                                             </h3>
-                                            {/* <a
-                        href="#"
-                        className="text-sm font-medium text-blue-700 hover:underline"
-                      >
-                        View all
-                      </a> */}
                                         </div>
                                         <div className="flow-root">
                                             {Info.team.map((team) => (
@@ -69,11 +63,6 @@ export default function Account({Info, postProps, tag, session, courseProps, cre
                                     </div>
 
                                     <div className="lg:w-8/12 lg:ml-6">
-                                        {/* <CreatePost
-                                            courseProps={courseProps}
-                                            id={session.user._id}
-                                            Info={session}
-                                        /> */}
                                         {createPost}
                                         {postProps.map((post) => (
                                             <div key={post._id}>

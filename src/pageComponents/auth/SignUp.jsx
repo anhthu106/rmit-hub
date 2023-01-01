@@ -1,12 +1,7 @@
 import Header from "../../components/header/Header";
 import { useState } from "react";
-import LoginForm from "../../components/auth/LoginForm";
 import SignUpForm from "../../components/auth/SignUpForm";
-import {
-  Button,
-  DisabledButton,
-  ButtonWithLoading,
-} from "../../components/button/Button";
+import { Button } from "../../components/button/Button";
 
 const SignUp = ({ majorProps }) => {
   const [showModal, setShowModal] = useState(false);
@@ -16,7 +11,7 @@ const SignUp = ({ majorProps }) => {
       <section
         className="
           bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-300 via-indigo-400 to-indigo-500
-          grid h-fit lg:h-screen sm:h-[60rem] sm:max-w-full"
+          grid min-h-fit sm:h-[60rem] sm:max-w-full"
       >
         {/*Header*/}
         <Header></Header>
@@ -47,7 +42,6 @@ const SignUp = ({ majorProps }) => {
               <div className="fixed inset-0 z-10 overflow-y-auto">
                 <div
                   className="fixed inset-0 w-full h-full bg-black opacity-40"
-                  // onClick={() => setShowModal(false)}
                 ></div>
                 <div className="flex items-center min-h-screen px-4 py-8">
                   <div className="relative w-full max-w-lg p-4 mx-auto bg-white rounded-md shadow-lg">

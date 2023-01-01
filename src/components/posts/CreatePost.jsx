@@ -6,10 +6,10 @@ import { addItems } from "../../backend/helper/items/items";
 import Link from "next/link";
 import Image from "next/image";
 import { Button, ButtonWithLoading, DisabledButton } from "../button/Button";
+import setFileToBase from "../img/img";
 
 export default function CreatePost({ courseProps, id, Info }) {
   const animated = makeAnimated();
-  // const courseOptions = util.item(courseProps, "name");
   const teamOptions = util.item(Info.user.team_id, "name");
 
   const [team, setTeam] = useState("");
@@ -31,19 +31,10 @@ export default function CreatePost({ courseProps, id, Info }) {
       }, 300);
     }
   }
-
   function imageHandler(e) {
     const file = e.target.files[0];
-    setFileToBase(file);
+    setFileToBase(file, setImage);
   }
-
-  const setFileToBase = (file) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setImage(reader.result);
-    };
-  };
 
   function checkForm() {
     if (content === "" || course === "" || image === null) {
@@ -127,7 +118,6 @@ export default function CreatePost({ courseProps, id, Info }) {
         </div>
 
         <div className="font-semibold text-sm mx-4 mt-2 mb-4">
-          {/* placeHolder */}
         </div>
       </div>
       {showModal ? (
@@ -172,13 +162,7 @@ export default function CreatePost({ courseProps, id, Info }) {
                             >
                               Course
                             </label>
-                            {/*<Select*/}
-                            {/*    onChange={(course) => setCourse(course.label)}*/}
-                            {/*    closeMenuOnSelect={true}*/}
-                            {/*    components={animated}*/}
-                            {/*    placeholder={course}*/}
-                            {/*    options={courseOptions}*/}
-                            {/*/>*/}
+
                             <input
                               type="text"
                               id="course"
@@ -188,7 +172,6 @@ export default function CreatePost({ courseProps, id, Info }) {
                               className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                             />
                           </div>
-
                           <div>
                             <label
                               htmlFor="content"
@@ -211,7 +194,6 @@ export default function CreatePost({ courseProps, id, Info }) {
                               placeholder="Content..."
                             />
                           </div>
-
                           <div>
                             <label
                               htmlFor="image"
@@ -220,14 +202,21 @@ export default function CreatePost({ courseProps, id, Info }) {
                               Image
                             </label>
                             <input
-                              className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+                              className="block w-full h-fit text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
                               id="file_input"
                               type="file"
                               accept="image/*"
                               name="image"
                               onChange={(e) => imageHandler(e)}
                             />
+
+                            <div
+                              className="grid place-items-center"
+                              id="preview"
+                            ></div>
                           </div>
+
+                          <hr />
                           <div className="ml-auto text-xs text-gray-500 pt-3">
                             Remember, contributions to this topic should follow
                             our&nbsp;
@@ -264,13 +253,6 @@ export default function CreatePost({ courseProps, id, Info }) {
                                 </span>
                               </span>
                             </span>
-                            {/* <a
-                              href="#"
-                              className="text-blue-600 hover:underline"
-                            >
-                              Community Guidelines
-                            </a> */}
-                            .
                           </div>
                         </div>
                         <p className="py-4 text-lg text-green-600 text-center">
@@ -286,7 +268,7 @@ export default function CreatePost({ courseProps, id, Info }) {
                             ) : (
                               <Button
                                 type="submit"
-                                style="w-6/12 mt-2 p-2.5 flex-1 text-white bg-blue-700 rounded-md outline-none ring-offset-2 ring-blue-700 focus:ring-2"
+                                style="w-6/12 mt-2 p-2.5 text-white bg-blue-700 font-medium rounded-md text-sm px-5 py-2.5 text-center flex-1 outline-none ring-offset-2 ring-blue-700 focus:ring-2"
                                 fn={(e) => {
                                   addItems(
                                     {
@@ -302,9 +284,6 @@ export default function CreatePost({ courseProps, id, Info }) {
                                     "/api/posts"
                                   );
                                   setFormSent(true);
-                                  //   window.setTimeout(function () {
-                                  //     location.reload();
-                                  //   }, 3000);
                                 }}
                                 options={"Create Post"}
                               />
@@ -313,17 +292,25 @@ export default function CreatePost({ courseProps, id, Info }) {
                         ) : (
                           <DisabledButton
                             type="button"
-                            style="w-6/12 mt-2 p-2.5 text-white bg-blue-400 cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                            style="w-6/12 mt-2 p-2.5 text-white bg-blue-400 font-medium rounded-md text-sm px-5 py-2.5 text-center flex-1 outline-none ring-offset-2 ring-blue-700 focus:ring-2"
                             options={"Create Post"}
                           />
                         )}
 
-                        <Button
-                          type=""
-                          style="w-6/12 mt-2 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-indigo-600 focus:ring-2"
-                          fn={() => setShowModal(false)}
-                          options={"Cancel"}
-                        />
+                        {formSent ? (
+                          <DisabledButton
+                            type=""
+                            style="w-6/12 mt-2 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-gray-600 focus:ring-2 font-medium text-sm px-5 py-2.5 text-center outline-none"
+                            options={"Cancel"}
+                          />
+                        ) : (
+                          <Button
+                            type=""
+                            style="w-6/12 mt-2 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-gray-600 focus:ring-2 font-medium text-sm px-5 py-2.5 text-center outline-none"
+                            fn={() => setShowModal(false)}
+                            options={"Cancel"}
+                          />
+                        )}
                       </div>
                     </form>
                     <div className="items-center gap-2 mt-3 sm:flex"></div>

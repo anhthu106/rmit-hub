@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button } from "../button/Button";
+import { Button, DisabledButton } from "../button/Button";
 import { addItems } from "../../backend/helper/items/items";
 
 const RecoverForm = () => {
@@ -9,18 +9,24 @@ const RecoverForm = () => {
   const [messagePass, setMessagePass] = useState(false);
   const [messageFail, setMessageFail] = useState(false);
 
+  const [formUncompelete, setFormUncompelete] = useState(null);
   //Function
   function MessageCheck() {
     if (message !== null) {
       if (message.toLowerCase().includes("verify")) {
         setMessagePass(true);
         setMessageFail(false);
-        console.log("Pass");
       }
       if (message.toLowerCase().includes("invalid")) {
         setMessagePass(false);
         setMessageFail(true);
-        console.log("Fail");
+      }
+      if (message === "Verify email is sent which have 5 minutes expires") {
+        setMessage(message);
+        setFormUncompelete(true);
+        setTimeout(() => {
+          setMessage("Send again, if you did not received email");
+        }, 60000);
       }
     }
   }
@@ -30,7 +36,10 @@ const RecoverForm = () => {
   });
 
   return (
-    <form className="px-6 pb-6 space-y-4 md:space-y-6 sm:px-8 sm:pb-8 pt-8">
+    <form
+      className="px-6 pb-6 space-y-4 md:space-y-6 sm:px-8 sm:pb-8 pt-8"
+      onSubmit={(e) => addItems({ email }, e, setMessage, "/api/auth/recover")}
+    >
       <div>
         <label
           htmlFor="email"
@@ -46,15 +55,30 @@ const RecoverForm = () => {
           placeholder="ID@rmit.edu.vn"
           required
           value={email}
-          onChange={({ target }) => setEmail(target.value)}
+          onChange={({ target }) => {
+            setEmail(target.value);
+            setFormUncompelete(false);
+          }}
         />
       </div>
-      <Button
-        type="button"
-        style="w-full  bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-white text-center"
-        fn={(e) => addItems({ email }, e, setMessage, "/api/auth/recover")}
-        options={"Recover"}
-      />
+      {formUncompelete ? (
+        <DisabledButton
+          type="button"
+          style="w-full text-white bg-blue-400 dark:bg-blue-500 cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+          options={"Recover"}
+        />
+      ) : (
+        <Button
+          type="button"
+          style="w-full  bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-white text-center"
+          fn={(e) => {
+            addItems({ email }, e, setMessage, "/api/auth/recover");
+            setFormUncompelete(true);
+          }}
+          options={"Recover"}
+        />
+      )}
+
       {messageFail && <p className="text-xs text-red-600">{message}</p>}
       {messagePass && <p className="mt-2 text-xs text-green-600">{message}</p>}
     </form>
