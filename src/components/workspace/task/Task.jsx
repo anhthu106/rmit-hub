@@ -72,10 +72,20 @@ export default function Task({
   };
 
   function conpareString(pick) {
+    
     let current = new Date();
-    let date = `${current.getFullYear()}-${
-      current.getMonth() + 1
-    }-${current.getDate()}`;
+    let month = current.getMonth() + 1;
+    if (month < 10){
+      month = `0${month}`
+    }
+
+    let day = current.getDate();
+    if (day < 10){
+      day = `0${day}`
+    }
+
+
+    let date = `${current.getFullYear()}-${month}-${day}`;
     let text1 = date.toString();
     let text2 = pick.toString();
     let result = text2.localeCompare(text1);
@@ -236,7 +246,7 @@ export default function Task({
                         id="deadline"
                         name="deadline"
                         required
-                        value={deadline}
+                        value={deadline || ''}
                         onKeyDown={onKeyDown}
                         onChange={(e) => {
                           setDeadline(e.target.value);
