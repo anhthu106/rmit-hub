@@ -116,8 +116,8 @@ export default function Board({ listProps, usernameProps, TeamInfo }) {
                         e.preventDefault();
                       }}
                       options={
-                        <span>
-                          <span>
+                        <span className="flex space-x-1">
+                          <span className="my-auto">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               fill="none"
@@ -259,7 +259,7 @@ export default function Board({ listProps, usernameProps, TeamInfo }) {
                             <>
                               <Button
                                 type="button"
-                                style="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-lg font-medium w-full  px-4 py-2 inline-flex space-x-1 items-center justify-center"
+                                style="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-lg font-medium w-full px-4 py-2 inline-flex space-x-1 items-center justify-center"
                                 options={
                                   <>
                                     <span>

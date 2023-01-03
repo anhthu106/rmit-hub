@@ -61,7 +61,7 @@ const Homepage = ({ courseProps, postProps, session, Info }) => {
                     </div>
                   ))}
 
-                  <span className="md:hidden block">
+                  <span className="md:hidden block snap-end">
                     <Footer />
                   </span>
                 </div>

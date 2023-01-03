@@ -88,10 +88,10 @@ export default function Team({ courseProps, teamProps }) {
                     <h1 className="text-xl font-semibold">Teams</h1>
                   </div>
                   <CreateTeam courseProps={courseProps} OwnerUser={id} />
-                  <div className="flex-grow h-0 overflow-auto">
+                  <div className="flex-grow h-0 overflow-auto snap-y snap-always">
                     <div className="w-full">
                       {teamProps.map((team) => (
-                        <div key={team._id} className="space-y-2 ">
+                        <div key={team._id} className="space-y-2 snap-start">
                           <TeamInformation
                             User={team.userID}
                             CourseId={team.courseID}
@@ -103,7 +103,7 @@ export default function Team({ courseProps, teamProps }) {
                         </div>
                       ))}
                     </div>
-                    <span className="md:hidden block">
+                    <span className="md:hidden block snap-end">
                       <Footer />
                     </span>
                   </div>

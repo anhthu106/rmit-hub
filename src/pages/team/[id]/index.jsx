@@ -72,6 +72,10 @@ export async function getServerSideProps({params}) {
             })
         );
 
+        const userPending =  teamData.pending.map((data) => {
+            return data.toString();
+        })
+
         TeamInfo = {
             _id: teamData._id.toString(),
             name: teamData.name,
@@ -80,7 +84,8 @@ export async function getServerSideProps({params}) {
             members: teamData.Member,
             userId: userId,
             user: userName,
-            userPicture: userPicture
+            userPicture: userPicture,
+            pendingList: userPending
         };
 
         resetServerContext();
@@ -119,7 +124,7 @@ export default function TeamDetail({
     } else {
         return (
             <div>
-                <NonTeamMember TeamInfo={TeamInfo} currentUser={currentUser}/>
+                <NonTeamMember TeamInfo={TeamInfo} currentUser={currentUser} section={session}/>
             </div>
 
         )

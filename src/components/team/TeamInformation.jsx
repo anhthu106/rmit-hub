@@ -12,7 +12,7 @@ export default function TeamInformation({
     <div>
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-5 mx-auto md:px-32">
-          <div className="p-5 bg-white flex items-center mx-auto border-b  mb-10 border-gray-200 rounded-xl sm:flex-row flex-col shadow-md">
+          <div className="p-5 min-w-full bg-white flex items-center mx-auto border-b  mb-10 border-gray-200 rounded-xl sm:flex-row flex-col shadow-md">
             {/* <div className="sm:w-32 sm:h-32 h-20 w-20 sm:mr-10 inline-flex items-center justify-center flex-shrink-0 bg-indigo-500"></div> */}
             <div className="flex-grow sm:text-left text-center mt-6 sm:mt-0">
               <h1 className="text-black text-2xl title-font font-bold mb-2">
@@ -22,7 +22,7 @@ export default function TeamInformation({
               <div className="py-4"></div>
               <div className="flex font-bold text-gray-800">
                 <div className="w-full min-w-max sm:space-x-6 sm:flex space-y-6 sm:space-y-0">
-                  <div className="w-full">
+                  <div className="sm:w-full">
                     <h2 className="text-gray-500">Member({Member})</h2>
                     <ul>
                       {User.map((id) => (
@@ -31,9 +31,9 @@ export default function TeamInformation({
                     </ul>
                   </div>
 
-                  <div className="w-full">
+                  <div className="sm:w-full">
                     <h2 className="text-gray-500">Course</h2>
-                    <p>{CourseId}</p>
+                    <p className="break-words w-52 sm:w-full">{CourseId}</p>
                   </div>
                 </div>
               </div>

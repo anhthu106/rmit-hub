@@ -17,8 +17,8 @@ export default function Account({Info, postProps, tag, session, courseProps, cre
                             <div className="container mx-auto md:px-8" id="myportal">
                                 <div className="lg:flex md:my-20">
                                     <div
-                                        className="lg:w-4/12 mx-auto md:mt-4 h-fit px-8 shadow-xl sm:drop-shadow-2xl rounded-lg border-2 border-gray-100">
-                                        <div className="text-center md:p-5">
+                                        className="lg:w-4/12 m-4 md:mt-4 h-fit md:py-8 px-8 shadow-xl sm:drop-shadow-2xl rounded-lg border-2 border-gray-200">
+                                        <div className="text-center md:p-5 shadow-none">
                                             <UserInformation
                                                 username={Info.username}
                                                 email={Info.email}
@@ -29,7 +29,7 @@ export default function Account({Info, postProps, tag, session, courseProps, cre
                                             {tag}
                                         </div>
 
-                                        <div className="flex justify-between items-center mb-4">
+                                        <div className="flex justify-between items-center mb-4 pt-4 sm:pt-0">
                                             <h3 className="text-xl font-bold leading-none text-gray-900">
                                                 Teams
                                             </h3>

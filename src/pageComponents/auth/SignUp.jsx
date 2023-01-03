@@ -17,7 +17,7 @@ const SignUp = ({ majorProps }) => {
         <Header></Header>
 
         {/*Body*/}
-        <div className="opacity-[1] flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-min lg:py-0 z-10 rounded-[50px] drop-shadow-2xl md:mt-0 sm:max-w-screen xl:p-0">
+        <div className="opacity-[1] flex flex-col items-center justify-center px-0 sm:px-6 py-8 mx-auto md:h-min lg:py-0 z-10 rounded-[50px] drop-shadow-2xl md:mt-0 sm:max-w-screen xl:p-0">
           <div className="w-max md:mt-0 sm:max-w-full xl:p-0">
             <div className="align-middle md:align-top">
               <div className="bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-pink-500 via-red-500 to-yellow-500 rounded-t-[50px] h-fit py-8">

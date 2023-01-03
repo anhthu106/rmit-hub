@@ -158,7 +158,7 @@ const SignUpForm = ({ majorProps }) => {
                     This account is already created
                 </p>
             )}
-            <div>
+            <div className="w-64 sm:w-full">
                 <label
                     htmlFor="username"
                     className="block mb-2 text-sm font-medium text-gray-900 "
@@ -188,7 +188,7 @@ const SignUpForm = ({ majorProps }) => {
                 >
                     Email
                 </label>
-                <div className="w-full flex flex-row">
+                <div className="w-64 sm:w-full flex">
                     <input
                         type="text"
                         id="email"

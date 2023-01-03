@@ -61,7 +61,6 @@ export default function CreateList({ teamID }) {
           }}
           options={
             <>
-              {" "}
               <span>
                 <svg
                   className="w-4 h-4"
