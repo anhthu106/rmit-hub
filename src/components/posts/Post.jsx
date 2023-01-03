@@ -13,7 +13,7 @@ export default function Post({
   TeamID,
 }) {
   return (
-    <>      
+    <>
       <div className="px-4 py-1">
         <div className="bg-white border rounded-xl shadow-md">
           <div className=" px-4 py-3 ">
@@ -71,15 +71,16 @@ export default function Post({
             <p>{content}</p>
           </div>
           <div className="px-4 grid place-content-center">
-            <Image
-              className="h-fit w-auto rounded-lg object-contain border-solid border-3 border-gray-100"
-              src={image}
-              alt="post"
-              layout="intrinsic"
-              width="700"
-              height="700"
-              objectFit="cover" // change to suit your needs
-            />
+            <div className="w-60 h-60 sm:w-96 sm:h-96 relative">
+              <Image
+                className="h-fit w-auto rounded-lg object-contain border-solid border-3 border-gray-100"
+                src={image}
+                alt="post"
+                width="100%"
+                height="100%"
+                layout="responsive"
+              />
+            </div>
           </div>
           <div className="flex items-center justify-between mx-4 mt-2 mb-2">
             <div className="flex gap-5"></div>
