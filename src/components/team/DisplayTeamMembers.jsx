@@ -1,9 +1,10 @@
 import { Button } from "../button/Button";
 import { deleteItems } from "../../backend/helper/items/items";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
 export default function DisplayTeamMembers({ userProps, team, session }) {
+  
   return (
     <div className="">
       <div className="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8">
@@ -86,6 +87,16 @@ function DisplayWithoutButton({ user }) {
 
 function DisplayWithButton({ user, button, team }) {
   const [message, setMessage] = useState(null);
+  function reloadHandler() {
+    if (message === "User Deleted") {
+      window.setTimeout(function () {
+        location.reload();
+      }, 300);
+    }
+  }
+  useEffect(() => {
+    reloadHandler();
+  });
   return (
     <li
       key={user._id}
@@ -116,9 +127,6 @@ function DisplayWithButton({ user, button, team }) {
                 setMessage,
                 `../../api/team/${team.id}`
               );
-              window.setTimeout(function () {
-                location.reload();
-              }, 300);
             }}
             style="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2"
           />

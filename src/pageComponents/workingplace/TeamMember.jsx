@@ -5,14 +5,14 @@ const Board = dynamic(() => import("../../components/workspace/Board"));
 
 export default function TeamMember({ TeamInfo, listProps, userName }) {
   return (
-    <div className="bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200 min-h-screen">
+    <div className="bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200 h-fit">
       <Header />
       <div className="text-gray-700">
-        <div className="flex-col w-screen max-h-screen ">
+        <div className="flex-col w-screen pb-5">
           <div className="md:px-10 px-3 pt-6  ">
             <h1 className="text-2xl font-bold ">{TeamInfo.name}</h1>
 
-            <div className="flex space-x-3">
+            <div className="sm:flex space-x-3">
               <SideBar teamID={TeamInfo._id} state1={1} state2={0} />
               <Board
                 listProps={listProps}
