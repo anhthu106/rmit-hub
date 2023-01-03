@@ -13,7 +13,7 @@ export default function SideBar({ teamID, state1, state2 }) {
           <a
             href={`/team/${teamID}`}
             className="h-16 px-6 flex justify-start items-center w-full
-focus:text-blue-500 space-x-3auto"
+focus:text-blue-500 space-x-3"
           >
             <svg
               className="w-6 h-6"
@@ -34,7 +34,7 @@ focus:text-blue-500 space-x-3auto"
         </li>
 
         {/* Team */}
-        <li className={`${active[state2]} `}>
+        <li className={`${active[state2]}`}>
           <a
             href={`/team/${teamID}` + "/Management"}
             className="h-16 px-6 flex justify-start items-center w-full

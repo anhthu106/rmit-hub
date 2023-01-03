@@ -90,7 +90,7 @@ export default function Management({ userProps, userPending, team, userID }) {
   } else {
     if (currentUser === team.leader) {
       return (
-        <div className="bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200 h-fit">
+        <div className="bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200 h-fit min-h-screen">
           <Header />
 
           <div className="text-gray-700">
@@ -115,7 +115,7 @@ export default function Management({ userProps, userPending, team, userID }) {
       );
     } else {
       return (
-        <div className="bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200 h-fit">
+        <div className="bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200 h-fit min-h-screen">
           <Header />
 
           <div className="text-gray-700">

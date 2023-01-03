@@ -5,7 +5,7 @@ const Board = dynamic(() => import("../../components/workspace/Board"));
 
 export default function TeamMember({ TeamInfo, listProps, userName }) {
   return (
-    <div className="bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200 h-fit">
+    <div className="bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200 h-fit min-h-screen">
       <Header />
       <div className="text-gray-700">
         <div className="flex-col w-screen pb-5">
