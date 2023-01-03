@@ -107,7 +107,13 @@ export default function Task({
         </span>
         {tag2}
       </div>
-      <span onClick={() => setShowModal(true)}>{tag3}</span>
+
+      <div
+        className={"justify-center items-center rounded-md w-full"}
+      >
+        <span onClick={() => setShowModal(true)}>{tag3}</span>
+      </div>
+      
 
       {showModal ? (
         <>

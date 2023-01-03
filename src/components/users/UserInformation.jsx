@@ -10,7 +10,7 @@ export default function UserInformation({
     const mailTo = "mailto:" + email
     return (
         <div>
-            <div className="mx-auto">
+            <div className="mx-auto pt-8 sm:pt-0">
                 <Image
                     key={image}
                     className="mx-auto rounded-full"
