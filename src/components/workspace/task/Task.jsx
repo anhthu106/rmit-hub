@@ -295,7 +295,7 @@ export default function Task({
                         submit(e);
                         setShowModal(false);
                       }}
-                      options={"Update?"}
+                      options={"Update"}
                     />
                   </form>
 
