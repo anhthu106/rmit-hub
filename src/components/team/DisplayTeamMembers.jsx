@@ -1,12 +1,13 @@
 import { Button } from "../button/Button";
 import { deleteItems } from "../../backend/helper/items/items";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
 export default function DisplayTeamMembers({ userProps, team, session }) {
+  
   return (
-    <div>
-      <div className="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
+    <div className="">
+      <div className="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8">
         <div className="mb-4 flex items-center justify-between">
           <div>
             <h3 className="text-xl font-bold text-gray-900 mb-2">
@@ -39,7 +40,7 @@ export default function DisplayTeamMembers({ userProps, team, session }) {
                               key={user._id}
                               user={user}
                               team={team}
-                              button={"Out Team"}
+                              button={"Leave"}
                             />
                           );
                         }
@@ -65,7 +66,7 @@ function DisplayWithoutButton({ user }) {
       key={user._id}
       className="first:pb-4 first:pt-0 last:pb-0 last:pt-4 [&:not(:first-child,:last-child)]:py-4"
     >
-      <div className="flex items-center space-x-4 ">
+      <div className="flex items-center sm:space-x-4 space-x-2">
         <Image
           key={user.image.imgURL}
           className="rounded-full"
@@ -86,12 +87,22 @@ function DisplayWithoutButton({ user }) {
 
 function DisplayWithButton({ user, button, team }) {
   const [message, setMessage] = useState(null);
+  function reloadHandler() {
+    if (message === "User Deleted") {
+      window.setTimeout(function () {
+        location.reload();
+      }, 300);
+    }
+  }
+  useEffect(() => {
+    reloadHandler();
+  });
   return (
     <li
       key={user._id}
       className="first:pb-4 first:pt-0 last:pb-0 last:pt-4 [&:not(:first-child,:last-child)]:py-4"
     >
-      <div className="flex items-center space-x-4 ">
+      <div className="flex items-center sm:space-x-4 space-x-2">
         <Image
           key={user.image.imgURL}
           className="rounded-full"
@@ -116,9 +127,6 @@ function DisplayWithButton({ user, button, team }) {
                 setMessage,
                 `../../api/team/${team.id}`
               );
-              window.setTimeout(function () {
-                location.reload();
-              }, 300);
             }}
             style="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2"
           />

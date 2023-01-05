@@ -116,8 +116,8 @@ export default function Board({ listProps, usernameProps, TeamInfo }) {
                         e.preventDefault();
                       }}
                       options={
-                        <span>
-                          <span>
+                        <span className="flex space-x-1">
+                          <span className="my-auto">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               fill="none"

@@ -92,7 +92,7 @@ export default async function handler(req, res) {
                             }
                         })
 
-                        res.status(StatusCodes.OK).json(req.body);
+                        res.status(StatusCodes.OK).json({message: "User Deleted"});
                     } else {
                         //Delete main
                         const team = await Teams.findByIdAndDelete(id)

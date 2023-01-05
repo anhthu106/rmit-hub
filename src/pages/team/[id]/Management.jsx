@@ -90,16 +90,16 @@ export default function Management({ userProps, userPending, team, userID }) {
   } else {
     if (currentUser === team.leader) {
       return (
-        <div className="bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200 min-h-screen">
+        <div className="bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200 h-fit min-h-screen">
           <Header />
 
           <div className="text-gray-700">
-            <div className="flex-col w-screen max-h-screen ">
+            <div className="flex-col w-screen pb-5">
               <div className="md:px-10 px-3 pt-6  ">
                 <h1 className="text-2xl font-bold ">{team.name}</h1>
-                <div className="flex">
+                <div className="sm:flex">
                   <SideBar teamID={team.id} state1={0} state2={1} />
-                  <section className="w-4/5 sm:w-full 2xl:px-40">
+                  <section className="sm:w-4/5 2xl:w-full 2xl:px-40">
                     <TeamLeaderPage
                       team={team}
                       userPending={userPending}
@@ -115,16 +115,16 @@ export default function Management({ userProps, userPending, team, userID }) {
       );
     } else {
       return (
-        <div className="bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200 min-h-screen">
+        <div className="bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200 h-fit min-h-screen">
           <Header />
 
           <div className="text-gray-700">
-            <div className="flex-col w-screen max-h-screen ">
+            <div className="flex-col w-screen pb-5">
               <div className="md:px-10 px-3 pt-6  ">
                 <h1 className="text-2xl font-bold ">{team.name}</h1>
-                <div className="flex">
+                <div className="sm:flex">
                   <SideBar teamID={team.id} state1={0} state2={1} />
-                  <section className="w-3/4">
+                  <section className="sm:w-4/5 2xl:w-full 2xl:px-40">
                     <TeamMemberPage
                       team={team}
                       userProps={userProps}
