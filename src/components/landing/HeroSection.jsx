@@ -48,13 +48,15 @@ export default function HeroSection() {
           </div>
         </div>
         <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-          <Image
-            className="h-56 w-full object-cover sm:h-72 md:h-96 lg:h-full lg:w-full"
-            src="https://www.rmit.edu.vn/content/dam/rmit/vn/en/assets-for-production/images/rmit-sgs-campus-facilities/2019-campus-photos/sgs-campus-night-05.jpg"
-            alt=""
-            width="1000"
-            height="500"
-          />
+          <div className="my-20 lg:my-0">
+            <Image
+              className="h-56 w-full object-cover sm:h-72 md:h-96 lg:h-full lg:w-full"
+              src="https://www.rmit.edu.vn/content/dam/rmit/vn/en/assets-for-production/images/rmit-sgs-campus-facilities/2019-campus-photos/sgs-campus-night-05.jpg"
+              alt=""
+              width="1000"
+              height="500"
+            />
+          </div>
         </div>
       </div>
     </section>
