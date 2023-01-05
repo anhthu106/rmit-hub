@@ -1,6 +1,6 @@
 import connectDB from "../../../backend/lib/connectDB";
 import { StatusCodes } from "http-status-codes";
-
+import { Types } from "mongoose";
 import Teams from "../../../backend/models/team";
 import Users from "../../../backend/models/user";
 import Course from "../../../backend/models/course";
@@ -13,6 +13,8 @@ export default async function handler(req, res) {
 
     const courseID = await Course.findOne({ name: courseName });
     
+    const allTeams = await Teams.find({}, "pending")
+
     if (status === "accept") {
         await Teams.findByIdAndUpdate(
             teamID,
@@ -35,7 +37,20 @@ export default async function handler(req, res) {
                 }
             }
         )
+
+        for (let i of allTeams) {
+            if (i.pending.includes(Types.ObjectId(userID))) {
+                await Teams.findByIdAndUpdate(
+                    i._id.toString(), 
+                    {
+                        $pull: {pending: userID}
+                    }
+                )
+            }
+        }
     }
+
+
     await Teams.findByIdAndUpdate(teamID, { $pull: { pending: userID } });
     return res.status(StatusCodes.OK).json({ message: "Team updated" })
 
