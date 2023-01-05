@@ -1,10 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Button } from "../button/Button";
 import { addItems } from "../../backend/helper/items/items";
 
 export default function PendingList({ userPending, team }) {
   const [message, setMessage] = useState("");
+  function reloadHandler() {
+    if (message === "Team updated") {
+      window.setTimeout(function () {
+        location.reload();
+      }, 300);
+    }
+  }
+
+  useEffect(() => {
+    reloadHandler();
+  });
+
   return (
     <div>
       <div className="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 my-4">
@@ -77,9 +89,6 @@ export default function PendingList({ userPending, team }) {
                                   setMessage,
                                   "/api/team/pending"
                                 );
-                                window.setTimeout(function () {
-                                  location.reload();
-                                }, 300);
                               }}
                               options={
                                 <div>
@@ -121,7 +130,7 @@ export default function PendingList({ userPending, team }) {
                                   setMessage,
                                   "/api/team/pending"
                                 );
-                                window.location.reload(false);
+                                
                               }}
                               options={
                                 <div>

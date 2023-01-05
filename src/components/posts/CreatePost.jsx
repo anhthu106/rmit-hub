@@ -187,7 +187,7 @@ export default function CreatePost({ courseProps, id, Info }) {
                               value={content}
                               onChange={(e) => {
                                 setContent(e.target.value);
-                                setPlaceHolder(content);
+                                setPlaceHolder(e.target.value);
                               }}
                               rows="4"
                               className="w-full text-lg text-gray-900 bg-white focus:ring-1 resize-none rounded-md border border-gray-300"
