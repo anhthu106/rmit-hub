@@ -20,6 +20,9 @@ export default function NonTeamMember({ TeamInfo, currentUser, section }) {
   }
 
   function AlertCheck() {
+    window.setTimeout(function () {
+      location.reload();
+    }, 1000);
     if (message !== "Cannot join the team") {
       return (
         <div
