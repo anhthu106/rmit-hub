@@ -1,14 +1,14 @@
 /* eslint-disable react/no-unescaped-entities */
 import makeAnimated from "react-select/animated";
-import { util } from "../../utils/utils";
-import { useEffect, useState } from "react";
-import { validPassword } from "../regularexpression/Regex";
+import {util} from "../../utils/utils";
+import {useEffect, useState} from "react";
+import {validPassword} from "../regularexpression/Regex";
 import Select from "react-select";
-import { Button, DisabledButton } from "../button/Button";
-import { addItems } from "../../backend/helper/items/items";
-import { signIn } from "next-auth/react";
+import {Button, DisabledButton} from "../button/Button";
+import {addItems} from "../../backend/helper/items/items";
+import {signIn} from "next-auth/react";
 
-const SignUpForm = ({ majorProps }) => {
+const SignUpForm = ({majorProps}) => {
     //Use animated of react-select
     const animatedComponents = makeAnimated();
 
@@ -127,13 +127,13 @@ const SignUpForm = ({ majorProps }) => {
             campus !== "" &&
             major !== ""
         ) {
-            if (message === "Verify email is sent which have 5 minutes expires") {
+            if (message === "Verify email is sent which have 2 minutes expires") {
                 setMessage(message)
                 setFormCompelete(false);
                 setFormUncompelete(true);
                 setTimeout(() => {
                     setMessage("Send again, if you did not received email")
-                }, 60000)
+                }, 120000)
             } else {
                 setFormCompelete(true);
                 setFormUncompelete(false);
@@ -199,7 +199,9 @@ const SignUpForm = ({ majorProps }) => {
                         value={sid}
                         onChange={(e) => setSID(e.target.value.toLocaleLowerCase())}
                     />
-                    <div className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm p-2.5 rounded-r-lg">@rmit.edu.vn</div>
+                    <div
+                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm p-2.5 rounded-r-lg">@rmit.edu.vn
+                    </div>
                 </div>
 
                 {emailError && (
@@ -320,7 +322,7 @@ const SignUpForm = ({ majorProps }) => {
                         style="w-full  bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-white text-center"
                         fn={(e) => {
                             addItems(
-                                { username, email, password, campus, major },
+                                {username, email, password, campus, major},
                                 e,
                                 setMessage,
                                 "/api/auth/register"
@@ -344,7 +346,7 @@ const SignUpForm = ({ majorProps }) => {
                     />
                 </a>
             </p>
-        </form >
+        </form>
     );
 };
 
