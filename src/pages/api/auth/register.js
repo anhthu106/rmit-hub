@@ -15,7 +15,7 @@ export default async function handler(req, res) {
             expiresIn: process.env.JWT_VERIFY_LIFETIME
         })
         //Send Email
-        res.status(StatusCodes.CREATED).json({message: "Verify email is sent which have 5 minutes expires"})
+        res.status(StatusCodes.CREATED).json({message: "Verify email is sent which have 2 minutes expires"})
         await sendConfirmationEmail({toUser: body, token})
     } else {
         if (user.email === body.email && user.username === body.username) {
